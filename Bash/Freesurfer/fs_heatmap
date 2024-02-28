@@ -1,0 +1,73 @@
+#!/bin/bash
+
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=8
+#SBATCH --mem=16gb
+#SBATCH --time=12:00:00
+#SBATCH --job-name=freesurfer
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=mphook@ufl.edu
+#SBATCH --output=freesurfer_%j.out
+
+
+module load fsl
+module load freesurfer/6.0.0
+SUBJECTS_DIR=/home/mphook/blue_butsonc/mphook/freesurfer/SimNIBS/FS_Subjects
+
+recon-all -s $1 -i $2 -all -parallel -openmp 8 #-FLAIR $3 -FLAIRpial
+set -e
+
+m2m_id=$1
+subject_id=${m2m_id}
+home=${PWD}
+
+
+#mv ${home}/${subject_id} $SUBJECTS_DIR
+
+#Transform heat maps into patient space
+echo $'\nTransforming Cortial Heat Maps to Patient Space**********************************************************************\n'
+for hemi in lh rh
+do
+	mri_surf2surf --srcsubject fsaverage --trgsubject ${subject_id} --trgsurfreg sphere.reg --hemi ${hemi} --sval /home/mphook/blue_butsonc/mphook/freesurfer/${hemi}.fsaverage.gm.PET_EEGFMRI_DWI_ZSCORE_4D_INTERSECTIONONLY_MEAN.proj-mid.sm10.5pcnt.min1cmsq.caudalmiddlefrontal.mgh --tval ${SUBJECTS_DIR}/${subject_id}/surf/${hemi}.thresh.mgh
+	mri_surf2surf --srcsubject fsaverage --trgsubject ${subject_id} --trgsurfreg sphere.reg --hemi ${hemi} --sval /home/mphook/blue_butsonc/mphook/freesurfer/${hemi}.fsaverage.gm.PET_EEGFMRI_DWI_ZSCORE_4D_INTERSECTIONONLY_MEAN.proj-mid.sm10.posthresh.frontal.mgh --tval ${SUBJECTS_DIR}/${subject_id}/surf/${hemi}.heatmap.mgh
+	#Also adding HCP annotations to subject
+	mri_surf2surf --srcsubject fsaverage --trgsubject ${subject_id} --hemi ${hemi} --sval-annot ${SUBJECTS_DIR}/fsaverage/label/${hemi}.HCPMMP1.annot --tval ${SUBJECTS_DIR}/${subject_id}/label/${hemi}.HCPMMP1.annot
+done
+
+# Convert heat maps to vtk
+echo $'\nConvert Heat Maps to vtk**********************************************************************************************\n'
+cd ${SUBJECTS_DIR}/${subject_id}/surf
+
+for hemi in lh rh
+do
+	mris_convert -c ${hemi}.thresh.mgh ${hemi}.pial ${hemi}.thresh.vtk
+	mris_convert -c ${hemi}.heatmap.mgh ${hemi}.pial ${hemi}.heatmap.vtk
+done
+
+#Convert thresh map to volume
+echo $'\nCreate volume of Thresholded Heatmap**********************************************************************************\n'
+mri_surf2vol --o thresh.nii.gz --subject $subject_id --so lh.pial lh.thresh.mgh --so rh.pial rh.thresh.mgh
+
+#Convert vtk to TriSurfField
+echo $'\nConvert Heat Maps to .pts, .fac, and data*****************************************************************************\n'
+cp /home/mphook/blue_butsonc/mphook/freesurfer/vtk_to_TriSurfField.py .
+module load python
+python vtk_to_TriSurfField.py
+
+mkdir SCIRun
+mv *.pts ${PWD}/SCIRun
+mv *.fac ${PWD}/SCIRun
+mv *_data.txt ${PWD}/SCIRun
+
+rm -r ${PWD}/SCIRun/*_threes.fac
+cd ${home}
+
+#HCP Volume Creation
+echo $'\nCreate HCP Labelmap***************************************************************************************************\n'
+mri_aparc2aseg --s ${subject_id} --annot HCPMMP1 --o ${subject_id}_HCP.mgz
+module load mrtrix
+mrconvert -datatype uint32 ${subject_id}_HCP.mgz ${subject_id}_HCP.mif
+labelconvert ${subject_id}_HCP.mif /home/mphook/blue_butsonc/mphook/freesurfer/hcpmmp1_original.txt /home/mphook/blue_butsonc/mphook/freesurfer/hcpmmp1_ordered_edited.txt ${subject_id}_HCP.nii.gz
+
+echo $'\n\n******************Done!****************\n\n'

@@ -1,0 +1,89 @@
+#!/bin/bash
+
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=32gb
+#SBATCH --time=05:00:00
+#SBATCH --job-name=THOMAS
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=mphook@ufl.edu
+#SBATCH --output=thomas_run_%j.out
+
+module load apptainer
+
+apptainer run -B ${PWD}:${PWD} -W ${PWD} -u --cleanenv /home/mphook/blue_butsonc/mphook/THOMAS/thomas.sif bash -c "hipsthomas_csh -i $1"
+
+module load ants
+module load fsl
+
+#Left Side
+echo "Left Side"
+
+cp left/*Affine.mat ${PWD}
+rm rigid0GenericAffine.mat
+cp *.mat linear.mat
+
+antsApplyTransforms -d 3 -i /home/mphook/blue_butsonc/mphook/THOMAS/atlasA_CL_VPM.nii.gz -r left/crop* -o atlas_left.nii.gz -n GenericLabel -t [linear.mat,1] -t left/*InverseWarp.nii.gz
+
+rm *.mat
+
+
+#Right Side
+echo "Right Side"
+
+cp right/*Affine.mat ${PWD}
+rm rigid0GenericAffine.mat
+cp *.mat linear.mat
+
+antsApplyTransforms -d 3 -i /home/mphook/blue_butsonc/mphook/THOMAS/atlasA_CL_VPM.nii.gz -r right/crop* -o atlas_right_unflipped.nii.gz -n GenericLabel -t [linear.mat,1] -t right/*InverseWarp.nii.gz
+
+rm *.mat
+
+
+#Flip the right side to correct orientation
+fslswapdim atlas_right_unflipped.nii.gz -x y z atlas_right.nii.gz
+echo "Flip Right"
+
+rm atlas_right_unflipped.nii.gz
+
+
+echo "Resampling individual nuclei onto image"
+#Left Nuclei Resampling
+echo "Left Side"
+cd left
+mkdir Resample
+
+for file in *-*.nii.gz
+do
+	antsApplyTransforms -d 3 -i $file -r ../$1 -o Resample/${file%.*.*}_resamp.nii.gz -n GenericLabel
+done
+rm Resample/san*
+
+cd ../right
+echo "Right Side"
+mkdir Resample
+
+for file in *-*.nii.gz
+do
+	antsApplyTransforms -d 3 -i $file -r ../$1 -o Resample/${file%.*.*}_resamp.nii.gz -n GenericLabel
+done
+rm Resample/san*
+
+cd ..
+
+echo "Resampling Atlases"
+
+for file in atlas*
+do
+	antsApplyTransforms -d 3 -i $file -r $1 -o ${file%.*.*}_resamp.nii.gz -n GenericLabel
+done
+
+echo "Reconstructing Atlas CL"
+
+module load python
+
+cp /home/mphook/blue_butsonc/mphook/THOMAS/THOMAS_atlas_CL.py .
+python THOMAS_atlas_CL.py
+
+echo "Done!"
