@@ -9,6 +9,7 @@ import nibabel as nib
 
 dwi = ["DWI_up.nii.gz", "DWI_down.nii.gz"]
 
+
 slice_count = {}
 for file in dwi:
     img = nib.load(file)
