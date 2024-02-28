@@ -1,0 +1,63 @@
+#!/bin/bash
+
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=12
+#SBATCH --mem=16gb
+#SBATCH --time=10:00:00
+#SBATCH --job-name=simnibs
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=mphook@ufl.edu
+#SBATCH --output=simnibs_%j.out
+
+
+module load fsl
+module load freesurfer/6.0.0
+module load simnibs
+
+set -e
+mri2mesh --all $1 $2 $3 #1 is subject id, 2 is T1_ACPC, 3 is T2_ACPC
+
+m2m_id=$1
+subject_id=fs_${m2m_id}
+home=${PWD}
+SUBJECTS_DIR=/home/mphook/blue_butsonc/mphook/freesurfer/SimNIBS/FS_Subjects
+
+mv ${home}/${subject_id} $SUBJECTS_DIR
+
+#Transform heat maps into patient space
+echo $'\nTransforming Cortial Heat Maps to Patient Space**********************************************************************\n'
+for hemi in lh rh
+do
+	mri_surf2surf --srcsubject fsaverage --trgsubject ${subject_id} --trgsurfreg sphere.reg --hemi ${hemi} --sval /home/mphook/blue_butsonc/mphook/freesurfer/${hemi}.fsaverage.gm.PET_EEGFMRI_DWI_ZSCORE_4D_INTERSECTIONONLY_MEAN.proj-mid.sm10.5pcnt.min1cmsq.caudalmiddlefrontal.mgh --tval ${SUBJECTS_DIR}/${subject_id}/surf/${hemi}.thresh.mgh
+	mri_surf2surf --srcsubject fsaverage --trgsubject ${subject_id} --trgsurfreg sphere.reg --hemi ${hemi} --sval /home/mphook/blue_butsonc/mphook/freesurfer/${hemi}.fsaverage.gm.PET_EEGFMRI_DWI_ZSCORE_4D_INTERSECTIONONLY_MEAN.proj-mid.sm10.posthresh.frontal.mgh --tval ${SUBJECTS_DIR}/${subject_id}/surf/${hemi}.heatmap.mgh
+done
+
+# Convert heat maps to vtk
+echo $'\nConvert Heat Maps to vtk**********************************************************************************************\n'
+cd ${SUBJECTS_DIR}/${subject_id}/surf
+
+for hemi in lh rh
+do
+	mris_convert -c ${hemi}.thresh.mgh ${hemi}.pial ${hemi}.thresh.vtk
+	mris_convert -c ${hemi}.heatmap.mgh ${hemi}.pial ${hemi}.heatmap.vtk
+done
+
+#Convert thresh map to volume
+echo $'\nCreate volume of Thresholded Heatmap**********************************************************************************\n'
+mri_surf2vol --o thresh.nii.gz --subject $subject_id --so lh.pial lh.thresh.mgh --so rh.pial rh.thresh.mgh
+
+#Convert vtk to TriSurfField
+echo $'\nConvert Heat Maps to .pts, .fac, and data*****************************************************************************\n'
+cp /home/mphook/blue_butsonc/mphook/freesurfer/vtk_to_TriSurfField.py .
+module load python
+python vtk_to_TriSurfField.py
+
+mkdir SCIRun
+mv *.pts ${PWD}/SCIRun
+mv *.fac ${PWD}/SCIRun
+mv *_data.txt ${PWD}/SCIRun
+
+rm -r ${PWD}/SCIRun/*_threes.fac
+echo $'\n\n******************Done!****************\n\n'
+cd ${home}

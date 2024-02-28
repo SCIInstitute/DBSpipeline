@@ -1,0 +1,20 @@
+#!/bin/bash
+
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=8
+#SBATCH --mem=16gb
+#SBATCH --time=12:00:00
+#SBATCH --job-name=MRtrix
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=mphook@ufl.edu
+#SBATCH --output=MRtrix_%j.out
+
+
+module load mrtrix
+
+#tcksift2 -act ../T1_5tt.nii.gz -out_mu sift2_mu.txt whole_brain_fibers.tck ../wmfod_norm.mif sift2_weights.txt
+
+mrtransform -linear ../ACPC_to_b0.txt HCP_parc_all.nii.gz HCP_parc_all_b0space.nii.gz -force
+
+tck2connectome whole_brain_fibers.tck HCP_parc_all_b0space.nii.gz connectome_matrix.csv -tck_weights_in sift2_weights.txt -keep_unassigned -assignment_radial_search 3 -out_assignments assignments.txt -force

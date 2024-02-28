@@ -1,0 +1,15 @@
+#!/bin/bash
+
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=8
+#SBATCH --mem=64gb
+#SBATCH --time=1:00:00
+#SBATCH --job-name=fs_synth
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=mphook@ufl.edu
+#SBATCH --output=fs_synth_%j.out
+
+module load freesurfer/7.4.1
+set -e
+mri_synthsr --i $1 --o T1_synth.nii.gz --threads 8

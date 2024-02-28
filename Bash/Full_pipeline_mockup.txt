@@ -1,0 +1,43 @@
+#!/bin/bash
+
+while getopts ":h:
+
+
+mkdir THOMAS
+cp WMnulled THOMAS/WMnulled
+cp /code/path/thomas_run
+sbatch ./thomas_run.sh WMnulled_ACPC
+
+mkdir Models
+cd Models
+mkdir Freesurfer
+cp ../T1 Freesurfer/T1
+cp ../T2 Freesurfer/T2
+cp /code/path/freesurfer.sh Freesurfer/freesurfer.sh
+cd Freesurfer
+sbatch ./freesurfer.sh T1 T2
+mkdir Simnibs
+cd ..
+mkdir MRtrix
+
+
+until [ -f /path/of/thomas/output ]
+do
+	sleep 600
+done
+
+#Thomas output needs to be processed outside of HPG
+
+#sbatch ./SimNibs.sh T1_ACPC T2_ACPC
+
+until [[ -f /path/of/FS/output || -f /path/of/FS/fail ]]
+do
+	sleep 600
+done
+
+if [ -f /path/of/FS/output ]
+then
+#	sbatch ./mrtrix_with_FS.sh
+else
+#	sbatch ./mrtrix_without_FS.sh
+fi

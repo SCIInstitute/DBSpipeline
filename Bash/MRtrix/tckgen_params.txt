@@ -1,0 +1,15 @@
+tckgen -act T1_5tt_freesurfer.mif -backtrack -minlength 50 -maxlength 100 -angle 22.5 -seed_dynamic wmfod_norm.mif -include CM_left_in_b0space.nii.gz -exclude Midline.nii.gz -cutoff 0.15 -select 2000 wmfod_norm.mif CM_L_fibers.tck -force
+-nthreads 8
+
+
+Better results:
+tckgen -act T1_5tt_freesurfer.mif -backtrack -angle 22.5 -seed_dynamic wmfod_norm.mif -include CM_left_in_b0space.nii.gz -exclude Midline.nii.gz -cutoff 0.2 -select 5000 wmfod_norm.mif CM_L_fibers.tck -force -nthreads 12
+
+- Just need to add more selects
+
+
+tckgen -act T1_5tt_freesurfer.mif -backtrack -angle 22.5 -seed_dynamic wmfod_norm.mif -include CM_left_in_b0space.nii.gz -exclude Midline.nii.gz -cutoff 0.2 -select 8000 wmfod_norm.mif CM_L_fibers.tck -force -nthreads 8
+
+
+Best Visual Results:
+tckgen -act T1_5tt_freesurfer.mif -backtrack -angle 22.5 -seed_image CM_left_in_b0space.nii.gz -exclude Midline.nii.gz -cutoff 0.2 -seeds 5000 wmfod_norm.mif CM_L_fibers.tck -force -nthreads 8

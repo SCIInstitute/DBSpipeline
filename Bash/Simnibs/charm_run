@@ -1,0 +1,23 @@
+#!/bin/bash
+
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=8
+#SBATCH --mem=16gb
+#SBATCH --time=3:00:00
+#SBATCH --job-name=simnibs
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=mphook@ufl.edu
+#SBATCH --output=simnibs_%j.out
+
+
+module load simnibs/4.0.0
+set -e
+charm --forceqform $1 $2 #$3 #Subject ID, T1, T2
+
+cd m2m_$1
+
+module load python
+cp /home/mphook/blue_butsonc/mphook/freesurfer/convert_mesh.py .
+python convert_mesh.py $1.msh
+cd ..
