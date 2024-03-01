@@ -15,8 +15,8 @@ module load fsl
 module load freesurfer/6.0.0
 SUBJECTS_DIR=/home/mphook/blue_butsonc/mphook/freesurfer/SimNIBS/FS_Subjects
 
-recon-all -s $1 -i $2 -all -parallel -openmp 8 #-FLAIR $3 -FLAIRpial
 set -e
+recon-all -s $1 -i $2 -all -parallel -openmp 8 #-FLAIR $3 -FLAIRpial
 
 m2m_id=$1
 subject_id=${m2m_id}
