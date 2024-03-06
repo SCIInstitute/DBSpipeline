@@ -69,6 +69,6 @@ echo $'\nCreate HCP Labelmap****************************************************
 mri_aparc2aseg --s ${subject_id} --annot HCPMMP1 --o ${subject_id}_HCP.mgz
 module load mrtrix
 mrconvert -datatype uint32 ${subject_id}_HCP.mgz ${subject_id}_HCP.mif
-labelconvert ${subject_id}_HCP.mif /home/mphook/blue_butsonc/mphook/freesurfer/hcpmmp1_original.txt /home/mphook/blue_butsonc/mphook/freesurfer/hcpmmp1_ordered_edited.txt ${subject_id}_HCP.nii.gz
+labelconvert ${subject_id}_HCP.mif /home/mphook/blue_butsonc/mphook/freesurfer/hcpmmp1_original.txt /home/mphook/blue_butsonc/mphook/freesurfer/hcpmmp1_ordered_edited.txt HCP_FS.nii.gz
 
 echo $'\n\n******************Done!****************\n\n'

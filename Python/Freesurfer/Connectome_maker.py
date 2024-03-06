@@ -12,42 +12,45 @@ import pandas as pd
 
 #Load lookup table
 lookup = pd.read_csv(r'Z:\Dropbox (UFL)\CT DBS Human\CENTURY S Patients\connectome_lookup.csv',index_col=False)
+
+with open(r'Z:/Dropbox (UFL)/CT DBS Human/CENTURY S Patients/pDummy_conectome/Subjects.txt','r') as f:
+    subjects = [line.rstrip() for line in f]
 #%%
-#Get patient ***TODO: Replace this with reading a file with a list of subjects***
-filepath = r'Z:/Dropbox (UFL)/CT DBS Human/CENTURY S Patients/pDummy_conectome/pDummy/'
-
-seg_files = lookup['Filename'].unique()
-#seg_dirs = lookup['Path'].unique()
-seg_dirs = lookup['Path'][lookup['Filename'] == seg_files[0]].unique()[0]
-
-#Load HCP first always. This will be the reference
-HCP = nibabel.load(filepath + 'Segmentations/' +seg_dirs + '/' + seg_files[0])
-HCP_data = HCP.get_fdata()
-main_index = np.array(lookup['Index'][lookup['Filename'] == seg_files[0]])
-local_index = np.array(lookup['File Index'][lookup['Filename'] == seg_files[0]])
-
-All_data = HCP_data.copy()
-
-for i in range(0,len(local_index)):
-   All_data[HCP_data == local_index[i]] = int(main_index[i])
-#%%
-#Rest of the data
-for file in seg_files: 
-    seg_dirs = lookup['Path'][lookup['Filename'] == file].unique()[0]
-    main_index = np.array(lookup['Index'][lookup['Filename'] == file])
-    local_index = np.array(lookup['File Index'][lookup['Filename'] == file])
+for subject in subjects:
+    #Get patient
+    filepath = r'Z:/Dropbox (UFL)/CT DBS Human/CENTURY S Patients/pDummy_conectome/' + subject + '/'
     
-    img = nibabel.load(filepath + 'Segmentations/' + seg_dirs + '/' + file)
-    img_resamp = nibabel.processing.resample_from_to(img, HCP,order=0)
-    img_data = img_resamp.get_fdata()
-    for j in range(0,len(local_index)):
-        img_data[img_data == local_index[j]] = int(main_index[j])
-
-    All_data[img_data != 0] = img_data[img_data != 0]
-
-#%%
-All_to_nii = nibabel.Nifti1Image(All_data, HCP.affine, HCP.header)
-nibabel.save(All_to_nii, filepath + 'HCP_parc_all.nii.gz')
+    seg_files = lookup['Filename'].unique()
+    #seg_dirs = lookup['Path'].unique()
+    seg_dirs = lookup['Path'][lookup['Filename'] == seg_files[0]].unique()[0]
+    
+    #Load HCP first always. This will be the reference
+    HCP = nibabel.load(filepath + 'Segmentations/' +seg_dirs + '/' + seg_files[0])
+    HCP_data = HCP.get_fdata()
+    main_index = np.array(lookup['Index'][lookup['Filename'] == seg_files[0]])
+    local_index = np.array(lookup['File Index'][lookup['Filename'] == seg_files[0]])
+    
+    All_data = HCP_data.copy()
+    
+    for i in range(0,len(local_index)):
+       All_data[HCP_data == local_index[i]] = int(main_index[i])
+    #Rest of the data
+    for file in seg_files: 
+        seg_dirs = lookup['Path'][lookup['Filename'] == file].unique()[0]
+        main_index = np.array(lookup['Index'][lookup['Filename'] == file])
+        local_index = np.array(lookup['File Index'][lookup['Filename'] == file])
+        
+        img = nibabel.load(filepath + 'Segmentations/' + seg_dirs + '/' + file)
+        img_resamp = nibabel.processing.resample_from_to(img, HCP,order=0)
+        img_data = img_resamp.get_fdata()
+        data_add = img_data.copy()
+        for j in range(0,len(local_index)):
+            data_add[img_data == local_index[j]] = int(main_index[j])
+    
+        All_data[data_add != 0] = data_add[data_add != 0]
+    
+    All_to_nii = nibabel.Nifti1Image(All_data, HCP.affine, HCP.header)
+    nibabel.save(All_to_nii, filepath + 'Connectome/HCP_parc_all.nii.gz')
 #%%
 '''
 #Load HCP and grab all other nifti volumes to add
