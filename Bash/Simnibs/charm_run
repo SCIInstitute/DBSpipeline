@@ -18,6 +18,5 @@ charm --forceqform $1 $2 #$3 #Subject ID, T1, T2
 cd m2m_$1
 
 module load python/3.8
-cp /home/mphook/blue_butsonc/mphook/freesurfer/convert_mesh.py .
-python convert_mesh.py $1.msh
+python /home/mphook/blue_butsonc/mphook/freesurfer/convert_mesh.py $1.msh
 cd ..
