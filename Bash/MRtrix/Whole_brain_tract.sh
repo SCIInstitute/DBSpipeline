@@ -34,9 +34,8 @@ mrtransform warp.mif -linear ACPC_to_b0.txt transform.mif -template b0_hifi.nii.
 tcktransform Fibers/whole_brain_100k_fibers.tck transform.mif Fibers/whole_brain_100k_fibers_ACPC.tck -force
 
 mkdir -p SCIRun_files
-cp /home/mphook/blue_butsonc/mphook/MRtrix/tckConverter.py .
 #File Conversion to SCIRun
 module load python/3.10
-python tckConverter.py Fibers/whole_brain_100k_fibers_ACPC.tck SCIRun_files/whole_brain_100k
+python /home/mphook/blue_butsonc/mphook/MRtrix/tckConverter.py Fibers/whole_brain_100k_fibers_ACPC.tck SCIRun_files/whole_brain_100k
 
 #for file in Fibers/*_fibers_ACPC.tck; do filename=$(basename $file _fibers_ACPC.tck); python3 tckConverter.py $file SCIRun_files/$filename; done

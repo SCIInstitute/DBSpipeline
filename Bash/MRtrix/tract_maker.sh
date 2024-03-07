@@ -4,6 +4,8 @@ set -e
 #For renaming
 #for file in *-*; do arr=(${file//-/ }); filename=${arr[@]:1:2}; mv -- $file ${filename// /-}; done
 
+codedir=/mnt/z/Dropbox\ \(UFL\)/DataProcessing/Pipeline\ Code
+
 for file in *_left.nii.gz
 do
 	filename=$(basename $file .nii.gz)
@@ -34,6 +36,9 @@ do
 	tcktransform $file transform.mif Fibers/${filename}_ACPC.tck -force
 done
 mkdir -p SCIRun_files
-cp /mnt/z/Dropbox\ \(UFL\)/DataProcessing/Pipeline\ Code/Python/MRtrix/tckConverter.py .
 #File Conversion to SCIRun
-for file in Fibers/*_fibers_ACPC.tck; do filename=$(basename $file _fibers_ACPC.tck); python3 tckConverter.py $file SCIRun_files/$filename; done
+for file in Fibers/*_fibers_ACPC.tck
+do
+filename=$(basename $file _fibers_ACPC.tck)
+python3 $codedir/Python/MRtrix/tckConverter.py $file SCIRun_files/$filename
+done

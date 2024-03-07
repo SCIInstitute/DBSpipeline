@@ -79,13 +79,14 @@ cd proc_temp
 if [ -z "$slurm" ]
 then
 	echo -e "\nUse on local computer\n"
+  script=FSL_Slice_leveler.py
 else
 	echo -e "\nUse on HiPerGator\n"
 	module load python cuda
-	cp /home/mphook/blue_butsonc/mphook/MRtrix/FSL_Slice_leveler.py FSL_Slice_leveler.py
+	script=/home/mphook/blue_butsonc/mphook/MRtrix/FSL_Slice_leveler.py
 fi
 
-python FSL_Slice_leveler.py
+python $script
 
 if [ -z "$slurm" ]
 then
@@ -220,9 +221,8 @@ then
 	dwi2tensor dwi_cleaned_resamp.mif -mask brain_mask.mif dti.mif
 	mrconvert dti.mif dti.nii.gz
 	tensor2metric dti.mif -fa fa.nii.gz
-	cp /home/mphook/blue_butsonc/mphook/MRtrix/dtiConverter.py .
 	module load python/3.8
-	python dtiConverter.py
+	python /home/mphook/blue_butsonc/mphook/MRtrix/dtiConverter.py
 	cp tensor.nrrd ../Cleaned/tensor.nrrd
 	cp fa.nrrd ../Cleaned/fa.nrrd
 else

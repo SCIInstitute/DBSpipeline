@@ -5,10 +5,11 @@ set -e
 #Takes HCP annotation file in fsaverage space and puts it in subject space. Also outputs the files for use in tck2connectome
 subject=$1
 
+codedir=/mnt/z/Dropbox\ \(UFL\)/DataProcessing/Pipeline\ Code
+
 if [ -z "$subject" ]
 then
-	cp /mnt/z/Dropbox\ \(UFL\)/DataProcessing/Pipeline\ Code/Python/Freesurfer/Connectome_maker.py .
-	python3 Connectome_maker.py
+	python3 $codedir/Python/Freesurfer/Connectome_maker.py
 else
 	#Warp fsaverage to subject space
 	for hemi in lh rh
@@ -24,6 +25,5 @@ else
 	labelconvert ${subject}_HCP.mif /mnt/z/Dropbox\ \(UFL\)/DataProcessing/Pipeline\ Code/Bash/Freesurfer/hcpmmp1_original.txt /mnt/z/Dropbox\ \(UFL\)/DataProcessing/Pipeline\ Code/Bash/Freesurfer/hcpmmp1_ordered_edited.txt ${subject}_HCP.nii.gz
 
 	#add any nifti volumes present in the folder to the parcellation, following the MRtrix convention
-	cp /mnt/z/Dropbox\ \(UFL\)/DataProcessing/Pipeline\ Code/Python/Freesurfer/Connectome_maker.py .
-	python3 Connectome_maker.py
+	python3 $codedir/Python/Freesurfer/Connectome_maker.py
 fi
