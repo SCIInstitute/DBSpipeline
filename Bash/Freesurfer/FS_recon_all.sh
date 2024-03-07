@@ -25,8 +25,7 @@ done
 
 #Convert vtk to TriSurfField
 echo $'\nConvert Heat Maps to .pts, .fac, and data*****************************************************************************\n'
-cp /mnt/c/Users/Matthew/Dropbox\ \(UFL\)/DataProcessing/Pipeline\ Code/Python/SCIRun/vtk_to_TriSurfField.py vtk_to_TriSurfField.py
-python3 vtk_to_TriSurfField.py
+python3 /mnt/c/Users/Matthew/Dropbox\ \(UFL\)/DataProcessing/Pipeline\ Code/Python/SCIRun/vtk_to_TriSurfField.py
 
 mkdir SCIRun
 mv *.pts ${PWD}/SCIRun
