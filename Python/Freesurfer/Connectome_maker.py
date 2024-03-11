@@ -13,12 +13,12 @@ import pandas as pd
 #Load lookup table
 lookup = pd.read_csv(r'Z:\Dropbox (UFL)\CT DBS Human\CENTURY S Patients\connectome_lookup.csv',index_col=False)
 
-with open(r'Z:/Dropbox (UFL)/CT DBS Human/CENTURY S Patients/pDummy_conectome/Subjects.txt','r') as f:
+with open(r'Z:/Dropbox (UFL)/CT DBS Human/CENTURY S Patients/pDummy_connectome/Subjects.txt','r') as f:
     subjects = [line.rstrip() for line in f]
 #%%
 for subject in subjects:
     #Get patient
-    filepath = r'Z:/Dropbox (UFL)/CT DBS Human/CENTURY S Patients/pDummy_conectome/' + subject + '/'
+    filepath = r'Z:/Dropbox (UFL)/CT DBS Human/CENTURY S Patients/pDummy_connectome/' + subject + '/'
     
     seg_files = lookup['Filename'].unique()
     #seg_dirs = lookup['Path'].unique()
@@ -51,6 +51,8 @@ for subject in subjects:
     
     All_to_nii = nibabel.Nifti1Image(All_data, HCP.affine, HCP.header)
     nibabel.save(All_to_nii, filepath + 'Connectome/HCP_parc_all.nii.gz')
+
+
 #%%
 '''
 #Load HCP and grab all other nifti volumes to add
