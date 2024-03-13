@@ -68,6 +68,7 @@ do
         -scale_invnodevol \
         -force
         
+done < $subjects
 
 :'
 module load mrtrix
