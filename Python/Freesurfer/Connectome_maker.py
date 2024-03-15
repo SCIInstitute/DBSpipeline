@@ -9,48 +9,69 @@ import nibabel
 import nibabel.processing
 import numpy as np
 import pandas as pd
+import argparse
+
+parser = argparse.ArgumentParser(description='Inputs')
+parser.add_argument('--subject',action='store',dest='subject',default=0)
+parser.add_argument('--lookup',action='store',dest='lookup_dir',default=0)
+parser.add_argument('--filepath',action='store',dest='filepath',default=0)
+args = parser.parse_args()
+subject = args.subject
 
 #Load lookup table
-lookup = pd.read_csv(r'Z:\Dropbox (UFL)\CT DBS Human\CENTURY S Patients\connectome_lookup.csv',index_col=False)
+lookup = pd.read_csv(args.lookup_dir,index_col=False)
 
-with open(r'Z:/Dropbox (UFL)/CT DBS Human/CENTURY S Patients/pDummy_conectome/Subjects.txt','r') as f:
-    subjects = [line.rstrip() for line in f]
 #%%
-for subject in subjects:
-    #Get patient
-    filepath = r'Z:/Dropbox (UFL)/CT DBS Human/CENTURY S Patients/pDummy_conectome/' + subject + '/'
-    
-    seg_files = lookup['Filename'].unique()
-    #seg_dirs = lookup['Path'].unique()
-    seg_dirs = lookup['Path'][lookup['Filename'] == seg_files[0]].unique()[0]
-    
-    #Load HCP first always. This will be the reference
-    HCP = nibabel.load(filepath + 'Segmentations/' +seg_dirs + '/' + seg_files[0])
-    HCP_data = HCP.get_fdata()
-    main_index = np.array(lookup['Index'][lookup['Filename'] == seg_files[0]])
-    local_index = np.array(lookup['File Index'][lookup['Filename'] == seg_files[0]])
-    
-    All_data = HCP_data.copy()
-    
-    for i in range(0,len(local_index)):
-       All_data[HCP_data == local_index[i]] = int(main_index[i])
-    #Rest of the data
-    for file in seg_files: 
-        seg_dirs = lookup['Path'][lookup['Filename'] == file].unique()[0]
-        main_index = np.array(lookup['Index'][lookup['Filename'] == file])
-        local_index = np.array(lookup['File Index'][lookup['Filename'] == file])
+
+#Get patient
+filepath = args.filepath + '/' + subject + '/'
+
+seg_files = lookup['Filename'].unique()
+#seg_dirs = lookup['Path'].unique()
+seg_dirs = lookup['Path'][lookup['Filename'] == seg_files[0]].unique()[0]
+
+#Load HCP first always. This will be the reference
+HCP = nibabel.load(filepath + 'Segmentations/' +seg_dirs + '/' + seg_files[0])
+HCP_data = HCP.get_fdata()
+main_index = np.array(lookup['Index'][lookup['Filename'] == seg_files[0]])
+local_index = np.array(lookup['File Index'][lookup['Filename'] == seg_files[0]])
+
+All_data = HCP_data.copy()
+for i in range(0,len(local_index)):
+    All_data[HCP_data == local_index[i]] = int(main_index[i])
         
-        img = nibabel.load(filepath + 'Segmentations/' + seg_dirs + '/' + file)
-        img_resamp = nibabel.processing.resample_from_to(img, HCP,order=0)
-        img_data = img_resamp.get_fdata()
-        data_add = img_data.copy()
-        for j in range(0,len(local_index)):
-            data_add[img_data == local_index[j]] = int(main_index[j])
+#Rest of the data
+for file in seg_files: 
+    seg_dirs = lookup['Path'][lookup['Filename'] == file].unique()[0]
+    main_index = np.array(lookup['Index'][lookup['Filename'] == file])
+    local_index = np.array(lookup['File Index'][lookup['Filename'] == file])
     
-        All_data[data_add != 0] = data_add[data_add != 0]
+    img = nibabel.load(filepath + 'Segmentations/' + seg_dirs + '/' + file)
+    img_resamp = nibabel.processing.resample_from_to(img, HCP,order=0)
+    img_data = img_resamp.get_fdata()
+    data_add = img_data.copy()
+    for j in range(0,len(local_index)):
+        data_add[img_data == local_index[j]] = int(main_index[j])
+
+    All_data[data_add != 0] = data_add[data_add != 0]
+
+All_data = All_data.astype(int)
+All_to_nii = nibabel.Nifti1Image(All_data, HCP.affine, HCP.header)
+nibabel.save(All_to_nii, filepath + 'Connectome/HCP_parc_all_lookup.nii.gz')
+
+#Create Key for MRtrix image
+mrtrix_key = {}
+mrtrix_key['Lookup Index'] = np.unique(All_data)[1:].tolist()
+mrtrix_key['MRtrix Index'] = list(range(1,len(np.unique(All_data)[1:].tolist())+1))
+
+mrtrix_data = All_data.copy()
+for i in range(0,len(mrtrix_key['Lookup Index'])):
+    mrtrix_data[All_data == mrtrix_key['Lookup Index'][i]] = mrtrix_key['MRtrix Index'][i]
     
-    All_to_nii = nibabel.Nifti1Image(All_data, HCP.affine, HCP.header)
-    nibabel.save(All_to_nii, filepath + 'Connectome/HCP_parc_all.nii.gz')
+mrtrix_to_nii = nibabel.Nifti1Image(mrtrix_data, HCP.affine, HCP.header)
+nibabel.save(All_to_nii, filepath + 'Connectome/HCP_parc_all.nii.gz')
+mrtrix_save = pd.DataFrame(data=mrtrix_data)
+mrtrix_save.to_csv(filepath + 'Connectome/MRtrix_index_key.csv')
 #%%
 '''
 #Load HCP and grab all other nifti volumes to add

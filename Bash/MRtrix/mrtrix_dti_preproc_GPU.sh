@@ -202,7 +202,7 @@ else
 	mrconvert T1_5tt_FS.mif T1_5tt.nii.gz
 	bbregister --s ${FSID} --mov b0_hifi.nii.gz --reg b0_to_T1.lta --dti --o b0_ACPCspace.nii.gz
 	mri_vol2vol --mov b0_hifi.nii.gz --targ T1_5tt.nii.gz --lta b0_to_T1.lta --o T1_5tt_b0space.nii.gz --inv
-	mri_coreg --mov b0_hifi.nii.gz --ref T1_ACPC.nii.gz --reg b0_to_T1.lta
+	#mri_coreg --mov b0_hifi.nii.gz --ref T1_ACPC.nii.gz --reg b0_to_T1.lta
 fi
 
 #Prepare transformations
