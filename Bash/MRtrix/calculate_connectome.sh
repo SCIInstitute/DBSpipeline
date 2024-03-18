@@ -51,19 +51,19 @@ do
     echo $subject
     module load python/3.10
     python ${git_dir}DBSpipeline/Python/Freesurfer/Connectome_maker.py --subject $subject --lookup $lookup
-    
+    echo $subject
     module load mrtrix
-    mrtransform -linear ${sub_dir}/${subject}/Cleaned/ACPC_to_b0.txt \
-        ${sub_dir}/${subject}/Connectome/HCP_parc_all.nii.gz \
-        ${sub_dir}/${subject}/Connectome/HCP_parc_all_b0space.nii.gz -force
+    mrtransform -linear ${subject}/Tractography/Cleaned/ACPC_to_b0.txt \
+        ${subject}/Connectome/HCP_parc_all.nii.gz \
+        ${subject}/Connectome/HCP_parc_all_b0space.nii.gz -force
         
-    tck2connectome ${sub_dir}/${subject}/Cleaned/Fibers/whole_brain_fibers.tck \
-        ${sub_dir}/${subject}/Connectome/HCP_parc_all_b0space.nii.gz \
-        ${sub_dir}/${subject}/Connectome/connectome_matrix.csv \
-        -tck_weights_in ${sub_dir}/${subject}/Cleaned/Fibers/sift2_weights.txt \
+    tck2connectome ${subject}/Tractography/Cleaned/Fibers/whole_brain_fibers.tck \
+        ${subject}/Connectome/HCP_parc_all_b0space.nii.gz \
+        ${subject}/Connectome/connectome_matrix.csv \
+        -tck_weights_in ${subject}/Tractography/Cleaned/Fibers/sift2_weights.txt \
         -keep_unassigned \
         -assignment_radial_search 3 \
-        -out_assignments ${sub_dir}/${subject}/Cleaned/Fibers/assignments.txt \
+        -out_assignments ${subject}/Tractography/Cleaned/Fibers/assignments.txt \
         -scale_invlength \
         -scale_invnodevol \
         -force
