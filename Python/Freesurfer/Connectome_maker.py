@@ -14,7 +14,7 @@ import argparse
 parser = argparse.ArgumentParser(description='Inputs')
 parser.add_argument('--subject',action='store',dest='subject',default=0)
 parser.add_argument('--lookup',action='store',dest='lookup_dir',default=0)
-parser.add_argument('--filepath',action='store',dest='filepath',default=0)
+#parser.add_argument('--filepath',action='store',dest='filepath',default=0)
 args = parser.parse_args()
 subject = args.subject
 
@@ -24,7 +24,8 @@ lookup = pd.read_csv(args.lookup_dir,index_col=False)
 #%%
 
 #Get patient
-filepath = args.filepath + '/' + subject + '/'
+#filepath = args.filepath + '/' + subject + '/'
+filepath = subject + '/'
 
 seg_files = lookup['Filename'].unique()
 #seg_dirs = lookup['Path'].unique()

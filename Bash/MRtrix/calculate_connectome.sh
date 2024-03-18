@@ -44,13 +44,13 @@ then
     exit 1
 fi
 
-sub_dir=/home/mphook/blue_butsonc/share/Connectome
+git_dir=/home/mphook/blue_butsonc/mphook/Github/
 
 while read subject || [ -n '$subject' ]
 do
     echo $subject
     module load python/3.10
-    python DBSpipeline/Python/Freesurfer/Connectome_maker.py --filepath $sub_dir --subject $subject --lookup $lookup
+    python ${git_dir}DBSpipeline/Python/Freesurfer/Connectome_maker.py --subject $subject --lookup $lookup
     
     module load mrtrix
     mrtransform -linear ${sub_dir}/${subject}/Cleaned/ACPC_to_b0.txt \
