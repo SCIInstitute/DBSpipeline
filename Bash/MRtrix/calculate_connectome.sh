@@ -46,7 +46,7 @@ fi
 
 git_dir=/home/mphook/blue_butsonc/mphook/Github/
 
-while read subject || [ -n '$subject' ]
+while read subject
 do
     echo $subject
     module load python/3.10
@@ -68,7 +68,7 @@ do
         -scale_invnodevol \
         -force
         
-done < $subjects
+done < <(grep '' $subjects)
 
 :'
 module load mrtrix
