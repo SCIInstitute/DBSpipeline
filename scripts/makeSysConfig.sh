@@ -30,3 +30,8 @@ done
 data_dir=$(readlink -f $d_dir)
 
 echo Data dir is: $data_dir
+
+# tmp directory
+# tracking directories
+# envs
+
