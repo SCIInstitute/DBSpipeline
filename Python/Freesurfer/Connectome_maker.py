@@ -14,7 +14,7 @@ import argparse
 parser = argparse.ArgumentParser(description='Inputs')
 parser.add_argument('--subject',action='store',dest='subject',default=0)
 parser.add_argument('--lookup',action='store',dest='lookup_dir',default=0)
-parser.add_argument('--filepath',action='store',dest='filepath',default=0)
+#parser.add_argument('--filepath',action='store',dest='filepath',default=0)
 args = parser.parse_args()
 subject = args.subject
 
@@ -24,7 +24,9 @@ lookup = pd.read_csv(args.lookup_dir,index_col=False)
 #%%
 
 #Get patient
-filepath = args.filepath + '/' + subject + '/'
+#filepath = args.filepath + '/' + subject + '/'
+print('Python Input',subject)
+filepath = subject.rstrip() + '/'
 
 seg_files = lookup['Filename'].unique()
 #seg_dirs = lookup['Path'].unique()
@@ -69,8 +71,8 @@ for i in range(0,len(mrtrix_key['Lookup Index'])):
     mrtrix_data[All_data == mrtrix_key['Lookup Index'][i]] = mrtrix_key['MRtrix Index'][i]
     
 mrtrix_to_nii = nibabel.Nifti1Image(mrtrix_data, HCP.affine, HCP.header)
-nibabel.save(All_to_nii, filepath + 'Connectome/HCP_parc_all.nii.gz')
-mrtrix_save = pd.DataFrame(data=mrtrix_data)
+nibabel.save(mrtrix_to_nii, filepath + 'Connectome/HCP_parc_all.nii.gz')
+mrtrix_save = pd.DataFrame(data=mrtrix_key)
 mrtrix_save.to_csv(filepath + 'Connectome/MRtrix_index_key.csv')
 #%%
 '''
