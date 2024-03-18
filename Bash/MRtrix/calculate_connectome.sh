@@ -38,7 +38,7 @@ then
     echo "ERROR: must supply lookup table"
     exit 1
 fi
-if [ -z "$subjects"]
+if [ -z "$subjects" ]
 then
     echo "ERROR: must supply list of subjects"
     exit 1
@@ -51,7 +51,6 @@ do
     echo $subject
     module load python/3.10
     python ${git_dir}DBSpipeline/Python/Freesurfer/Connectome_maker.py --subject $subject --lookup $lookup
-    echo $subject
     module load mrtrix
     mrtransform -linear ${subject}/Tractography/Cleaned/ACPC_to_b0.txt \
         ${subject}/Connectome/HCP_parc_all.nii.gz \
@@ -70,27 +69,9 @@ do
         
 done < <(grep '' $subjects)
 
-:'
-module load mrtrix
-for d in */
-do
-	echo $d
-	mrtransform -linear ${PWD}/${d}Cleaned/ACPC_to_b0.txt ${PWD}/${d}Cleaned/Fibers/HCP_parc_all.nii.gz ${PWD}/${d}Cleaned/Fibers/HCP_parc_all_b0space.nii.gz -force
-
-	tck2connectome ${PWD}/${d}Cleaned/Fibers/whole_brain_fibers.tck ${PWD}/${d}Cleaned/Fibers/HCP_parc_all_b0space.nii.gz ${PWD}/${d}Cleaned/Fibers/connectome_matrix.csv \
-	    -tck_weights_in ${PWD}/${d}Cleaned/Fibers/sift2_weights.txt \
-	    -keep_unassigned \
-	    -assignment_radial_search 3 \
-	    -out_assignments ${PWD}/${d}Cleaned/Fibers/assignments.txt \
-	    -scale_invlength \
-	    -scale_invnodevol \
-	    -force
-done
-
-module load python/3.10
-for d in */
-do
-	echo $d
-	python calculate_connectome.py --subject $d --left_ROI 371 --right_ROI 372
-done
-'
+#module load python/3.10
+#for d in */
+#do
+#	echo $d
+#	python calculate_connectome.py --subject $d --left_ROI 371 --right_ROI 372
+#done
