@@ -10,6 +10,10 @@
 #SBATCH --mail-user=mphook@ufl.edu
 #SBATCH --output=freesurfer_%j.out
 
+. ./sysUtils.sh
+
+sysconfig_fname=$(getConfigDir)/$(getSysName).config
+readConfigFile $sysconfig_fname
 
 module load fsl
 module load freesurfer/6.0.0

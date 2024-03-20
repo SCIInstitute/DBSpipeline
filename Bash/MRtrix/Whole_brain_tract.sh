@@ -15,6 +15,11 @@ module load mrtrix
 set -e
 mkdir -p Fibers
 
+. ./sysUtils.sh
+
+sysconfig_fname=$(getConfigDir)/$(getSysName).config
+readConfigFile $sysconfig_fname
+
 tckgen -act T1_5tt.nii.gz -seed_dynamic wmfod_norm.mif -select 10000000 -cutoff 0.1 wmfod_norm.mif Fibers/whole_brain_fibers.tck -force
 
 #Resampling

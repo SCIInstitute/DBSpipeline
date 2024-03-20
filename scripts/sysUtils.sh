@@ -72,11 +72,23 @@ while read varline
 do
   if [[ "$varline" == "#"* ]] || [ -z "$varline" ]; then continue; fi
   
-  eval "export $varline"
+  eval "$varline"
 done <$fname
+}
 
-echo $SYSNAME
-export $SYSNAME
+runConfigFile () {
+local fname="$1"
+
+exstr="#!/bin/bash"
+configstr="$(<$fname)"
+
+fname_sh=$fname.sh
+echo $exstr > $fname_sh
+echo $configstr >> $fname_sh
+
+chmod a+x $fname_sh
+
+$fname_sh
 
 }
 

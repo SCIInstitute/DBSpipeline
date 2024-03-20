@@ -1,10 +1,15 @@
 #!/bin/bash
 
+. ./sysUtils.sh
+
+sysconfig_fname=$(getConfigDir)/$(getSysName).config
+readConfigFile $sysconfig_fname
+
 set -e
 #For renaming
 #for file in *-*; do arr=(${file//-/ }); filename=${arr[@]:1:2}; mv -- $file ${filename// /-}; done
 
-codedir=/mnt/z/Dropbox\ \(UFL\)/DataProcessing/Pipeline\ Code
+#codedir=/mnt/z/Dropbox\ \(UFL\)/DataProcessing/Pipeline\ Code
 
 for file in *_left.nii.gz
 do
@@ -40,5 +45,5 @@ mkdir -p SCIRun_files
 for file in Fibers/*_fibers_ACPC.tck
 do
 filename=$(basename $file _fibers_ACPC.tck)
-python3 $codedir/Python/MRtrix/tckConverter.py $file SCIRun_files/$filename
+python3 "$CODEDIR/Python/MRtrix/tckConverter.py" $file SCIRun_files/$filename
 done

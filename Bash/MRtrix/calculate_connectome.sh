@@ -10,6 +10,10 @@
 #SBATCH --mail-user=mphook@ufl.edu
 #SBATCH --output=Connectome_%j.out
 
+. ./sysUtils.sh
+sysconfig_fname=$(getConfigDir)/$(getSysName).config
+readConfigFile $sysconfig_fname
+
 set -e
 
 Help()
@@ -44,13 +48,13 @@ then
     exit 1
 fi
 
-git_dir=/home/mphook/blue_butsonc/mphook/Github/
+
 
 while read subject
 do
     echo $subject
     module load python/3.10
-    python ${git_dir}DBSpipeline/Python/Freesurfer/Connectome_maker.py --subject $subject --lookup $lookup
+    python "${CODEDIR}/Python/Freesurfer/Connectome_maker.py" --subject $subject --lookup $lookup
     echo $subject
     module load mrtrix
     mrtransform -linear ${subject}/Tractography/Cleaned/ACPC_to_b0.txt \

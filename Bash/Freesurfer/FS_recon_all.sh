@@ -1,3 +1,8 @@
+. ./sysUtils.sh
+
+sysconfig_fname=$(getConfigDir)/$(getSysName).config
+readConfigFile $sysconfig_fname
+
 # Run recon-all
 echo $'\nRunning recon-all***************************************************************************************************\n'
 recon-all -s $1 -i $2 -FLAIR $3 -FLAIRpial -3T -all -parallel -openmp 8
@@ -25,7 +30,7 @@ done
 
 #Convert vtk to TriSurfField
 echo $'\nConvert Heat Maps to .pts, .fac, and data*****************************************************************************\n'
-python3 /mnt/c/Users/Matthew/Dropbox\ \(UFL\)/DataProcessing/Pipeline\ Code/Python/SCIRun/vtk_to_TriSurfField.py
+python3 $CODEDIR/Python/SCIRun/vtk_to_TriSurfField.py
 
 mkdir SCIRun
 mv *.pts ${PWD}/SCIRun
