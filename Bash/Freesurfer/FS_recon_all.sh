@@ -1,7 +1,6 @@
 . ./sysUtils.sh
 
-sysconfig_fname=$(getConfigDir)/$(getSysName).config
-readConfigFile $sysconfig_fname
+innitBashPaths
 
 # Run recon-all
 echo $'\nRunning recon-all***************************************************************************************************\n'

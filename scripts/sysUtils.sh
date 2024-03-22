@@ -77,19 +77,28 @@ done <$fname
 }
 
 runConfigFile () {
-local fname="$1"
+# doesn't really work
+  local fname="$1"
 
-exstr="#!/bin/bash"
-configstr="$(<$fname)"
+  exstr="#!/bin/bash"
+  configstr="$(<$fname)"
 
-fname_sh=$fname.sh
-echo $exstr > $fname_sh
-echo $configstr >> $fname_sh
+  fname_sh=$fname.sh
+  echo $exstr > $fname_sh
+  echo $configstr >> $fname_sh
 
-chmod a+x $fname_sh
+  chmod a+x $fname_sh
 
-$fname_sh
+  $fname_sh
+}
 
+
+
+innitBashPaths () {
+  # assumes that this file hasn't been moved out of the repo
+  local sysconfig_fname=$(getConfigDir)/$(getSysName).config
+  readConfigFile $sysconfig_fname
+  
 }
 
 

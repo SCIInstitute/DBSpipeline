@@ -12,12 +12,15 @@
 
 . ./sysUtils.sh
 
-sysconfig_fname=$(getConfigDir)/$(getSysName).config
-readConfigFile $sysconfig_fname
+innitBashPaths
 
+if [ $SYSNAME == "hipergator" ]
+then
 module load fsl
 module load freesurfer/6.0.0
 module load simnibs
+module load python
+fi
 
 set -e
 mri2mesh --all $1 $2 $3 #1 is subject id, 2 is T1_ACPC, 3 is T2_ACPC
@@ -53,7 +56,7 @@ mri_surf2vol --o thresh.nii.gz --subject $subject_id --so lh.pial lh.thresh.mgh 
 
 #Convert vtk to TriSurfField
 echo $'\nConvert Heat Maps to .pts, .fac, and data*****************************************************************************\n'
-module load python
+
 python $CODEDIR/Python/SCIRun/vtk_to_TriSurfField.py
 
 mkdir SCIRun

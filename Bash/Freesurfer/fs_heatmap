@@ -12,12 +12,15 @@
 
 . ./sysUtils.sh
 
-sysconfig_fname=$(getConfigDir)/$(getSysName).config
-readConfigFile $sysconfig_fname
+innitBashPaths
 
+if [ $SYSNAME == "hipergator" ]
+then
 module load fsl
 module load freesurfer/6.0.0
 module load perl/5.20.0
+fi
+
 SUBJECTS_DIR=/home/mphook/blue_butsonc/mphook/freesurfer/SimNIBS/FS_Subjects
 
 set -e
@@ -56,7 +59,12 @@ mri_surf2vol --o thresh.nii.gz --subject $subject_id --so lh.pial lh.thresh.mgh 
 
 #Convert vtk to TriSurfField
 echo $'\nConvert Heat Maps to .pts, .fac, and data*****************************************************************************\n'
+
+if [ $SYSNAME == "hipergator" ]
+then
 module load python
+fi
+
 python /home/mphook/blue_butsonc/mphook/freesurfer/vtk_to_TriSurfField.py
 
 mkdir SCIRun
@@ -70,7 +78,13 @@ cd ${home}
 #HCP Volume Creation
 echo $'\nCreate HCP Labelmap***************************************************************************************************\n'
 mri_aparc2aseg --s ${subject_id} --annot HCPMMP1 --o ${subject_id}_HCP.mgz
+
+
+if [ $SYSNAME == "hipergator" ]
+then
 module load mrtrix
+fi
+
 mrconvert -datatype uint32 ${subject_id}_HCP.mgz ${subject_id}_HCP.mif
 labelconvert ${subject_id}_HCP.mif /home/mphook/blue_butsonc/mphook/freesurfer/hcpmmp1_original.txt /home/mphook/blue_butsonc/mphook/freesurfer/hcpmmp1_ordered_edited.txt HCP_FS.nii.gz
 

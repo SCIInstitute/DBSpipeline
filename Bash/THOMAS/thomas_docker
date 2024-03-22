@@ -12,15 +12,16 @@
 
 . ./sysUtils.sh
 
-sysconfig_fname=$(getConfigDir)/$(getSysName).config
-readConfigFile $sysconfig_fname
+innitBashPaths
 
+if [ $SYSNAME == "hipergator" ]
+then
 module load apptainer
-
-apptainer run -B ${PWD}:${PWD} -W ${PWD} -u --cleanenv /home/mphook/blue_butsonc/mphook/THOMAS/thomas.sif bash -c "hipsthomas_csh -i $1"
-
 module load ants
 module load fsl
+fi
+
+apptainer run -B ${PWD}:${PWD} -W ${PWD} -u --cleanenv /home/mphook/blue_butsonc/mphook/THOMAS/thomas.sif bash -c "hipsthomas_csh -i $1"
 
 #Left Side
 echo "Left Side"
@@ -86,7 +87,10 @@ done
 
 echo "Reconstructing Atlas CL"
 
+if [ $SYSNAME == "hipergator" ]
+then
 module load python
+fi
 
 python $CODEDIR/Python/THOMAS/THOMAS_atlas_CL.py
 

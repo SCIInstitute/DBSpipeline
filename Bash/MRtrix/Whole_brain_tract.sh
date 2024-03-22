@@ -8,17 +8,22 @@
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=mphook@ufl.edu
 #SBATCH --output=tckgen_%j.out
+. ./sysUtils.sh
 
+innitBashPaths
+
+if [ $SYSNAME == "hipergator" ]
+then
 module load fsl
 module load freesurfer
 module load mrtrix
+module load python/3.10
+fi
+
 set -e
 mkdir -p Fibers
 
-. ./sysUtils.sh
-
-sysconfig_fname=$(getConfigDir)/$(getSysName).config
-readConfigFile $sysconfig_fname
+# running in CWD, so run in subject dir?
 
 tckgen -act T1_5tt.nii.gz -seed_dynamic wmfod_norm.mif -select 10000000 -cutoff 0.1 wmfod_norm.mif Fibers/whole_brain_fibers.tck -force
 
@@ -40,7 +45,7 @@ tcktransform Fibers/whole_brain_100k_fibers.tck transform.mif Fibers/whole_brain
 
 mkdir -p SCIRun_files
 #File Conversion to SCIRun
-module load python/3.10
+
 python /home/mphook/blue_butsonc/mphook/MRtrix/tckConverter.py Fibers/whole_brain_100k_fibers_ACPC.tck SCIRun_files/whole_brain_100k
 
 #for file in Fibers/*_fibers_ACPC.tck; do filename=$(basename $file _fibers_ACPC.tck); python3 tckConverter.py $file SCIRun_files/$filename; done

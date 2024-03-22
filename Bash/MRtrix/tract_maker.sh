@@ -2,8 +2,7 @@
 
 . ./sysUtils.sh
 
-sysconfig_fname=$(getConfigDir)/$(getSysName).config
-readConfigFile $sysconfig_fname
+innitBashPaths
 
 set -e
 #For renaming
@@ -11,6 +10,7 @@ set -e
 
 #codedir=/mnt/z/Dropbox\ \(UFL\)/DataProcessing/Pipeline\ Code
 
+# running in CWD, so run in subject dir?
 for file in *_left.nii.gz
 do
 	filename=$(basename $file .nii.gz)

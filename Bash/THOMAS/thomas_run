@@ -12,17 +12,16 @@
 
 . ./sysUtils.sh
 
-sysconfig_fname=$(getConfigDir)/$(getSysName).config
-readConfigFile $sysconfig_fname
+innitBashPaths
 
-
-
+if [ $SYSNAME == "hipergator" ]
+then
 module load itk
 module load ants
 module load fsl
 module load picsl
 module load convert3d
-
+fi
 
 # Run THOMAS
 /home/mphook/blue_butsonc/mphook/THOMAS/thomas_new/thomas_csh $1
@@ -92,7 +91,10 @@ done
 
 echo "Reconstructing Atlas CL"
 
+if [ $SYSNAME == "hipergator" ]
+then
 module load python
+fi
 
 python $CODEDIR/Python/THOMAS/THOMAS_atlas_CL.py
 

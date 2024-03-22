@@ -11,8 +11,9 @@
 #SBATCH --output=Connectome_%j.out
 
 . ./sysUtils.sh
-sysconfig_fname=$(getConfigDir)/$(getSysName).config
-readConfigFile $sysconfig_fname
+
+innitBashPaths
+
 
 set -e
 
@@ -49,32 +50,36 @@ then
 fi
 
 
+if [ $SYSNAME == "hipergator" ]
+then
+  module load python/3.10
+  module load mrtrix
+fi
 
 while read subject
 do
     echo $subject
-    module load python/3.10
+    
     python "${CODEDIR}/Python/Freesurfer/Connectome_maker.py" --subject $subject --lookup $lookup
     echo $subject
-    module load mrtrix
-    mrtransform -linear ${subject}/Tractography/Cleaned/ACPC_to_b0.txt \
-        ${subject}/Connectome/HCP_parc_all.nii.gz \
-        ${subject}/Connectome/HCP_parc_all_b0space.nii.gz -force
+    
+    mrtransform -linear $DATADIR/${subject}/Tractography/Cleaned/ACPC_to_b0.txt\ $DATADIR/${subject}/Connectome/HCP_parc_all.nii.gz \
+        $DATADIR/${subject}/Connectome/HCP_parc_all_b0space.nii.gz -force
         
-    tck2connectome ${subject}/Tractography/Cleaned/Fibers/whole_brain_fibers.tck \
-        ${subject}/Connectome/HCP_parc_all_b0space.nii.gz \
-        ${subject}/Connectome/connectome_matrix.csv \
-        -tck_weights_in ${subject}/Tractography/Cleaned/Fibers/sift2_weights.txt \
+    tck2connectome  $DATADIR/${subject}/Tractography/Cleaned/Fibers/whole_brain_fibers.tck \
+        $DATADIR/${subject}/Connectome/HCP_parc_all_b0space.nii.gz \
+        $DATADIR/${subject}/Connectome/connectome_matrix.csv \
+        -tck_weights_in $DATADIR/${subject}/Tractography/Cleaned/Fibers/sift2_weights.txt \
         -keep_unassigned \
         -assignment_radial_search 3 \
-        -out_assignments ${subject}/Tractography/Cleaned/Fibers/assignments.txt \
+        -out_assignments $DATADIR/${subject}/Tractography/Cleaned/Fibers/assignments.txt \
         -scale_invlength \
         -scale_invnodevol \
         -force
         
 done < <(grep '' $subjects)
 
-:'
+'
 module load mrtrix
 for d in */
 do
