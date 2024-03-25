@@ -1,8 +1,8 @@
 #!/bin/bash
 
-. ./sysUtils.sh
+. $(dirname $(readlink -f $0))/../../scripts/sysUtils.sh
 
-innitBashPaths
+innitBashPaths -v
 
 set -e
 
@@ -10,6 +10,9 @@ set -e
 subject=$1
 
 #codedir=/mnt/z/Dropbox\ \(UFL\)/DataProcessing/Pipeline\ Code
+export SUBJECTS_DIR="${DATASDIR}"
+
+echo ${SUBJECTS_DIR}
 
 if [ -z "$subject" ]
 then
@@ -18,7 +21,7 @@ else
 	#Warp fsaverage to subject space
 	for hemi in lh rh
 	do
-		mri_surf2surf --srcsubject fsaverage --trgsubject ${subject} --hemi ${hemi} --sval-annot ${SUBJECTS_DIR}/fsaverage/label/${hemi}.HCPMMP1.annot --tval ${SUBJECTS_DIR}/${subject}/label/${hemi}.HCPMMP1.annot
+		mri_surf2surf --srcsubject fsaverage --trgsubject ${subject} --hemi ${hemi} --sval-annot ${DATASDIR}/fsaverage/label/${hemi}.HCPMMP1.annot --tval ${DATASDIR}/${subject}/label/${hemi}.HCPMMP1.annot
 	done
 
 	#convert annotation to volume

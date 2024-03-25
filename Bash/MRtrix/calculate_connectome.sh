@@ -10,10 +10,8 @@
 #SBATCH --mail-user=mphook@ufl.edu
 #SBATCH --output=Connectome_%j.out
 
-. ./sysUtils.sh
-
+. $(dirname $(readlink -f $0))/../../scripts/sysUtils.sh
 innitBashPaths
-
 
 set -e
 

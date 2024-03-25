@@ -1,14 +1,11 @@
 #!/bin/bash
 
-. ./sysUtils.sh
+#script=$(readlink -f $0)
+#sc_dir=$(dirname $(readlink -f $0))
+. $(dirname $(readlink -f $0))/sysUtils.sh
 
-innitBashPaths
-
-
-echo $SYSNAME
-echo $DATADIR
-echo $CODEDIR
-echo $TEMPDIR
+innitBashPaths -v
 
 
 python "${CODEDIR}/Python/Freesurfer/Connectome_maker.py" --subject $subject --lookup $lookup
+

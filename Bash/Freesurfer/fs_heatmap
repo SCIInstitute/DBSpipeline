@@ -10,7 +10,7 @@
 #SBATCH --mail-user=mphook@ufl.edu
 #SBATCH --output=freesurfer_%j.out
 
-. ./sysUtils.sh
+. $(dirname $(readlink -f $0))/../../scripts/sysUtils.sh
 
 innitBashPaths
 
@@ -21,13 +21,14 @@ module load freesurfer/6.0.0
 module load perl/5.20.0
 fi
 
-SUBJECTS_DIR=/home/mphook/blue_butsonc/mphook/freesurfer/SimNIBS/FS_Subjects
+#SUBJECTS_DIR=/home/mphook/blue_butsonc/mphook/freesurfer/SimNIBS/FS_Subjects
+SUBJECTS_DIR=$DATADIR
 
 set -e
 recon-all -s $1 -i $2 -all -parallel -openmp 8 #-FLAIR $3 -FLAIRpial
 
 m2m_id=$1
-subject_id=${m2m_id}
+subject=${m2m_id}
 home=${PWD}
 
 
@@ -37,15 +38,15 @@ home=${PWD}
 echo $'\nTransforming Cortial Heat Maps to Patient Space**********************************************************************\n'
 for hemi in lh rh
 do
-	mri_surf2surf --srcsubject fsaverage --trgsubject ${subject_id} --trgsurfreg sphere.reg --hemi ${hemi} --sval /home/mphook/blue_butsonc/mphook/freesurfer/${hemi}.fsaverage.gm.PET_EEGFMRI_DWI_ZSCORE_4D_INTERSECTIONONLY_MEAN.proj-mid.sm10.5pcnt.min1cmsq.caudalmiddlefrontal.mgh --tval ${SUBJECTS_DIR}/${subject_id}/surf/${hemi}.thresh.mgh
-	mri_surf2surf --srcsubject fsaverage --trgsubject ${subject_id} --trgsurfreg sphere.reg --hemi ${hemi} --sval /home/mphook/blue_butsonc/mphook/freesurfer/${hemi}.fsaverage.gm.PET_EEGFMRI_DWI_ZSCORE_4D_INTERSECTIONONLY_MEAN.proj-mid.sm10.posthresh.frontal.mgh --tval ${SUBJECTS_DIR}/${subject_id}/surf/${hemi}.heatmap.mgh
+	mri_surf2surf --srcsubject fsaverage --trgsubject ${subject} --trgsurfreg sphere.reg --hemi ${hemi} --sval ${DATADIR}/${hemi}.fsaverage.gm.PET_EEGFMRI_DWI_ZSCORE_4D_INTERSECTIONONLY_MEAN.proj-mid.sm10.5pcnt.min1cmsq.caudalmiddlefrontal.mgh --tval ${DATADIR}/${subject}/surf/${hemi}.thresh.mgh
+	mri_surf2surf --srcsubject fsaverage --trgsubject ${subject} --trgsurfreg sphere.reg --hemi ${hemi} --sval ${DATADIR}/${hemi}.fsaverage.gm.PET_EEGFMRI_DWI_ZSCORE_4D_INTERSECTIONONLY_MEAN.proj-mid.sm10.posthresh.frontal.mgh --tval ${DATADIR}/${subject}/surf/${hemi}.heatmap.mgh
 	#Also adding HCP annotations to subject
-	mri_surf2surf --srcsubject fsaverage --trgsubject ${subject_id} --hemi ${hemi} --sval-annot ${SUBJECTS_DIR}/fsaverage/label/${hemi}.HCPMMP1.annot --tval ${SUBJECTS_DIR}/${subject_id}/label/${hemi}.HCPMMP1.annot
+	mri_surf2surf --srcsubject fsaverage --trgsubject ${subject} --hemi ${hemi} --sval-annot ${DATADIR}/fsaverage/label/${hemi}.HCPMMP1.annot --tval ${DATADIR}/${subject}/label/${hemi}.HCPMMP1.annot
 done
 
 # Convert heat maps to vtk
 echo $'\nConvert Heat Maps to vtk**********************************************************************************************\n'
-cd ${SUBJECTS_DIR}/${subject_id}/surf
+cd ${DATADIR}/${subject}/surf
 
 for hemi in lh rh
 do
@@ -65,7 +66,7 @@ then
 module load python
 fi
 
-python /home/mphook/blue_butsonc/mphook/freesurfer/vtk_to_TriSurfField.py
+python ${CODEDIR}/Python/SCIRun/vtk_to_TriSurfField.py
 
 mkdir SCIRun
 mv *.pts ${PWD}/SCIRun
@@ -77,7 +78,7 @@ cd ${home}
 
 #HCP Volume Creation
 echo $'\nCreate HCP Labelmap***************************************************************************************************\n'
-mri_aparc2aseg --s ${subject_id} --annot HCPMMP1 --o ${subject_id}_HCP.mgz
+mri_aparc2aseg --s ${subject} --annot HCPMMP1 --o ${subject}_HCP.mgz
 
 
 if [ $SYSNAME == "hipergator" ]
@@ -85,7 +86,7 @@ then
 module load mrtrix
 fi
 
-mrconvert -datatype uint32 ${subject_id}_HCP.mgz ${subject_id}_HCP.mif
-labelconvert ${subject_id}_HCP.mif /home/mphook/blue_butsonc/mphook/freesurfer/hcpmmp1_original.txt /home/mphook/blue_butsonc/mphook/freesurfer/hcpmmp1_ordered_edited.txt HCP_FS.nii.gz
+mrconvert -datatype uint32 ${subject}_HCP.mgz ${subject}_HCP.mif
+labelconvert ${subject}_HCP.mif ${CODEDIR}/Freesurfer/hcpmmp1_original.txt ${DATADIR}/${subject}/freesurfer/hcpmmp1_ordered_edited.txt HCP_FS.nii.gz
 
 echo $'\n\n******************Done!****************\n\n'

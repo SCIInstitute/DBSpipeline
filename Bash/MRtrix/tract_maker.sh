@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. ./sysUtils.sh
+. $(dirname $(readlink -f $0))/../../scripts/sysUtils.sh
 
 innitBashPaths
 
