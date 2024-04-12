@@ -10,9 +10,9 @@
 #SBATCH --mail-user=mphook@ufl.edu
 #SBATCH --output=thomas_run_%j.out
 
-. ./sysUtils.sh
+. $(dirname $(readlink -f $0))/../../scripts/sysUtils.sh
 
-innitBashPaths
+innitBashPaths -v
 
 if [ $SYSNAME == "hipergator" ]
 then
@@ -21,6 +21,7 @@ module load ants
 module load fsl
 fi
 
+# TODO: figure out where the sif file should live
 apptainer run -B ${PWD}:${PWD} -W ${PWD} -u --cleanenv /home/mphook/blue_butsonc/mphook/THOMAS/thomas.sif bash -c "hipsthomas_csh -i $1"
 
 #Left Side
