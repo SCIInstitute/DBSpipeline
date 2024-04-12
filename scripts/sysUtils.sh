@@ -77,7 +77,11 @@ checkSysConfig(){
 
 getSysName() {
   hname=$(hostname)
-  sysname=${hname%%.*}
+  if [[ $hname == *"ufhpc"* ]]; then
+    sysname="hipergator"
+  else
+    sysname=${hname%%.*}
+  fi
   echo $sysname
 }
 

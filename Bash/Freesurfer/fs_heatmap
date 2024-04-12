@@ -20,7 +20,7 @@
 
 innitBashPaths -v
 
-if [ $SYSNAME == "login7" ]
+if [ $SYSNAME == "hipergator" ]
 then
 module load fsl
 module load freesurfer/6.0.0
