@@ -11,7 +11,7 @@
 #SBATCH --output=Connectome_%j.out
 
 . $(dirname $(readlink -f $0))/../../scripts/sysUtils.sh
-innitBashPaths
+innitBashPaths -v
 
 set -e
 

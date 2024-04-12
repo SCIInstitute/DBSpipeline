@@ -10,7 +10,7 @@ set -e
 subject=$1
 
 #codedir=/mnt/z/Dropbox\ \(UFL\)/DataProcessing/Pipeline\ Code
-export SUBJECTS_DIR="${FREESURFERDIR}"/Subjects
+export SUBJECTS_DIR="${FREESURFERDIR}"/FS_Subjects
 
 echo ${SUBJECTS_DIR}
 

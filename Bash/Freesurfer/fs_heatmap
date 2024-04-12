@@ -28,7 +28,7 @@ module load perl/5.20.0
 fi
 
 #SUBJECTS_DIR=/home/mphook/blue_butsonc/mphook/freesurfer/SimNIBS/FS_Subjects
-SUBJECTS_DIR="${FREESURFERDIR}"/Subjects
+SUBJECTS_DIR="${FREESURFERDIR}"/FS_Subjects
 
 set -e
 echo recon-all -s "$1" -i "${2}" -all -parallel -openmp 8
@@ -102,6 +102,6 @@ module load mrtrix
 fi
 
 mrconvert -datatype uint32 ${subject}_HCP.mgz ${subject}_HCP.mif
-labelconvert ${subject}_HCP.mif ${CODEDIR}/Freesurfer/hcpmmp1_original.txt ${SUBJECTS_DIR}/${subject}/freesurfer/hcpmmp1_ordered_edited.txt HCP_FS.nii.gz
+labelconvert ${subject}_HCP.mif ${CODEDIR}/Bash/Freesurfer/hcpmmp1_original.txt ${SUBJECTS_DIR}/${subject}/freesurfer/hcpmmp1_ordered_edited.txt HCP_FS.nii.gz
 
 echo $'\n\n******************Done!****************\n\n'
