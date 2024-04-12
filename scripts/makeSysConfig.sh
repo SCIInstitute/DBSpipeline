@@ -49,6 +49,8 @@ echo Data dir is: $data_dir
 # envs
 
 #/Users/jess/Dropbox/CT DBS Human/CENTURY S Patients/pDummy_connectome
+#/Users/jess/UF_brainstim/scratch/
+
 
 # default temp in unix - /var/tmp/
 
@@ -74,6 +76,10 @@ tempdir=$tempdirroot/DBSPipeline
 echo  temp dir is: $tempdir
 mkdir -p $tempdir
 
+FSdir=$tempdirroot/FreeSurfer
+echo  FreeSurfer dir is: $FSdir
+mkdir -p $FSdir
+
 echo writing config file
 echo $sysconfig_fname
 
@@ -91,4 +97,5 @@ echo SYSNAME=\"$sysname\" >> $sysconfig_fname
 echo DATADIR=\"$data_dir\" >> $sysconfig_fname
 echo CODEDIR=\"$codedir\" >> $sysconfig_fname
 echo TEMPDIR=\"$tempdir\" >> $sysconfig_fname
+echo FREESURFERDIR=\"$FSdir\" >> $sysconfig_fname
 

@@ -22,7 +22,6 @@ then
 module load fsl
 module load freesurfer
 module load mrtrix
-module load python/3.10
 fi
 
 set -e
@@ -88,6 +87,11 @@ tcktransform Fibers/whole_brain_100k_fibers.tck Cleaned/transform.mif Fibers/who
 
 mkdir -p SCIRun_files
 #File Conversion to SCIRun
+
+if [ $SYSNAME == "hipergator" ]
+then
+module load python/3.10
+fi
 
 python $CODEDIR/Python/MRtrix/tckConverter.py Fibers/whole_brain_100k_fibers_ACPC.tck SCIRun_files/whole_brain_100k
 

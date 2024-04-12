@@ -22,7 +22,7 @@ module load perl/5.20.0
 fi
 
 #SUBJECTS_DIR=/home/mphook/blue_butsonc/mphook/freesurfer/SimNIBS/FS_Subjects
-SUBJECTS_DIR=$DATADIR
+SUBJECTS_DIR="${FREESURFERDIR}"/Subjects
 
 set -e
 recon-all -s $1 -i $2 -all -parallel -openmp 8 #-FLAIR $3 -FLAIRpial
@@ -38,15 +38,15 @@ home=${PWD}
 echo $'\nTransforming Cortial Heat Maps to Patient Space**********************************************************************\n'
 for hemi in lh rh
 do
-	mri_surf2surf --srcsubject fsaverage --trgsubject ${subject} --trgsurfreg sphere.reg --hemi ${hemi} --sval ${DATADIR}/${hemi}.fsaverage.gm.PET_EEGFMRI_DWI_ZSCORE_4D_INTERSECTIONONLY_MEAN.proj-mid.sm10.5pcnt.min1cmsq.caudalmiddlefrontal.mgh --tval ${DATADIR}/${subject}/surf/${hemi}.thresh.mgh
-	mri_surf2surf --srcsubject fsaverage --trgsubject ${subject} --trgsurfreg sphere.reg --hemi ${hemi} --sval ${DATADIR}/${hemi}.fsaverage.gm.PET_EEGFMRI_DWI_ZSCORE_4D_INTERSECTIONONLY_MEAN.proj-mid.sm10.posthresh.frontal.mgh --tval ${DATADIR}/${subject}/surf/${hemi}.heatmap.mgh
+	mri_surf2surf --srcsubject fsaverage --trgsubject ${subject} --trgsurfreg sphere.reg --hemi ${hemi} --sval ${SUBJECTS_DIR}/${hemi}.fsaverage.gm.PET_EEGFMRI_DWI_ZSCORE_4D_INTERSECTIONONLY_MEAN.proj-mid.sm10.5pcnt.min1cmsq.caudalmiddlefrontal.mgh --tval ${SUBJECTS_DIR}/${subject}/surf/${hemi}.thresh.mgh
+	mri_surf2surf --srcsubject fsaverage --trgsubject ${subject} --trgsurfreg sphere.reg --hemi ${hemi} --sval ${SUBJECTS_DIR}/${hemi}.fsaverage.gm.PET_EEGFMRI_DWI_ZSCORE_4D_INTERSECTIONONLY_MEAN.proj-mid.sm10.posthresh.frontal.mgh --tval ${SUBJECTS_DIR}/${subject}/surf/${hemi}.heatmap.mgh
 	#Also adding HCP annotations to subject
-	mri_surf2surf --srcsubject fsaverage --trgsubject ${subject} --hemi ${hemi} --sval-annot ${DATADIR}/fsaverage/label/${hemi}.HCPMMP1.annot --tval ${DATADIR}/${subject}/label/${hemi}.HCPMMP1.annot
+	mri_surf2surf --srcsubject fsaverage --trgsubject ${subject} --hemi ${hemi} --sval-annot ${SUBJECTS_DIR}/fsaverage/label/${hemi}.HCPMMP1.annot --tval ${SUBJECTS_DIR}/${subject}/label/${hemi}.HCPMMP1.annot
 done
 
 # Convert heat maps to vtk
 echo $'\nConvert Heat Maps to vtk**********************************************************************************************\n'
-cd ${DATADIR}/${subject}/surf
+cd ${SUBJECTS_DIR}/${subject}/surf
 
 for hemi in lh rh
 do
@@ -87,6 +87,6 @@ module load mrtrix
 fi
 
 mrconvert -datatype uint32 ${subject}_HCP.mgz ${subject}_HCP.mif
-labelconvert ${subject}_HCP.mif ${CODEDIR}/Freesurfer/hcpmmp1_original.txt ${DATADIR}/${subject}/freesurfer/hcpmmp1_ordered_edited.txt HCP_FS.nii.gz
+labelconvert ${subject}_HCP.mif ${CODEDIR}/Freesurfer/hcpmmp1_original.txt ${SUBJECTS_DIR}/${subject}/freesurfer/hcpmmp1_ordered_edited.txt HCP_FS.nii.gz
 
 echo $'\n\n******************Done!****************\n\n'

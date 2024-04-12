@@ -28,7 +28,8 @@ mri2mesh --all $1 $2 $3 #1 is subject id, 2 is T1_ACPC, 3 is T2_ACPC
 m2m_id=$1
 subject_id=fs_${m2m_id}
 home=${PWD}
-SUBJECTS_DIR=/home/mphook/blue_butsonc/mphook/freesurfer/SimNIBS/FS_Subjects
+#SUBJECTS_DIR=/home/mphook/blue_butsonc/mphook/freesurfer/SimNIBS/FS_Subjects
+SUBJECTS_DIR="${FREESURFERDIR}"/Subjects
 
 mv ${home}/${subject_id} $SUBJECTS_DIR
 

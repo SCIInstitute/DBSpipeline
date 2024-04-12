@@ -48,18 +48,24 @@ then
 fi
 
 
-if [ $SYSNAME == "hipergator" ]
-then
-  module load python/3.10
-  module load mrtrix
-fi
 
 while read subject
 do
     echo $subject
     
+    if [ $SYSNAME == "hipergator" ]
+    then
+      module load python/3.10
+    fi
+
+    
     python "${CODEDIR}/Python/Freesurfer/Connectome_maker.py" --subject $subject --lookup $lookup
     echo $subject
+    
+    if [ $SYSNAME == "hipergator" ]
+    then
+      module load mrtrix
+    fi
     
     mrtransform -linear $DATADIR/${subject}/Tractography/Cleaned/ACPC_to_b0.txt\ $DATADIR/${subject}/Connectome/HCP_parc_all.nii.gz \
         $DATADIR/${subject}/Connectome/HCP_parc_all_b0space.nii.gz -force

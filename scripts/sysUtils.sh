@@ -56,10 +56,10 @@ handle_options() {
 
   
 checkSysConfig(){
-  handle_options "$@"
-  if [ "$verbose_mode" = true ]; then
-   echo $sysconfig_fname
-  fi
+#  handle_options "$@"
+#  if [ "$verbose_mode" = true ]; then
+#   echo $sysconfig_fname
+#  fi
   
   local sysconfig_fname="$1"
   
@@ -172,6 +172,7 @@ innitBashPaths () {
     echo DATADIR: $DATADIR
     echo CODEDIR: $CODEDIR
     echo TEMPDIR: $TEMPDIR
+    echo FREESURFERDIR: $FREESURFERDIR
   fi
   
   
