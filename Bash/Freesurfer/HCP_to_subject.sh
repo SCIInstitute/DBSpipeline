@@ -1,8 +1,11 @@
 #!/bin/bash
 
-. $(dirname $(readlink -f $0))/../../scripts/sysUtils.sh
 
-innitBashPaths -v
+if [[ -z "$SYSNAME" ]]; then
+echo environment not set.  run makeSysConfig.sh
+exit
+fi
+
 
 set -e
 

@@ -12,7 +12,10 @@
 #SBATCH --mail-user=mphook@ufl.edu
 #SBATCH --output=Preproc_%j.out
 
-
+if [[ -z "$SYSNAME" ]]; then
+echo environment not set.  run makeSysConfig.sh
+exit
+fi
 
 Help()
 {
@@ -52,9 +55,6 @@ done
 
 set -e #exit on fail
 
-. $(dirname $(readlink -f $0))/../../scripts/sysUtils.sh
-
-innitBashPaths -v
 
 set -e
 

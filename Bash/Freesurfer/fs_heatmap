@@ -15,6 +15,11 @@
 # TODO: FS ID lookup table
 # TODO: add FS env to scripts
 
+if [[ -z "$SYSNAME" ]]; then
+echo environment not set.  run makeSysConfig.sh
+exit
+fi
+
 
 if [ $SYSNAME == "hipergator" ]
 then
