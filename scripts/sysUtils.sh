@@ -182,6 +182,20 @@ innitBashPaths () {
   
 }
 
+addConfigProfile() {
+
+  local sysconfig_fname="$1"
+  if ! $(checkSysConfig "$sysconfig_fname")
+  then
+    echo config file not found.  cannot add to .bashrc
+    exit
+  fi
+  
+  
+  cat "${sysconfig_fname}" >> "${HOME}/.bashrc"
+
+}
+
 
 main() {
   echo "runnin utils"

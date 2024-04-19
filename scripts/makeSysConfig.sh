@@ -83,19 +83,29 @@ mkdir -p $FSdir
 echo writing config file
 echo $sysconfig_fname
 
-header_str="##############
+header_str="
+##############
 # system config file for the DBS pipeline code.
 # config files should not be added to github,
 # except for public/shared systems and paths
 #
-
-
 "
 
 echo "$header_str" > $sysconfig_fname
-echo SYSNAME=\"$sysname\" >> $sysconfig_fname
-echo DATADIR=\"$data_dir\" >> $sysconfig_fname
-echo CODEDIR=\"$codedir\" >> $sysconfig_fname
-echo TEMPDIR=\"$tempdir\" >> $sysconfig_fname
-echo FREESURFERDIR=\"$FSdir\" >> $sysconfig_fname
+echo export SYSNAME=\"$sysname\" >> $sysconfig_fname
+echo export DATADIR=\"$data_dir\" >> $sysconfig_fname
+echo export CODEDIR=\"$codedir\" >> $sysconfig_fname
+echo export TEMPDIR=\"$tempdir\" >> $sysconfig_fname
+echo export FREESURFERDIR=\"$FSdir\" >> $sysconfig_fname
+echo export PATH='$PATH:'\"$codedir/scripts\" >> $sysconfig_fname
+
+
+read -p "add $sysconfig_fname to .basrc file? [y/N]:" profile
+if [ ! "$profile" == "y" ] || [ -z "${profile}" ]
+then
+  echo Exiting
+  exit
+fi
+
+addConfigProfile $sysconfig_fname
 
