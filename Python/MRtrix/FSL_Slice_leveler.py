@@ -12,7 +12,11 @@ dwi = ["DWI_up.nii.gz", "DWI_down.nii.gz"]
 
 slice_count = {}
 for file in dwi:
-    img = nib.load(file)
+    try:
+        img = nib.load(file)
+    except:
+        print(file,'does not exist')
+        continue
     header_info = img.header
     dims = header_info["dim"][1:5]
     slice_count[file] = dims[2]

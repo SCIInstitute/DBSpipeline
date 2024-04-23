@@ -1,11 +1,18 @@
 import nrrd
 import nibabel as nib
 import numpy as np
+import argparse
 
-inputFile = "T1_pre_ACPCspace.nrrd"
-outputFile = "T1_pre_ACPCspace_converted.nii.gz"
+parser = argparse.ArgumentParser(description='Inputs')
+parser.add_argument('--NRRD',action='store',dest='inputFile',default=0)
+args = parser.parse_args()
 
-bestNii = nib.load("T1_pre_ACPCspace.nii.gz")
+inputFile = args.inputFile
+outputFile = inputFile.replace("nrrd", "nii.gz")
+#inputFile = "T1_pre_ACPCspace.nrrd"
+#outputFile = "T1_pre_ACPCspace_converted.nii.gz"
+
+#bestNii = nib.load("T1_pre_ACPCspace.nii.gz")
 
 readdata, header = nrrd.read(inputFile)
 if header["space"] == "left-posterior-superior":
