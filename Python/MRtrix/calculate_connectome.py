@@ -21,15 +21,17 @@ args = parser.parse_args()
 if np.isnan(args.ROI_list_left) or np.isnan(args.ROI_list_right):
     raise Exception('Not Valid Region')
 
+#home = os.environ["DATADIR"]
+#home = os.environ["FREESURFERDIR"]
 home = os.getcwd()
-file_dir = home + '/' + args.subject + 'Cleaned/Fibers'
+file_dir = os.path.join(home,  args.subject + 'Cleaned/Fibers')
 
 #Note: this notebook generates figures the rely on the data being from one region to everywhere else.
 # ROI lists should be related as they will be combined into one region
-subject = np.loadtxt(file_dir + '/connectome_matrix.csv', delimiter=',')
-mu = np.loadtxt(file_dir + '/sift2_mu.txt')
+subject = np.loadtxt(os.path.join(file_dir, 'connectome_matrix.csv'), delimiter=',')
+mu = np.loadtxt(os.path.join(file_dir + 'sift2_mu.txt'))
 # Lookup table
-with open('/home/mphook/blue_butsonc/mphook/freesurfer/hcpmmp1_subcortex.txt','r') as f:
+with open(os.path.join(os.environ["CODEDIR"], 'Bash/Freesurfer/hcpmmp1_subcortex.txt'),'r') as f:
     labels = []
     for line in f:
         if line.startswith('#') or len(line) < 10:
@@ -74,20 +76,20 @@ ROI_right_top = ROI_right[Index_right]
 labels_left = np.array(labels)[Index_left[Index_left < len(labels)]]
 labels_right = np.array(labels)[Index_right[Index_right < len(labels)]]
 
-with open(file_dir + '/labels_left.txt','w') as f:
+with open(os.path.join(file_dir, 'labels_left.txt'),'w') as f:
     count = 0
     for label in labels_left:
         print(label,Index_left[count]+1,ROI_left_top[count],file=f)
         count += 1
-with open(file_dir + '/labels_right.txt','w') as f:
+with open(os.path.join(file_dir, 'labels_right.txt'),'w') as f:
     count = 0
     for label in labels_right:
         print(label,Index_right[count]+1,ROI_right_top[count],file=f)
         count += 1    
         
         
-file_path_1 = file_dir + '/labels_left.txt'
-file_path_2 = file_dir + '/labels_right.txt'
+file_path_1 = os.path.join(file_dir, 'labels_left.txt')
+file_path_2 = os.path.join(file_dir, 'labels_right.txt')
 
 f = open(file_path_1,'r')
 connectome_1 = f.readlines()
@@ -214,11 +216,11 @@ all_data = region_connectivity
 
 padding = ' ' * 35
 filepath = file_path_1.split('labels')[0]
-with open(filepath + 'Region_connectivity.txt', 'w') as f:
+with open(os.path.join(filepath, 'Region_connectivity.txt'), 'w') as f:
     for k,v in all_data.items():
         print('{:.50s} {}'.format(k + padding,v), file=f)
         
 region_both = {'Region': left_region.keys(),'Left': left_region.values(), 'Right': right_region.values()}
 region_both = [left_region, right_region]
 df_regions = pd.DataFrame(data=region_both)
-df_regions.to_csv(filepath +'Region_Connectivity.csv', index=False)
+df_regions.to_csv(os.path.join(filepath,'Region_Connectivity.csv'), index=False)
