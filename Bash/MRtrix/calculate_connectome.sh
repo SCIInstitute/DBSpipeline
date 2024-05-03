@@ -3,7 +3,7 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4
-#SBATCH --mem=4gb
+#SBATCH --mem=1gb
 #SBATCH --time=1:00:00
 #SBATCH --job-name=Connectome
 #SBATCH --mail-type=ALL
@@ -88,7 +88,7 @@ do
         
 done < <(grep '' $subjects)
 
-'
+:'
 module load mrtrix
 for d in */
 do
