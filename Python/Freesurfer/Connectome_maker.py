@@ -20,7 +20,7 @@ args = parser.parse_args()
 subject = args.subject
 
 #Load lookup table
-lookup = pd.read_csv(os.path.join(os.environ["CODEDIR"], 'Bash/Freesurfer/connectome_matrix.csv'),index_col=False)
+lookup = pd.read_csv(os.path.join(os.environ["CODEDIR"], 'Bash/Freesurfer/connectome_lookup.csv'),index_col=False)
 
 #%%
 

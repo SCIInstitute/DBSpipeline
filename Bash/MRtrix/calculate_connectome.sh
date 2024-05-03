@@ -45,7 +45,7 @@ done
 #    echo "ERROR: must supply lookup table"
 #    exit 1
 #fi
-if [ -z "$subjects"]
+if [ -z "$subjects" ]
 then
     echo "ERROR: must supply list of subjects"
     exit 1
