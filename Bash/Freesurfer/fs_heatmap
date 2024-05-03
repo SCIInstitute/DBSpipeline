@@ -9,6 +9,8 @@
 #SBATCH --mail-type=ALL
 #SBATCH --output=freesurfer_%j.out
 
+# example call
+# sbatch --mail-user=jess.tate@ufl.edu fs_heatmap fs_pDummy /blue/butsonc/Butson_Lab/Connectome/Testing/pDummy/Imaging/T1_pre_scirun.nii.gz
 ###
 # TODO: figure out spaces in paths problem
 # TODO: FS ID lookup table

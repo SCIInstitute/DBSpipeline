@@ -9,6 +9,9 @@
 #SBATCH --mail-type=ALL
 #SBATCH --output=Connectome_%j.out
 
+# example call
+# sbatch --mail-user=jess.tate@ufl.edu calculate_connectome.sh  /blue/butsonc/Butson_Lab/Connectome/Testing/SubjectsShort.txt
+
 if [[ -z "$SYSNAME" ]]; then
 echo environment not set.  run makeSysConfig.sh
 exit
@@ -22,12 +25,12 @@ Help()
    echo
    echo "options:"
    echo "-h    Help Page"
-   echo "-L    Path to Lookup Table"
+#   echo "-L    Path to Lookup Table"
    echo "-s    Path to Subjects List"
    echo
 }
 
-lookup="${CODEDIR}/Bash/Freesurfer/connectome_lookup.csv"
+#lookup="${CODEDIR}/Bash/Freesurfer/connectome_lookup.csv"
 # Get the options
 while getopts ":h:L:s:" option; do
    case $option in
@@ -37,11 +40,11 @@ while getopts ":h:L:s:" option; do
    esac
 done
 
-if [ -z "$lookup" ]
-then
-    echo "ERROR: must supply lookup table"
-    exit 1
-fi
+#if [ -z "$lookup" ]
+#then
+#    echo "ERROR: must supply lookup table"
+#    exit 1
+#fi
 if [ -z "$subjects"]
 then
     echo "ERROR: must supply list of subjects"
@@ -60,7 +63,7 @@ do
     fi
 
     
-    python "${CODEDIR}/Python/Freesurfer/Connectome_maker.py" --subject $subject --lookup $lookup
+    python "${CODEDIR}/Python/Freesurfer/Connectome_maker.py" --subject $subject
     echo $subject
     
     if [ $SYSNAME == "hipergator" ]
