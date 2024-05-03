@@ -7,7 +7,6 @@
 #SBATCH --time=1:00:00
 #SBATCH --job-name=Connectome
 #SBATCH --mail-type=ALL
-#SBATCH --mail-user=mphook@ufl.edu
 #SBATCH --output=Connectome_%j.out
 
 if [[ -z "$SYSNAME" ]]; then
@@ -28,11 +27,11 @@ Help()
    echo
 }
 
-
+lookup="${CODEDIR}/Bash/Freesurfer/connectome_lookup.csv"
 # Get the options
 while getopts ":h:L:s:" option; do
    case $option in
-      L) lookup=$OPTARG;;
+#      L) lookup=$OPTARG;;
       s) subjects=$OPTARG;;
       h | * | :) Help && exit;;
    esac
