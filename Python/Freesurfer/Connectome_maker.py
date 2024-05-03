@@ -10,6 +10,7 @@ import nibabel.processing
 import numpy as np
 import pandas as pd
 import argparse
+import os
 
 parser = argparse.ArgumentParser(description='Inputs')
 parser.add_argument('--subject',action='store',dest='subject',default=0)
@@ -26,7 +27,7 @@ lookup = pd.read_csv(os.path.join(os.environ["CODEDIR"], 'Bash/Freesurfer/connec
 #Get patient
 #filepath = args.filepath + '/' + subject + '/'
 print('Python Input',subject)
-filepath = subject.rstrip() + '/'
+filepath = os.path.join(os.environ["DATADIR"],subject.rstrip())
 
 seg_files = lookup['Filename'].unique()
 #seg_dirs = lookup['Path'].unique()

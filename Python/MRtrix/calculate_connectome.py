@@ -24,7 +24,8 @@ if np.isnan(args.ROI_list_left) or np.isnan(args.ROI_list_right):
 
 home = os.environ["DATADIR"]
 #home = os.getcwd()
-file_dir = os.path.join(home,  args.subject, 'Tractography/Fibers')
+# to match calculate_connectom.sh
+file_dir = os.path.join(home,  args.subject, '/Tractography/Cleaned/Fibers')
 
 #Note: this notebook generates figures the rely on the data being from one region to everywhere else.
 # ROI lists should be related as they will be combined into one region
