@@ -29,7 +29,7 @@ file_dir = os.path.join(home,  args.subject, '/Tractography/Cleaned/Fibers')
 
 #Note: this notebook generates figures the rely on the data being from one region to everywhere else.
 # ROI lists should be related as they will be combined into one region
-subject = np.loadtxt(os.path.join(os.environ["CODEDIR"], 'Bash/Freesurfer/connectome_matrix.csv'), delimiter=',')
+subject = np.loadtxt(os.path.join(filepath, 'connectome_matrix.csv'), delimiter=',')
 mu = np.loadtxt(os.path.join(file_dir, 'sift2_mu.txt'))
 # Lookup table
 with open(os.path.join(os.environ["CODEDIR"], 'Bash/Freesurfer/hcpmmp1_subcortex.txt'),'r') as f:
