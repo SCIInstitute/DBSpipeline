@@ -71,8 +71,7 @@ do
       module load mrtrix
     fi
     
-    mrtransform -linear ${DATADIR}/${subject}/Tractography/Cleaned/ACPC_to_b0.txt\ ${DATADIR}/${subject}/Connectome/HCP_parc_all.nii.gz \
-        ${DATADIR}/${subject}/Connectome/HCP_parc_all_b0space.nii.gz -force
+    mrtransform -linear ${DATADIR}/${subject}/Tractography/Cleaned/ACPC_to_b0.txt\ ${DATADIR}/${subject}/Connectome/HCP_parc_all.nii.gz \ ${DATADIR}/${subject}/Connectome/HCP_parc_all_b0space.nii.gz -force
         
     tck2connectome  ${DATADIR}/${subject}/Tractography/Cleaned/Fibers/whole_brain_fibers.tck \
         ${DATADIR}/${subject}/Connectome/HCP_parc_all_b0space.nii.gz \
