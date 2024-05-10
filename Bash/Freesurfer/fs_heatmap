@@ -37,7 +37,7 @@ export SUBJECTS_DIR="${FREESURFERDIR}"/FS_Subjects
 set -e
 echo recon-all -s "$1" -i "${2}" -all -parallel -openmp 8
 
-recon-all -s "$1" -i "${2}" -all -parallel -openmp 8 #-FLAIR $3 -FLAIRpial
+# recon-all -s "$1" -i "${2}" -all -parallel -openmp 8 #-FLAIR $3 -FLAIRpial
 
 m2m_id="$1"
 subject=${m2m_id}
@@ -47,7 +47,7 @@ home="${PWD}"
 #mv ${home}/${subject_id} $SUBJECTS_DIR
 
 #Transform heat maps into patient space
-echo $'\nTransforming Cortial Heat Maps to Patient Space**********************************************************************\n'
+echo $'\nTransforming Cortial Heat Maps to Patient Space **********************************************************************\n'
 for hemi in lh rh
 do
   call1="mri_surf2surf --srcsubject fsaverage --trgsubject ${subject} --trgsurfreg sphere.reg --hemi ${hemi} --sval ${SUBJECTS_DIR}/${hemi}.fsaverage.gm.PET_EEGFMRI_DWI_ZSCORE_4D_INTERSECTIONONLY_MEAN.proj-mid.sm10.5pcnt.min1cmsq.caudalmiddlefrontal.mgh --tval ${SUBJECTS_DIR}/${subject}/surf/${hemi}.thresh.mgh"
@@ -64,7 +64,7 @@ do
 done
 
 # Convert heat maps to vtk
-echo $'\nConvert Heat Maps to vtk**********************************************************************************************\n'
+echo $'\nConvert Heat Maps to vtk **********************************************************************************************\n'
 cd ${SUBJECTS_DIR}/${subject}/surf
 
 for hemi in lh rh
@@ -74,11 +74,11 @@ do
 done
 
 #Convert thresh map to volume
-echo $'\nCreate volume of Thresholded Heatmap**********************************************************************************\n'
-mri_surf2vol --o thresh.nii.gz --subject $subject_id --so lh.pial lh.thresh.mgh --so rh.pial rh.thresh.mgh
+echo $'\nCreate volume of Thresholded Heatmap **********************************************************************************\n'
+mri_surf2vol --o thresh.nii.gz --subject ${subject} --so lh.pial lh.thresh.mgh --so rh.pial rh.thresh.mgh
 
 #Convert vtk to TriSurfField
-echo $'\nConvert Heat Maps to .pts, .fac, and data*****************************************************************************\n'
+echo $'\nConvert Heat Maps to .pts, .fac, and data *****************************************************************************\n'
 
 if [ $SYSNAME == "hipergator" ]
 then
@@ -96,7 +96,7 @@ rm -r ${PWD}/SCIRun/*_threes.fac
 cd ${home}
 
 #HCP Volume Creation
-echo $'\nCreate HCP Labelmap***************************************************************************************************\n'
+echo $'\nCreate HCP Labelmap ***************************************************************************************************\n'
 mri_aparc2aseg --s ${subject} --annot HCPMMP1 --o ${subject}_HCP.mgz
 
 

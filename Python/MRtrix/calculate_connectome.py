@@ -14,6 +14,8 @@ import json
 #Inputs for calculation
 parser = argparse.ArgumentParser(description='Inputs')
 parser.add_argument('--subject',action='store',dest='subject',default=0)
+# row of the connectivity matrix (370 and 371)
+# TODO maybe automate these choices
 parser.add_argument('--left_ROI',action='store',dest='ROI_list_left',type=int,default=np.NaN)
 parser.add_argument('--right_ROI',action='store',dest='ROI_list_right',type=int,default=np.NaN)
 args = parser.parse_args()
@@ -29,6 +31,7 @@ file_dir = os.path.join(home,  args.subject, '/Tractography/Cleaned/Fibers')
 
 #Note: this notebook generates figures the rely on the data being from one region to everywhere else.
 # ROI lists should be related as they will be combined into one region
+# ${DATADIR}/${subject}/Connectome/connectome_matrix.csv in calculate_connectome.sh
 subject = np.loadtxt(os.path.join(filepath, 'connectome_matrix.csv'), delimiter=',')
 mu = np.loadtxt(os.path.join(file_dir, 'sift2_mu.txt'))
 # Lookup table
@@ -165,6 +168,7 @@ left_leftover = connectome_1.copy()
 right_leftover = connectome_2.copy()
 
 for key in connectome_regions.keys():
+    region_connectivity[key] = 0
     for region in connectome_1:
         if region.split()[0].split('_')[-1] in connectome_regions[key]:
             region_connectivity[key] = region_connectivity[key] + float(region.split()[-1].split('\n')[0])
