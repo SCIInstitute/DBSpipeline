@@ -34,20 +34,28 @@ file_dir = os.path.join(home,  args.subject, '/Tractography/Cleaned/Fibers')
 # ${DATADIR}/${subject}/Connectome/connectome_matrix.csv in calculate_connectome.sh
 subject = np.loadtxt(os.path.join(filepath, 'connectome_matrix.csv'), delimiter=',')
 mu = np.loadtxt(os.path.join(file_dir, 'sift2_mu.txt'))
+
+
 # Lookup table
-with open(os.path.join(os.environ["CODEDIR"], 'Bash/Freesurfer/hcpmmp1_subcortex.txt'),'r') as f:
-    labels = []
-    for line in f:
-        if line.startswith('#') or len(line) < 10:
-            continue
-        else:
-            labels.append(line.split()[1])
+LT_file = os.path.join(os.environ["CODEDIR"], 'Bash/Freesurfer/hcpmmp1_subcortex.txt')
+print(LT_file)
+label_table = pd.read_fwf(LT_file, header=None)
+labels = label_table[1].tolist()
+
+#with open(os.path.join(os.environ["CODEDIR"], 'Bash/Freesurfer/hcpmmp1_subcortex.txt'),'r') as f:
+#    labels = []
+#    for line in f:
+#        if line.startswith('#') or len(line) < 10:
+#            continue
+#        else:
+#            labels.append(line.split()[1])
             
 ROI_list_left = np.array([args.ROI_list_left]) - 1 #to deal with starting at 1
 ROI_list_right = np.array([args.ROI_list_right]) - 1
 data = subject[1:,1:] * mu #Remove unassigned tracts, multiply "Fudge Factor"
 data_left = data[:,ROI_list_left]
 data_right = data[:,ROI_list_right]
+
 '''
 data_left_sum = np.sum(data_left,axis=1) #collapse all regions
 data_right_sum = np.sum(data_right,axis=1)
