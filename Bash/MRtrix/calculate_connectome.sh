@@ -116,7 +116,7 @@ do
       module load python/3.10
     fi
     
-    python calculate_connectome.py --matrix "$connectome_matrix" --subject ${subject} --left_ROI 371 --right_ROI 372
+    python "${CODEDIR}"/Python/MRtrix/calculate_connectome.py --matrix "$connectome_matrix" --subject ${subject} --left_ROI 371 --right_ROI 372
   done
 done
 
