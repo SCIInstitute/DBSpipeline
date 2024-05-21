@@ -84,7 +84,7 @@ for subject in ${subjects_list[@]}
 do
   echo $subject
   
-  files=($(ls -1 "${DATADIR}"/"${subject}"/"${rel_path1}"/HCP_parc_all_*.nii.gz))
+  files=($(ls -1 "${DATADIR}"/"${subject}"/"${rel_path1}"/Stim/HCP_parc_all_*.nii.gz))
   
   for file in ${files[@]}
   do

@@ -59,8 +59,8 @@ for i in BilateralStim.index:
     print(call_string_2)
     subprocess.call(call_string_2, shell=True)
     
-    file_1 = os.path.join(connectomeMakerDir, "CL_HCP_subcortex", "HCP_parc_all.nii.gz")
-    file_2 = os.path.join(connectomeMakerDir , "CL_HCP_subcortex", "HCP_parc_all" + "_" + str(i) + ".nii.gz")
+    file_1 = os.path.join(connectomeMakerDir, "Stim", "HCP_parc_all.nii.gz")
+    file_2 = os.path.join(connectomeMakerDir , "Stim", "HCP_parc_all" + "_" + str(i) + ".nii.gz")
     print(file_1)
     print(file_2)
     shutil.copy(file_1, file_2)
