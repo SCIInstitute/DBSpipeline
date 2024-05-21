@@ -104,7 +104,7 @@ do
     
     filename=$(basename $file .nii.gz)
     
-    mrtransform -linear "${DATADIR}"/"${subject}"/ACPC_to_b0.txt $file "${DATADIR}"/"${subject}"/"${rel_path1}"/HCP_parc_all_b0space.nii.gz  -force
+    mrtransform -linear "${DATADIR}"/"${subject}"/"${rel_path2}"/ACPC_to_b0.txt $file "${DATADIR}"/"${subject}"/"${rel_path1}"/HCP_parc_all_b0space.nii.gz  -force
     connectome_matrix="${DATADIR}"/"${subject}"/"${rel_path1}"/connectome_matrix_${filename: -1}.csv
     tck2connectome "${DATADIR}"/"${subject}"/"${rel_path2}"/whole_brain_fibers.tck "${DATADIR}"/"${subject}"/"${rel_path1}"/HCP_parc_all_b0space.nii.gz $connectome_matrix -tck_weights_in "${DATADIR}"/"${subject}"/"${rel_path2}"/sift2_weights.txt  -keep_unassigned -assignment_radial_search 3 -out_assignments "${DATADIR}"/"${subject}"/"${rel_path2}"/assignments_${filename: -1}.txt -force
         #-scale_invlength \
