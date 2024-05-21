@@ -115,7 +115,7 @@ do
     then
       module load python/3.10
     fi
-    python_call="python ${CODEDIR}/Python/MRtrix/calculate_connectome.py --matrix "$connectome_matrix" --subject ${subject} --left_ROI 371 --right_ROI 372
+    python_call="python \"${CODEDIR}/Python/MRtrix/calculate_connectome.py\" --matrix \"$connectome_matrix\" --subject ${subject} --left_ROI 371 --right_ROI 372"
     echo $python_call
     $python_call
   done
