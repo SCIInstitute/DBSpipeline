@@ -52,10 +52,12 @@ def vtk_converter(vtk_filename):
   
   return
 
-def vtk_to_TriSurfField():
+def vtk_to_TriSurfField(subject):
+  SUBJECTS_DIR=os.environ["SUBJECTS_DIR"]
+  rel_path = "surf"
   vtk_files = ['lh.thresh.vtk', 'rh.thresh.vtk', 'lh.heatmap.vtk', 'rh.heatmap.vtk']
   for file in vtk_files:
-    vtk_converter(file)
+    vtk_converter(os.path.join(SUBJECTS_DIR, subject, rel_path, file)
     
   return
 

@@ -7,4 +7,5 @@ import sys,os
 sys.path.insert(1, os.path.realpath(os.path.pardir))
 from utils.meshfiles import vtk_to_TriSurfField
 
-vtk_to_TriSurfField()
+subject = sys.argv[1]
+vtk_to_TriSurfField(subject)
