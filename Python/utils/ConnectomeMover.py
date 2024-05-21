@@ -37,12 +37,12 @@ allStimVolume = os.listdir(stimVolumeDir)
 
 BilateralStim = pd.read_csv(os.path.join(stimVolumeDir, "BilateralStim.csv"), delimiter=",")
 print(BilateralStim.keys())
+print(BilateralStim)
 for i in BilateralStim.index:
     os.chdir(stimVolumeDir)
 
     for side in ["Left", "Right"]:
         # Convert NRRD first here.
-        #print("python3 /mnt/d/Github/DBSpipeline/Python/MRtrix/NRRDConverter.py --NRRD " + stimVolumeDir + os.path.sep + BilateralStim[side][i])
         call_string='python3 ' + os.path.join(os.environ["CODEDIR"], "Python/MRtrix/NRRDConverter.py") + ' --NRRD "' + os.path.join(stimVolumeDir, BilateralStim[side][i]) + '"'
         print(call_string)
         subprocess.call(call_string, shell=True)
@@ -55,8 +55,11 @@ for i in BilateralStim.index:
     # run HCP_to_subject
     
     os.chdir(connectomeMakerDir)
-    subprocess.call('python3 "' + os.path.join(os.environ["CODEDIR"], "Python/Freesurfer/Connectome_maker.py") + ' --subject '+arg.subject+'"', shell=True)
+    subprocess.call('python3 "' + os.path.join(os.environ["CODEDIR"], "Python/Freesurfer/Connectome_maker.py") + ' --subject '+args.subject+'"', shell=True)
     
-    shutil.copy(connectomeMakerDir + os.path.sep + "HCP_parc_all.nii.gz", connectomeMakerDir + os.path.sep + "HCP_parc_all" + "_" + str(i) + ".nii.gz")
+    file_1 = os.path.join(connectomeMakerDir, "HCP_parc_all.nii.gz")
+    file_2 = os.path.join(connectomeMakerDir , "HCP_parc_all" + "_" + str(i) + ".nii.gz")
+    print(file_1, file_2)
+    shutil.copy(file_1, file_2)
 
     
