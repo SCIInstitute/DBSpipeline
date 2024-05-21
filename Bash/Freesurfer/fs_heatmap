@@ -46,6 +46,8 @@ m2m_id="$1"
 subject=${m2m_id}
 home="${PWD}"
 
+subject_LO="$3"
+
 
 #mv ${home}/${subject_id} $SUBJECTS_DIR
 
@@ -90,10 +92,10 @@ fi
 
 python ${CODEDIR}/Python/SCIRun/vtk_to_TriSurfField.py "${subject}"
 
-mkdir ${DATADIR}/${subject}/$rel_path1
-mv *.pts ${DATADIR}/${subject}/$rel_path1
-mv *.fac ${DATADIR}/${subject}/$rel_path1
-mv *_data.txt ${DATADIR}/${subject}/$rel_path1
+mkdir ${DATADIR}/${subject_LO}/$rel_path1
+mv *.pts ${DATADIR}/${subject_LO}/$rel_path1
+mv *.fac ${DATADIR}/${subject_LO}/$rel_path1
+mv *_data.txt ${DATADIR}/${subject_LO}/$rel_path1
 
 rm -r ${DATADIR}/${subject}/$rel_path1/*_threes.fac
 cd ${home}
@@ -109,7 +111,7 @@ module load mrtrix
 fi
 
 mrconvert -datatype uint32 ${subject}_HCP.mgz ${subject}_HCP.mif
-labelconvert ${subject}_HCP.mif ${CODEDIR}/Bash/Freesurfer/hcpmmp1_original.txt ${DATADIR}/${subject}/${rel_path2}/hcpmmp1_ordered_edited.txt ${DATADIR}/${subject}/${rel_path2}/HCP_FS.nii.gz
+labelconvert ${subject}_HCP.mif ${CODEDIR}/Bash/Freesurfer/hcpmmp1_original.txt ${DATADIR}/${subject_LO}/${rel_path2}/hcpmmp1_ordered_edited.txt ${DATADIR}/${subject_LO}/${rel_path2}/HCP_FS.nii.gz
 
 echo $'\n\n******************Done!****************\n\n'
 
