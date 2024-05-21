@@ -6,7 +6,7 @@
 # currently copied from meshfiles
 import sys,os
 
-import meshio
+#import meshio
 import scipy.io
 
 import numpy as np
