@@ -46,7 +46,7 @@ file_dir = os.path.join(home,  args.subject, rel_path2)
 if not os.path.exists(c_matrix):
   c_matrix = os.path.join(file_dir, rel_path1, "connectome_matrix.csv")
 subject = np.loadtxt(c_matrix, delimiter=',')
-mu = np.loadtxt(os.path.join(file_dir, rel_path2 'sift2_mu.txt'))
+mu = np.loadtxt(os.path.join(file_dir, rel_path2, 'sift2_mu.txt'))
 
 
 # Lookup table
