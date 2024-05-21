@@ -117,7 +117,7 @@ do
     fi
     python_call="python \"${CODEDIR}/Python/MRtrix/calculate_connectome.py\" --matrix \"$connectome_matrix\" --subject ${subject} --left_ROI 371 --right_ROI 372"
     echo $python_call
-    $python_call
+#    $python_call
   done
 done
 
