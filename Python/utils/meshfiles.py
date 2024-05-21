@@ -60,7 +60,7 @@ def vtk_to_TriSurfField():
   return
 
 
-def gmsh2Mat(filename)
+def gmsh2Mat(filename):
 
   """
   convert gmsh files to matlab for scirun
@@ -93,7 +93,7 @@ def gmsh2Mat(filename)
 
   scipy.io.savemat(os.path.join(pathname, outname+"_trisurf.mat"),
                     {"trisurf" : trisurf} )
-  scipy.io.savemat(os.path.join(pathname, outname+"_tetvol.mat",
+  scipy.io.savemat(os.path.join(pathname, outname+"_tetvol.mat"),
                     {"tetvol" : tetvol} )
 
 
