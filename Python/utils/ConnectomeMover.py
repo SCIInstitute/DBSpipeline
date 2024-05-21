@@ -24,8 +24,8 @@ if os.environ["SYSNAME"]=="hipergator":
   rel_path2 = "Tractography"
   rel_path3 = "SCIRun" # not relavent on hipergator yet?
 else:
-  rel_path1 = "MRTrix/Connectome/"
-  rel_path2 = "MRTrix/Tractography"
+  rel_path1 = "MRtrix/Connectome/"
+  rel_path2 = "MRtrix/Tractography"
   rel_path3 = "MRtrix/SCIRun"
 
 connectomeMakerDir = os.path.join(os.environ["DATADIR"],  args.subject, rel_path1)

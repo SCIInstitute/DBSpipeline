@@ -49,7 +49,7 @@ done
 #    echo "ERROR: must supply lookup table"
 #    exit 1
 #fi
-if [[ -z "$subjects" ] && [ -z "$d_dir" ]]
+if ([ -z "$subjects" ] && [ -z "$d_dir" ])
 then
     echo "ERROR: must supply list of subjects or directory to subjects"
     exit 1
@@ -69,9 +69,11 @@ else
     echo "ERROR: must supply list of subjects or directory to subjects"
     exit 1
   else
-  echo "using list of subjects in:"
-  echo $subjects
-  readarray -t subjects_list < $subjects
+    echo "using list of subjects in:"
+    echo "$subjects"
+    readarray -t subjects_list < "$subjects"
+#    subjects_list=("${(@f)$(< ${subjects} )}")
+  fi
 fi
 
 echo ${#subjects_list[@]}
@@ -108,33 +110,10 @@ do
     fi
     
     python calculate_connectome.py --matrix "$connectome_matrix" --subject ${subject} --left_ROI 371 --right_ROI 372
-    
+  done
 done
 
-:'
-module load mrtrix
-for d in */
-do
-	echo $d
-	mrtransform -linear ${PWD}/${d}Cleaned/ACPC_to_b0.txt ${PWD}/${d}Cleaned/Fibers/HCP_parc_all.nii.gz ${PWD}/${d}Cleaned/Fibers/HCP_parc_all_b0space.nii.gz -force
 
-	tck2connectome ${PWD}/${d}Cleaned/Fibers/whole_brain_fibers.tck ${PWD}/${d}Cleaned/Fibers/HCP_parc_all_b0space.nii.gz ${PWD}/${d}Cleaned/Fibers/connectome_matrix.csv \
-	    -tck_weights_in ${PWD}/${d}Cleaned/Fibers/sift2_weights.txt \
-	    -keep_unassigned \
-	    -assignment_radial_search 3 \
-	    -out_assignments ${PWD}/${d}Cleaned/Fibers/assignments.txt \
-	    -scale_invlength \
-	    -scale_invnodevol \
-	    -force
-done
-
-module load python/3.10
-for d in */
-do
-	echo $d
-	python calculate_connectome.py --subject $d --left_ROI 371 --right_ROI 372
-done
-'
 
 getSubjectsFromDir() {
   local d_dir="$1"
@@ -143,7 +122,7 @@ getSubjectsFromDir() {
   
   for f in ${files[@]}
   do
-    if ([ -d "$f"/Connectome ] && [ -d "$f"/Tractography ] && [ -d "$f"/Segmentations ])
+    if ([ -d "$f"/"$rel_path1" ] && [ -d "$f"/"$rel_path2" ] && [ -d "$f"/"$rel_path3" ])
     then
       echo $(basename $f)
     fi

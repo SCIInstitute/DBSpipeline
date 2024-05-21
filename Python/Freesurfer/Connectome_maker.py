@@ -2,6 +2,13 @@
 """
 Created on Mon Nov 27 16:07:45 2023
 
+this script will run through the connectome lookup table to generate
+a compilation of atlases or subsets into a single volume.
+It can be used to swap out different atlases.
+
+with new parcelation segmentation
+
+
 @author: Matthew
 """
 #For use in the working directory
@@ -20,7 +27,7 @@ args = parser.parse_args()
 subject = args.subject
 
 #Load lookup table
-lookup = pd.read_csv(os.path.join(os.environ["CODEDIR"], 'Bash/Freesurfer/connectome_lookup.csv'),index_col=False)
+lookup = pd.read_csv(os.path.join(os.environ["CODEDIR"], 'Bash/Freesurfer/connectome_lookup_v1.csv'),index_col=False)
 
 #%%
 
@@ -29,8 +36,8 @@ if os.environ["SYSNAME"]=="hipergator":
   rel_path2 = "Tractography"
   rel_path3 = "Segmentations"
 else:
-  rel_path1 = "MRTrix/Connectome"
-  rel_path2 = "MRTrix/Tractography"
+  rel_path1 = "MRtrix/Connectome"
+  rel_path2 = "MRtrix/Tractography"
   rel_path3 = "MRtrix/Segmentations"
 
 #Get patient

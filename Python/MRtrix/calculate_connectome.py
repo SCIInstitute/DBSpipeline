@@ -26,8 +26,14 @@ if np.isnan(args.ROI_list_left) or np.isnan(args.ROI_list_right):
     raise Exception('Not Valid Region')
 
 home = os.environ["DATADIR"]
-rel_path1 = "Connectome"
-rel_path2 = "Tractography"
+if os.environ["SYSNAME"]=="hipergator":
+  rel_path1 = "Connectome"
+  rel_path2 = "Tractography"
+  rel_path3 = "Segmentations"
+else:
+  rel_path1 = "MRtrix/Connectome"
+  rel_path2 = "MRtrix/Tractography"
+  rel_path3 = "MRtrix/Segmentations"
 
 #home = os.getcwd()
 # to match calculate_connectom.sh
