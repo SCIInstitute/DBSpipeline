@@ -40,7 +40,7 @@ set -e
 echo recon-all -s "${1}" -i "${2}" -all -parallel -openmp 8
 
 # comment out this line to make faster
-recon-all -s "${1}" -i "${2}" -all -parallel -openmp 8 #-FLAIR $3 -FLAIRpial
+#recon-all -s "${1}" -i "${2}" -all -parallel -openmp 8 #-FLAIR $3 -FLAIRpial
 
 m2m_id="$1"
 subject=${m2m_id}
