@@ -111,7 +111,7 @@ module load mrtrix
 fi
 
 mrconvert -datatype uint32 ${subject}_HCP.mgz ${subject}_HCP.mif
-labelconvert ${subject}_HCP.mif ${CODEDIR}/Bash/Freesurfer/hcpmmp1_original.txt ${DATADIR}/${subject_LO}/${rel_path2}/hcpmmp1_ordered_edited.txt ${DATADIR}/${subject_LO}/${rel_path2}/HCP_FS.nii.gz
+labelconvert ${subject}_HCP.mif ${CODEDIR}/Bash/Freesurfer/hcpmmp1_original.txt ${CODEDIR}/Bash/Freesurfer/hcpmmp1_ordered_edited.txt ${DATADIR}/${subject_LO}/${rel_path2}/HCP_FS.nii.gz
 
 echo $'\n\n******************Done!****************\n\n'
 
