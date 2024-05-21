@@ -3,7 +3,7 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4
-#SBATCH --mem=2gb
+#SBATCH --mem=8gb
 #SBATCH --time=1:00:00
 #SBATCH --job-name=Connectome
 #SBATCH --mail-type=ALL
