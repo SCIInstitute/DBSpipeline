@@ -14,10 +14,11 @@ import json
 #Inputs for calculation
 parser = argparse.ArgumentParser(description='Inputs')
 parser.add_argument('--subject',action='store',dest='subject',default=0)
-# row of the connectivity matrix (370 and 371)
-# TODO maybe automate these choices
+# row of the connectivity matrix (371 and 372)
+# hard coded in calculate_connectome.sh file
 parser.add_argument('--left_ROI',action='store',dest='ROI_list_left',type=int,default=np.NaN)
 parser.add_argument('--right_ROI',action='store',dest='ROI_list_right',type=int,default=np.NaN)
+parser.add_argument('--matrix',action='store',dest='c_matrix',default=0)
 args = parser.parse_args()
 #print(args.subject, args.ROI_list_left, args.ROI_list_right)
 
@@ -25,15 +26,21 @@ if np.isnan(args.ROI_list_left) or np.isnan(args.ROI_list_right):
     raise Exception('Not Valid Region')
 
 home = os.environ["DATADIR"]
+rel_path1 = "Connectome"
+rel_path2 = "Tractography"
+
 #home = os.getcwd()
 # to match calculate_connectom.sh
-file_dir = os.path.join(home,  args.subject, '/Tractography/Cleaned/Fibers')
+file_dir = os.path.join(home,  args.subject, rel_path2)
 
 #Note: this notebook generates figures the rely on the data being from one region to everywhere else.
 # ROI lists should be related as they will be combined into one region
 # ${DATADIR}/${subject}/Connectome/connectome_matrix.csv in calculate_connectome.sh
-subject = np.loadtxt(os.path.join(filepath, 'connectome_matrix.csv'), delimiter=',')
-mu = np.loadtxt(os.path.join(file_dir, 'sift2_mu.txt'))
+#added to input
+if not os.path.exists(c_matrix):
+  c_matrix = os.path.join(file_dir, rel_path1, "connectome_matrix.csv")
+subject = np.loadtxt(c_matrix, delimiter=',')
+mu = np.loadtxt(os.path.join(file_dir, rel_path2 'sift2_mu.txt'))
 
 
 # Lookup table
@@ -42,32 +49,28 @@ print(LT_file)
 label_table = pd.read_fwf(LT_file, header=None)
 labels = label_table[1].tolist()
 
-#with open(os.path.join(os.environ["CODEDIR"], 'Bash/Freesurfer/hcpmmp1_subcortex.txt'),'r') as f:
-#    labels = []
-#    for line in f:
-#        if line.startswith('#') or len(line) < 10:
-#            continue
-#        else:
-#            labels.append(line.split()[1])
-            
-ROI_list_left = np.array([args.ROI_list_left]) - 1 #to deal with starting at 1
-ROI_list_right = np.array([args.ROI_list_right]) - 1
+
 data = subject[1:,1:] * mu #Remove unassigned tracts, multiply "Fudge Factor"
-data_left = data[:,ROI_list_left]
-data_right = data[:,ROI_list_right]
-
-'''
-data_left_sum = np.sum(data_left,axis=1) #collapse all regions
-data_right_sum = np.sum(data_right,axis=1)
-
-data = np.column_stack((data_left_sum,data_right_sum))
-data_weighted = data * mu #"Fudge Factor"
-data_norm = data_weighted
-#data_norm = data_weighted / np.sum(data_weighted)
-
-ROI_left = data_norm[:,0]
-ROI_right = data_norm[:,1]
-'''
+if np.isnan(args.ROI_list_left):
+    #raise Exception('Left region not given. Setting data to 0')
+    print('Left region not given. Setting data to 0')
+    data_left = np.zeros((1,len(data)))
+    ROI_list_left = 0
+else:
+    ROI_list_left = np.array([args.ROI_list_left]) - 1 #to deal with starting at 1
+    data_left = data[:,ROI_list_left]
+    
+if np.isnan(args.ROI_list_right):
+    #raise Exception('Right region not given. Setting data to 0')
+    print('Right region not given. Setting data to 0')
+    data_right = np.zeros((1,len(data)))
+    ROI_list_right = 0
+else:
+    ROI_list_right = np.array([args.ROI_list_right]) - 1
+    data_right = data[:,ROI_list_right]
+    
+    
+    
 ROI_left = np.sum(data_left,axis=1) #collapse all regions
 ROI_right = np.sum(data_right,axis=1)
 ROI_left[ROI_list_left] = np.NAN #Remove regions from connectivity output

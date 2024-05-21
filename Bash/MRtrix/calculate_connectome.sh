@@ -19,6 +19,9 @@ fi
 
 set -e
 
+rel_path1="Connectome"
+rel_path2="Tractography"
+
 Help()
 {
    # Display Help
@@ -27,6 +30,7 @@ Help()
    echo "-h    Help Page"
 #   echo "-L    Path to Lookup Table"
    echo "-s    Path to Subjects List"
+   echo "-d  path to subjects directory (will run all subjects)"
    echo
 }
 
@@ -34,7 +38,7 @@ Help()
 # Get the options
 while getopts ":h:L:s:" option; do
    case $option in
-#      L) lookup=$OPTARG;;
+      d) d_dir=$OPTARG;;
       s) subjects=$OPTARG;;
       h | * | :) Help && exit;;
    esac
@@ -45,48 +49,67 @@ done
 #    echo "ERROR: must supply lookup table"
 #    exit 1
 #fi
-if [ -z "$subjects" ]
+if [[ -z "$subjects" ] && [ -z "$d_dir" ]]
 then
-    echo "ERROR: must supply list of subjects"
+    echo "ERROR: must supply list of subjects or directory to subjects"
     exit 1
 fi
 
+if [ -d "$d_dir" ]
+then
+  echo "running all subjects in : "
+  echo "$d_dir"
+  subjects_list=($(getSubjectsFromDir $d_dir))
+else
+  echo "Directory input not found:"
+  echo "$d_dir"
+
+  if [ -z "$subjects" ]
+  then
+    echo "ERROR: must supply list of subjects or directory to subjects"
+    exit 1
+  else
+  echo "using list of subjects in:"
+  echo $subjects
+  readarray -t subjects_list < $subjects
+fi
+
+echo ${#subjects_list[@]}
 
 
-while read subject
+
+for subject in ${subjects_list[@]}
 do
-    echo $subject
-    
-    if [ $SYSNAME == "hipergator" ]
-    then
-      module load python/3.10
-    fi
-
-    
-    python "${CODEDIR}/Python/Freesurfer/Connectome_maker.py" --subject $subject
-    echo $subject
+  echo $subject
+  
+  files=($(ls -1 "${DATADIR}"/"${subject}"/"${rel_path1}"/HCP_parc_all_*.nii.gz))
+  
+  for file in ${files[@]}
+  do
+    echo $file
     
     if [ $SYSNAME == "hipergator" ]
     then
       module load mrtrix
     fi
     
-    mrtransform -linear ${DATADIR}/${subject}/Tractography/Cleaned/ACPC_to_b0.txt \
-           ${DATADIR}/${subject}/Connectome/HCP_parc_all.nii.gz \
-           ${DATADIR}/${subject}/Connectome/HCP_parc_all_b0space.nii.gz -force
-        
-    tck2connectome  ${DATADIR}/${subject}/Tractography/Cleaned/Fibers/whole_brain_fibers.tck \
-        ${DATADIR}/${subject}/Connectome/HCP_parc_all_b0space.nii.gz \
-        ${DATADIR}/${subject}/Connectome/connectome_matrix.csv \
-        -tck_weights_in ${DATADIR}/${subject}/Tractography/Cleaned/Fibers/sift2_weights.txt \
-        -keep_unassigned \
-        -assignment_radial_search 3 \
-        -out_assignments ${DATADIR}/${subject}/Tractography/Cleaned/Fibers/assignments.txt \
-        -scale_invlength \
-        -scale_invnodevol \
-        -force
-        
-done < <(grep '' $subjects)
+    filename=$(basename $file .nii.gz)
+    
+    mrtransform -linear "${DATADIR}"/"${subject}"/ACPC_to_b0.txt $file "${DATADIR}"/"${subject}"/"${rel_path1}"/HCP_parc_all_b0space.nii.gz  -force
+    connectome_matrix="${DATADIR}"/"${subject}"/"${rel_path1}"/connectome_matrix_${filename: -1}.csv
+    tck2connectome "${DATADIR}"/"${subject}"/"${rel_path2}"/whole_brain_fibers.tck "${DATADIR}"/"${subject}"/"${rel_path1}"/HCP_parc_all_b0space.nii.gz $connectome_matrix -tck_weights_in "${DATADIR}"/"${subject}"/"${rel_path2}"/sift2_weights.txt  -keep_unassigned -assignment_radial_search 3 -out_assignments "${DATADIR}"/"${subject}"/"${rel_path2}"/assignments_${filename: -1}.txt -force
+        #-scale_invlength \
+        #-scale_invnodevol
+    
+    
+    if [ $SYSNAME == "hipergator" ]
+    then
+      module load python/3.10
+    fi
+    
+    python calculate_connectome.py --matrix "$connectome_matrix" --subject ${subject} --left_ROI 371 --right_ROI 372
+    
+done
 
 :'
 module load mrtrix
@@ -112,3 +135,17 @@ do
 	python calculate_connectome.py --subject $d --left_ROI 371 --right_ROI 372
 done
 '
+
+getSubjectsFromDir() {
+  local d_dir="$1"
+  
+  local files=($(ls -1d $d_dir/*))
+  
+  for f in ${files[@]}
+  do
+    if ([ -d "$f"/Connectome ] && [ -d "$f"/Tractography ] && [ -d "$f"/Segmentations ])
+    then
+      echo $(basename $f)
+    fi
+  done
+}
