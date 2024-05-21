@@ -19,8 +19,15 @@ fi
 
 set -e
 
-rel_path1="Connectome"
-rel_path2="Tractography"
+if [ $SYSNAME == "hipergator" ]
+then
+  rel_path1="Connectome"
+  rel_path2="Tractography"
+else
+  rel_path1="MRtrix/Connectome"
+  rel_path2="MRtrix/Tractography"
+fi
+
 
 Help()
 {
