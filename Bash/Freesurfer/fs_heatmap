@@ -97,7 +97,7 @@ mv *.pts ${DATADIR}/${subject_LO}/$rel_path1
 mv *.fac ${DATADIR}/${subject_LO}/$rel_path1
 mv *_data.txt ${DATADIR}/${subject_LO}/$rel_path1
 
-rm -r ${DATADIR}/${subject}/$rel_path1/*_threes.fac
+#rm -r ${DATADIR}/${subject}/$rel_path1/*_threes.fac
 cd ${home}
 
 #HCP Volume Creation
