@@ -24,7 +24,7 @@ if os.environ["SYSNAME"]=="hipergator":
   rel_path2 = "Tractography"
   rel_path3 = "SCIRun" # not relavent on hipergator yet?
 else:
-  rel_path1 = "MRTrix/Connectome"
+  rel_path1 = "MRTrix/Connectome/"
   rel_path2 = "MRTrix/Tractography"
   rel_path3 = "MRtrix/SCIRun"
 
@@ -55,11 +55,14 @@ for i in BilateralStim.index:
     # run HCP_to_subject
     
     os.chdir(connectomeMakerDir)
-    subprocess.call('python3 "' + os.path.join(os.environ["CODEDIR"], "Python/Freesurfer/Connectome_maker.py") + ' --subject '+args.subject+'"', shell=True)
+    call_string_2 = 'python3 "' + os.path.join(os.environ["CODEDIR"], "Python/Freesurfer/Connectome_maker.py") + '" --subject "'+args.subject+'"'
+    print(call_string_2)
+    subprocess.call(call_string_2, shell=True)
     
-    file_1 = os.path.join(connectomeMakerDir, "HCP_parc_all.nii.gz")
-    file_2 = os.path.join(connectomeMakerDir , "HCP_parc_all" + "_" + str(i) + ".nii.gz")
-    print(file_1, file_2)
+    file_1 = os.path.join(connectomeMakerDir, "CL_HCP_subcortex", "HCP_parc_all.nii.gz")
+    file_2 = os.path.join(connectomeMakerDir , "CL_HCP_subcortex", "HCP_parc_all" + "_" + str(i) + ".nii.gz")
+    print(file_1)
+    print(file_2)
     shutil.copy(file_1, file_2)
 
     

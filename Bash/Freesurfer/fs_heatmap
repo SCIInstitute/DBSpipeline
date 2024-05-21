@@ -37,7 +37,8 @@ export SUBJECTS_DIR="${FREESURFERDIR}"/FS_Subjects
 set -e
 echo recon-all -s "$1" -i "${2}" -all -parallel -openmp 8
 
-# recon-all -s "$1" -i "${2}" -all -parallel -openmp 8 #-FLAIR $3 -FLAIRpial
+# comment out this line to make faster
+recon-all -s "$1" -i "${2}" -all -parallel -openmp 8 #-FLAIR $3 -FLAIRpial
 
 m2m_id="$1"
 subject=${m2m_id}
@@ -106,7 +107,7 @@ module load mrtrix
 fi
 
 mrconvert -datatype uint32 ${subject}_HCP.mgz ${subject}_HCP.mif
-labelconvert ${subject}_HCP.mif ${CODEDIR}/Bash/Freesurfer/hcpmmp1_original.txt ${SUBJECTS_DIR}/${subject}/freesurfer/hcpmmp1_ordered_edited.txt HCP_FS.nii.gz
+labelconvert ${subject}_HCP.mif ${CODEDIR}/Bash/Freesurfer/hcpmmp1_original.txt ${DATADIR}/${subject}/freesurfer/hcpmmp1_ordered_edited.txt ${DATADIR}/${subject}/freesurfer/HCP_FS.nii.gz
 
 echo $'\n\n******************Done!****************\n\n'
 
