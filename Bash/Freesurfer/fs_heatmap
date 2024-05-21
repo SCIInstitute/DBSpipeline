@@ -90,7 +90,7 @@ fi
 
 python ${CODEDIR}/Python/SCIRun/vtk_to_TriSurfField.py "${subject}"
 
-mkdir {DATADIR}/${subject}/$rel_path1
+mkdir ${DATADIR}/${subject}/$rel_path1
 mv *.pts ${DATADIR}/${subject}/$rel_path1
 mv *.fac ${DATADIR}/${subject}/$rel_path1
 mv *_data.txt ${DATADIR}/${subject}/$rel_path1
