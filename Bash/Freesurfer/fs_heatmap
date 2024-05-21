@@ -85,7 +85,7 @@ echo $'\nConvert Heat Maps to .pts, .fac, and data *****************************
 
 if [ $SYSNAME == "hipergator" ]
 then
-module load python
+module load python/3.10
 fi
 
 python ${CODEDIR}/Python/SCIRun/vtk_to_TriSurfField.py "${subject}"
