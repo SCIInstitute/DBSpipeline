@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
@@ -19,13 +19,17 @@ fi
 
 set -e
 
-if [ $SYSNAME == "hipergator" ]
+if [[ $SYSNAME == "hipergator" ]]
 then
   rel_path1="Connectome"
   rel_path2="Tractography"
+  rel_path3="Tractography"
+  rel_path4="Segmentations"
 else
   rel_path1="MRtrix/Connectome"
-  rel_path2="MRtrix/Tractography"
+  rel_path2="MRtrix/Tractography/Cleaned"
+  rel_path3="MRtrix/Tractography/Fibers"
+  rel_path4="MRtrixSegmentations"
 fi
 
 
@@ -77,9 +81,11 @@ else
     exit 1
   else
     echo "using list of subjects in:"
-    echo "$subjects"
-    readarray -t subjects_list < "$subjects"
-#    subjects_list=("${(@f)$(< ${subjects} )}")
+    echo "${subjects}"
+#    readarray -t subjects_list < "$subjects"
+
+    subjects_list=("${(f)"$(<"/Users/jess/Dropbox/CT DBS Human/CENTURY S Patients/TBI_patients.txt")"}")
+#    subjects_list=($(awk -F= '{print $1}' "$subjects"))
   fi
 fi
 
@@ -91,13 +97,14 @@ for subject in ${subjects_list[@]}
 do
   echo $subject
   
-  files=($(ls -1 "${DATADIR}"/"${subject}"/"${rel_path1}"/Stim/HCP_parc_all_*.nii.gz))
+  files=("$(ls -1 "${DATADIR}"/"${subject}"/"${rel_path1}"/Stim/HCP_parc_all_*.nii.gz)")
   
-  for file in ${files[@]}
+  echo ${#files[@]}
+  for file in "$files[@]"
   do
-    echo $file
+    echo "$file"
     
-    if [ $SYSNAME == "hipergator" ]
+    if [[ $SYSNAME == "hipergator" ]]
     then
       module load mrtrix
     fi
@@ -105,8 +112,8 @@ do
     filename=$(basename $file .nii.gz)
     
     mrtransform -linear "${DATADIR}"/"${subject}"/"${rel_path2}"/ACPC_to_b0.txt $file "${DATADIR}"/"${subject}"/"${rel_path1}"/HCP_parc_all_b0space.nii.gz  -force
-    connectome_matrix="${DATADIR}"/"${subject}"/"${rel_path1}"/connectome_matrix_${filename: -1}.csv
-    tck2connectome "${DATADIR}"/"${subject}"/"${rel_path2}"/whole_brain_fibers.tck "${DATADIR}"/"${subject}"/"${rel_path1}"/HCP_parc_all_b0space.nii.gz $connectome_matrix -tck_weights_in "${DATADIR}"/"${subject}"/"${rel_path2}"/sift2_weights.txt  -keep_unassigned -assignment_radial_search 3 -out_assignments "${DATADIR}"/"${subject}"/"${rel_path2}"/assignments_${filename: -1}.txt -force
+    connectome_matrix="${DATADIR}"/"${subject}"/"${rel_path2}"/connectome_matrix_${filename: -1}.csv
+    tck2connectome "${DATADIR}"/"${subject}"/"${rel_path3}"/whole_brain_fibers.tck "${DATADIR}"/"${subject}"/"${rel_path1}"/HCP_parc_all_b0space.nii.gz $connectome_matrix -tck_weights_in "${DATADIR}"/"${subject}"/"${rel_path3}"/sift2_weights.txt  -keep_unassigned -assignment_radial_search 3 -out_assignments "${DATADIR}"/"${subject}"/"${rel_path2}"/assignments_${filename: -1}.txt -force
         #-scale_invlength \
         #-scale_invnodevol
     
@@ -130,7 +137,7 @@ getSubjectsFromDir() {
   
   for f in ${files[@]}
   do
-    if ([ -d "$f"/"$rel_path1" ] && [ -d "$f"/"$rel_path2" ] && [ -d "$f"/"$rel_path3" ])
+    if ([ -d "$f"/"$rel_path1" ] && [ -d "$f"/"$rel_path2" ] && [ -d "$f"/"$rel_path4" ])
     then
       echo $(basename $f)
     fi

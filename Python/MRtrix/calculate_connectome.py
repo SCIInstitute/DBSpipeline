@@ -2,8 +2,16 @@
 """
 Created on Tue Feb 20 10:04:09 2024
 
+usage:
+
+python3 calculate_connectome.py --matrix <connectome_matrix> --subject <subject> --left_ROI <index> --right_ROI <index>
+
+python3 calculate_connectome.py --matrix <connectome_matrix> --subject "p102 (44)" --left_ROI 371 --right_ROI 372
+
 @author: Matthew
 """
+
+
 
 import pandas as pd
 import os
@@ -29,11 +37,13 @@ home = os.environ["DATADIR"]
 if os.environ["SYSNAME"]=="hipergator":
   rel_path1 = "Connectome"
   rel_path2 = "Tractography"
-  rel_path3 = "Segmentations"
+  rel_path3 = "Tractography"
+  rel_path4 = "Segmentations"
 else:
   rel_path1 = "MRtrix/Connectome"
-  rel_path2 = "MRtrix/Tractography"
-  rel_path3 = "MRtrix/Segmentations"
+  rel_path2 = "MRtrix/Tractography/Cleaned"
+  rel_path3 = "MRtrix/Tractography/Fibers/"
+  rel_path4 = "MRtrix/Segmentations"
 
 #home = os.getcwd()
 # to match calculate_connectom.sh
@@ -44,9 +54,9 @@ file_dir = os.path.join(home,  args.subject, rel_path2)
 # ${DATADIR}/${subject}/Connectome/connectome_matrix.csv in calculate_connectome.sh
 #added to input
 if not os.path.exists(c_matrix):
-  c_matrix = os.path.join(file_dir, rel_path1, "connectome_matrix.csv")
+  c_matrix = os.path.join(file_dir, rel_path2, "connectome_matrix.csv")
 subject = np.loadtxt(c_matrix, delimiter=',')
-mu = np.loadtxt(os.path.join(file_dir, rel_path2, 'sift2_mu.txt'))
+mu = np.loadtxt(os.path.join(file_dir, rel_path3, 'sift2_mu.txt'))
 
 
 # Lookup table
