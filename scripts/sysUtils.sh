@@ -1,4 +1,4 @@
-#/bib/bash
+#/bin/bash
 
 # set up paths to run the DBSPipeline code.
 # https://github.com/SCIInstitute/DBSpipeline

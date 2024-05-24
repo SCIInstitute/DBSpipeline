@@ -6,7 +6,7 @@ usage:
 
 python3 calculate_connectome.py --matrix <connectome_matrix> --subject <subject> --left_ROI <index> --right_ROI <index>
 
-python3 calculate_connectome.py --matrix <connectome_matrix> --subject "p102 (44)" --left_ROI 371 --right_ROI 372
+python3 calculate_connectome.py --matrix "/Users/jess/Dropbox/CT DBS Human/CENTURY S Patients/p102 (44)/MRtrix/Tractography/Cleaned/connectome_matrix_1.csv --subject "p102 (44)" --left_ROI 371 --right_ROI 372
 
 @author: Matthew
 """
