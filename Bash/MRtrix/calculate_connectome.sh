@@ -98,7 +98,7 @@ do
   files=("$(ls -1 "${DATADIR}"/"${subject}"/"${rel_path1}"/Stim/HCP_parc_all_*.nii.gz)")
   
   echo ${#files[@]}
-  for file in "$files[@]"
+  for file in ${files[@]}
   do
     echo "$file"
     
