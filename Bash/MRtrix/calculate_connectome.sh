@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
@@ -82,10 +82,8 @@ else
   else
     echo "using list of subjects in:"
     echo "${subjects}"
-#    readarray -t subjects_list < "$subjects"
-
-    subjects_list=("${(f)"$(<"/Users/jess/Dropbox/CT DBS Human/CENTURY S Patients/TBI_patients.txt")"}")
-#    subjects_list=($(awk -F= '{print $1}' "$subjects"))
+    readarray -t subjects_list < "$subjects"
+#    subjects_list=("${(f)"$(<"${subjects}")"}")
   fi
 fi
 
