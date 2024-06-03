@@ -9,6 +9,7 @@ args = parser.parse_args()
 
 inputFile = args.inputFile
 outputFile = inputFile.replace("nrrd", "nii.gz")
+print(outputFile)
 #inputFile = "T1_pre_ACPCspace.nrrd"
 #outputFile = "T1_pre_ACPCspace_converted.nii.gz"
 
@@ -22,20 +23,12 @@ if header["space"] == "left-posterior-superior":
   tform[:3,-1] += (header["space origin"])
   tform[:2,:] *= -1
 
-  
-  
 elif header["space"] == "3D-right-handed":
   tform = np.eye(4)
   tform[:3,:3] = 0
   tform[:3,:3] += (header["space directions"].T)
   tform[:3,-1] += (header["space origin"])
-#  tform[:2,:] *= -1
   
-#  print(tform[:2,:])
-#  print(header["space directions"])
-#  print(tform)
-
-
 else:
   raise Exception("I am too lazy to implement other space, so please contact Jackson to add more support for this NRRD file.")
 
