@@ -21,15 +21,29 @@ import os
 
 parser = argparse.ArgumentParser(description='Inputs')
 parser.add_argument('--subject',action='store',dest='subject',default=0)
-#parser.add_argument('--lookup',action='store',dest='lookup_dir',default=0)
+parser.add_argument('--lookup',action='store',dest='lookup_file',default=0, required=False)
 #parser.add_argument('--filepath',action='store',dest='filepath',default=0)
 args = parser.parse_args()
 subject = args.subject
 
 #Load lookup table
-lookup = pd.read_csv(os.path.join(os.environ["CODEDIR"], 'Bash/Freesurfer/connectome_lookup_v1.csv'),index_col=False)
+default_lookup = os.path.join(os.environ["CODEDIR"], 'Bash/Freesurfer/connectome_lookup_v1.csv')
+
+if not subject:
+  print("need subject string")
+  quit()
+
+if args.lookup_file:
+  lookup_file = args.lookup_file
+else:
+  lookup_file = default_lookup
 
 #%%
+
+print(lookup_file)
+lookup = pd.read_csv(lookup_file,index_col=False)
+
+
 
 if os.environ["SYSNAME"]=="hipergator":
   rel_path1 = "Connectome"
