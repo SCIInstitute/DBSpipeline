@@ -150,7 +150,7 @@ for region in connectome_2:
 connectome_file = os.path.join(os.environ["CODEDIR"], "Python/connectomics/connectome_maps/HCP_MacroRegions.json")
 
 with open(connectome_file, 'r') as fp:
-    connectome_regions = json.dump(fp)
+    connectome_regions = json.load(fp)
 
 subject_id = args.subject
 PatientID = subject_id.split('/')[0]

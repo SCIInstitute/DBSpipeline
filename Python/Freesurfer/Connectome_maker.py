@@ -13,6 +13,7 @@ with new parcelation segmentation
 """
 #For use in the working directory
 import nibabel
+import json
 import nibabel.processing
 import numpy as np
 import pandas as pd
@@ -20,44 +21,64 @@ import argparse
 import os
 
 parser = argparse.ArgumentParser(description='Inputs')
+parser.add_argument('--profile',action='store',dest='profile',default=0)
 parser.add_argument('--subject',action='store',dest='subject',default=0)
 parser.add_argument('--lookup',action='store',dest='lookup_file',default=0, required=False)
-#parser.add_argument('--filepath',action='store',dest='filepath',default=0)
+parser.add_argument('--experiment',action='store',dest='experiment',default=0)
 args = parser.parse_args()
-subject = args.subject
 
 #Load lookup table
 default_lookup = os.path.join(os.environ["CODEDIR"], 'Bash/Freesurfer/connectome_lookup_v1.csv')
+default_experiment=""
+
+if args.profile:
+  with open(args.profile, 'r') as js_file:
+    profile = json.load(js_file)
+    
+  subject= profile["subject"]
+  experiment = profile["experiment"]
+  lookup_file = profile["lookup_table"]
+else:
+  subject = args.subject
+
+  if args.lookup_file:
+    lookup_file = args.lookup_file
+  else:
+    lookup_file = default_lookup
+    
+  if args.experiment:
+    experiment = args.experiment
+  else:
+    experiment = default_experiment
+    
+  if os.environ["SYSNAME"]=="hipergator":
+    rel_path1 = "Connectome"
+    rel_path2 = "Tractography"
+    rel_path3 = "Segmentations"
+  else:
+    rel_path1 = "MRtrix/Connectome"
+    rel_path2 = "MRtrix/Tractography"
+    rel_path3 = "MRtrix/Segmentations"
+  
+  filepath = os.path.join(os.environ["DATADIR"],subject.rstrip())
+  segPath = os.path.join(filepath , rel_path3)
 
 if not subject:
   print("need subject string")
   quit()
-
-if args.lookup_file:
-  lookup_file = args.lookup_file
-else:
-  lookup_file = default_lookup
-
 #%%
 
 print(lookup_file)
 lookup = pd.read_csv(lookup_file,index_col=False)
 
+print(experiment)
 
 
-if os.environ["SYSNAME"]=="hipergator":
-  rel_path1 = "Connectome"
-  rel_path2 = "Tractography"
-  rel_path3 = "Segmentations"
-else:
-  rel_path1 = "MRtrix/Connectome"
-  rel_path2 = "MRtrix/Tractography"
-  rel_path3 = "MRtrix/Segmentations"
 
 #Get patient
 #filepath = args.filepath + '/' + subject + '/'
 print('Python Input',subject)
-filepath = os.path.join(os.environ["DATADIR"],subject.rstrip())
+filepath = profile["rootpath"]
 
 seg_files = lookup['Filename'].unique()
 #seg_dirs = lookup['Path'].unique()
@@ -65,7 +86,7 @@ seg_dirs = lookup['Path'][lookup['Filename'] == seg_files[0]].unique()[0]
 
 #Load HCP first always. This will be the reference
 print(seg_files)
-HCP = nibabel.load(os.path.join(filepath , rel_path3, seg_dirs, seg_files[0]))
+HCP = nibabel.load(os.path.join(profile["segPath"], seg_dirs, seg_files[0]))
 HCP_data = HCP.get_fdata()
 main_index = np.array(lookup['Index'][lookup['Filename'] == seg_files[0]])
 local_index = np.array(lookup['File Index'][lookup['Filename'] == seg_files[0]])
@@ -80,7 +101,7 @@ for file in seg_files:
     main_index = np.array(lookup['Index'][lookup['Filename'] == file])
     local_index = np.array(lookup['File Index'][lookup['Filename'] == file])
     
-    img = nibabel.load(os.path.join(filepath, rel_path3, seg_dirs, file))
+    img = nibabel.load(os.path.join(profile["segPath"], seg_dirs, file))
     img_resamp = nibabel.processing.resample_from_to(img, HCP,order=0)
     img_data = img_resamp.get_fdata()
     data_add = img_data.copy()
@@ -91,7 +112,7 @@ for file in seg_files:
 
 All_data = All_data.astype(int)
 All_to_nii = nibabel.Nifti1Image(All_data, HCP.affine, HCP.header)
-nibabel.save(All_to_nii, os.path.join(filepath, rel_path1, 'HCP_parc_all_lookup.nii.gz'))
+nibabel.save(All_to_nii, os.path.join(profile["connectomePath"], 'HCP_parc_all_'+experiment+'_lookup.nii.gz'))
 
 #Create Key for MRtrix image
 mrtrix_key = {}
@@ -103,9 +124,9 @@ for i in range(0,len(mrtrix_key['Lookup Index'])):
     mrtrix_data[All_data == mrtrix_key['Lookup Index'][i]] = mrtrix_key['MRtrix Index'][i]
     
 mrtrix_to_nii = nibabel.Nifti1Image(mrtrix_data, HCP.affine, HCP.header)
-nibabel.save(mrtrix_to_nii, os.path.join(filepath,  rel_path1, "Stim", 'HCP_parc_all.nii.gz'))
+nibabel.save(mrtrix_to_nii, os.path.join(profile["connectomePath"], 'HCP_parc_all_'+experiment+'.nii.gz'))
 mrtrix_save = pd.DataFrame(data=mrtrix_key)
-mrtrix_save.to_csv(os.path.join(filepath, rel_path1, 'MRtrix_index_key.csv'))
+mrtrix_save.to_csv(os.path.join(profile["connectomePath"], 'MRtrix_index_key_'+experiment+'.csv'))
 
 #%%
 '''
