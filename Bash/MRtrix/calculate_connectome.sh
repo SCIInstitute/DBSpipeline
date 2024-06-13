@@ -96,6 +96,8 @@ run_loop() {
     connectomePath=$(jq -r '.connectomePath' $file)
     fibertractPath=$(jq -r '.fibertractPath' $file)
     
+    # heres where to add connectome maker
+    
     filename=$hcp_pattern$experiment".nii.gz"
     filepath=$connectomePath/$filename
     
@@ -111,11 +113,10 @@ run_loop() {
     then
       module load python/3.10
     fi
-    python_call="python \"${CODEDIR}/Python/MRtrix/calculate_connectome.py\" --matrix \"$connectome_matrix\" --subject ${subject} --left_ROI 371 --right_ROI 372"
+    python_call="python \"${CODEDIR}/Python/MRtrix/calculate_connectome.py\" -m \"$connectome_matrix\" -p ${$file}"
     echo $python_call
 #    $python_call
 
-#    read line </dev/tty
   done
 }
 
