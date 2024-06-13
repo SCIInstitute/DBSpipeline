@@ -152,7 +152,7 @@ def main():
   nibabel.save(mrtrix_to_nii, nifti_outputfile )
   mrtrix_save = pd.DataFrame(data=mrtrix_key)
   matkey_outputname=os.path.join(profile["connectomePath"], 'MRtrix_index_key_'+experiment+'.csv')
-  mrtrix_save.to_csv()
+  mrtrix_save.to_csv(matkey_outputname)
   
   profile["Connectome_maker"] = { "Output_files":
         {"nifti_outputfile": nifti_outputfile,
