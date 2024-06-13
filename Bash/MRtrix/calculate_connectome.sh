@@ -25,11 +25,16 @@ then
   rel_path2="Tractography"
   rel_path3="Tractography"
   rel_path4="Segmentations"
+  module load jq
 else
-  rel_path1="MRtrix/Connectome"
-  rel_path2="MRtrix/Tractography/Cleaned"
-  rel_path3="MRtrix/Tractography/Fibers"
-  rel_path4="MRtrix/Segmentations"
+#  rel_path1="MRtrix/Connectome"
+#  rel_path2="MRtrix/Tractography/Cleaned"
+#  rel_path3="MRtrix/Tractography/Fibers"
+#  rel_path4="MRtrix/Segmentations"
+  rel_path1="Connectome"
+  rel_path2="Tractography/Cleaned"
+  rel_path3="Tractography/Cleaned/Fibers"
+  rel_path4="Segmentations"
 fi
 
 
@@ -61,8 +66,12 @@ run_loop() {
   
 #  files=($(ls -1 "${DATADIR}/${subject}/${rel_path1}/Stim/HCP_parc_all_"*".nii.gz"))
   
-  subject_path="${DATADIR}/${subject}/${rel_path1}/Stim/"
-  file_pattern="HCP_parc_all_*.nii.gz"
+#  subject_path="${DATADIR}/${subject}/${rel_path1}/Stim/"
+#  subject_path="${DATADIR}/${subject}/${rel_path1}/"
+  subject_path="${DATADIR}/${subject}/"
+#  file_pattern="HCP_parc_all_*.nii.gz"
+  file_pattern="*profile.json"
+  hcp_pattern="HCP_parc_all_"
 
   
 #  echo ${#files[@]}
@@ -71,17 +80,29 @@ run_loop() {
   do
     echo "file = $file"
     
+#    if [[ $file == *"/HCP_parc_all_b0space.nii.gz" ]]
+#    then
+#      continue
+#    fi
+    
     if [[ $SYSNAME == "hipergator" ]]
     then
       module load mrtrix
     fi
     
-    filename="$(basename "$file" .nii.gz)"
+    experiment=$(jq -r '.experiment' $file)
+    lookup_table=$(jq -r '.lookup_table' $file)
+    cleantractPath=$(jq -r '.cleantractPath' $file)
+    connectomePath=$(jq -r '.connectomePath' $file)
+    fibertractPath=$(jq -r '.fibertractPath' $file)
     
-    mrtransform -linear "${DATADIR}/${subject}/${rel_path2}/ACPC_to_b0.txt" "$file" "${DATADIR}/${subject}/${rel_path1}/HCP_parc_all_b0space.nii.gz"  -force
-    connectome_matrix="${DATADIR}/${subject}/${rel_path2}/connectome_matrix_${filename: -1}.csv"
+    filename=$hcp_pattern$experiment".nii.gz"
+    filepath=$connectomePath/$filename
+    
+    mrtransform -linear "${cleantractPath}/ACPC_to_b0.txt" "$filepath" "${connectomePath}/HCP_parc_all_b0space.nii.gz"  -force
+    connectome_matrix="${connectomePath}/connectome_matrix_${experiment}.csv"
     echo $connectome_matrix
-    tck2connectome "${DATADIR}/${subject}/${rel_path3}/whole_brain_fibers.tck" "${DATADIR}/${subject}/${rel_path1}/HCP_parc_all_b0space.nii.gz" "$connectome_matrix" -tck_weights_in "${DATADIR}/${subject}/${rel_path3}/sift2_weights.txt"  -keep_unassigned -assignment_radial_search 3 -out_assignments "${DATADIR}/${subject}/${rel_path2}/assignments_${filename: -1}.txt" -force
+    tck2connectome "${fibertractPath}/whole_brain_fibers.tck" "${connectomePath}/HCP_parc_all_b0space.nii.gz" "$connectome_matrix" -tck_weights_in "${fibertractPath}/sift2_weights.txt"  -keep_unassigned -assignment_radial_search 3 -out_assignments "${cleantractPath}/assignments_${experiment}.txt" -force
         #-scale_invlength \
         #-scale_invnodevol
     
@@ -94,7 +115,7 @@ run_loop() {
     echo $python_call
 #    $python_call
 
-    read line </dev/tty
+#    read line </dev/tty
   done
 }
 
