@@ -112,13 +112,6 @@ def main():
   lookup_main = pd.read_csv(profile["lookup_table"])
   lookup_key = pd.read_csv(profile["Connectome_maker"]["Output_files"]["matkey_outputname"])
 
-
-  # Lookup table
-  LT_file = os.path.join(os.environ["CODEDIR"], 'Bash/Freesurfer/hcpmmp1_subcortex.txt')
-  print(LT_file)
-  label_table = pd.read_fwf(LT_file, header=None)
-  labels = label_table[1].tolist()
-  
   
   ROI_list_left = lookup_key.loc[lookup_key["Lookup Index"].isin(ROI_list_left_index),'MRtrix Index'].tolist()
   ROI_list_right = lookup_key.loc[lookup_key["Lookup Index"].isin(ROI_list_right_index),'MRtrix Index'].tolist()
@@ -224,7 +217,7 @@ def main():
   region_both = [left_region, right_region]
   df_regions = pd.DataFrame(data=region_both)
   
-  df_outputfile = os.path.join(file_dir,'Region_Connectivity_'+experiment+'.csv')
+  df_outputfile = os.path.join(profile["connectomePath"],'Region_Connectivity_'+experiment+'.csv')
 
   df_regions.to_csv(df_outputfile, index=False)
 
