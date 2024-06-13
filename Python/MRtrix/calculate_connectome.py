@@ -8,6 +8,12 @@ python3 calculate_connectome.py --matrix <connectome_matrix> --subject <subject>
 
 python3 calculate_connectome.py --matrix "/Users/jess/Dropbox/CT DBS Human/CENTURY S Patients/p102 (44)/MRtrix/Tractography/Cleaned/connectome_matrix_1.csv --subject "p102 (44)" --left_ROI 371 --right_ROI 372
 
+revised to match lookup table
+
+l - 1001
+r - 1016
+
+
 @author: Matthew
 """
 
@@ -38,10 +44,10 @@ def build_parser():
                       dest="subject")
   parser.add_argument("--left_ROI", type=int, required=False,
                       help="indexes for left ROIs.  cannot be used with --profile",
-                      default=np.NaN, dest="ROI_list_left")
+                      default=np.NaN, dest="ROI_list_left_index")
   parser.add_argument("--right_ROI", type=int, required=False,
                       help="indexes for right ROIs.  cannot be used with --profile",
-                      default=np.NaN, dest="ROI_list_right")
+                      default=np.NaN, dest="ROI_list_right_index")
   parser.add_argument("-e", "--experiment", required=False,
                       help="experiment lable.  cannot be used with --profile",
                       dest="experiment")
@@ -66,8 +72,8 @@ def main():
     
     file_dir = profile["tractographyPath"]
     
-    ROI_list_right = profile["right_ROI"]
-    ROI_list_left = profile["left_ROI"]
+    ROI_list_right_index = profile["right_ROI"]
+    ROI_list_left_index = profile["left_ROI"]
     
   else:
     if np.isnan(args.ROI_list_left) or np.isnan(args.ROI_list_right):
@@ -85,8 +91,8 @@ def main():
       rel_path3 = "MRtrix/Tractography/Fibers/"
       rel_path4 = "MRtrix/Segmentations"
       
-    ROI_list_right = args.ROI_list_right
-    ROI_list_left = args.ROI_list_left
+    ROI_list_right_index = args.ROI_list_right_index
+    ROI_list_left_index = args.ROI_list_left_index
 
 #home = os.getcwd()
 # to match calculate_connectom.sh
@@ -102,6 +108,9 @@ def main():
     c_matrix = os.path.join(profile["connectomePath"], "connectome_matrix.csv")
   connect_mat = np.loadtxt(c_matrix, delimiter=',')
   mu = np.loadtxt(os.path.join(profile["fibertractPath"], 'sift2_mu.txt'))
+  
+  lookup_main = pd.read_csv(profile["lookup_table"])
+  lookup_key = pd.read_csv(profile["Connectome_maker"]["Output_files"]["matkey_outputname"])
 
 
   # Lookup table
@@ -109,6 +118,10 @@ def main():
   print(LT_file)
   label_table = pd.read_fwf(LT_file, header=None)
   labels = label_table[1].tolist()
+  
+  
+  ROI_list_left = lookup_key.loc[lookup_key["Lookup Index"].isin(ROI_list_left_index),'MRtrix Index'].tolist()
+  ROI_list_right = lookup_key.loc[lookup_key["Lookup Index"].isin(ROI_list_right_index),'MRtrix Index'].tolist()
 
 
   data = connect_mat[1:,1:] * mu #Remove unassigned tracts, multiply "Fudge Factor"
@@ -134,62 +147,8 @@ def main():
       
   ROI_left = np.sum(data_left,axis=1) #collapse all regions
   ROI_right = np.sum(data_right,axis=1)
-  ROI_left[ROI_list_left] = np.NAN #Remove regions from connectivity output
-  ROI_right[ROI_list_right] = np.NAN
-
-
-
-  percent = 100 #top k percentage of connections, not implemented at the moment
-  top = percent/100
-  Index_left = np.argsort(ROI_left) #Sort indicies and remove nan values
-  Index_left = Index_left[np.argwhere(~np.isnan(ROI_left[Index_left]))].squeeze()[::-1]
-  Index_right = np.argsort(ROI_right)
-  Index_right = Index_right[np.argwhere(~np.isnan(ROI_right[Index_right]))].squeeze()[::-1]
-
-  #ROI_left_top = ROI_left[Index_left[Index_left < 360]]
-  ROI_left_top = ROI_left[Index_left]
-  ROI_right_top = ROI_right[Index_right]
-  labels_left = np.array(labels)[Index_left[Index_left < len(labels)]]
-  labels_right = np.array(labels)[Index_right[Index_right < len(labels)]]
-
-  with open(os.path.join(file_dir, 'labels_left.txt'),'w') as f:
-      count = 0
-      for label in labels_left:
-          print(label,Index_left[count]+1,ROI_left_top[count],file=f)
-          count += 1
-  with open(os.path.join(file_dir, 'labels_right.txt'),'w') as f:
-      count = 0
-      for label in labels_right:
-          print(label,Index_right[count]+1,ROI_right_top[count],file=f)
-          count += 1
-          
-          
-  file_path_1 = os.path.join(file_dir, 'labels_left.txt')
-  file_path_2 = os.path.join(file_dir, 'labels_right.txt')
-
-  f = open(file_path_1,'r')
-  connectome_1 = f.readlines()
-  f.close()
-
-  f = open(file_path_2,'r')
-  connectome_2 = f.readlines()
-  f.close()
-
-  shared = []
-  conn_1 = []
-  conn_2 = []
-  count = 0
-  for region in connectome_1:
-      if region in connectome_2:
-          shared.append(region.split()[0])
-      else:
-          conn_1.append(region.split()[0])
-
-  for region in connectome_2:
-      if region in connectome_1:
-          continue
-      else:
-          conn_2.append(region.split()[0])
+  np.savetxt(os.path.join(file_dir, 'ROI_left.txt'), ROI_left,delimiter=',')
+  np.savetxt(os.path.join(file_dir, 'ROI_right.txt'), ROI_right,delimiter=',')
 
   #HCP Macro-regions
   connectome_file = os.path.join(os.environ["CODEDIR"], "Python/connectomics/connectome_maps/HCP_MacroRegions.json")
@@ -205,95 +164,75 @@ def main():
       'Patient ID': PatientID,
       'Hemisphere': ""}
       
-  #region_connectivity = {
-  #    'Patient ID': PatientID,
-  #    'Hemisphere': "",
-  #    'Primary Visual Cortex': 0,
-  #    'Early Visual Cortex': 0,
-  #    'Dorsal Stream Visual Cortex': 0,
-  #    'Ventral Stream Visual Cortex': 0,
-  #    'MT+ Complex and Neighboring Visual Areas': 0,
-  #    'Somatosensory and Motor Cortex': 0,
-  #    'Paracentral Lobular and Mid Cingulate Cortex': 0,
-  #    'Premotor Cortex': 0,
-  #    'Posterior Opercular Cortex': 0,
-  #    'Early Auditory Cortex': 0,
-  #    'Auditory Association Cortex': 0,
-  #    'Insular and Frontal Opercular Cortex': 0,
-  #    'Medial Temporal Cortex': 0,
-  #    'Lateral Temporal Cortex': 0,
-  #    'Temporo-Parieto-Occipital Junction': 0,
-  #    'Superior Parietal Cortex': 0,
-  #    'Inferior Parietal Cortex': 0,
-  #    'Posterior Cingulate Cortex': 0,
-  #    'Anterior Cingulate and Medial Prefrontal Cortex': 0,
-  #    'Orbital and Polar Frontal Cortex': 0,
-  #    'Inferior Frontal Cortex': 0,
-  #    'DorsoLateral Prefrontal Cortex': 0,
-  #}
+  region_connectivity = {
+      'Patient ID': PatientID,
+      'Hemisphere': "",
+      'Primary Visual Cortex': 0,
+      'Early Visual Cortex': 0,
+      'Dorsal Stream Visual Cortex': 0,
+      'Ventral Stream Visual Cortex': 0,
+      'MT+ Complex and Neighboring Visual Areas': 0,
+      'Somatosensory and Motor Cortex': 0,
+      'Paracentral Lobular and Mid Cingulate Cortex': 0,
+      'Premotor Cortex': 0,
+      'Posterior Opercular Cortex': 0,
+      'Early Auditory Cortex': 0,
+      'Auditory Association Cortex': 0,
+      'Insular and Frontal Opercular Cortex': 0,
+      'Medial Temporal Cortex': 0,
+      'Lateral Temporal Cortex': 0,
+      'Temporo-Parieto-Occipital Junction': 0,
+      'Superior Parietal Cortex': 0,
+      'Inferior Parietal Cortex': 0,
+      'Posterior Cingulate Cortex': 0,
+      'Anterior Cingulate and Medial Prefrontal Cortex': 0,
+      'Orbital and Polar Frontal Cortex': 0,
+      'Inferior Frontal Cortex': 0,
+      'DorsoLateral Prefrontal Cortex': 0,
+  }
 
   left_region = region_connectivity.copy()
   left_region["Hemisphere"] = "Left"
   right_region = region_connectivity.copy()
   right_region["Hemisphere"] = "Right"
-  left_leftover = connectome_1.copy()
-  right_leftover = connectome_2.copy()
 
-  for key in connectome_regions.keys():
-      region_connectivity[key] = 0
-      for region in connectome_1:
-          if region.split()[0].split('_')[-1] in connectome_regions[key]:
-              region_connectivity[key] = region_connectivity[key] + float(region.split()[-1].split('\n')[0])
-              left_region[key] = left_region[key] + float(region.split()[-1].split('\n')[0])
-              try:
-                  left_leftover.remove(region)
-              except:
-                  continue
-                  
-  for region in left_leftover:
-      keyname = region.split()[0].split('_')[-1]
-      try:
-          left_region[keyname] = left_region[keyname] + float(region.split()[-1].split('\n')[0])
-      except:
-          left_region[keyname] = float(region.split()[-1].split('\n')[0])
-                  
-  for key in connectome_regions.keys():
-      region_connectivity[key] = 0
-      for region in connectome_2:
-          if region.split()[0].split('_')[-1] in connectome_regions[key]:
-              region_connectivity[key] = region_connectivity[key] + float(region.split()[-1].split('\n')[0])
-              right_region[key] = right_region[key] + float(region.split()[-1].split('\n')[0])
-              try:
-                  right_leftover.remove(region)
-              except:
-                  continue
-                  
-  for region in right_leftover:
-      keyname = region.split()[0].split('_')[-1]
-      try:
-          right_region[keyname] = right_region[keyname] + float(region.split()[-1].split('\n')[0])
-      except:
-          right_region[keyname] = float(region.split()[-1].split('\n')[0])
-          
-  all_data = region_connectivity
+  HCP_regions = [x for xs in connectome_regions.values() for x in xs] #List of all HCP regions
 
+  for i in lookup_key["Lookup Index"].tolist():
+    label = lookup_main["Labels"].loc[lookup_main["Index"] == i].tolist()[0].split('_')
+    hemi = label[0]
+    name = label[1]
+    matrix_index = lookup_key["MRtrix Index"].loc[lookup_key['Lookup Index'] == i].tolist()[0] - 1
+    if matrix_index in ROI_list_left or matrix_index in ROI_list_right: #Remove connections to itself
+        continue
+    if name not in HCP_regions: #Any non HCP regions
+        if 'L' in hemi:
+            left_region[name] = ROI_left[matrix_index]
+        else:
+            right_region[name] = ROI_right[matrix_index]
+        continue
+    for key in connectome_regions.keys():
+        if name in connectome_regions[key]:
+            if 'L' in hemi:
+                left_region[key] = left_region[key] + ROI_left[matrix_index]
+            else:
+                right_region[key] = right_region[key] + ROI_right[matrix_index]
+        
 
-  padding = ' ' * 35
-  filepath = file_path_1.split('labels')[0]
-  region_outputfile = os.path.join(filepath, 'Region_connectivity_'+experiment+'.txt')
-  with open(region_outputfile, 'w') as f:
-      for k,v in all_data.items():
-          print('{:.50s} {}'.format(k + padding,v), file=f)
-          
+#%%
   region_both = {'Region': left_region.keys(),'Left': left_region.values(), 'Right': right_region.values()}
   region_both = [left_region, right_region]
   df_regions = pd.DataFrame(data=region_both)
-  df_outputfile = os.path.join(filepath,'Region_Connectivity_'+experiment+'.csv')
-  df_regions.to_csv( df_outputfile, index=False)
   
+  df_outputfile = os.path.join(file_dir,'Region_Connectivity_'+experiment+'.csv')
+
+  df_regions.to_csv(df_outputfile, index=False)
+
+
+
+  #setup output files for saving
   profile["connectome_connectome"] = { "Output_files":
-        {"df_outputfile" : df_outputfile,
-          "region_outputfile" : region_outputfile
+        {"df_outputfile" : df_outputfile
         }
   }
   
