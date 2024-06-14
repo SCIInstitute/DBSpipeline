@@ -104,7 +104,7 @@ run_loop() {
     mrtransform -linear "${cleantractPath}/ACPC_to_b0.txt" "$filepath" "${connectomePath}/HCP_parc_all_b0space.nii.gz"  -force
     connectome_matrix="${connectomePath}/connectome_matrix_${experiment}.csv"
     echo $connectome_matrix
-    tck2connectome "${fibertractPath}/whole_brain_fibers.tck" "${connectomePath}/HCP_parc_all_b0space.nii.gz" "$connectome_matrix" -tck_weights_in "${fibertractPath}/sift2_weights.txt"  -keep_unassigned -assignment_radial_search 3 -out_assignments "${cleantractPath}/assignments_${experiment}.txt" -force
+    tck2connectome "${fibertractPath}/whole_brain_fibers.tck" "${connectomePath}/HCP_parc_all_b0space.nii.gz" "$connectome_matrix" -tck_weights_in "${fibertractPath}/sift2_weights.txt"  -keep_unassigned -assignment_end_voxels -out_assignments "${cleantractPath}/assignments_${experiment}.txt" -force
         #-scale_invlength \
         #-scale_invnodevol
     
@@ -113,8 +113,8 @@ run_loop() {
     then
       module load python/3.10
     fi
-    python_call="python \"${CODEDIR}/Python/MRtrix/calculate_connectome.py\" -m \"$connectome_matrix\" -p ${$file}"
-    echo $python_call
+    #python_call="python \"${CODEDIR}/Python/MRtrix/calculate_connectome.py\" -m \"$connectome_matrix\" -p ${$file}"
+    #echo $python_call
 #    $python_call
 
   done
