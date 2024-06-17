@@ -113,6 +113,10 @@ run_loop() {
     then
       module load python/3.10
     fi
+    echo "${CODEDIR}"
+    echo "${connectome_matrix}"
+    echo "${$file}"
+    
     python_call="python ${CODEDIR}/Python/MRtrix/calculate_connectome.py -m ${connectome_matrix} -p ${$file}"
     echo $python_call
     $python_call
