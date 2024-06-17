@@ -115,7 +115,7 @@ run_loop() {
     fi
     python_call="python ${CODEDIR}/Python/MRtrix/calculate_connectome.py -m ${connectome_matrix} -p ${$file}"
     echo $python_call
-#    $python_call
+    $python_call
 
   done
 }
