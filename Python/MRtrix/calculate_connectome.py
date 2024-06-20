@@ -138,8 +138,8 @@ def main():
       
       
       
-  ROI_left = np.sum(data_left,axis=1) #collapse all regions
-  ROI_right = np.sum(data_right,axis=1)
+  ROI_left = np.sum(data_left,axis=1).flatten() #collapse all regions
+  ROI_right = np.sum(data_right,axis=1).flatten()
   np.savetxt(os.path.join(file_dir, 'ROI_left.txt'), ROI_left,delimiter=',')
   np.savetxt(os.path.join(file_dir, 'ROI_right.txt'), ROI_right,delimiter=',')
 
@@ -198,6 +198,7 @@ def main():
     matrix_index = lookup_key["MRtrix Index"].loc[lookup_key['Lookup Index'] == i].tolist()[0] - 1
     if matrix_index in ROI_list_left or matrix_index in ROI_list_right: #Remove connections to itself
         continue
+    
     if name not in HCP_regions: #Any non HCP regions
         if 'L' in hemi:
             left_region[name] = ROI_left[matrix_index]
@@ -207,10 +208,11 @@ def main():
     for key in connectome_regions.keys():
         if name in connectome_regions[key]:
             if 'L' in hemi:
+#                left_region[key] += ROI_left[matrix_index]
                 left_region[key] = left_region[key] + ROI_left[matrix_index]
             else:
                 right_region[key] = right_region[key] + ROI_right[matrix_index]
-        
+                
 
 #%%
   region_both = {'Region': left_region.keys(),'Left': left_region.values(), 'Right': right_region.values()}
