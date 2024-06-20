@@ -84,6 +84,16 @@ run_loop() {
 #    then
 #      continue
 #    fi
+
+    if [ $SYSNAME == "hipergator" ]
+    then
+      module load python/3.10
+    fi
+
+    python_call="python ${CODEDIR}/Python/Freesurfer/Connectome_maker.py -p ${file}"
+    echo $python_call
+    $python_call
+
     
     if [[ $SYSNAME == "hipergator" ]]
     then
