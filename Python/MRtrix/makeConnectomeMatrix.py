@@ -68,15 +68,19 @@ def main():
 #  if SYSNAME == "hipergator":
 #    subprocess.run(["module", "load", "mrtrix"])
   
-  subprocess.run(["mrtransform",  "-linear " + os.path.join(cleantractPath, "ACPC_to_b0.txt"), filepath, os.path.join(connectomePath, hcp_pattern+"b0space.nii.gz"),   "-force"])
+  cl_call1 = ["mrtransform",  "-linear", os.path.join(cleantractPath, "ACPC_to_b0.txt"), filepath, os.path.join(connectomePath, hcp_pattern+"b0space.nii.gz"),   "-force"]
+  print(" ".join(cl_call1))
+  subprocess.run(cl_call1)
   
   connectome_matrix=os.path.join(connectomePath, "connectome_matrix_" + experiment + ".csv")
   print(connectome_matrix)
   print(assignment)
   
-  subprocess.run(["tck2connectome" , os.path.join(fibertractPath, "whole_brain_fibers.tck"), os.path.join(connectomePath, hcp_pattern+"b0space.nii.gz"), connectome_matrix,  "-tck_weights_in " + os.path.join(fibertractPath, "sift2_weights.txt"),   "-keep_unassigned",  "-"+assignment,  "-out_assignments "+os.path.join(cleantractPath, "assignments_" + experiment + ".txt"),  "-force"])
+  cl_call2 = ["tck2connectome", os.path.join(fibertractPath, "whole_brain_fibers.tck"), os.path.join(connectomePath, hcp_pattern+"b0space.nii.gz"), connectome_matrix,  "-tck_weights_in", os.path.join(fibertractPath, "sift2_weights.txt"),   "-keep_unassigned",  "-"+assignment,  "-out_assignments", os.path.join(cleantractPath, "assignments_" + experiment + ".txt"),  "-force"]
       #-scale_invlength \
       #-scale_invnodevol
+  print(" ".join(cl_call2))
+  subprocess.run(cl_call2)
       
  
   #setup output files for saving
