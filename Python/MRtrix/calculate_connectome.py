@@ -157,8 +157,12 @@ def main():
 
   for i in lookup_key["Lookup Index"].tolist():
     label = lookup_main["Labels"].loc[lookup_main["Index"] == i].tolist()[0].split('_')
-    hemi = label[0]
-    name = label[1]
+    try:
+        hemi = label[0]
+        name = label[1]
+    except:
+        name = label[0] #to account for regions that do not have left/right split
+        hemi = ''
     matrix_index = lookup_key["MRtrix Index"].loc[lookup_key['Lookup Index'] == i].tolist()[0] - 1
     if matrix_index in ROI_list_left or matrix_index in ROI_list_right: #Remove connections to itself
         continue
@@ -166,7 +170,10 @@ def main():
     if name not in HCP_regions: #Any non HCP regions
         if 'L' in hemi:
             left_region[name] = ROI_left[matrix_index]
-        else:
+        elif 'R' in hemi:
+            right_region[name] = ROI_right[matrix_index]
+        elif not hemi:
+            left_region[name] = ROI_left[matrix_index] #add midline ROI's to both sides
             right_region[name] = ROI_right[matrix_index]
         continue
     for key in connectome_regions.keys():
