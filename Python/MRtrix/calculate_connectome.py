@@ -37,23 +37,6 @@ def build_parser():
   parser.add_argument("-p", "--profile", required=False,
                       help="profile filename",
                       dest="profile")
-                      
-                      
-  parser.add_argument("-s", "--subject", required=False,
-                      help="subject to run.  cannot be used with --profile",
-                      dest="subject")
-  parser.add_argument("--left_ROI", type=int, required=False,
-                      help="indexes for left ROIs.  cannot be used with --profile",
-                      default=np.NaN, dest="ROI_list_left_index")
-  parser.add_argument("--right_ROI", type=int, required=False,
-                      help="indexes for right ROIs.  cannot be used with --profile",
-                      default=np.NaN, dest="ROI_list_right_index")
-  parser.add_argument("-e", "--experiment", required=False,
-                      help="experiment lable.  cannot be used with --profile",
-                      dest="experiment")
-  parser.add_argument("-m", "--matrix", required=True,
-                      help="connectome matrix.  ouput of calculate_connectome.sh",
-                      dest="c_matrix")
   return parser
   
 
@@ -75,37 +58,18 @@ def main():
     ROI_list_right_index = profile["right_ROI"]
     ROI_list_left_index = profile["left_ROI"]
     
-  else:
-    if np.isnan(args.ROI_list_left) or np.isnan(args.ROI_list_right):
-        raise Exception('Not Valid Region')
-
-    home = os.environ["DATADIR"]
-    if os.environ["SYSNAME"]=="hipergator":
-      rel_path1 = "Connectome"
-      rel_path2 = "Tractography"
-      rel_path3 = "Tractography"
-      rel_path4 = "Segmentations"
-    else:
-      rel_path1 = "MRtrix/Connectome"
-      rel_path2 = "MRtrix/Tractography/Cleaned"
-      rel_path3 = "MRtrix/Tractography/Fibers/"
-      rel_path4 = "MRtrix/Segmentations"
-      
-    ROI_list_right_index = args.ROI_list_right_index
-    ROI_list_left_index = args.ROI_list_left_index
-
-#home = os.getcwd()
-# to match calculate_connectom.sh
-    file_dir = os.path.join(home,  args.subject, rel_path2)
     
 #Note: this notebook generates figures the rely on the data being from one region to everywhere else.
 # ROI lists should be related as they will be combined into one region
+
 # ${DATADIR}/${subject}/Connectome/connectome_matrix.csv in calculate_connectome.sh
 #added to input
-  c_matrix =args.c_matrix
+  c_matrix = profile["makeConnectomeMatrix"]["Output_files"]["connectome_matrix"]
 
   if not os.path.exists(c_matrix):
     c_matrix = os.path.join(profile["connectomePath"], "connectome_matrix.csv")
+    
+    
   connect_mat = np.loadtxt(c_matrix, delimiter=',')
   mu = np.loadtxt(os.path.join(profile["fibertractPath"], 'sift2_mu.txt'))
   
