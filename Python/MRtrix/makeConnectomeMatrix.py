@@ -18,14 +18,16 @@ import argparse
 import json
 import subprocess
 
-default_assignment="assignment_radial_search 3mm"
+default_assignment="assignment_radial_search"
+default_radius=3
+default_distance=0
 hcp_pattern="HCP_parc_all_"
 
 def build_parser():
   parser = argparse.ArgumentParser(
-                prog = "Connectome_maker",
-                description = "compiles a connectome nifti from disparate nifti segmentations.",
-                epilog="output saves nifti files as defined by profile or settings"
+                prog = "makeConnectomeMatrix",
+                description = "makes connectome matrix from compiled nifti",
+                epilog="output: connectome matrix"
                 )
 
   # This will be implemented as rollout broadens
@@ -34,8 +36,16 @@ def build_parser():
                       dest="profile")
 
   parser.add_argument("-a", "--assignment", required=False,
-                      help="Assignment method for MRtrix",
+                      help="Assignment method for MRtrix.  found in: https://mrtrix.readthedocs.io/en/dev/reference/commands/tck2connectome.html#options",
                       dest="assignment")
+                      
+  parser.add_argument("-r", "--radius", required=False,
+                      help="Assignment radius for MRtrix.  works only with assignment_radial_search",
+                      dest="radius", default=default_radius, type=int)
+                      
+  parser.add_argument("-d", "--distance", required=False,
+                      help="Assignment max distance for MRtrix.  works only with assignment_reverse_search and assignment_forward_search",
+                      dest="distance", default=default_distance, type=int)
   return parser
   
 
@@ -56,15 +66,12 @@ def main():
   cleantractPath = profile["cleantractPath"]
     
   file_dir = profile["tractographyPath"]
-  
-  if not args.assignment:
-    assignment = default_assignment
-  else:
-    assignment = args.assignment
+
+  assignment = args.assignment
     
   filename = hcp_pattern+experiment+".nii.gz"
   filepath = os.path.join(connectomePath,filename)
-  
+    
 #  if SYSNAME == "hipergator":
 #    subprocess.run(["module", "load", "mrtrix"])
   
@@ -75,8 +82,14 @@ def main():
   connectome_matrix=os.path.join(connectomePath, "connectome_matrix_" + experiment + ".csv")
   print(connectome_matrix)
   print(assignment)
+  cl_call2 = ["tck2connectome", os.path.join(fibertractPath, "whole_brain_fibers.tck"), os.path.join(connectomePath, hcp_pattern+"b0space.nii.gz"), connectome_matrix,  "-tck_weights_in", os.path.join(fibertractPath, "sift2_weights.txt"),   "-keep_unassigned",  "-out_assignments", os.path.join(cleantractPath, "assignments_" + experiment + ".txt"),  "-force" ]
   
-  cl_call2 = ["tck2connectome", os.path.join(fibertractPath, "whole_brain_fibers.tck"), os.path.join(connectomePath, hcp_pattern+"b0space.nii.gz"), connectome_matrix,  "-tck_weights_in", os.path.join(fibertractPath, "sift2_weights.txt"),   "-keep_unassigned",  "-"+assignment,  "-out_assignments", os.path.join(cleantractPath, "assignments_" + experiment + ".txt"),  "-force"]
+  cl_call2.append("-"+assignment)
+  if assignment == "assignment_radial_search":
+    cl_call2.append(str(args.radius))
+  elif assignment == "assignment_forward_search" or assignment == "assignment_reverse_search":
+    cl_call2.append(str(args.distance))
+    
       #-scale_invlength \
       #-scale_invnodevol
   print(" ".join(cl_call2))

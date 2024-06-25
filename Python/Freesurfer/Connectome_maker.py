@@ -40,6 +40,9 @@ def build_parser():
   parser.add_argument("-e", "--experiment", required=False,
                       help="experiment lable.  cannot be used with --profile",
                       dest="experiment")
+  parser.add_argument("-f", "--force", required=False,
+                      help="force a rewrite of files",
+                      action = "store_true", dest="rerun")
   return parser
 
 
@@ -101,6 +104,30 @@ def main():
   #filepath = args.filepath + '/' + subject + '/'
   print('Python Input',subject)
   filepath = profile["rootpath"]
+  
+  nifti_lookup_outputfile = os.path.join(profile["connectomePath"], 'HCP_parc_all_'+experiment+'_lookup.nii.gz')
+  nifti_outputfile = os.path.join(profile["connectomePath"], 'HCP_parc_all_'+experiment+'.nii.gz')
+  matkey_outputname=os.path.join(profile["connectomePath"], 'MRtrix_index_key_'+experiment+'.csv')
+  
+  output_files =  {"nifti_outputfile": nifti_outputfile,
+          "nifti_lookup_outputfile" : nifti_lookup_outputfile,
+          "matkey_outputname" : matkey_outputname}
+  
+  out_check = [os.path.exists(f_name ) for f_var, f_name in output_files.items() ]
+  
+  print(out_check)
+  
+  if all(out_check):
+    print("files all exist")
+    print(args.rerun)
+    if args.rerun:
+      print("overwriting output files")
+    else:
+      print("output files exist.  Use '-f' to force overwrite")
+      return
+      
+    
+  
 
   seg_files = lookup['Filename'].unique()
   #seg_dirs = lookup['Path'].unique()
@@ -134,7 +161,6 @@ def main():
 
   All_data = All_data.astype(int)
   All_to_nii = nibabel.Nifti1Image(All_data, HCP.affine, HCP.header)
-  nifti_lookup_outputfile = os.path.join(profile["connectomePath"], 'HCP_parc_all_'+experiment+'_lookup.nii.gz')
   
   nibabel.save(All_to_nii, nifti_lookup_outputfile)
 
@@ -148,17 +174,13 @@ def main():
       mrtrix_data[All_data == mrtrix_key['Lookup Index'][i]] = mrtrix_key['MRtrix Index'][i]
       
   mrtrix_to_nii = nibabel.Nifti1Image(mrtrix_data, HCP.affine, HCP.header)
-  nifti_outputfile = os.path.join(profile["connectomePath"], 'HCP_parc_all_'+experiment+'.nii.gz')
   nibabel.save(mrtrix_to_nii, nifti_outputfile )
   mrtrix_save = pd.DataFrame(data=mrtrix_key)
-  matkey_outputname=os.path.join(profile["connectomePath"], 'MRtrix_index_key_'+experiment+'.csv')
+  
   mrtrix_save.to_csv(matkey_outputname)
   
-  profile["Connectome_maker"] = { "Output_files":
-        {"nifti_outputfile": nifti_outputfile,
-          "nifti_lookup_outputfile" : nifti_lookup_outputfile, 
-          "matkey_outputname" : matkey_outputname}
-        }
+  profile["Connectome_maker"] = { "Output_files": output_files}
+        
         
   with open(args.profile, 'w') as fp:
     json.dump(profile, fp)
