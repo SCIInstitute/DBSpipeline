@@ -72,8 +72,8 @@ def main():
   filename = hcp_pattern+experiment+".nii.gz"
   filepath = os.path.join(connectomePath,filename)
     
-#  if SYSNAME == "hipergator":
-#    subprocess.run(["module", "load", "mrtrix"])
+  if os.environ["SYSNAME"] == "hipergator":
+    subprocess.run(["module", "load", "mrtrix"])
   
   cl_call1 = ["mrtransform",  "-linear", os.path.join(cleantractPath, "ACPC_to_b0.txt"), filepath, os.path.join(connectomePath, hcp_pattern+"b0space.nii.gz"),   "-force"]
   print(" ".join(cl_call1))
