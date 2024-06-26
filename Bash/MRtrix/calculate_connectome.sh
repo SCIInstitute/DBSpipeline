@@ -7,10 +7,36 @@
 #SBATCH --time=1:00:00
 #SBATCH --job-name=Connectome
 #SBATCH --mail-type=ALL
-#SBATCH --mail-user=mphook@ufl.edu
 #SBATCH --output=Connectome_%j.out
 
+# example call
+# sbatch --mail-user=jess.tate@ufl.edu calculate_connectome.sh -s  /blue/butsonc/Butson_Lab/Connectome/Testing/SubjectsShort.txt
+
+if [[ -z "$SYSNAME" ]]; then
+echo environment not set.  run makeSysConfig.sh
+exit
+fi
+
 set -e
+
+if [[ $SYSNAME == "hipergator" ]]
+then
+  rel_path1="Connectome"
+  rel_path2="Tractography"
+  rel_path3="Tractography"
+  rel_path4="Segmentations"
+  module load jq
+else
+#  rel_path1="MRtrix/Connectome"
+#  rel_path2="MRtrix/Tractography/Cleaned"
+#  rel_path3="MRtrix/Tractography/Fibers"
+#  rel_path4="MRtrix/Segmentations"
+  rel_path1="Connectome"
+  rel_path2="Tractography/Cleaned"
+  rel_path3="Tractography/Cleaned/Fibers"
+  rel_path4="Segmentations"
+fi
+
 
 Help()
 {
@@ -18,60 +44,204 @@ Help()
    echo
    echo "options:"
    echo "-h    Help Page"
-   echo "-L    Path to Lookup Table"
+#   echo "-L    Path to Lookup Table"
    echo "-s    Path to Subjects List"
+   echo "-d  path to subjects directory (will run all subjects)"
+   echo "-f  force rerun connectome maker"
+   echo "-r  radius of assignment method [3]"
+   echo "-t  test run"
+   echo "-a  assignment method [\"assignment_radial_search 3\"].  options from MRtrix: https://mrtrix.readthedocs.io/en/dev/reference/commands/tck2connectome.html#options"
    echo
 }
 
+#default_assignment="assignment_radial_search 3"
+default_assignment="assignment_end_voxels"
+
+
+
+getSubjectsFromFile() {
+  local subs="$1"
+  
+  while read -r line;
+    do
+    echo -e "${line}\n"
+  done < "$subs"
+#  echo $sub_list
+}
+
+run_loop() {
+  local subject="$1"
+  local assignment="$2"
+  local rerun=$3
+  local testrun=$4
+  local radius=$5
+  local mdist=$6
+  
+#  files=($(ls -1 "${DATADIR}/${subject}/${rel_path1}/Stim/HCP_parc_all_"*".nii.gz"))
+  
+#  subject_path="${DATADIR}/${subject}/${rel_path1}/Stim/"
+#  subject_path="${DATADIR}/${subject}/${rel_path1}/"
+  subject_path="${DATADIR}/${subject}/"
+#  file_pattern="HCP_parc_all_*.nii.gz"
+  file_pattern="*profile.json"
+
+  
+#  echo ${#files[@]}
+  
+  find "$subject_path" -type f -name "$file_pattern" -print0 | while IFS= read -r -d '' file;
+  do
+    echo "file = $file"
+    
+#    if [[ $file == *"/HCP_parc_all_b0space.nii.gz" ]]
+#    then
+#      continue
+#    fi
+
+    echo "rerun: $rerun testrun: $testrun radius: $radius mdist: $mdist"
+    
+    if [ $SYSNAME == "hipergator" ]
+    then
+      module load python/3.10
+    fi
+
+    python_call="python ${CODEDIR}/Python/Freesurfer/Connectome_maker.py -p ${file}"
+    if [ $rerun = true ] ; then
+      python_call=$python_call" -f"
+    fi
+    
+    if [ $testrun = true ]; then
+      echo "this is the call that would run: "
+      echo $python_call
+    else
+      echo "running: "
+      echo $python_call
+      $python_call
+    fi
+        
+    # heres where to add connectome maker
+    python_call="python ${CODEDIR}/Python/MRtrix/makeConnectomeMatrix.py -p ${file} -a ${assignment} -r ${radius} -d ${mdist}"
+    
+    if [ $testrun = true ]; then
+      echo "this is the call that would run: "
+      echo $python_call
+    else
+      echo "running: "
+      echo $python_call
+      $python_call
+    fi
+    
+#    echo "${CODEDIR}"
+#    echo "${connectome_matrix}"
+#    echo "${file}"
+    
+    python_call="python ${CODEDIR}/Python/MRtrix/calculate_connectome.py -p ${file}"
+    
+    if [ $testrun = true ]; then
+      echo "this is the call that would run: "
+      echo $python_call
+    else
+      echo "running: "
+      echo $python_call
+      $python_call
+    fi
+
+  done
+}
+
+#==========================
 
 # Get the options
-while getopts ":h:L:s:" option; do
+
+testrun=false
+rerun=false
+
+while getopts "hd:s:a:r:tfm:" option; do
    case $option in
-      L) lookup=$OPTARG;;
+      d) d_dir=$OPTARG;;
       s) subjects=$OPTARG;;
+      a) assignment=$OPTARG;;
+      r) radius=$OPTARG;;
+      t) testrun=true;;
+      f) rerun=true;;
+      m) mdist=$OPTARG;;
       h | * | :) Help && exit;;
    esac
 done
 
-if [ -z "$lookup" ]
+if [ -z "$assignment" ]
 then
-    echo "ERROR: must supply lookup table"
-    exit 1
-fi
-if [ -z "$subjects" ]
-then
-    echo "ERROR: must supply list of subjects"
-    exit 1
+    echo "using default assignment"
+    assignment=$default_assignment
 fi
 
-git_dir=/home/mphook/blue_butsonc/mphook/Github/
+echo "$assignment"
 
-while read subject
-do
-    echo $subject
-    module load python/3.10
-    python ${git_dir}DBSpipeline/Python/Freesurfer/Connectome_maker.py --subject $subject --lookup $lookup
-    module load mrtrix
-    mrtransform -linear ${subject}/Tractography/Cleaned/ACPC_to_b0.txt \
-        ${subject}/Connectome/HCP_parc_all.nii.gz \
-        ${subject}/Connectome/HCP_parc_all_b0space.nii.gz -force
-        
-    tck2connectome ${subject}/Tractography/Cleaned/Fibers/whole_brain_fibers.tck \
-        ${subject}/Connectome/HCP_parc_all_b0space.nii.gz \
-        ${subject}/Connectome/connectome_matrix.csv \
-        -tck_weights_in ${subject}/Tractography/Cleaned/Fibers/sift2_weights.txt \
-        -keep_unassigned \
-        -assignment_radial_search 3 \
-        -out_assignments ${subject}/Tractography/Cleaned/Fibers/assignments.txt \
-        -scale_invlength \
-        -scale_invnodevol \
-        -force
-        
-done < <(grep '' $subjects)
+if [ -z "$radius" ]
+then
+    echo "using default assignment radius"
+    radius=3
+fi
 
-#module load python/3.10
-#for d in */
-#do
-#	echo $d
-#	python calculate_connectome.py --subject $d --left_ROI 371 --right_ROI 372
-#done
+if [ -z "$mdist" ]
+then
+    echo "using default assignment max distance"
+    mdist=0
+fi
+
+if ([ -z "$subjects" ] && [ -z "$d_dir" ])
+then
+    echo "ERROR: must supply list of subjects or directory to subjects"
+    exit 1
+fi
+
+if [ -d "$d_dir" ]
+then
+
+  echo "running all subjects in : "
+  echo "$d_dir"
+  
+#  sfiles=($(ls -1d "$d_dir/"*))
+#  
+#  echo ${#sfiles[@]}
+#  echo $sfiles
+#  echo "looping"
+
+  find "$d_dir" -maxdepth 1 -type d -print0 | while read -r -d $'\0' sf;
+  do
+#    echo "checking dir $sf"
+
+    if ([ -d "$sf/$rel_path1" ] && [ -d "$sf/$rel_path2" ] && [ -d "$sf/$rel_path4" ])
+    then
+      subject=$(basename "$sf")
+      echo "valid subject: $subject"
+      run_loop "$subject" "$assignment" $rerun $testrun $radius $mdist
+#    else
+#      echo "skipping $sf"
+    fi
+  done
+
+else
+  echo "Directory input not found:"
+  echo "$d_dir"
+
+  if [ -z "$subjects" ]
+  then
+    echo "ERROR: must supply list of subjects or directory to subjects"
+    exit 1
+  else
+    echo "using list of subjects in:"
+    echo "${subjects}"
+    while read -r subject;
+    do
+      echo "$subject"
+      
+      run_loop "$subject" "$assignment" $rerun $testrun $radius $mdist
+
+    done < "$subjects"
+  fi
+fi
+
+
+
+
+

@@ -75,13 +75,14 @@ cd proc_temp
 if [ -z "$slurm" ]
 then
 	echo -e "\nUse on local computer\n"
+  script=FSL_Slice_Remover.py
 else
 	echo -e "\nUse on HiPerGator\n"
 	module load python
-	cp /home/mphook/blue_butsonc/mphook/MRtrix/FSL_Slice_Remover.py FSL_Slice_Remover.py
+	script=/home/mphook/blue_butsonc/mphook/MRtrix/FSL_Slice_Remover.py
 fi
 
-python FSL_Slice_Remover.py
+python $script
 
 if [ -z "$slurm" ]
 then

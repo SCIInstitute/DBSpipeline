@@ -12,7 +12,10 @@
 #SBATCH --mail-user=mphook@ufl.edu
 #SBATCH --output=Preproc_%j.out
 
-
+if [[ -z "$SYSNAME" ]]; then
+echo environment not set.  run makeSysConfig.sh
+exit
+fi
 
 Help()
 {
@@ -51,6 +54,11 @@ while getopts ":h:u:d:l:c:a:e:f:t:s:" option; do
 done
 
 set -e #exit on fail
+
+
+set -e
+
+
 mkdir proc_temp
 cp $DWI_up proc_temp/DWI_up.nii.gz
 
@@ -76,29 +84,27 @@ fi
 cp $T1 proc_temp/T1_ACPC.nii.gz
 cd proc_temp
 
-if [ -z "$slurm" ]
+if [ $SYSNAME == "hipergator" ]
 then
+  echo -e "\nUse on HiPerGator\n"
+  module load python cuda
+else
 	echo -e "\nUse on local computer\n"
-else
-	echo -e "\nUse on HiPerGator\n"
-	module load python cuda
-	cp /home/mphook/blue_butsonc/mphook/MRtrix/FSL_Slice_leveler.py FSL_Slice_leveler.py
 fi
+script=${CODEDIR}/Python/MRtrix/FSL_Slice_leveler.py
 
-python FSL_Slice_leveler.py
+python $script
 
-if [ -z "$slurm" ]
+if [ $SYSNAME == "hipergator" ]
 then
-	echo -e "\n"
-else
 	module load ants
 	module load fsl
 	module load mrtrix
 	module load freesurfer/7.2.0
-	SUBJECTS_DIR=/home/mphook/blue_butsonc/mphook/freesurfer/SimNIBS/FS_Subjects
 fi
 
-
+#SUBJECTS_DIR=/home/mphook/blue_butsonc/mphook/freesurfer/SimNIBS/FS_Subjects
+SUBJECTS_DIR="${FREESURFERDIR}"/FS_Subjects
 
 #Denoise
 echo -e "\nDenoising\n"
@@ -213,16 +219,15 @@ transformconvert b0_to_ACPC.txt itk_import b0_to_ACPC_mrtrix.txt
 echo -e "\nCreating Output Directory called 'Cleaned'\n"
 mkdir ../Cleaned
 
-if [ -z "$slurm" ]
+if [ $SYSNAME == "hipergator" ]
 then
 	#Tensor Reconstruction
 	echo -e "\nTensor Reconstrunction\n"
 	dwi2tensor dwi_cleaned_resamp.mif -mask brain_mask.mif dti.mif
 	mrconvert dti.mif dti.nii.gz
 	tensor2metric dti.mif -fa fa.nii.gz
-	cp /home/mphook/blue_butsonc/mphook/MRtrix/dtiConverter.py .
 	module load python/3.8
-	python dtiConverter.py
+	python ${CODEDIR}/Python/MRtrix/dtiConverter.py
 	cp tensor.nrrd ../Cleaned/tensor.nrrd
 	cp fa.nrrd ../Cleaned/fa.nrrd
 else

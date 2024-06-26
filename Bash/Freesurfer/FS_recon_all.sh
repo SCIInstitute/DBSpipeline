@@ -1,9 +1,15 @@
+. $(dirname $(readlink -f $0))/../../scripts/sysUtils.sh
+
+innitBashPaths
+
 # Run recon-all
 echo $'\nRunning recon-all***************************************************************************************************\n'
 recon-all -s $1 -i $2 -FLAIR $3 -FLAIRpial -3T -all -parallel -openmp 8
 
 subject_id=$1
 home=${PWD}
+
+SUBJECTS_DIR="${FREESURFERDIR}"/Subjects
 
 #Transform heat maps into patient space
 echo $'\nTransforming Cortial Heat Maps to Patient Space**********************************************************************\n'
@@ -25,8 +31,7 @@ done
 
 #Convert vtk to TriSurfField
 echo $'\nConvert Heat Maps to .pts, .fac, and data*****************************************************************************\n'
-cp /mnt/c/Users/Matthew/Dropbox\ \(UFL\)/DataProcessing/Pipeline\ Code/Python/SCIRun/vtk_to_TriSurfField.py vtk_to_TriSurfField.py
-python3 vtk_to_TriSurfField.py
+python3 $CODEDIR/Python/SCIRun/vtk_to_TriSurfField.py
 
 mkdir SCIRun
 mv *.pts ${PWD}/SCIRun

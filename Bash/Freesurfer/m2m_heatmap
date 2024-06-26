@@ -10,10 +10,17 @@
 #SBATCH --mail-user=mphook@ufl.edu
 #SBATCH --output=simnibs_%j.out
 
+. $(dirname $(readlink -f $0))/../../scripts/sysUtils.sh
 
+innitBashPaths
+
+if [ $SYSNAME == "hipergator" ]
+then
 module load fsl
 module load freesurfer/6.0.0
 module load simnibs
+module load python
+fi
 
 set -e
 mri2mesh --all $1 $2 $3 #1 is subject id, 2 is T1_ACPC, 3 is T2_ACPC
@@ -21,7 +28,8 @@ mri2mesh --all $1 $2 $3 #1 is subject id, 2 is T1_ACPC, 3 is T2_ACPC
 m2m_id=$1
 subject_id=fs_${m2m_id}
 home=${PWD}
-SUBJECTS_DIR=/home/mphook/blue_butsonc/mphook/freesurfer/SimNIBS/FS_Subjects
+#SUBJECTS_DIR=/home/mphook/blue_butsonc/mphook/freesurfer/SimNIBS/FS_Subjects
+SUBJECTS_DIR="${FREESURFERDIR}"/Subjects
 
 mv ${home}/${subject_id} $SUBJECTS_DIR
 
@@ -49,9 +57,8 @@ mri_surf2vol --o thresh.nii.gz --subject $subject_id --so lh.pial lh.thresh.mgh 
 
 #Convert vtk to TriSurfField
 echo $'\nConvert Heat Maps to .pts, .fac, and data*****************************************************************************\n'
-cp /home/mphook/blue_butsonc/mphook/freesurfer/vtk_to_TriSurfField.py .
-module load python
-python vtk_to_TriSurfField.py
+
+python $CODEDIR/Python/SCIRun/vtk_to_TriSurfField.py
 
 mkdir SCIRun
 mv *.pts ${PWD}/SCIRun
