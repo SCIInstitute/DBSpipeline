@@ -4,7 +4,7 @@
 
 usage:
 
-python3 makeConnectomeMatrix.py --profile Allprofile.json --assigment "assignment_end_voxels"
+python3 makeConnectomeMatrix.py --profile Allprofile.json --assigment assignment_end_voxels
 
 
 """
