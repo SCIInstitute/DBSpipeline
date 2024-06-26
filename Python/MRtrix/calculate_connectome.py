@@ -82,7 +82,7 @@ def main():
 
 
   data = connect_mat[1:,1:] * mu #Remove unassigned tracts, multiply "Fudge Factor"
-  if np.isnan(ROI_list_left):
+  if True in np.isnan(ROI_list_left):
       #raise Exception('Left region not given. Setting data to 0')
       print('Left region not given. Setting data to 0')
       data_left = np.zeros((1,len(data)))
@@ -91,7 +91,7 @@ def main():
       ROI_list_left = np.array([ROI_list_left]) - 1 #to deal with starting at 1
       data_left = data[:,ROI_list_left]
       
-  if np.isnan(ROI_list_right):
+  if True in np.isnan(ROI_list_right):
       #raise Exception('Right region not given. Setting data to 0')
       print('Right region not given. Setting data to 0')
       data_right = np.zeros((1,len(data)))
