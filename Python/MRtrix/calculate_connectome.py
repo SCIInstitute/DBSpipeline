@@ -88,8 +88,9 @@ def main():
       data_left = np.zeros((1,len(data)))
       ROI_list_left = 0
   else:
-      ROI_list_left = np.array([ROI_list_left]) - 1 #to deal with starting at 1
+      ROI_list_left = np.array(ROI_list_left) - 1 #to deal with starting at 1
       data_left = data[:,ROI_list_left]
+      print(data_left.shape)
       
   if True in np.isnan(ROI_list_right):
       #raise Exception('Right region not given. Setting data to 0')
@@ -97,12 +98,13 @@ def main():
       data_right = np.zeros((1,len(data)))
       ROI_list_right = 0
   else:
-      ROI_list_right = np.array([ROI_list_right]) - 1
+      ROI_list_right = np.array(ROI_list_right) - 1
       data_right = data[:,ROI_list_right]
       
       
       
   ROI_left = np.sum(data_left,axis=1).flatten() #collapse all regions
+  print(ROI_left.shape)
   ROI_right = np.sum(data_right,axis=1).flatten()
   np.savetxt(os.path.join(file_dir, 'ROI_left.txt'), ROI_left,delimiter=',')
   np.savetxt(os.path.join(file_dir, 'ROI_right.txt'), ROI_right,delimiter=',')
