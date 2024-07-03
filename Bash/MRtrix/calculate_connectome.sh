@@ -50,6 +50,7 @@ Help()
    echo "-f  force rerun connectome maker"
    echo "-r  radius of assignment method [3]"
    echo "-t  test run"
+   echo "-e  experiment tag to run"
    echo "-a  assignment method [\"assignment_radial_search 3\"].  options from MRtrix: https://mrtrix.readthedocs.io/en/dev/reference/commands/tck2connectome.html#options"
    echo
 }
@@ -76,6 +77,7 @@ run_loop() {
   local testrun=$4
   local radius=$5
   local mdist=$6
+  local experiment=$7
   
 #  files=($(ls -1 "${DATADIR}/${subject}/${rel_path1}/Stim/HCP_parc_all_"*".nii.gz"))
   
@@ -83,7 +85,7 @@ run_loop() {
 #  subject_path="${DATADIR}/${subject}/${rel_path1}/"
   subject_path="${DATADIR}/${subject}/"
 #  file_pattern="HCP_parc_all_*.nii.gz"
-  file_pattern="*profile.json"
+  file_pattern=$experiment"*profile.json"
 
   
 #  echo ${#files[@]}
@@ -164,6 +166,7 @@ while getopts "hd:s:a:r:tfm:" option; do
       t) testrun=true;;
       f) rerun=true;;
       m) mdist=$OPTARG;;
+      e) experiment=$OPTARG;;
       h | * | :) Help && exit;;
    esac
 done
@@ -214,7 +217,7 @@ then
     then
       subject=$(basename "$sf")
       echo "valid subject: $subject"
-      run_loop "$subject" "$assignment" $rerun $testrun $radius $mdist
+      run_loop "$subject" "$assignment" $rerun $testrun $radius $mdist $experiment
 #    else
 #      echo "skipping $sf"
     fi
@@ -235,7 +238,7 @@ else
     do
       echo "$subject"
       
-      run_loop "$subject" "$assignment" $rerun $testrun $radius $mdist
+      run_loop "$subject" "$assignment" $rerun $testrun $radius $mdist $experiment
 
     done < "$subjects"
   fi
