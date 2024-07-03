@@ -157,7 +157,7 @@ run_loop() {
 testrun=false
 rerun=false
 
-while getopts "hd:s:a:r:tfm:" option; do
+while getopts "hd:s:a:r:tfm:e:" option; do
    case $option in
       d) d_dir=$OPTARG;;
       s) subjects=$OPTARG;;
@@ -178,6 +178,15 @@ then
 fi
 
 echo "$assignment"
+
+
+if [ -z "$experiment" ]
+then
+    echo "running all profiles"
+    experiment=""
+else
+    echo "running experiment profiles with: $experiment"
+fi
 
 if [ -z "$radius" ]
 then
