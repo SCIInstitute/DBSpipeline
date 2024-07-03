@@ -88,8 +88,9 @@ def main():
       data_left = np.zeros((1,len(data)))
       ROI_list_left = 0
   else:
-      ROI_list_left = np.array([ROI_list_left]) - 1 #to deal with starting at 1
+      ROI_list_left = np.array(ROI_list_left) - 1 #to deal with starting at 1
       data_left = data[:,ROI_list_left]
+      print(data_left.shape)
       
   if True in np.isnan(ROI_list_right):
       #raise Exception('Right region not given. Setting data to 0')
@@ -97,12 +98,13 @@ def main():
       data_right = np.zeros((1,len(data)))
       ROI_list_right = 0
   else:
-      ROI_list_right = np.array([ROI_list_right]) - 1
+      ROI_list_right = np.array(ROI_list_right) - 1
       data_right = data[:,ROI_list_right]
       
       
       
   ROI_left = np.sum(data_left,axis=1).flatten() #collapse all regions
+  print(ROI_left.shape)
   ROI_right = np.sum(data_right,axis=1).flatten()
   np.savetxt(os.path.join(file_dir, 'ROI_left.txt'), ROI_left,delimiter=',')
   np.savetxt(os.path.join(file_dir, 'ROI_right.txt'), ROI_right,delimiter=',')
@@ -158,31 +160,29 @@ def main():
   for i in lookup_key["Lookup Index"].tolist():
     label = lookup_main["Labels"].loc[lookup_main["Index"] == i].tolist()[0].split('_')
     try:
-        hemi = label[0]
         name = label[1]
     except:
         name = label[0] #to account for regions that do not have left/right split
-        hemi = ''
     matrix_index = lookup_key["MRtrix Index"].loc[lookup_key['Lookup Index'] == i].tolist()[0] - 1
     if matrix_index in ROI_list_left or matrix_index in ROI_list_right: #Remove connections to itself
         continue
-    
+    #### Add new changes here ####
+    # Keep the loop, but add based on name only
+    # if not in df, include it. If in df, add to existing
+    # same for HCP regions
+    # should keep everything fine unless problem added to lookup table    
     if name not in HCP_regions: #Any non HCP regions
-        if 'L' in hemi:
+        if name in left_region.keys():
+            left_region[name] = left_region[name] + ROI_left[matrix_index]
+            right_region[name] = right_region[name] + ROI_right[matrix_index]
+        else:
             left_region[name] = ROI_left[matrix_index]
-        elif 'R' in hemi:
-            right_region[name] = ROI_right[matrix_index]
-        elif not hemi:
-            left_region[name] = ROI_left[matrix_index] #add midline ROI's to both sides
             right_region[name] = ROI_right[matrix_index]
         continue
     for key in connectome_regions.keys():
         if name in connectome_regions[key]:
-            if 'L' in hemi:
-#                left_region[key] += ROI_left[matrix_index]
-                left_region[key] = left_region[key] + ROI_left[matrix_index]
-            else:
-                right_region[key] = right_region[key] + ROI_right[matrix_index]
+            left_region[key] = left_region[key] + ROI_left[matrix_index]
+            right_region[key] = right_region[key] + ROI_right[matrix_index]
                 
 
 #%%
