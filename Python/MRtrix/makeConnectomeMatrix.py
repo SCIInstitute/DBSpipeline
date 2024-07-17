@@ -74,7 +74,7 @@ def main():
   
   apppath=""
   if os.environ["SYSNAME"] == "hipergator":
-  # hard coded for now. There should be a better way to do this. ugh
+  # TODO: hard coded for now. There should be a better way to do this. ugh
     apppath="/apps/mrtrix/3.0.3/bin/"
   
   cl_call1 = [apppath+"mrtransform",  "-linear", os.path.join(cleantractPath, "ACPC_to_b0.txt"), filepath, os.path.join(connectomePath, hcp_pattern+"b0space.nii.gz"),   "-force"]
