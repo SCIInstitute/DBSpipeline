@@ -1,0 +1,28 @@
+Region,Grouping,Plot
+Primary Visual Cortex,Visual,HCP
+Early Visual Cortex,Visual,HCP
+Dorsal Stream Visual Cortex,Visual,HCP
+Ventral Stream Visual Cortex,Visual,HCP
+MT+ Complex and Neighboring Visual Areas,Visual,HCP
+Somatosensory and Motor Cortex,Mesocircuit,HCP
+Paracentral Lobular and Mid Cingulate Cortex,Mesocircuit,HCP
+Premotor Cortex,Mesocircuit,HCP
+Posterior Opercular Cortex,Auditory,HCP
+Early Auditory Cortex,Auditory,HCP
+Auditory Association Cortex,Auditory,HCP
+Insular and Frontal Opercular Cortex,Mesocircuit,HCP
+Medial Temporal Cortex,Auditory,HCP
+Lateral Temporal Cortex,Auditory,HCP
+Temporo-Parieto-Occipital Junction,Mesocircuit,HCP
+Superior Parietal Cortex,Mesocircuit,HCP
+Inferior Parietal Cortex,Mesocircuit,HCP
+Posterior Cingulate Cortex,Retrospenial/episodic mem,HCP
+Anterior Cingulate and Medial Prefrontal Cortex,Mesocircuit,HCP
+Orbital and Polar Frontal Cortex,Limbic,HCP
+Inferior Frontal Cortex,Limbic,HCP
+DorsoLateral Prefrontal Cortex,Mesocircuit,HCP
+Caudate,Mesocircuit,Subcortex
+Pallidum,Subcortical other,Subcortex
+Putamen,Subcortical other,Subcortex
+Hippocampus,Subcortical other,Subcortex
+Amygdala,Subcortical other,Subcortex
