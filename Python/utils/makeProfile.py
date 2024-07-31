@@ -28,7 +28,7 @@ def build_parser():
                       help="path to profile directory. default location is <datapath>/profiles",
                       dest="profilepath")
   parser.add_argument("-e", "--experiment", required=False,
-                      help="path to experiment profile file. default file found default_experiment_profile.json.",
+                      help="path (relative to profilepath or absolute) to experiment profile file. default file found default_experiment_profile.json.",
                       dest="experimentfile", default = os.path.join(scriptpath, "default_experiment_profile.json" ))
   return parser
   
@@ -60,8 +60,33 @@ def check_parser(args):
     args.profilepath = os.path.join(datapath, "profiles")
     if os.path.exists(args.profilepath):
       os.makedirs(args.profilepath)
+  
+  experimentfile = args.experimentfile
+  if not os.path.exists(args.experimentfile):
+    args.experimentfile = os.path.abspath(args.experimentfile)
+    if not os.path.exists(args.experimentfile):
+      args.experimentfile = os.path.join(args.profilepath, args.experimentfile)
+    else:
+      raise ValueError("cannot file experiment file "+experimentfile+" or "+ args.experimentfile)
       
   return args
+  
+def readExperimentFile(args):
+  with open(experimentfile, 'r') as json_file:
+    experiment = json.load(json_file)
+    
+  check_experiment(experiment, args)
+  
+  return experiment
+  
+def check_experiment(experiment, args):
+  
+  required_fields = ["experiment_name", "subjects", "lookup_table", "left_ROI", "right_ROI"]
+  
+  for key in required_fields:
+    
+  
+  
 
 def main():
 
@@ -69,7 +94,7 @@ def main():
   args = parser.parse_args()
   args = check_parser(args)
   
-  
+  experiment = readExperimentFile(arg.experimentfile)
     
   
     
