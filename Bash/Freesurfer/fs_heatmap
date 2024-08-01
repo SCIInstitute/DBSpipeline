@@ -41,7 +41,7 @@ set -e
 echo recon-all -s "${1}" -i "${2}" -all -parallel -openmp 8
 
 # comment out this line to make faster
-#recon-all -s "${1}" -i "${2}" -all -parallel -openmp 8 #-FLAIR $3 -FLAIRpial
+recon-all -s "${1}" -i "${2}" -all -parallel -openmp 8 #-FLAIR $3 -FLAIRpial
 
 m2m_id="$1"
 subject=${m2m_id}
@@ -112,7 +112,7 @@ module load mrtrix
 fi
 
 mrconvert -datatype uint32 ${subject}_HCP.mgz ${subject}_HCP.mif -force
-labelconvert ${subject}_HCP.mif ${CODEDIR}/Bash/Freesurfer/hcpmmp1_original.txt ${CODEDIR}/Bash/Freesurfer/hcpmmp1_ordered_edited.txt ${DATADIR}/${subject_LO}/${rel_path3}/HCP_FS.nii.gz
+labelconvert ${subject}_HCP.mif ${CODEDIR}/Bash/Freesurfer/hcpmmp1_original.txt ${CODEDIR}/Bash/Freesurfer/hcpmmp1_subcortex.txt ${DATADIR}/${subject_LO}/${rel_path3}/HCP_FS.nii.gz
 
 echo $'\n\n******************Done!****************\n\n'
 
