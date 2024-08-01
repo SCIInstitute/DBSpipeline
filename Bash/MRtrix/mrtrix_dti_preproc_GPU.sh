@@ -226,10 +226,12 @@ then
 	dwi2tensor dwi_cleaned_resamp.mif -mask brain_mask.mif dti.mif
 	mrconvert dti.mif dti.nii.gz
 	tensor2metric dti.mif -fa fa.nii.gz
-	module load python/3.8
-	python ${CODEDIR}/Python/MRtrix/dtiConverter.py
-	cp tensor.nrrd ../Cleaned/tensor.nrrd
-	cp fa.nrrd ../Cleaned/fa.nrrd
+	#module load python/3.8
+	#python ${CODEDIR}/Python/MRtrix/dtiConverter.py
+	#cp tensor.nrrd ../Cleaned/tensor.nrrd
+	#cp fa.nrrd ../Cleaned/fa.nrrd
+	cp dti.nii.gz ../Cleaned/dit.nii.gz
+	cp fa.nii.gz ../Cleaned/fa.nii.gz
 else
 	echo -e "\nNo Tensor Reconstruction\n"
 fi
