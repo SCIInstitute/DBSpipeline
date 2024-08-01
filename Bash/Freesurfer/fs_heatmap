@@ -112,6 +112,7 @@ module load mrtrix
 fi
 
 mrconvert -datatype uint32 ${subject}_HCP.mgz ${subject}_HCP.mif -force
+mkdir -p ${DATADIR}/${subject_LO}/$rel_path3
 labelconvert ${subject}_HCP.mif ${CODEDIR}/Bash/Freesurfer/hcpmmp1_original.txt ${CODEDIR}/Bash/Freesurfer/hcpmmp1_subcortex.txt ${DATADIR}/${subject_LO}/${rel_path3}/HCP_FS.nii.gz
 
 echo $'\n\n******************Done!****************\n\n'
