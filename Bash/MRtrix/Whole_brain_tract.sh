@@ -10,7 +10,7 @@
 #SBATCH --output=tckgen_%j.out
 
 # example call
-# sbatch --mail-user=jess.tate@ufl.edu Whole_brain_tract S1
+# sbatch --mail-user=jess.tate@ufl.edu Whole_brain_tract.sh S1
 
 
 if [[ -z "$SYSNAME" ]]; then
