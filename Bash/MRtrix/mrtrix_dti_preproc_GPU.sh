@@ -12,6 +12,14 @@
 #SBATCH --mail-user=mphook@ufl.edu
 #SBATCH --output=Preproc_%j.out
 
+
+#TODO set this up to run with data going to scratch then move to connectome data location
+# TEMPDIR - scratch
+# DATADIR - permenant location
+
+#TODO check freesurfer file -
+
+
 if [[ -z "$SYSNAME" ]]; then
 echo environment not set.  run makeSysConfig.sh
 exit
@@ -55,10 +63,7 @@ done
 
 set -e #exit on fail
 
-
-set -e
-
-
+# temp dir should go in scratch dir
 mkdir proc_temp
 cp $DWI_up proc_temp/DWI_up.nii.gz
 
@@ -230,11 +235,12 @@ then
 	#python ${CODEDIR}/Python/MRtrix/dtiConverter.py
 	#cp tensor.nrrd ../Cleaned/tensor.nrrd
 	#cp fa.nrrd ../Cleaned/fa.nrrd
-	cp dti.nii.gz ../Cleaned/dit.nii.gz
+	cp dti.nii.gz ../Cleaned/dti.nii.gz
 	cp fa.nii.gz ../Cleaned/fa.nii.gz
 else
 	echo -e "\nNo Tensor Reconstruction\n"
 fi
+
 
 echo -e "\nCopying Files\n"
 mrconvert brain_mask.mif brain_mask.nii.gz
