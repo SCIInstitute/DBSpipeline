@@ -87,6 +87,8 @@ tmp_dir=$TEMPDIR/$SID/proc_temp
 mkdir -p tmp_dir
 cp $DWI_up $tmp_dir/DWI_up.nii.gz
 
+cwd=$PWD
+
 
 
 
@@ -110,7 +112,6 @@ else
 	cp $bvec_PA $tmp_dir/dwi_PA.bvec
 fi
 cp $T1 $tmp_dir/T1_ACPC.nii.gz
-cd $tmp_dir
 
 if [ $SYSNAME == "hipergator" ]
 then
@@ -119,6 +120,10 @@ then
 else
 	echo -e "\nUse on local computer\n"
 fi
+
+# I think the rest of the script assumes the location is the temp dir
+cd $tmp_dir
+
 script=${CODEDIR}/Python/MRtrix/FSL_Slice_leveler.py
 
 python $script
@@ -290,7 +295,8 @@ cp ACPC_to_b0_mrtrix.txt $clean_dir/ACPC_to_b0.txt
 cp b0_to_ACPC_mrtrix.txt $clean_dir/b0_to_ACPC.txt
 cp T1_ACPC.nii.gz $clean_dir/T1_ACPC.nii.gz
 
-cd ..
+cd $cwd
+
 echo -e "\n\nPreprocessing done, ready for tckgen\n\n"
 
 
