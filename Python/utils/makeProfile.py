@@ -84,8 +84,65 @@ def check_experiment(experiment, args):
   required_fields = ["experiment_name", "subjects", "lookup_table", "left_ROI", "right_ROI"]
   
   for key in required_fields:
-    
+    if not key in experiment:
+      raise ValueError("Required experiment inputs:", ", ".join(required_fields))
   
+  print(print_folder(args.datapath))
+      
+  for sub in subjects:
+    sub_dir = os.path.join(args.datapath, sub)
+    missing = []
+    if not os.path.exists(sub_dir):
+      missing.append(sub)
+    else:
+      #TODO: check file structure
+      subfolders = get_contents(sub_dir)
+      
+   if len(missing)>0:
+      raise ValueError("One or more subjects provided in experiment profile are missing")
+    
+    
+  return True
+  
+def fast_scandir(dirname):
+  subfolders= [f.path for f in os.scandir(dirname) if f.is_dir()]
+  for dirname in list(subfolders):
+    subfolders.extend(fast_scandir(dirname))
+  return subfolders
+
+def get_contents(directory):
+  #test_content = get_contents(sub_dir)
+  parent, folder = os.path.split(directory)
+  children = os.listdir(directory)
+  files={}
+  directories = {}
+  for child in children:
+    if child[0]==".":
+      continue
+    child_path = os.path.join(directory, child)
+    if os.path.isdir(child_path):
+      directories[child] = get_contents(child_path)
+    else:
+#      files.append((child, os.path.getsize(child_path)))
+      files[child] = {
+          "size" : os.path.getsize(child_path),
+          "time" : os.path.getmtime(child_path)
+      }
+    contents = {"files" : files, "directories" :  directories}
+#  output = {"path" : parent, folder : contents}
+  return contents
+  
+def print_folder(directory):
+  parent, folder = os.path.split(directory)
+  
+  contents = get_contents(directory)
+  
+  return string
+
+def print_contents(contents, indent = 2):
+  
+  output_string = ""
+  for
   
 
 def main():
@@ -95,38 +152,44 @@ def main():
   args = check_parser(args)
   
   experiment = readExperimentFile(arg.experimentfile)
-    
+  
   
     
+if __name__ == "__main__":
+    main()
     
 
-if os.path.exists(profile_file):
-  with open(profile_file, 'r') as json_file:
-    profile = json.load(json_file)
-else:
-  profile = {}
 
-profile["subject"] = "S1"
-profile["experiment"]  ="All"
-profile["profile_file"]= profile_file
+#if os.path.exists(profile_file):
+#  with open(profile_file, 'r') as json_file:
+#    profile = json.load(json_file)
+#else:
+#  profile = {}
+#
+#profile["subject"] = "S1"
+#profile["experiment"]  ="All"
+#profile["profile_file"]= profile_file
+#
+#profile["lookup_table"] = os.path.join(os.environ["DATADIR"], "connectome_lookup_all.csv")
+#profile["rootpath"] = os.path.join(os.environ["DATADIR"],"S1")
+#profile["segPath"] = os.path.join(profile["rootpath"], "Segmentations")
+#profile["connectomePath"] = os.path.join(profile["rootpath"], "Connectome")
+#profile["tractographyPath"] = os.path.join(profile["rootpath"], "Tractography")
+#profile["cleantractPath"] = os.path.join(profile["tractographyPath"], "Cleaned")
+#profile["fibertractPath"] = os.path.join(profile["tractographyPath"], "Cleaned", "Fibers")
+#
+## need to find a way to make this more consistent
+## for calculate_connectome.py
+## from matrix key
+#profile["left_ROI"] =  [ 1001 ]
+#profile["right_ROI"] = [ 1016 ]
+#
+#
+#
+#
+#
+#with open(profile_file, 'w') as fp:
+#    json.dump(profile, fp)
 
-profile["lookup_table"] = os.path.join(os.environ["DATADIR"], "connectome_lookup_all.csv")
-profile["rootpath"] = os.path.join(os.environ["DATADIR"],"S1")
-profile["segPath"] = os.path.join(profile["rootpath"], "Segmentations")
-profile["connectomePath"] = os.path.join(profile["rootpath"], "Connectome")
-profile["tractographyPath"] = os.path.join(profile["rootpath"], "Tractography")
-profile["cleantractPath"] = os.path.join(profile["tractographyPath"], "Cleaned")
-profile["fibertractPath"] = os.path.join(profile["tractographyPath"], "Cleaned", "Fibers")
-
-# need to find a way to make this more consistent
-# for calculate_connectome.py
-# from matrix key
-profile["left_ROI"] =  [ 1001 ]
-profile["right_ROI"] = [ 1016 ]
 
 
-
-
-
-with open(profile_file, 'w') as fp:
-    json.dump(profile, fp)
