@@ -10,8 +10,13 @@
 #SBATCH --mail-user=mphook@ufl.edu
 #SBATCH --output=simnibs_%j.out
 
-. ./sysUtils.sh
-innitBashPaths
+# . ./sysUtils.sh
+# innitBashPaths
+
+if [[ -z "$SYSNAME" ]]; then
+echo environment not set.  run makeSysConfig.sh
+exit
+fi
 
 if [ $SYSNAME == "hipergator" ]
 then
