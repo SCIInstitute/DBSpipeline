@@ -76,7 +76,7 @@ fi
 
 
 # TEMPDIR is scratch dir root.  Probably shouldn't be made automatically
-if [ -d $TEMPDIR ]
+if [ ! -d $TEMPDIR ]
 then
   echo "trying to use $TEMPDIR for temp files, but it doesn't exist."
   echo "please check env variables and//or run makeSysConfig.sh"
