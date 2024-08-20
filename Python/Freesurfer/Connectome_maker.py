@@ -28,21 +28,12 @@ def build_parser():
                 )
 
   # This will be implemented as rollout broadens
-  parser.add_argument("-p", "--profile", required=False,
+  parser.add_argument("-p", "--profile", required=True,
                       help="profile filename",
                       dest="profile")
-  parser.add_argument("-s", "--subject", required=False,
-                      help="subject to run.  cannot be used with --profile",
-                      dest="subject")
-  parser.add_argument("-l", "--lookup", required=False,
-                      help="lookup table to use.  cannot be used with --profile",
-                      dest="lookup_file")
-  parser.add_argument("-e", "--experiment", required=False,
-                      help="experiment lable.  cannot be used with --profile",
-                      dest="experiment")
-  parser.add_argument("-f", "--force", required=False,
-                      help="force a rewrite of files",
-                      action = "store_true", dest="rerun")
+  parser.add_argument("-s", "--stim", required=False,
+                      help="include stimulations",
+                      action = "store_true", dest="stim")
   return parser
 
 
@@ -50,43 +41,79 @@ def build_parser():
 default_lookup = os.path.join(os.environ["CODEDIR"], 'Bash/Freesurfer/connectome_lookup_v1.csv')
 default_experiment=""
 
+def append_lookup_file(lookup, profile, **kwargs):
+  # stim regions will start with 2000s?
+  default_kwargs = { "begin_idx" : 2000 }
+  kwargs = { **default_kwargs, **kwargs }
+ 
+  begin_idx = kwargs["begin_idx"]
+
+  experiment = profile["experiment"]
+  stim_table = pd.read_csv(profile["stim_table"],index_col=False)
+  stim_out = os.path.join(profile["connectomePath"], "Stim_volumes")
+  
+  if not os.path.exists(stim_out):
+    os.makedirs(stim_out)
+  
+  stim_output_files = {"lookup_tables" : [], "nifti_lookup_outfiles" : [], "nifti_outputfiles" : [], "matkey_outputname" : [], "ROIs" : [] }
+
+  stim_tags =  []
+  for row in stim_table.iterrows():
+    stim_string = "stim_"+str(row[0])+"-"
+    stim_fnames = []
+    stim_labels = []
+    for stim_key, stim_fname in row[1].items():
+      stim_fnames.append(stim_fname)
+      sfroot, ext = os.path.splitext(stim_fname)
+      stript_sfroot = "_".join([ t for t in sfroot.split("_") if not ("stim".casefold() in t.casefold() or  stim_key.casefold() in t.casefold()) ])
+      stim_labels.append(stim_key[0] + "_" + stript_sfroot)
+      stim_string+=stim_key + "_" + stript_sfroot + "-"
+      
+    stim_lookup_fname = os.path.join(stim_out, "connectome_lookup_"+stim_string+".csv")
+    stim_output_files["lookup_tables"].append(stim_lookup_fname)
+    stim_tags.append(stim_string)
+    
+    ROIs = list(range(begin_idx, begin_idx+len(stim_fnames)))
+    stim_output_files["ROIs"] = ROIs
+
+    stim_output_files["nifti_lookup_outfiles"].append( os.path.join(profile["connectomePath"], "HCP_parc_all_"+experiment+"_"+stim_string+"_lookup.nii.gz"))
+    stim_output_files["nifti_outputfiles"].append( os.path.join(profile["connectomePath"], "HCP_parc_all_"+experiment+"_"+stim_string+".nii.gz"))
+    stim_output_files["matkey_outputname"].append(os.path.join(profile["connectomePath"], "MRtrix_index_key_"+experiment+"_"+stim_string+".csv"))
+    
+    stim_dict = {
+              "Index" : ROIs,
+              "Labels" : stim_labels,
+              "Filename" : stim_fnames,
+              "File Index" : [1]*len(stim_fnames),
+              "Path" : "Stim_volumes",
+    }
+    
+    pd.concat((lookup, pd.DataFrame(stim_dict)), ignore_index=True).to_csv(stim_lookup_fname)
+    
+    
+  return stim_output_files
+    
+
+
 def main():
 
   parser = build_parser()
   args = parser.parse_args()
   
-  if args.profile:
-    with open(args.profile, 'r') as js_file:
-      profile = json.load(js_file)
-      
-    subject= profile["subject"]
-    experiment = profile["experiment"]
-    lookup_file = profile["lookup_table"]
-  else:
-    subject = args.subject
-
-    if args.lookup_file:
-      lookup_file = args.lookup_file
-    else:
-      lookup_file = default_lookup
-      
-    if args.experiment:
-      experiment = args.experiment
-    else:
-      experiment = default_experiment
-      
-    if os.environ["SYSNAME"]=="hipergator":
-      rel_path1 = "Connectome"
-      rel_path2 = "Tractography"
-      rel_path3 = "Segmentations"
-    else:
-      rel_path1 = "MRtrix/Connectome"
-      rel_path2 = "MRtrix/Tractography"
-      rel_path3 = "MRtrix/Segmentations"
+  
+  with open(args.profile, 'r') as js_file:
+    profile = json.load(js_file)
     
-    filepath = os.path.join(os.environ["DATADIR"],subject.rstrip())
-    segPath = os.path.join(filepath , rel_path3)
+  subject= profile["subject"]
+  experiment = profile["experiment"]
+  lookup_file = profile["lookup_table"]
 
+  if args.stim:
+    if "stim_table" in profile.keys():
+      if not os.path.exists(profile["stim_table"]):
+        raise ValueError("cannot find stimulation table: "+profile["stim_table"])
+    else:
+      raise ValueError("Cannot run --stim (-s) option without stimulation table filepath (profile['stim_table'])")
 
   if not subject:
     print("need subject string")
@@ -95,6 +122,8 @@ def main():
 
   print(lookup_file)
   lookup = pd.read_csv(lookup_file,index_col=False)
+  
+  
 
   print(experiment)
 
@@ -126,9 +155,21 @@ def main():
       print("output files exist.  Use '-f' to force overwrite")
       return
       
+  if arg.stim:
     
-  
-
+    stim_output_files = append_lookup(lookup, profile)
+    
+    stim_out_check = [  os.path.exists(f_name )  for f_var, fn_list in stim_output_files.items() if not f_var=="ROIs" for f_name in fn_list  ]
+    
+    if all(stim_out_check):
+      print("stim files all exist")
+      print(args.rerun)
+      if args.rerun:
+        print("overwriting stim output files")
+      else:
+        print("stim output files exist.  Use '-f' to force overwrite")
+        return
+    
   seg_files = lookup['Filename'].unique()
   #seg_dirs = lookup['Path'].unique()
   seg_dirs = lookup['Path'][lookup['Filename'] == seg_files[0]].unique()[0]
