@@ -252,7 +252,7 @@ transformconvert b0_to_ACPC.txt itk_import b0_to_ACPC_mrtrix.txt
 
 sub_dir=$DATADIR/$SID
 
-if [ -d $sub_dir ]
+if [ ! -d $sub_dir ]
 then
   echo "making subject dir: $sub_dir"
   echo "This is not normally supposed to happen.  Please check files, environments, and inputs"
