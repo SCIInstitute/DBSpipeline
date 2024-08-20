@@ -12,6 +12,11 @@
 #SBATCH --mail-user=mphook@ufl.edu
 #SBATCH --output=Preproc_%j.out
 
+
+
+#TODO check freesurfer file -
+
+
 if [[ -z "$SYSNAME" ]]; then
 echo environment not set.  run makeSysConfig.sh
 exit
@@ -21,7 +26,7 @@ Help()
 {
    # Display Help
    echo
-   echo "Syntax: scriptTemplate [-h|u|d|l|c|a|e|f|t|s]"
+   echo "Syntax: scriptTemplate [-h|u|d|l|c|a|e|f|t|s|:]"
    echo "options:"
    echo "-h    Help "
    echo "-u    DWI_up, pass as string *Required "
@@ -33,12 +38,13 @@ Help()
    echo "-f    Freesurfer Subject ID"
    echo "-t    T1 in ACPC space *Required"
    echo "-s    Use in Slurm/HiPerGator (y)"
+   echo "-i    Subject ID"
    echo
 }
 
 
 # Get the options
-while getopts ":h:u:d:l:c:a:e:f:t:s:" option; do
+while getopts ":h:u:d:l:c:a:e:f:t:s:i:" option; do
    case $option in
       u) DWI_up=$OPTARG;;
       d) DWI_down=$OPTARG;;
@@ -49,40 +55,63 @@ while getopts ":h:u:d:l:c:a:e:f:t:s:" option; do
       f) FSID=$OPTARG;;
       t) T1=$OPTARG;;
       s) slurm=$OPTARG;;
+      i) SID=$OPTARG;;
       h | * | :) Help && exit;;
    esac
 done
 
 set -e #exit on fail
 
+if [ -z "$SID" ]
+then
+  if [ -z "$FSID" ]
+  then
+    echo "no subject ID or FSID.  Using 'temp' for directory name"
+    SID="temp"
+  else
+    SID=${FSID#fs_}
+    echo "no subject ID.  Used FSID to get: $SID"
+  fi
+fi
 
-set -e
+
+# TEMPDIR is scratch dir root.  Probably shouldn't be made automatically
+if [ ! -d $TEMPDIR ]
+then
+  echo "trying to use $TEMPDIR for temp files, but it doesn't exist."
+  echo "please check env variables and//or run makeSysConfig.sh"
+  exit
+fi
+
+tmp_dir=$TEMPDIR/$SID/proc_temp
+mkdir -p tmp_dir
+cp $DWI_up $tmp_dir/DWI_up.nii.gz
+
+cwd=$PWD
 
 
-mkdir proc_temp
-cp $DWI_up proc_temp/DWI_up.nii.gz
+
 
 #Check for reverse phase
 if [ -z "$DWI_down" ]
 then
         echo -e "\n\nNo Reverse Phase given, changing methods. **Warning** This will decrease quality\n\n"
 else
-	cp $DWI_down proc_temp/DWI_down.nii.gz
+	cp $DWI_down $tmp_dir/DWI_down.nii.gz
 fi
 
-cp $dwi_bval proc_temp/dwi.bval
-cp $dwi_bvec proc_temp/dwi.bvec
+cp $dwi_bval $tmp_dir/dwi.bval
+cp $dwi_bvec $tmp_dir/dwi.bvec
 if [ -z "$bval_PA" ]
 then
 	echo -e "\nbval and bvec should match for both directions\n"
-	cp $dwi_bval proc_temp/dwi_PA.bval
-	cp $dwi_bvec proc_temp/dwi_PA.bvec
+	cp $dwi_bval $tmp_dir/dwi_PA.bval
+	cp $dwi_bvec $tmp_dir/dwi_PA.bvec
 else
-	cp $bval_PA proc_temp/dwi_PA.bval
-	cp $bvec_PA proc_temp/dwi_PA.bvec
+	cp $bval_PA $tmp_dir/dwi_PA.bval
+	cp $bvec_PA $tmp_dir/dwi_PA.bvec
 fi
-cp $T1 proc_temp/T1_ACPC.nii.gz
-cd proc_temp
+cp $T1 $tmp_dir/T1_ACPC.nii.gz
 
 if [ $SYSNAME == "hipergator" ]
 then
@@ -91,6 +120,10 @@ then
 else
 	echo -e "\nUse on local computer\n"
 fi
+
+# I think the rest of the script assumes the location is the temp dir
+cd $tmp_dir
+
 script=${CODEDIR}/Python/MRtrix/FSL_Slice_leveler.py
 
 python $script
@@ -216,8 +249,20 @@ lta_convert --inlta b0_to_T1.lta --outitk b0_to_ACPC.txt
 transformconvert ACPC_to_b0.txt itk_import ACPC_to_b0_mrtrix.txt
 transformconvert b0_to_ACPC.txt itk_import b0_to_ACPC_mrtrix.txt
 
-echo -e "\nCreating Output Directory called 'Cleaned'\n"
-mkdir ../Cleaned
+
+sub_dir=$DATADIR/$SID
+
+if [ -d $sub_dir ]
+then
+  echo "making subject dir: $sub_dir"
+  echo "This is not normally supposed to happen.  Please check files, environments, and inputs"
+  mkdir - p $sub_dir
+fi
+  
+
+clean_dir=$sub_dir/Tractography/Cleaned
+echo -e "\nCreating Output Directory: $clean_dir\n"
+mkdir -p $clean_dir
 
 if [ $SYSNAME == "hipergator" ]
 then
@@ -228,28 +273,30 @@ then
 	tensor2metric dti.mif -fa fa.nii.gz
 	#module load python/3.8
 	#python ${CODEDIR}/Python/MRtrix/dtiConverter.py
-	#cp tensor.nrrd ../Cleaned/tensor.nrrd
-	#cp fa.nrrd ../Cleaned/fa.nrrd
-	cp dti.nii.gz ../Cleaned/dit.nii.gz
-	cp fa.nii.gz ../Cleaned/fa.nii.gz
+	#cp tensor.nrrd $clean_dir/tensor.nrrd
+	#cp fa.nrrd $clean_dir/fa.nrrd
+	cp dti.nii.gz $clean_dir/dti.nii.gz
+	cp fa.nii.gz $clean_dir/fa.nii.gz
 else
 	echo -e "\nNo Tensor Reconstruction\n"
 fi
 
+
 echo -e "\nCopying Files\n"
 mrconvert brain_mask.mif brain_mask.nii.gz
 mrconvert dwi_cleaned_resamp.mif dwi_cleaned.nii.gz
-cp brain_mask.nii.gz ../Cleaned/brain_mask.nii.gz
-cp b0_hifi.nii.gz ../Cleaned/b0_hifi.nii.gz
-cp dwi_cleaned.nii.gz ../Cleaned/dwi_cleaned.nii.gz
-cp dwi_cleaned_resamp.mif ../Cleaned/dwi_cleaned.mif
-cp wmfod_norm.mif ../Cleaned/wmfod_norm.mif
-cp T1_5tt_b0space.nii.gz ../Cleaned/T1_5tt.nii.gz
-cp ACPC_to_b0_mrtrix.txt ../Cleaned/ACPC_to_b0.txt
-cp b0_to_ACPC_mrtrix.txt ../Cleaned/b0_to_ACPC.txt
-cp T1_ACPC.nii.gz ../Cleaned/T1_ACPC.nii.gz
+cp brain_mask.nii.gz $clean_dir/brain_mask.nii.gz
+cp b0_hifi.nii.gz $clean_dir/b0_hifi.nii.gz
+cp dwi_cleaned.nii.gz $clean_dir/dwi_cleaned.nii.gz
+cp dwi_cleaned_resamp.mif $clean_dir/dwi_cleaned.mif
+cp wmfod_norm.mif $clean_dir/wmfod_norm.mif
+cp T1_5tt_b0space.nii.gz $clean_dir/T1_5tt.nii.gz
+cp ACPC_to_b0_mrtrix.txt $clean_dir/ACPC_to_b0.txt
+cp b0_to_ACPC_mrtrix.txt $clean_dir/b0_to_ACPC.txt
+cp T1_ACPC.nii.gz $clean_dir/T1_ACPC.nii.gz
 
-cd ..
+cd $cwd
+
 echo -e "\n\nPreprocessing done, ready for tckgen\n\n"
 
 

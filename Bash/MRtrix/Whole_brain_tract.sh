@@ -14,13 +14,13 @@
 
 
 if [[ -z "$SYSNAME" ]]; then
-echo environment not set.  run makeSysConfig.sh
-exit
+  echo environment not set.  run makeSysConfig.sh
+  exit
 fi
 
 if [[ -z $1 ]]; then
-echo required input: subject name
-exit
+  echo required input: subject name
+  exit
 fi
 
 dryrun=false
@@ -30,8 +30,8 @@ sub_dir="${DATADIR}/${subject}"
 
 if [ ! -d "$sub_dir" ]
 then
-echo "Subject directory does not exist: ${sub_dir}"
-exit
+  echo "Subject directory does not exist: ${sub_dir}"
+  exit
 fi
 
 
