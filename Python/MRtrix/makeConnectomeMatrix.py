@@ -46,31 +46,21 @@ def build_parser():
   parser.add_argument("-d", "--distance", required=False,
                       help="Assignment max distance for MRtrix.  works only with assignment_reverse_search and assignment_forward_search",
                       dest="distance", default=default_distance, type=int)
+                      
+  parser.add_argument("-s", "--stim", required=False,
+                      help="include stimulations",
+                      action = "store_true", dest="stim")
   return parser
+
+def run_connectome_matrix(connectome_matrix, input_file, lookup_table,  experiment, profile, assignment, radius, distance):
   
-
-def main():
-
-  parser = build_parser()
-  args = parser.parse_args()
-#print(args.subject, args.ROI_list_left, args.ROI_list_right)
-
-  with open(args.profile, 'r') as js_file:
-    profile = json.load(js_file)
-    
   subject= profile["subject"]
-  experiment = profile["experiment"]
-  lookup_table = profile["lookup_table"]
   connectomePath = profile["connectomePath"]
   fibertractPath = profile["fibertractPath"]
   cleantractPath = profile["cleantractPath"]
-    
+   
   file_dir = profile["tractographyPath"]
-
-  assignment = args.assignment
-    
-  filename = hcp_pattern+experiment+".nii.gz"
-  filepath = os.path.join(connectomePath,filename)
+  
   
   apppath=""
   if os.environ["SYSNAME"] == "hipergator":
@@ -81,28 +71,73 @@ def main():
   print(" ".join(cl_call1))
   subprocess.run(cl_call1)
   
-  connectome_matrix=os.path.join(connectomePath, "connectome_matrix_" + experiment + ".csv")
+  
   print(connectome_matrix)
   print(assignment)
   cl_call2 = [apppath+"tck2connectome", os.path.join(fibertractPath, "whole_brain_fibers.tck"), os.path.join(connectomePath, hcp_pattern+"b0space.nii.gz"), connectome_matrix,  "-tck_weights_in", os.path.join(fibertractPath, "sift2_weights.txt"),   "-keep_unassigned",  "-out_assignments", os.path.join(cleantractPath, "assignments_" + experiment + ".txt"),  "-force", "-symmetric" ]
   
   cl_call2.append("-"+assignment)
   if assignment == "assignment_radial_search":
-    cl_call2.append(str(args.radius))
+    cl_call2.append(str(radius))
   elif assignment == "assignment_forward_search" or assignment == "assignment_reverse_search":
-    cl_call2.append(str(args.distance))
+    cl_call2.append(str(distance))
     
       #-scale_invlength \
       #-scale_invnodevol
   print(" ".join(cl_call2))
   subprocess.run(cl_call2)
-      
- 
+  
+  return
+
+
+def main():
+
+  parser = build_parser()
+  args = parser.parse_args()
+#print(args.subject, args.ROI_list_left, args.ROI_list_right)
+
+  with open(args.profile, 'r') as js_file:
+    profile = json.load(js_file)
+    
+  experiment = profile["experiment"]
+  connectome_matrix=os.path.join(connectomePath, "connectome_matrix_" + experiment + ".csv")
+  lookup_table = profile["lookup_table"]
+  
+  if "Connectome_maker" in profile.keys():
+    filepath = profile["Connectome_maker"]["Output_files"]["nifti_outputfile"]
+  else:
+    filename = hcp_pattern+experiment+".nii.gz"
+    filepath = os.path.join(connectomePath,filename)
+  
+  run_connectome_matrix(connectome_matrix, filepath, lookup_table,  experiment, profile, args.assignment, args.radius, args.distance)
+  
   #setup output files for saving
   profile["makeConnectomeMatrix"] = { "Output_files":
-        {"connectome_matrix" : connectome_matrix
-        }
+        {"connectome_matrix" : connectome_matrix }
   }
+  
+  if args.stim:
+    if not "stim" in profile.keys():
+      raise valueError("--stim flag (-s) used, but previous outputs are missing.  Please run Connectome_maker.py")
+      
+    stim_tags = profile["stim"]["Connectome_maker"]["stim_tags"]
+    stim_ROIs = profile["stim"]["Connectome_maker"]["ROIs"]
+    stim_inputs = profile["stim"]["Connectome_maker"]["Output_files"]["nifti_outputfile"]
+    stim_lookup_tables = profile["stim"]["Connectome_maker"]["Output_files"]["lookup_tables"]
+    stim_connectome_matrices = []
+    for idx in range(len(stim_tags)):
+      stim_experiment = experiment+"_"+stim_tags[idx]
+      stim_conn_mat=os.path.join(connectomePath, "Stim_volumes", "connectome_matrix_" + stim_experiment + ".csv")
+      
+      run_connectome_matrix(stim_conn_mat, stim_inputs[k], stim_lookup_table[k],  stim_experiment, profile, args.assignment, args.radius, args.distance)
+      
+      stim_connectome_matrices.append(stim_conn_mat)
+      
+    profile["stim"]["makeConnectomeMatrix"] = { "Output_files":
+        {"connectome_matrix" : stim_connectome_matrices }
+    }
+    
+    
   
   with open(args.profile, 'w') as fp:
     json.dump(profile, fp)

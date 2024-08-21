@@ -42,8 +42,9 @@ default_lookup = os.path.join(os.environ["CODEDIR"], 'Bash/Freesurfer/connectome
 default_experiment=""
 
 def append_lookup_file(lookup, profile, **kwargs):
-  # stim regions will start with 2000s?
-  default_kwargs = { "begin_idx" : 2000 }
+  # stim regions will start with 3000s?
+  # always want the stim regions to go last because of overwriting
+  default_kwargs = { "begin_idx" : 3000 }
   kwargs = { **default_kwargs, **kwargs }
  
   begin_idx = kwargs["begin_idx"]
@@ -73,6 +74,7 @@ def append_lookup_file(lookup, profile, **kwargs):
     stim_output_files["lookup_tables"].append(stim_lookup_fname)
     stim_tags.append(stim_string)
     
+    # TODO: ROIs need to be index of the connectome matrix, not the lookup table
     ROIs = list(range(begin_idx, begin_idx+len(stim_fnames)))
     stim_output_files["ROIs"] = ROIs
 
@@ -89,7 +91,8 @@ def append_lookup_file(lookup, profile, **kwargs):
     }
     
     pd.concat((lookup, pd.DataFrame(stim_dict)), ignore_index=True).to_csv(stim_lookup_fname)
-    
+  
+  stim_output_files["stim_tags"] = stim_tags
     
   return stim_output_files
   
@@ -162,13 +165,6 @@ def main():
   experiment = profile["experiment"]
   lookup_file = profile["lookup_table"]
 
-  if args.stim:
-    if "stim_table" in profile.keys():
-      if not os.path.exists(profile["stim_table"]):
-        raise ValueError("cannot find stimulation table: "+profile["stim_table"])
-    else:
-      raise ValueError("Cannot run --stim (-s) option without stimulation table filepath (profile['stim_table'])")
-
   if not subject:
     print("need subject string")
     quit()
@@ -211,12 +207,17 @@ def main():
       
   table_2_atlas(lookup, profile, output_files )
   profile["Connectome_maker"] = { "Output_files": output_files}
-      
-  if arg.stim:
-    
+  
+  if args.stim:
+    if "stim_table" in profile.keys():
+      if not os.path.exists(profile["stim_table"]):
+        raise ValueError("cannot find stimulation table: "+profile["stim_table"])
+    else:
+      raise ValueError("Cannot run --stim (-s) option without stimulation table filepath (profile['stim_table'])")
+
     stim_output_files = append_lookup(lookup, profile)
     
-    stim_out_check = [  os.path.exists(f_name )  for f_var, fn_list in stim_output_files.items() if not f_var=="ROIs" for f_name in fn_list  ]
+    stim_out_check = [  os.path.exists(f_name )  for f_var, fn_list in stim_output_files.items() if not (f_var=="ROIs" or f_var=="stim_tags") for f_name in fn_list  ]
     
     if all(stim_out_check):
       print("stim files all exist")
@@ -237,7 +238,21 @@ def main():
       
       table_2_atlas(st_lookup, profile, output_files )
     
-    profile["Connectome_maker"]["stim"] = { "Output_files" : stim_output_files}        
+    # TODO: invert structure -- Stim -> connectome_maker
+    if "stim" in profile.keys():
+      profile["stim"]["Connectome_maker"] =
+                            { "Output_files" : stim_output_files,
+                              "ROIs" : stim_output_files["ROIs"],
+                              "stim_tags" : stim_output_files["stim_tags"]
+                            }
+    else:
+      profile["stim"] = { "Connectome_maker" :
+                            { "Output_files" : stim_output_files,
+                              "ROIs" : stim_output_files["ROIs"],
+                              "stim_tags" : stim_output_files["stim_tags"]
+                            }
+                        }
+                      
         
   with open(args.profile, 'w') as fp:
     json.dump(profile, fp)
