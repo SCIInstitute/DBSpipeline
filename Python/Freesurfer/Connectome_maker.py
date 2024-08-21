@@ -92,8 +92,62 @@ def append_lookup_file(lookup, profile, **kwargs):
     
     
   return stim_output_files
-    
+  
+  
+def table_2_atlas(lookup, profile, output_files ):
 
+  seg_files = lookup['Filename'].unique()
+  #seg_dirs = lookup['Path'].unique()
+  seg_dirs = lookup['Path'][lookup['Filename'] == seg_files[0]].unique()[0]
+
+  #Load HCP first always. This will be the reference
+  print(seg_files)
+  HCP = nibabel.load(os.path.join(profile["segPath"], seg_dirs, seg_files[0]))
+  HCP_data = HCP.get_fdata()
+  main_index = np.array(lookup['Index'][lookup['Filename'] == seg_files[0]])
+  local_index = np.array(lookup['File Index'][lookup['Filename'] == seg_files[0]])
+
+  All_data = HCP_data.copy()
+  for i in range(0,len(local_index)):
+      All_data[HCP_data == local_index[i]] = int(main_index[i])
+          
+  #Rest of the data
+  for file in seg_files:
+      seg_dirs = lookup['Path'][lookup['Filename'] == file].unique()[0]
+      main_index = np.array(lookup['Index'][lookup['Filename'] == file])
+      local_index = np.array(lookup['File Index'][lookup['Filename'] == file])
+      
+      img = nibabel.load(os.path.join(profile["segPath"], seg_dirs, file))
+      img_resamp = nibabel.processing.resample_from_to(img, HCP,order=0)
+      img_data = img_resamp.get_fdata()
+      data_add = img_data.copy()
+      for j in range(0,len(local_index)):
+          data_add[img_data == local_index[j]] = int(main_index[j])
+
+      All_data[data_add != 0] = data_add[data_add != 0]
+
+  All_data = All_data.astype(int)
+  All_to_nii = nibabel.Nifti1Image(All_data, HCP.affine, HCP.header)
+  
+  nibabel.save(All_to_nii, output_files["nifti_lookup_outputfile"])
+
+  #Create Key for MRtrix image
+  mrtrix_key = {}
+  mrtrix_key['Lookup Index'] = np.unique(All_data)[1:].tolist()
+  mrtrix_key['MRtrix Index'] = list(range(1,len(np.unique(All_data)[1:].tolist())+1))
+
+  mrtrix_data = All_data.copy()
+  for i in range(0,len(mrtrix_key['Lookup Index'])):
+      mrtrix_data[All_data == mrtrix_key['Lookup Index'][i]] = mrtrix_key['MRtrix Index'][i]
+      
+  mrtrix_to_nii = nibabel.Nifti1Image(mrtrix_data, HCP.affine, HCP.header)
+  nibabel.save(mrtrix_to_nii, output_files["nifti_outputfile"] )
+  mrtrix_save = pd.DataFrame(data=mrtrix_key)
+  
+  mrtrix_save.to_csv(output_files["matkey_outputname"])
+  
+  return
+  
 
 def main():
 
@@ -155,6 +209,9 @@ def main():
       print("output files exist.  Use '-f' to force overwrite")
       return
       
+  table_2_atlas(lookup, profile, output_files )
+  profile["Connectome_maker"] = { "Output_files": output_files}
+      
   if arg.stim:
     
     stim_output_files = append_lookup(lookup, profile)
@@ -170,58 +227,17 @@ def main():
         print("stim output files exist.  Use '-f' to force overwrite")
         return
     
-  seg_files = lookup['Filename'].unique()
-  #seg_dirs = lookup['Path'].unique()
-  seg_dirs = lookup['Path'][lookup['Filename'] == seg_files[0]].unique()[0]
-
-  #Load HCP first always. This will be the reference
-  print(seg_files)
-  HCP = nibabel.load(os.path.join(profile["segPath"], seg_dirs, seg_files[0]))
-  HCP_data = HCP.get_fdata()
-  main_index = np.array(lookup['Index'][lookup['Filename'] == seg_files[0]])
-  local_index = np.array(lookup['File Index'][lookup['Filename'] == seg_files[0]])
-
-  All_data = HCP_data.copy()
-  for i in range(0,len(local_index)):
-      All_data[HCP_data == local_index[i]] = int(main_index[i])
-          
-  #Rest of the data
-  for file in seg_files:
-      seg_dirs = lookup['Path'][lookup['Filename'] == file].unique()[0]
-      main_index = np.array(lookup['Index'][lookup['Filename'] == file])
-      local_index = np.array(lookup['File Index'][lookup['Filename'] == file])
+    for idx in len(stim_output_files["lookup_tables"]):
       
-      img = nibabel.load(os.path.join(profile["segPath"], seg_dirs, file))
-      img_resamp = nibabel.processing.resample_from_to(img, HCP,order=0)
-      img_data = img_resamp.get_fdata()
-      data_add = img_data.copy()
-      for j in range(0,len(local_index)):
-          data_add[img_data == local_index[j]] = int(main_index[j])
-
-      All_data[data_add != 0] = data_add[data_add != 0]
-
-  All_data = All_data.astype(int)
-  All_to_nii = nibabel.Nifti1Image(All_data, HCP.affine, HCP.header)
-  
-  nibabel.save(All_to_nii, nifti_lookup_outputfile)
-
-  #Create Key for MRtrix image
-  mrtrix_key = {}
-  mrtrix_key['Lookup Index'] = np.unique(All_data)[1:].tolist()
-  mrtrix_key['MRtrix Index'] = list(range(1,len(np.unique(All_data)[1:].tolist())+1))
-
-  mrtrix_data = All_data.copy()
-  for i in range(0,len(mrtrix_key['Lookup Index'])):
-      mrtrix_data[All_data == mrtrix_key['Lookup Index'][i]] = mrtrix_key['MRtrix Index'][i]
+      st_lookup = pd.read_csv(stim_output_files["lookup_tables"][idx], index_col=False)
+      st_output_fs = {"nifti_outputfile": stim_output_files["nifti_outputfile"][idx],
+          "nifti_lookup_outputfile" : stim_output_files["nifti_lookup_outputfile"][idx],
+          "matkey_outputname" : stim_output_files["matkey_outputname"][idx]
+      }
       
-  mrtrix_to_nii = nibabel.Nifti1Image(mrtrix_data, HCP.affine, HCP.header)
-  nibabel.save(mrtrix_to_nii, nifti_outputfile )
-  mrtrix_save = pd.DataFrame(data=mrtrix_key)
-  
-  mrtrix_save.to_csv(matkey_outputname)
-  
-  profile["Connectome_maker"] = { "Output_files": output_files}
-        
+      table_2_atlas(st_lookup, profile, output_files )
+    
+    profile["Connectome_maker"]["stim"] = { "Output_files" : stim_output_files}        
         
   with open(args.profile, 'w') as fp:
     json.dump(profile, fp)
