@@ -34,6 +34,9 @@ def build_parser():
   parser.add_argument("-s", "--stim", required=False,
                       help="include stimulations",
                       action = "store_true", dest="stim")
+  parser.add_argument("-f", "--force", required=False,
+                      help="force a rewrite of files",
+                      action = "store_true", dest="rerun")
   return parser
 
 
@@ -74,7 +77,7 @@ def append_lookup_file(lookup, profile, **kwargs):
     stim_output_files["lookup_tables"].append(stim_lookup_fname)
     stim_tags.append(stim_string)
     
-    # TODO: ROIs need to be index of the connectome matrix, not the lookup table
+    # TODO: ROIs need to be index of the connectome matrix, not the lookup table. Also left and right
     ROIs = list(range(begin_idx, begin_idx+len(stim_fnames)))
     stim_output_files["ROIs"] = ROIs
 

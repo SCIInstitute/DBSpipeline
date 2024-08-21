@@ -37,44 +37,21 @@ def build_parser():
   parser.add_argument("-p", "--profile", required=False,
                       help="profile filename",
                       dest="profile")
+  parser.add_argument("-s", "--stim", required=False,
+                      help="include stimulations",
+                      action = "store_true", dest="stim")
+  parser.add_argument("-f", "--force", required=False,
+                      help="force a rewrite of files",
+                      action = "store_true", dest="rerun")
   return parser
-  
 
-def main():
+def run_calc_connectome(df_outputfile, c_matrix, experiment, ROI_list_right_index, ROI_list_left_index, profile["lookup_table"], matkey_outputname,  profile):
 
-  parser = build_parser()
-  args = parser.parse_args()
-#print(args.subject, args.ROI_list_left, args.ROI_list_right)
-
-  if args.profile:
-    with open(args.profile, 'r') as js_file:
-      profile = json.load(js_file)
-      
-    subject= profile["subject"]
-    experiment = profile["experiment"]
-    
-    file_dir = profile["tractographyPath"]
-    
-    ROI_list_right_index = profile["right_ROI"]
-    ROI_list_left_index = profile["left_ROI"]
-    
-    
-#Note: this notebook generates figures the rely on the data being from one region to everywhere else.
-# ROI lists should be related as they will be combined into one region
-
-# ${DATADIR}/${subject}/Connectome/connectome_matrix.csv in calculate_connectome.sh
-#added to input
-  c_matrix = profile["makeConnectomeMatrix"]["Output_files"]["connectome_matrix"]
-
-  if not os.path.exists(c_matrix):
-    c_matrix = os.path.join(profile["connectomePath"], "connectome_matrix.csv")
-    
-    
   connect_mat = np.loadtxt(c_matrix, delimiter=',')
   mu = np.loadtxt(os.path.join(profile["fibertractPath"], 'sift2_mu.txt'))
   
-  lookup_main = pd.read_csv(profile["lookup_table"])
-  lookup_key = pd.read_csv(profile["Connectome_maker"]["Output_files"]["matkey_outputname"])
+  lookup_main = pd.read_csv(lookup_table)
+  lookup_key = pd.read_csv(matkey_outputname)
 
   
   ROI_list_left = lookup_key.loc[lookup_key["Lookup Index"].isin(ROI_list_left_index),'MRtrix Index'].tolist()
@@ -170,7 +147,7 @@ def main():
     # Keep the loop, but add based on name only
     # if not in df, include it. If in df, add to existing
     # same for HCP regions
-    # should keep everything fine unless problem added to lookup table    
+    # should keep everything fine unless problem added to lookup table
     if name not in HCP_regions: #Any non HCP regions
         if name in left_region.keys():
             left_region[name] = left_region[name] + ROI_left[matrix_index]
@@ -189,12 +166,45 @@ def main():
   region_both = {'Region': left_region.keys(),'Left': left_region.values(), 'Right': right_region.values()}
   region_both = [left_region, right_region]
   df_regions = pd.DataFrame(data=region_both)
-  
-  df_outputfile = os.path.join(profile["connectomePath"],'Region_Connectivity_'+experiment+'.csv')
 
   df_regions.to_csv(df_outputfile, index=False)
+  
+  return
 
 
+def main():
+
+  parser = build_parser()
+  args = parser.parse_args()
+#print(args.subject, args.ROI_list_left, args.ROI_list_right)
+
+  if args.profile:
+    with open(args.profile, 'r') as js_file:
+      profile = json.load(js_file)
+      
+    subject= profile["subject"]
+    experiment = profile["experiment"]
+    
+    file_dir = profile["tractographyPath"]
+    
+    ROI_list_right_index = profile["right_ROI"]
+    ROI_list_left_index = profile["left_ROI"]
+    
+    
+#Note: this notebook generates figures the rely on the data being from one region to everywhere else.
+# ROI lists should be related as they will be combined into one region
+
+# ${DATADIR}/${subject}/Connectome/connectome_matrix.csv in calculate_connectome.sh
+#added to input
+  c_matrix = profile["makeConnectomeMatrix"]["Output_files"]["connectome_matrix"]
+  matkey_outputname = profile["Connectome_maker"]["Output_files"]["matkey_outputname"]
+
+  if not os.path.exists(c_matrix):
+    c_matrix = os.path.join(profile["connectomePath"], "connectome_matrix.csv")
+    
+  df_outputfile = os.path.join(profile["connectomePath"],'Region_Connectivity_'+experiment+'.csv')
+    
+  run_calc_connectome(df_outputfile, c_matrix, experiment, ROI_list_right_index, ROI_list_left_index, profile["lookup_table"], matkey_outputname,  profile)
 
   #setup output files for saving
   profile["connectome_connectome"] = { "Output_files":
@@ -204,6 +214,28 @@ def main():
   
   with open(args.profile, 'w') as fp:
     json.dump(profile, fp)
+    
+  if args.stim:
+    if not "stim" in profile.keys():
+      raise valueError("--stim flag (-s) used, but previous outputs are missing.  Please run Connectome_maker.py and makeConnectomeMatrix.py")
+      
+    stim_tags = profile["stim"]["Connectome_maker"]["stim_tags"]
+    stim_ROIs = profile["stim"]["Connectome_maker"]["ROIs"]
+    
+    stim_df_outputfiles=[]
+    for idx in range(len(stim_tags)):
+      stim_experiment = experiment+"_"+stim_tags[idx]
+      stim_df_outputfile = os.path.join(profile["connectomePath"],"Stim_volumes", "Region_Connectivity_"+stim_experiment+".csv")
+      stim_df_outputfiles.append(stim_df_outputfile)
+      
+      c_matrix = profile["stim"]["makeConnectomeMatrix"]["Output_files"]["connectome_matrix"][idx]
+      matkey_outputname = profile["stim"]["Connectome_maker"]["Output_files"]["matkey_outputname"][idx]
+      
+      run_calc_connectome(stim_df_outputfile, c_matrix, stim_experiment, stim_ROIs["Right"][idx], stim_ROIs["left"][idx], profile["lookup_table"], matkey_outputname,  profile)
+      
+    profile["stim"]["connectome_connectome"] = { "Output_files":
+        {"df_outputfile" : stim_df_outputfiles }
+    }
     
 if __name__ == "__main__":
    main()

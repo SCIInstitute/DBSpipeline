@@ -121,7 +121,7 @@ def main():
       raise valueError("--stim flag (-s) used, but previous outputs are missing.  Please run Connectome_maker.py")
       
     stim_tags = profile["stim"]["Connectome_maker"]["stim_tags"]
-    stim_ROIs = profile["stim"]["Connectome_maker"]["ROIs"]
+    
     stim_inputs = profile["stim"]["Connectome_maker"]["Output_files"]["nifti_outputfile"]
     stim_lookup_tables = profile["stim"]["Connectome_maker"]["Output_files"]["lookup_tables"]
     stim_connectome_matrices = []
@@ -129,7 +129,7 @@ def main():
       stim_experiment = experiment+"_"+stim_tags[idx]
       stim_conn_mat=os.path.join(connectomePath, "Stim_volumes", "connectome_matrix_" + stim_experiment + ".csv")
       
-      run_connectome_matrix(stim_conn_mat, stim_inputs[k], stim_lookup_table[k],  stim_experiment, profile, args.assignment, args.radius, args.distance)
+      run_connectome_matrix(stim_conn_mat, stim_inputs[idx], stim_lookup_table[k],  stim_experiment, profile, args.assignment, args.radius, args.distance)
       
       stim_connectome_matrices.append(stim_conn_mat)
       
