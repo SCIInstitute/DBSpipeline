@@ -84,7 +84,7 @@ then
 fi
 
 tmp_dir=$TEMPDIR/$SID/proc_temp
-mkdir -p tmp_dir
+mkdir -p $tmp_dir
 cp $DWI_up $tmp_dir/DWI_up.nii.gz
 
 cwd=$PWD
