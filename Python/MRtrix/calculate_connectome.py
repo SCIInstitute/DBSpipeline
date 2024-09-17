@@ -181,30 +181,34 @@ def main():
         if name in left_region.keys():
             left_region[name] = left_region[name] + ROI_left[matrix_index]
             right_region[name] = right_region[name] + ROI_right[matrix_index]
-            if 'L' in hemi or not hemi:
+            if 'L' == hemi or not hemi:
                left_ips[name] = left_ips[name] + ROI_left[matrix_index]
                right_con[name] = right_con[name] + ROI_right[matrix_index]
-            if 'R' in hemi or not hemi:
+            if 'R' == hemi or not hemi:
                right_ips[name] = right_ips[name] + ROI_right[matrix_index]
                left_con[name] = left_con[name] + ROI_left[matrix_index] 
         else:
             left_region[name] = ROI_left[matrix_index]
             right_region[name] = ROI_right[matrix_index]
-            if 'L' in hemi or not hemi:
+            if 'L' == hemi or not hemi:
                left_ips[name] = ROI_left[matrix_index]
                right_con[name] = ROI_right[matrix_index]
-            if 'R' in hemi or not hemi:
+               right_ips[name] = 0
+               left_con[name] = 0
+            if 'R' == hemi or not hemi:
                right_ips[name] = ROI_right[matrix_index]
                left_con[name] = ROI_left[matrix_index]
+               left_ips[name] = 0
+               right_con[name] = 0
         continue
     for key in connectome_regions.keys():
         if name in connectome_regions[key]:
             left_region[key] = left_region[key] + ROI_left[matrix_index]
             right_region[key] = right_region[key] + ROI_right[matrix_index]
-            if 'L' in hemi or not hemi:
+            if 'L' == hemi or not hemi:
                left_ips[key] = left_ips[key] + ROI_left[matrix_index]
                right_con[key] = right_con[key] + ROI_right[matrix_index]
-            if 'R' in hemi or not hemi:
+            if 'R' == hemi or not hemi:
                right_ips[key] = right_ips[key] + ROI_right[matrix_index]
                left_con[key] = left_con[key] + ROI_left[matrix_index]
                 
