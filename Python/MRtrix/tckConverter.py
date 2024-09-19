@@ -18,7 +18,11 @@ def convertPtsEdges(filename, tract_datafile=None):
     currentEdges = 0
 
     if tract_datafile:
-        original_data = np.loadtxt(tract_datafile, delimiter=",")
+        try:
+            original_data = np.loadtxt(tract_datafile, delimiter=",")
+        except:
+            original_data = np.loadtxt(tract_datafile, delimiter=" ")
+
         tract_data = np.zeros((extractedTckFile.streamlines.total_nb_rows))
         counter = 0
 
