@@ -45,6 +45,9 @@ def build_parser():
                       action = "store_true", dest="rerun")
   return parser
 
+# TODO: debug
+#  |
+#  V
 def run_calc_connectome(df_outputfile, c_matrix, experiment, ROI_list_right_index, ROI_list_left_index, profile["lookup_table"], matkey_outputname,  profile):
 
   connect_mat = np.loadtxt(c_matrix, delimiter=',')
