@@ -132,8 +132,12 @@ def run_calc_connectome(df_outputfile, c_matrix, experiment, ROI_list_right_inde
 
   left_region = region_connectivity.copy()
   left_region["Hemisphere"] = "Left"
+  left_ips = left_region.copy()
+  left_con = left_region.copy()
   right_region = region_connectivity.copy()
   right_region["Hemisphere"] = "Right"
+  right_ips = right_region.copy()
+  right_con = right_region.copy()
 
   HCP_regions = [x for xs in connectome_regions.values() for x in xs] #List of all HCP regions
 
@@ -141,8 +145,10 @@ def run_calc_connectome(df_outputfile, c_matrix, experiment, ROI_list_right_inde
     label = lookup_main["Labels"].loc[lookup_main["Index"] == i].tolist()[0].split('_')
     try:
         name = label[1]
+        hemi = label[0]
     except:
         name = label[0] #to account for regions that do not have left/right split
+        hemi = ''
     matrix_index = lookup_key["MRtrix Index"].loc[lookup_key['Lookup Index'] == i].tolist()[0] - 1
     if matrix_index in ROI_list_left or matrix_index in ROI_list_right: #Remove connections to itself
         continue
@@ -155,14 +161,36 @@ def run_calc_connectome(df_outputfile, c_matrix, experiment, ROI_list_right_inde
         if name in left_region.keys():
             left_region[name] = left_region[name] + ROI_left[matrix_index]
             right_region[name] = right_region[name] + ROI_right[matrix_index]
+            if 'L' == hemi or not hemi:
+               left_ips[name] = left_ips[name] + ROI_left[matrix_index]
+               right_con[name] = right_con[name] + ROI_right[matrix_index]
+            if 'R' == hemi or not hemi:
+               right_ips[name] = right_ips[name] + ROI_right[matrix_index]
+               left_con[name] = left_con[name] + ROI_left[matrix_index] 
         else:
             left_region[name] = ROI_left[matrix_index]
             right_region[name] = ROI_right[matrix_index]
+            if 'L' == hemi or not hemi:
+               left_ips[name] = ROI_left[matrix_index]
+               right_con[name] = ROI_right[matrix_index]
+               right_ips[name] = 0
+               left_con[name] = 0
+            if 'R' == hemi or not hemi:
+               right_ips[name] = ROI_right[matrix_index]
+               left_con[name] = ROI_left[matrix_index]
+               left_ips[name] = 0
+               right_con[name] = 0
         continue
     for key in connectome_regions.keys():
         if name in connectome_regions[key]:
             left_region[key] = left_region[key] + ROI_left[matrix_index]
             right_region[key] = right_region[key] + ROI_right[matrix_index]
+            if 'L' == hemi or not hemi:
+               left_ips[key] = left_ips[key] + ROI_left[matrix_index]
+               right_con[key] = right_con[key] + ROI_right[matrix_index]
+            if 'R' == hemi or not hemi:
+               right_ips[key] = right_ips[key] + ROI_right[matrix_index]
+               left_con[key] = left_con[key] + ROI_left[matrix_index]
                 
 
 #%%
@@ -172,6 +200,7 @@ def run_calc_connectome(df_outputfile, c_matrix, experiment, ROI_list_right_inde
 
   df_regions.to_csv(df_outputfile, index=False)
   
+<<<<<<< HEAD
   return
 
 
@@ -208,6 +237,17 @@ def main():
   df_outputfile = os.path.join(profile["connectomePath"],'Region_Connectivity_'+experiment+'.csv')
     
   run_calc_connectome(df_outputfile, c_matrix, experiment, ROI_list_right_index, ROI_list_left_index, profile["lookup_table"], matkey_outputname,  profile)
+=======
+  region_ips = [left_ips, right_ips]
+  df_ips = pd.DataFrame(data=region_ips)
+  df_outputfile = os.path.join(profile["connectomePath"],'Region_Connectivity_'+experiment+'_ipsilateral.csv')
+  df_ips.to_csv(df_outputfile, index=False)
+
+  region_con = [left_con, right_con]
+  df_con = pd.DataFrame(data=region_con)
+  df_outputfile = os.path.join(profile["connectomePath"],'Region_Connectivity_'+experiment+'_contralateral.csv')
+  df_con.to_csv(df_outputfile, index=False)
+>>>>>>> main
 
   #setup output files for saving
   profile["connectome_connectome"] = { "Output_files":

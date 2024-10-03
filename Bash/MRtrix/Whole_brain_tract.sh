@@ -172,4 +172,3 @@ else
 fi
 
 
-#for file in Fibers/*_fibers_ACPC.tck; do filename=$(basename $file _fibers_ACPC.tck); python3 tckConverter.py $file SCIRun_files/$filename; done

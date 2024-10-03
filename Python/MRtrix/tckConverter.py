@@ -9,35 +9,60 @@ Convert MRTRIX3 tck file to SCIRun Pts/Edges
 import argparse
 from nibabel import streamlines
 import numpy as np
+import scipy.io
 
-def convertPtsEdges(filename):
+def convertPtsEdges(filename, tract_datafile=None):
     extractedTckFile = streamlines.load(filename)
-
     pts = np.zeros((extractedTckFile.streamlines.total_nb_rows, 3))
     edges = np.zeros((extractedTckFile.streamlines.total_nb_rows - len(extractedTckFile.streamlines),2), dtype=int)
-    track_index = np.zeros(extractedTckFile.streamlines.total_nb_rows)
-
+    
     currentPts = 0
     currentEdges = 0
-    for k,track in enumerate(extractedTckFile.streamlines):
+
+    if tract_datafile:
+        try:
+            original_data = np.loadtxt(tract_datafile, delimiter=",")
+        except:
+            original_data = [i for i in np.loadtxt(tract_datafile, delimiter=" ", dtype=str) if not i == ""]
+
+        tract_data = np.zeros((extractedTckFile.streamlines.total_nb_rows))
+        counter = 0
+
+    for track in extractedTckFile.streamlines:
         trackNodes = track.copy()
         pts[currentPts:currentPts+trackNodes.shape[0],:] = trackNodes * [-1,-1,1]
         track_index[currentPts:currentPts+trackNodes.shape[0]] = k
         edges[currentEdges:currentEdges+trackNodes.shape[0]-1,0] = np.arange(currentPts,currentPts+trackNodes.shape[0]-1, dtype=int)
         edges[currentEdges:currentEdges+trackNodes.shape[0]-1,1] = np.arange(currentPts+1,currentPts+trackNodes.shape[0], dtype=int)
 
+        if tract_datafile:
+            tract_data[currentPts:currentPts+trackNodes.shape[0]] = original_data[counter]
+            counter += 1
+        
         currentPts += trackNodes.shape[0]
         currentEdges += trackNodes.shape[0]-1
 
-    return pts, edges, track_index
+    if tract_datafile:
+        return pts, edges, tract_data
+    else:
+        return pts, edges
 
 parser = argparse.ArgumentParser(description='Convert MRTRIX3 tck file to SCIRun Pts/Edges')
 parser.add_argument('input_tck', help='The input .tck File')
 parser.add_argument('output_path', help='The output path (without extension). Two files will be generated')
+parser.add_argument('--tract_data', help='The data to be written for each point.')
 
 if __name__ == "__main__":
     args = parser.parse_args()
-    pts, edges, tck_data = convertPtsEdges(args.input_tck)
-    np.savetxt(args.output_path + ".edge", edges, fmt="%d", delimiter=" ")
-    np.savetxt(args.output_path + ".pts", pts, fmt="%.8f", delimiter=" ")
-    np.savetxt(args.output_path + ".txt", tck_data, fmt="%d", delimiter=" ")
+    if args.tract_data:
+        pts, edges, tract_data = convertPtsEdges(args.input_tck, args.tract_data)
+        np.savetxt(args.output_path + ".edge", edges, fmt="%d", delimiter=" ")
+        np.savetxt(args.output_path + ".pts", pts, fmt="%.8f", delimiter=" ")
+        np.savetxt(args.output_path + ".tckdata", tract_data, fmt="%.8f", delimiter=" ")
+        scipy.io.savemat(args.output_path + ".mat", {"edge" : edges, "pts" : pts, "data" : tract_data })
+        
+    else:
+        pts, edges = convertPtsEdges(args.input_tck, args.tract_data)
+        np.savetxt(args.output_path + ".edge", edges, fmt="%d", delimiter=" ")
+        np.savetxt(args.output_path + ".pts", pts, fmt="%.8f", delimiter=" ")
+        scipy.io.savemat(args.output_path + ".mat", {"edge" : edges, "pts" : pts })
