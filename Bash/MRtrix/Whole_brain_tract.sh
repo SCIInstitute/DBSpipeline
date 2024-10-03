@@ -160,14 +160,15 @@ fi
 
 sr_out_tck_100K=${sub_dir}/SCIRun_files/whole_brain_100k
 py_call="python $CODEDIR/Python/MRtrix/tckConverter.py ${out_tck_100k_ACPC} ${sr_out_tck_100K}"
+SCIrun_call="python $CODEDIR/Python/MRtrix/edge_finder.py ${sr_out_tck_100K}.edge ${sr_out_tck_100K}.pts"
 
 if [ "$dryrun" = false ]; then
   eval "$py_call"
+  eval "$SCIRun_call"
 else
   check=($(ls -1 ${out_tck_100k_ACPC} ${sr_out_tck_100K}.edge ${sr_out_tck_100K}.pts ))
   echo "$check[@]"
   echo "$py_call"
+  echo "$SCIRun_call"
 fi
 
-
-#for file in Fibers/*_fibers_ACPC.tck; do filename=$(basename $file _fibers_ACPC.tck); python3 tckConverter.py $file SCIRun_files/$filename; done
