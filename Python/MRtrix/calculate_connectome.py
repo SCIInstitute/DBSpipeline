@@ -48,7 +48,7 @@ def build_parser():
 # TODO: debug
 #  |
 #  V
-def run_calc_connectome(df_outputfile, c_matrix, experiment, ROI_list_right_index, ROI_list_left_index, profile["lookup_table"], matkey_outputname,  profile):
+def run_calc_connectome(df_outputfile, df_outputfile_isp, df_outputfile_con, c_matrix, experiment, ROI_list_right_index, ROI_list_left_index, profile["lookup_table"], matkey_outputname,  profile):
 
   connect_mat = np.loadtxt(c_matrix, delimiter=',')
   mu = np.loadtxt(os.path.join(profile["fibertractPath"], 'sift2_mu.txt'))
@@ -194,13 +194,22 @@ def run_calc_connectome(df_outputfile, c_matrix, experiment, ROI_list_right_inde
                 
 
 #%%
+  region_ips = [left_ips, right_ips]
+  df_ips = pd.DataFrame(data=region_ips)
+  
+  df_ips.to_csv(df_outputfile_ips, index=False)
+
+  region_con = [left_con, right_con]
+  df_con = pd.DataFrame(data=region_con)
+  df_con.to_csv(df_outputfile_con, index=False)
+  
+  
   region_both = {'Region': left_region.keys(),'Left': left_region.values(), 'Right': right_region.values()}
   region_both = [left_region, right_region]
   df_regions = pd.DataFrame(data=region_both)
 
   df_regions.to_csv(df_outputfile, index=False)
   
-<<<<<<< HEAD
   return
 
 
@@ -235,23 +244,17 @@ def main():
     c_matrix = os.path.join(profile["connectomePath"], "connectome_matrix.csv")
     
   df_outputfile = os.path.join(profile["connectomePath"],'Region_Connectivity_'+experiment+'.csv')
+  df_outputfile_isp = os.path.join(profile["connectomePath"],'Region_Connectivity_'+experiment+'_ipsilateral.csv'))
+  df_outputfile_con = os.path.join(profile["connectomePath"],'Region_Connectivity_'+experiment+'_contralateral.csv')
     
-  run_calc_connectome(df_outputfile, c_matrix, experiment, ROI_list_right_index, ROI_list_left_index, profile["lookup_table"], matkey_outputname,  profile)
-=======
-  region_ips = [left_ips, right_ips]
-  df_ips = pd.DataFrame(data=region_ips)
-  df_outputfile = os.path.join(profile["connectomePath"],'Region_Connectivity_'+experiment+'_ipsilateral.csv')
-  df_ips.to_csv(df_outputfile, index=False)
+  run_calc_connectome(df_outputfile, df_outputfile_isp, df_outputfile_con, c_matrix,  experiment, ROI_list_right_index, ROI_list_left_index, profile["lookup_table"], matkey_outputname,  profile)
 
-  region_con = [left_con, right_con]
-  df_con = pd.DataFrame(data=region_con)
-  df_outputfile = os.path.join(profile["connectomePath"],'Region_Connectivity_'+experiment+'_contralateral.csv')
-  df_con.to_csv(df_outputfile, index=False)
->>>>>>> main
 
   #setup output files for saving
   profile["connectome_connectome"] = { "Output_files":
-        {"df_outputfile" : df_outputfile
+        { "df_outputfile" : df_outputfile,
+          "df_outputfile_ips" : df_outputfile_isp,
+          "df_outputfile_con" : df_outputfile_con
         }
   }
   
@@ -266,10 +269,19 @@ def main():
     stim_ROIs = profile["stim"]["Connectome_maker"]["ROIs"]
     
     stim_df_outputfiles=[]
+    stim_df_outputfiles_ips=[]
+    stim_df_outputfiles_con=[]
+    
     for idx in range(len(stim_tags)):
       stim_experiment = experiment+"_"+stim_tags[idx]
       stim_df_outputfile = os.path.join(profile["connectomePath"],"Stim_volumes", "Region_Connectivity_"+stim_experiment+".csv")
       stim_df_outputfiles.append(stim_df_outputfile)
+      
+      stim_df_outputfile_ips = os.path.join(profile["connectomePath"],"Stim_volumes", "Region_Connectivity_"+stim_experiment+"ipsolateral.csv")
+      stim_df_outputfiles_ips.append(stim_df_outputfile_ips)
+      
+      stim_df_outputfile_con = os.path.join(profile["connectomePath"],"Stim_volumes", "Region_Connectivity_"+stim_experiment+"contralateral.csv")
+      stim_df_outputfiles_con.append(stim_df_outputfile_con)
       
       c_matrix = profile["stim"]["makeConnectomeMatrix"]["Output_files"]["connectome_matrix"][idx]
       matkey_outputname = profile["stim"]["Connectome_maker"]["Output_files"]["matkey_outputname"][idx]
