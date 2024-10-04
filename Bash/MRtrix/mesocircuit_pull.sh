@@ -32,16 +32,20 @@ fi
 subject=$1
 sub_dir="${DATADIR}/${subject}"
 
-assignment=assignments_CLonly.txt
-left_roi=371
-right_roi=372
-roi_name=CL
+# assignment=assignments_CLonly.txt
+# left_roi=371
+# right_roi=372
+# roi_name=CL
 
 # assignment=assignments_Therapy.txt
 # left_roi=415
 # right_roi=416
 # roi_name=Stim
 
+assignment=assignments_CM.txt
+left_roi=373
+right_roi=387
+roi_name=CM
 
 # Anterior Cingulate and Medial Prefrontal projection
 echo -e "\nAnterior Cingulate and Medial Prefrontal projection\n"
