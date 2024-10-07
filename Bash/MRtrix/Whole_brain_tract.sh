@@ -160,7 +160,7 @@ fi
 
 sr_out_tck_100K=${sub_dir}/SCIRun_files/whole_brain_100k
 py_call="python $CODEDIR/Python/MRtrix/tckConverter.py ${out_tck_100k_ACPC} ${sr_out_tck_100K}"
-SCIrun_call="python $CODEDIR/Python/MRtrix/edge_finder.py ${sr_out_tck_100K}.edge ${sr_out_tck_100K}.pts"
+SCIrun_call="python $CODEDIR/Python/MRtrix/edge_finder.py ${sr_out_tck_100K}.edge ${sr_out_tck_100K}.pts 2"
 
 if [ "$dryrun" = false ]; then
   eval "$py_call"
