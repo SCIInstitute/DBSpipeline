@@ -263,9 +263,7 @@ def main():
         }
   }
   
-  with open(args.profile, 'w') as fp:
-    json.dump(profile, fp)
-    
+  
   if args.stim:
     if not "stim" in profile.keys():
       raise valueError("--stim flag (-s) used, but previous outputs are missing.  Please run Connectome_maker.py and makeConnectomeMatrix.py")
@@ -296,6 +294,9 @@ def main():
     profile["stim"]["connectome_connectome"] = { "Output_files":
         {"df_outputfile" : stim_df_outputfiles }
     }
+    
+  with open(args.profile, 'w') as fp:
+    json.dump(profile, fp)
     
 if __name__ == "__main__":
    main()
