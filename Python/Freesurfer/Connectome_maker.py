@@ -241,7 +241,6 @@ def main():
       
       table_2_atlas(st_lookup, profile, output_files )
     
-    # TODO: invert structure -- Stim -> connectome_maker
     if "stim" in profile.keys():
       profile["stim"]["Connectome_maker"] = {
                              "Output_files" : stim_output_files,
