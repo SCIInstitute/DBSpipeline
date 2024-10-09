@@ -67,7 +67,7 @@ def run_connectome_matrix(connectome_matrix, input_file, lookup_table,  experime
   # hard coded for now. There should be a better way to do this. ugh
     apppath="/apps/mrtrix/3.0.3/bin/"
   
-  cl_call1 = [apppath+"mrtransform",  "-linear", os.path.join(cleantractPath, "ACPC_to_b0.txt"), filepath, os.path.join(connectomePath, hcp_pattern+"b0space.nii.gz"),   "-force"]
+  cl_call1 = [apppath+"mrtransform",  "-linear", os.path.join(cleantractPath, "ACPC_to_b0.txt"), input_file, os.path.join(connectomePath, hcp_pattern+"b0space.nii.gz"),   "-force"]
   print(" ".join(cl_call1))
   subprocess.run(cl_call1)
   
@@ -100,6 +100,7 @@ def main():
     profile = json.load(js_file)
     
   experiment = profile["experiment"]
+  connectomePath = profile["connectomePath"]
   connectome_matrix=os.path.join(connectomePath, "connectome_matrix_" + experiment + ".csv")
   lookup_table = profile["lookup_table"]
   

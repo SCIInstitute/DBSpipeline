@@ -48,7 +48,11 @@ def build_parser():
 # TODO: debug
 #  |
 #  V
-def run_calc_connectome(df_outputfile, df_outputfile_isp, df_outputfile_con, c_matrix, experiment, ROI_list_right_index, ROI_list_left_index, profile["lookup_table"], matkey_outputname,  profile):
+
+def run_calc_connectome(df_outputfile, df_outputfile_ips, df_outputfile_con, c_matrix, experiment, ROI_list_right_index, ROI_list_left_index, lookup_table, matkey_outputname,  profile):
+
+  subject= profile["subject"]
+  experiment = profile["experiment"]
 
   connect_mat = np.loadtxt(c_matrix, delimiter=',')
   mu = np.loadtxt(os.path.join(profile["fibertractPath"], 'sift2_mu.txt'))
@@ -82,7 +86,8 @@ def run_calc_connectome(df_outputfile, df_outputfile_isp, df_outputfile_con, c_m
       data_right = data[:,ROI_list_right]
       
       
-      
+  file_dir = profile["tractographyPath"]
+  
   ROI_left = np.sum(data_left,axis=1).flatten() #collapse all regions
   print(ROI_left.shape)
   ROI_right = np.sum(data_right,axis=1).flatten()
@@ -244,7 +249,7 @@ def main():
     c_matrix = os.path.join(profile["connectomePath"], "connectome_matrix.csv")
     
   df_outputfile = os.path.join(profile["connectomePath"],'Region_Connectivity_'+experiment+'.csv')
-  df_outputfile_isp = os.path.join(profile["connectomePath"],'Region_Connectivity_'+experiment+'_ipsilateral.csv'))
+  df_outputfile_isp = os.path.join(profile["connectomePath"],'Region_Connectivity_'+experiment+'_ipsilateral.csv')
   df_outputfile_con = os.path.join(profile["connectomePath"],'Region_Connectivity_'+experiment+'_contralateral.csv')
     
   run_calc_connectome(df_outputfile, df_outputfile_isp, df_outputfile_con, c_matrix,  experiment, ROI_list_right_index, ROI_list_left_index, profile["lookup_table"], matkey_outputname,  profile)

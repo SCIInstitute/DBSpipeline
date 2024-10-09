@@ -243,11 +243,11 @@ def main():
     
     # TODO: invert structure -- Stim -> connectome_maker
     if "stim" in profile.keys():
-      profile["stim"]["Connectome_maker"] =
-                            { "Output_files" : stim_output_files,
-                              "ROIs" : stim_output_files["ROIs"],
-                              "stim_tags" : stim_output_files["stim_tags"]
-                            }
+      profile["stim"]["Connectome_maker"] = {
+                             "Output_files" : stim_output_files,
+                             "ROIs" : stim_output_files["ROIs"],
+                             "stim_tags" : stim_output_files["stim_tags"]
+      }
     else:
       profile["stim"] = { "Connectome_maker" :
                             { "Output_files" : stim_output_files,
