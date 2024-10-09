@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=8
+#SBATCH --cpus-per-task=16
 #SBATCH --mem=30gb
 #SBATCH --time=20:00:00
 #SBATCH --job-name=tckgen
@@ -162,13 +162,15 @@ fi
 
 sr_out_tck_100K=${sub_dir}/SCIRun_files/whole_brain_100k
 py_call="python $CODEDIR/Python/MRtrix/tckConverter.py ${out_tck_100k_ACPC} ${sr_out_tck_100K}"
+SCIrun_call="python $CODEDIR/Python/MRtrix/edge_finder.py ${sr_out_tck_100K}.edge ${sr_out_tck_100K}.pts 2"
 
 if [ "$dryrun" = false ]; then
   eval "$py_call"
+  eval "$SCIRun_call"
 else
   check=($(ls -1 ${out_tck_100k_ACPC} ${sr_out_tck_100K}.edge ${sr_out_tck_100K}.pts ))
   echo "$check[@]"
   echo "$py_call"
+  echo "$SCIRun_call"
 fi
-
 
