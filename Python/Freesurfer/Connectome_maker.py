@@ -204,21 +204,25 @@ def main():
     print(args.rerun)
     if args.rerun:
       print("overwriting output files")
+      table_2_atlas(lookup, profile, output_files )
+      profile["Connectome_maker"] = { "Output_files": output_files}
     else:
       print("output files exist.  Use '-f' to force overwrite")
-      return
       
-  table_2_atlas(lookup, profile, output_files )
-  profile["Connectome_maker"] = { "Output_files": output_files}
+  
+  
+  print("stim flag")
+  print(args.stim)
   
   if args.stim:
+    print("running simulation data")
     if "stim_table" in profile.keys():
       if not os.path.exists(profile["stim_table"]):
         raise ValueError("cannot find stimulation table: "+profile["stim_table"])
     else:
       raise ValueError("Cannot run --stim (-s) option without stimulation table filepath (profile['stim_table'])")
 
-    stim_output_files = append_lookup(lookup, profile)
+    stim_output_files = append_lookup_file(lookup, profile)
     
     stim_out_check = [  os.path.exists(f_name )  for f_var, fn_list in stim_output_files.items() if not (f_var=="ROIs" or f_var=="stim_tags") for f_name in fn_list  ]
     
@@ -231,11 +235,11 @@ def main():
         print("stim output files exist.  Use '-f' to force overwrite")
         return
     
-    for idx in len(stim_output_files["lookup_tables"]):
+    for idx in range(len(stim_output_files["lookup_tables"])):
       
       st_lookup = pd.read_csv(stim_output_files["lookup_tables"][idx], index_col=False)
-      st_output_fs = {"nifti_outputfile": stim_output_files["nifti_outputfile"][idx],
-          "nifti_lookup_outputfile" : stim_output_files["nifti_lookup_outputfile"][idx],
+      st_output_fs = {"nifti_outputfiles": stim_output_files["nifti_outputfiles"][idx],
+          "nifti_lookup_outputfiles" : stim_output_files["nifti_lookup_outputfile"][idx],
           "matkey_outputname" : stim_output_files["matkey_outputname"][idx]
       }
       
