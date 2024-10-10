@@ -19,6 +19,7 @@ import numpy as np
 import pandas as pd
 import argparse
 import os
+import nrrd
 
 def build_parser():
   parser = argparse.ArgumentParser(
@@ -54,12 +55,12 @@ def append_lookup_file(lookup, profile, **kwargs):
 
   experiment = profile["experiment"]
   stim_table = pd.read_csv(profile["stim_table"],index_col=False)
-  stim_out = os.path.join(profile["connectomePath"], "Stim_volumes")
+  stim_out = profile["stimoutpath"]
   
   if not os.path.exists(stim_out):
     os.makedirs(stim_out)
   
-  stim_output_files = {"lookup_tables" : [], "nifti_lookup_outfiles" : [], "nifti_outputfiles" : [], "matkey_outputname" : [], "ROIs" : [] }
+  stim_output_files = {"lookup_tables" : [], "nifti_lookup_outputfiles" : [], "nifti_outputfiles" : [], "matkey_outputnames" : [], "ROIs" : [] }
 
   stim_tags =  []
   for row in stim_table.iterrows():
@@ -81,16 +82,16 @@ def append_lookup_file(lookup, profile, **kwargs):
     ROIs = list(range(begin_idx, begin_idx+len(stim_fnames)))
     stim_output_files["ROIs"] = ROIs
 
-    stim_output_files["nifti_lookup_outfiles"].append( os.path.join(profile["connectomePath"], "HCP_parc_all_"+experiment+"_"+stim_string+"_lookup.nii.gz"))
-    stim_output_files["nifti_outputfiles"].append( os.path.join(profile["connectomePath"], "HCP_parc_all_"+experiment+"_"+stim_string+".nii.gz"))
-    stim_output_files["matkey_outputname"].append(os.path.join(profile["connectomePath"], "MRtrix_index_key_"+experiment+"_"+stim_string+".csv"))
+    stim_output_files["nifti_lookup_outputfiles"].append( os.path.join(stim_out, "HCP_parc_all_"+experiment+"_"+stim_string+"_lookup.nii.gz"))
+    stim_output_files["nifti_outputfiles"].append( os.path.join(stim_out, "HCP_parc_all_"+experiment+"_"+stim_string+".nii.gz"))
+    stim_output_files["matkey_outputnames"].append( os.path.join(stim_out, "MRtrix_index_key_"+experiment+"_"+stim_string+".csv"))
     
     stim_dict = {
               "Index" : ROIs,
               "Labels" : stim_labels,
               "Filename" : stim_fnames,
               "File Index" : [1]*len(stim_fnames),
-              "Path" : "Stim_volumes",
+              "Path" : "Stim",
     }
     
     pd.concat((lookup, pd.DataFrame(stim_dict)), ignore_index=True).to_csv(stim_lookup_fname)
@@ -208,14 +209,12 @@ def main():
       profile["Connectome_maker"] = { "Output_files": output_files}
     else:
       print("output files exist.  Use '-f' to force overwrite")
-      
   
-  
-  print("stim flag")
-  print(args.stim)
+  with open(args.profile, 'w') as fp:
+    json.dump(profile, fp)
   
   if args.stim:
-    print("running simulation data")
+    print("running stimulation data")
     if "stim_table" in profile.keys():
       if not os.path.exists(profile["stim_table"]):
         raise ValueError("cannot find stimulation table: "+profile["stim_table"])
@@ -238,9 +237,9 @@ def main():
     for idx in range(len(stim_output_files["lookup_tables"])):
       
       st_lookup = pd.read_csv(stim_output_files["lookup_tables"][idx], index_col=False)
-      st_output_fs = {"nifti_outputfiles": stim_output_files["nifti_outputfiles"][idx],
-          "nifti_lookup_outputfiles" : stim_output_files["nifti_lookup_outputfile"][idx],
-          "matkey_outputname" : stim_output_files["matkey_outputname"][idx]
+      st_output_fs = {"nifti_outputfile": stim_output_files["nifti_outputfiles"][idx],
+          "nifti_lookup_outputfile" : stim_output_files["nifti_lookup_outputfiles"][idx],
+          "matkey_outputname" : stim_output_files["matkey_outputnames"][idx]
       }
       
       table_2_atlas(st_lookup, profile, output_files )
