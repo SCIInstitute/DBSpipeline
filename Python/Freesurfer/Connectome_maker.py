@@ -19,7 +19,11 @@ import numpy as np
 import pandas as pd
 import argparse
 import os
+import sys
 import nrrd
+print(os.path.join(os.path.dirname(__file__), "..", "MRtrix" ))
+sys.path.append(os.path.join(os.path.dirname(__file__), "..", "MRtrix" ))
+from NRRDConverter import readNRRD
 
 def build_parser():
   parser = argparse.ArgumentParser(
@@ -126,7 +130,7 @@ def table_2_atlas(lookup, profile, output_files ):
 
     fullfile = os.path.join(profile["segPath"], seg_dirs, file)
     if os.path.splitext(file)[1] == ".nrrd":
-      img = loadNRRD(fullfile)
+      img = readNRRD(fullfile)
     else:
       img = nibabel.load(fullfile)
       
@@ -159,22 +163,6 @@ def table_2_atlas(lookup, profile, output_files ):
   mrtrix_save.to_csv(output_files["matkey_outputname"])
   
   return
-  
-def loadNRRD(filename, affine = None):
-  _nrrd = nrrd.read(filename)
-  data = _nrrd[0]
-  header = _nrrd[1]
-  
-  # only works with specific formats.  LHS
-  if not affine:
-    rotate = np.eye(4)
-    rotate[:3,:3] = header["space directions"].T
-    translate= np.eye(4)
-    translate[:3, -1] = -header["space origin"]
-    affine = np.dot(translate, rotate)
-    
-  
-  return nibabel.Nifti1Image(data, affine)
   
   
 
