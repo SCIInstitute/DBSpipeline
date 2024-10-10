@@ -53,6 +53,8 @@ def build_parser():
   return parser
 
 def run_connectome_matrix(connectome_matrix, input_file, lookup_table,  experiment, profile, assignment, radius, distance):
+
+  rerun = True
   
   subject= profile["subject"]
   connectomePath = profile["connectomePath"]
@@ -67,14 +69,18 @@ def run_connectome_matrix(connectome_matrix, input_file, lookup_table,  experime
   # hard coded for now. There should be a better way to do this. ugh
     apppath="/apps/mrtrix/3.0.3/bin/"
   
-  cl_call1 = [apppath+"mrtransform",  "-linear", os.path.join(cleantractPath, "ACPC_to_b0.txt"), input_file, os.path.join(connectomePath, hcp_pattern+"b0space.nii.gz"),   "-force"]
+  cl_call1 = [apppath+"mrtransform",  "-linear", os.path.join(cleantractPath, "ACPC_to_b0.txt"), input_file, os.path.join(connectomePath, hcp_pattern+"b0space.nii.gz")]
+  if rerun:
+    cl_call1.append("-force")
   print(" ".join(cl_call1))
   subprocess.run(cl_call1)
   
   
   print(connectome_matrix)
   print(assignment)
-  cl_call2 = [apppath+"tck2connectome", os.path.join(fibertractPath, "whole_brain_fibers.tck"), os.path.join(connectomePath, hcp_pattern+"b0space.nii.gz"), connectome_matrix,  "-tck_weights_in", os.path.join(fibertractPath, "sift2_weights.txt"),   "-keep_unassigned",  "-out_assignments", os.path.join(cleantractPath, "assignments_" + experiment + ".txt"),  "-force", "-symmetric" ]
+  cl_call2 = [apppath+"tck2connectome", os.path.join(fibertractPath, "whole_brain_fibers.tck"), os.path.join(connectomePath, hcp_pattern+"b0space.nii.gz"), connectome_matrix,  "-tck_weights_in", os.path.join(fibertractPath, "sift2_weights.txt"),   "-keep_unassigned",  "-out_assignments", os.path.join(cleantractPath, "assignments_" + experiment + ".txt"), "-symmetric" ]
+  if rerun:
+    cl_call2.append("-force")
   
   cl_call2.append("-"+assignment)
   if assignment == "assignment_radial_search":
@@ -123,14 +129,14 @@ def main():
       
     stim_tags = profile["stim"]["Connectome_maker"]["stim_tags"]
     
-    stim_inputs = profile["stim"]["Connectome_maker"]["Output_files"]["nifti_outputfile"]
+    stim_inputs = profile["stim"]["Connectome_maker"]["Output_files"]["nifti_outputfiles"]
     stim_lookup_tables = profile["stim"]["Connectome_maker"]["Output_files"]["lookup_tables"]
     stim_connectome_matrices = []
     for idx in range(len(stim_tags)):
       stim_experiment = experiment+"_"+stim_tags[idx]
-      stim_conn_mat=os.path.join(connectomePath, "Stim_volumes", "connectome_matrix_" + stim_experiment + ".csv")
+      stim_conn_mat=os.path.join(profile["stimoutpath"], "connectome_matrix_" + stim_experiment + ".csv")
       
-      run_connectome_matrix(stim_conn_mat, stim_inputs[idx], stim_lookup_table[k],  stim_experiment, profile, args.assignment, args.radius, args.distance)
+      run_connectome_matrix(stim_conn_mat, stim_inputs[idx], stim_lookup_tables[idx],  stim_experiment, profile, args.assignment, args.radius, args.distance)
       
       stim_connectome_matrices.append(stim_conn_mat)
       

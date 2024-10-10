@@ -112,7 +112,7 @@ def table_2_atlas(lookup, profile, output_files ):
   seg_dirs = lookup['Path'][lookup['Filename'] == seg_files[0]].unique()[0]
 
   #Load HCP first always. This will be the reference
-  print(seg_files)
+#  print(seg_files)
   HCP = nibabel.load(os.path.join(profile["segPath"], seg_dirs, seg_files[0]))
   HCP_data = HCP.get_fdata()
   main_index = np.array(lookup['Index'][lookup['Filename'] == seg_files[0]])
@@ -204,7 +204,7 @@ def main():
   
   out_check = [os.path.exists(f_name ) for f_var, f_name in output_files.items() ]
   
-  print(out_check)
+#  print(out_check)
   
   if all(out_check):
     print("files all exist")
@@ -230,13 +230,13 @@ def main():
       raise ValueError("Cannot run --stim (-s) option without stimulation table filepath (profile['stim_table'])")
 
     stim_output_files = append_lookup_file(lookup, profile)
-    print("--- checking files ---")
-    print(stim_output_files)
+#    print("--- checking files ---")
+#    print(stim_output_files)
     
     stim_out_check = [  os.path.exists(f_name )  for f_var, fn_list in stim_output_files.items() if not (f_var=="ROIs" or f_var=="stim_tags") for f_name in fn_list  ]
     
-    print(stim_out_check)
-    print(np.all(stim_out_check))
+#    print(stim_out_check)
+#    print(np.all(stim_out_check))
     
     if np.all(stim_out_check):
       print("stim files all exist")
@@ -255,8 +255,8 @@ def main():
           "matkey_outputname" : stim_output_files["matkey_outputnames"][idx]
       }
       
-      print("should make these files :")
-      print(st_output_fs)
+#      print("should make these files :")
+#      print(st_output_fs)
       
       table_2_atlas(st_lookup, profile, st_output_fs )
     
@@ -275,8 +275,8 @@ def main():
                         }
                       
         
-  with open(args.profile, 'w') as fp:
-    json.dump(profile, fp, sort_keys=True, indent=2)
+    with open(args.profile, 'w') as fp:
+      json.dump(profile, fp, sort_keys=True, indent=2)
     
 
 if __name__ == "__main__":

@@ -252,7 +252,7 @@ def main():
 
 
   #setup output files for saving
-  profile["connectome_connectome"] = { "Output_files":
+  profile["calculate_connectome"] = { "Output_files":
         { "df_outputfile" : df_outputfile,
           "df_outputfile_ips" : df_outputfile_isp,
           "df_outputfile_con" : df_outputfile_con
@@ -273,21 +273,22 @@ def main():
     
     for idx in range(len(stim_tags)):
       stim_experiment = experiment+"_"+stim_tags[idx]
-      stim_df_outputfile = os.path.join(profile["connectomePath"],"Stim_volumes", "Region_Connectivity_"+stim_experiment+".csv")
+      stim_df_outputfile = os.path.join(profile["stimoutpath"], "Region_Connectivity_"+stim_experiment+".csv")
       stim_df_outputfiles.append(stim_df_outputfile)
       
-      stim_df_outputfile_ips = os.path.join(profile["connectomePath"],"Stim_volumes", "Region_Connectivity_"+stim_experiment+"ipsolateral.csv")
+      stim_df_outputfile_ips = os.path.join(profile["stimoutpath"], "Region_Connectivity_"+stim_experiment+"ipsolateral.csv")
       stim_df_outputfiles_ips.append(stim_df_outputfile_ips)
       
-      stim_df_outputfile_con = os.path.join(profile["connectomePath"],"Stim_volumes", "Region_Connectivity_"+stim_experiment+"contralateral.csv")
+      stim_df_outputfile_con = os.path.join(profile["stimoutpath"], "Region_Connectivity_"+stim_experiment+"contralateral.csv")
       stim_df_outputfiles_con.append(stim_df_outputfile_con)
       
       c_matrix = profile["stim"]["makeConnectomeMatrix"]["Output_files"]["connectome_matrix"][idx]
-      matkey_outputname = profile["stim"]["Connectome_maker"]["Output_files"]["matkey_outputname"][idx]
+      matkey_outputname = profile["stim"]["Connectome_maker"]["Output_files"]["matkey_outputnames"][idx]
+      lookup_table = profile["stim"]["Connectome_maker"]["Output_files"]["lookup_tables"][idx]
       
-      run_calc_connectome(stim_df_outputfile, c_matrix, stim_experiment, stim_ROIs["Right"][idx], stim_ROIs["left"][idx], profile["lookup_table"], matkey_outputname,  profile)
+      run_calc_connectome(stim_df_outputfile, stim_df_outputfile_ips, stim_df_outputfile_con, c_matrix, stim_experiment, [stim_ROIs[0]], [stim_ROIs[1]], lookup_table, matkey_outputname,  profile)
       
-    profile["stim"]["connectome_connectome"] = { "Output_files":
+    profile["stim"]["calculate_connectome"] = { "Output_files":
         {"df_outputfile" : stim_df_outputfiles }
     }
     
