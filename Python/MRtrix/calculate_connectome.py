@@ -45,10 +45,6 @@ def build_parser():
                       action = "store_true", dest="rerun")
   return parser
 
-# TODO: debug
-#  |
-#  V
-
 def run_calc_connectome(df_outputfile, df_outputfile_ips, df_outputfile_con, c_matrix, experiment, ROI_list_right_index, ROI_list_left_index, lookup_table, matkey_outputname,  profile):
 
   subject= profile["subject"]
@@ -296,7 +292,7 @@ def main():
     }
     
   with open(args.profile, 'w') as fp:
-    json.dump(profile, fp)
+    json.dump(profile, fp, sort_keys=True, indent=2)
     
 if __name__ == "__main__":
    main()

@@ -213,11 +213,13 @@ def main():
       print("overwriting output files")
       table_2_atlas(lookup, profile, output_files )
       profile["Connectome_maker"] = { "Output_files": output_files}
+      
+      with open(args.profile, 'w') as fp:
+        json.dump(profile, fp, sort_keys=True, indent=2)
     else:
       print("output files exist.  Use '-f' to force overwrite")
   
-  with open(args.profile, 'w') as fp:
-    json.dump(profile, fp)
+  
   
   if args.stim:
     print("running stimulation data")
@@ -228,10 +230,15 @@ def main():
       raise ValueError("Cannot run --stim (-s) option without stimulation table filepath (profile['stim_table'])")
 
     stim_output_files = append_lookup_file(lookup, profile)
+    print("--- checking files ---")
+    print(stim_output_files)
     
     stim_out_check = [  os.path.exists(f_name )  for f_var, fn_list in stim_output_files.items() if not (f_var=="ROIs" or f_var=="stim_tags") for f_name in fn_list  ]
     
-    if all(stim_out_check):
+    print(stim_out_check)
+    print(np.all(stim_out_check))
+    
+    if np.all(stim_out_check):
       print("stim files all exist")
       print(args.rerun)
       if args.rerun:
@@ -248,7 +255,10 @@ def main():
           "matkey_outputname" : stim_output_files["matkey_outputnames"][idx]
       }
       
-      table_2_atlas(st_lookup, profile, output_files )
+      print("should make these files :")
+      print(st_output_fs)
+      
+      table_2_atlas(st_lookup, profile, st_output_fs )
     
     if "stim" in profile.keys():
       profile["stim"]["Connectome_maker"] = {
@@ -266,7 +276,7 @@ def main():
                       
         
   with open(args.profile, 'w') as fp:
-    json.dump(profile, fp)
+    json.dump(profile, fp, sort_keys=True, indent=2)
     
 
 if __name__ == "__main__":

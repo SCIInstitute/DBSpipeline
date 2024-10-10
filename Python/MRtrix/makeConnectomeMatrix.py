@@ -141,7 +141,7 @@ def main():
     
   
   with open(args.profile, 'w') as fp:
-    json.dump(profile, fp)
+    json.dump(profile, fp, sort_keys=True, indent=2)
     
 if __name__ == "__main__":
    main()
