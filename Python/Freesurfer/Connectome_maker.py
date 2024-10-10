@@ -120,18 +120,23 @@ def table_2_atlas(lookup, profile, output_files ):
           
   #Rest of the data
   for file in seg_files:
-      seg_dirs = lookup['Path'][lookup['Filename'] == file].unique()[0]
-      main_index = np.array(lookup['Index'][lookup['Filename'] == file])
-      local_index = np.array(lookup['File Index'][lookup['Filename'] == file])
-      
-      img = nibabel.load(os.path.join(profile["segPath"], seg_dirs, file))
-      img_resamp = nibabel.processing.resample_from_to(img, HCP,order=0)
-      img_data = img_resamp.get_fdata()
-      data_add = img_data.copy()
-      for j in range(0,len(local_index)):
-          data_add[img_data == local_index[j]] = int(main_index[j])
+    seg_dirs = lookup['Path'][lookup['Filename'] == file].unique()[0]
+    main_index = np.array(lookup['Index'][lookup['Filename'] == file])
+    local_index = np.array(lookup['File Index'][lookup['Filename'] == file])
 
-      All_data[data_add != 0] = data_add[data_add != 0]
+    fullfile = os.path.join(profile["segPath"], seg_dirs, file)
+    if os.path.splitext(file)[1] == ".nrrd":
+      img = loadNRRD(fullfile)
+    else:
+      img = nibabel.load(fullfile)
+      
+    img_resamp = nibabel.processing.resample_from_to(img, HCP,order=0)
+    img_data = img_resamp.get_fdata()
+    data_add = img_data.copy()
+    for j in range(0,len(local_index)):
+      data_add[img_data == local_index[j]] = int(main_index[j])
+
+    All_data[data_add != 0] = data_add[data_add != 0]
 
   All_data = All_data.astype(int)
   All_to_nii = nibabel.Nifti1Image(All_data, HCP.affine, HCP.header)
@@ -155,6 +160,23 @@ def table_2_atlas(lookup, profile, output_files ):
   
   return
   
+def loadNRRD(filename, affine = None):
+  _nrrd = nrrd.read(filename)
+  data = _nrrd[0]
+  header = _nrrd[1]
+  
+  # only works with specific formats.  LHS
+  if not affine:
+    rotate = np.eye(4)
+    rotate[:3,:3] = header["space directions"].T
+    translate= np.eye(4)
+    translate[:3, -1] = -header["space origin"]
+    affine = np.dot(translate, rotate)
+    
+  
+  return nibabel.Nifti1Image(data, affine)
+  
+  
 
 def main():
 
@@ -177,11 +199,7 @@ def main():
   print(lookup_file)
   lookup = pd.read_csv(lookup_file,index_col=False)
   
-  
-
   print(experiment)
-
-
 
   #Get patient
   #filepath = args.filepath + '/' + subject + '/'
