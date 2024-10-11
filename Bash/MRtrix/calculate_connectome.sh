@@ -179,7 +179,6 @@ fi
 
 echo "$assignment"
 
-
 if [ -z "$experiment" ]
 then
     echo "running all profiles"
