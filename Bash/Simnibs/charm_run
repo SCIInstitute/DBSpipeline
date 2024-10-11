@@ -10,13 +10,17 @@
 #SBATCH --mail-user=mphook@ufl.edu
 #SBATCH --output=simnibs_%j.out
 
-. ./sysUtils.sh
-innitBashPaths
+# . ./sysUtils.sh
+# innitBashPaths
+
+if [[ -z "$SYSNAME" ]]; then
+echo environment not set.  run makeSysConfig.sh
+exit
+fi
 
 if [ $SYSNAME == "hipergator" ]
 then
   module load simnibs/4.0.0
-  module load python/3.8
 fi
 
 set -e
@@ -24,6 +28,10 @@ charm --forceqform $1 $2 #$3 #Subject ID, T1, T2
 
 cd m2m_$1
 
+if [ $SYSNAME == "hipergator" ]
+then
+  module load python/3.8
+fi
 
 python $CODEDIR/Python/Simnibs/convert_mesh.py $1.msh
 cd ..

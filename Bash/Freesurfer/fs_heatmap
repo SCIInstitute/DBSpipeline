@@ -34,6 +34,7 @@ export SUBJECTS_DIR="${FREESURFERDIR}"/FS_Subjects
 rel_path1="SCIRun"
 rel_path2="Connectome"
 rel_path3="Segmentations/HCP"
+rel_path4="Segmentations/Hotspot"
 
 
 
@@ -82,7 +83,8 @@ done
 #Convert thresh map to volume
 echo $'\nCreate volume of Thresholded Heatmap **********************************************************************************\n'
 mri_surf2vol --o thresh.nii.gz --subject ${subject} --so lh.pial lh.thresh.mgh --so rh.pial rh.thresh.mgh
-
+mkdir -p ${DATADIR}/${subject_LO}/$rel_path4
+mv thresh.nii.gz ${DATADIR}/${subject_LO}/$rel_path4
 #Convert vtk to TriSurfField
 echo $'\nConvert Heat Maps to .pts, .fac, and data *****************************************************************************\n'
 

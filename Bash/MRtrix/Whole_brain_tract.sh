@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=8
+#SBATCH --cpus-per-task=16
 #SBATCH --mem=30gb
 #SBATCH --time=20:00:00
 #SBATCH --job-name=tckgen
@@ -14,13 +14,13 @@
 
 
 if [[ -z "$SYSNAME" ]]; then
-echo environment not set.  run makeSysConfig.sh
-exit
+  echo environment not set.  run makeSysConfig.sh
+  exit
 fi
 
 if [[ -z $1 ]]; then
-echo required input: subject name
-exit
+  echo required input: subject name
+  exit
 fi
 
 dryrun=false
@@ -30,8 +30,8 @@ sub_dir="${DATADIR}/${subject}"
 
 if [ ! -d "$sub_dir" ]
 then
-echo "Subject directory does not exist: ${sub_dir}"
-exit
+  echo "Subject directory does not exist: ${sub_dir}"
+  exit
 fi
 
 
@@ -68,15 +68,15 @@ mkdir -p ${sub_dir}/${rel_path3}
 # running in CWD, so run in subject dir?
 # ${subject}/Tractography dir
 T1file=${sub_dir}/${rel_path2}/T1_5tt.nii.gz
-seed_dy=${sub_dir}/${rel_path2}/wmfod_norm.mif
+FOD_file=${sub_dir}/${rel_path2}/wmfod_norm.mif
 out_tck=${sub_dir}/${rel_path3}/whole_brain_fibers.tck
 
-first_tckgen="tckgen -act $T1file -seed_dynamic $seed_dy -select 10000000 -cutoff 0.1 $seed_dy $out_tck -force"
+first_tckgen="tckgen -act $T1file -seed_dynamic $FOD_file -select 10000000 -cutoff 0.1 $FOD_file $out_tck -force"
 
 if [ "$dryrun" = false ]; then
   eval "$first_tckgen"
 else
-  check=($(ls -1 $T1file $seed_dy $out_tck ))
+  check=($(ls -1 $T1file $FOD_file $out_tck ))
   echo "$check[@]"
   echo "$first_tckgen"
 fi
@@ -99,11 +99,11 @@ done
 mu_file=${sub_dir}/${rel_path3}/sift2_mu.txt
 weights_file=${sub_dir}/${rel_path3}/sift2_weights.txt
 
-tck_sh_1="tcksift2 -act $T1file -out_mu $mu_file $out_tck $seed_dy $weights_file"
+tck_sh_1="tcksift2 -act $T1file -out_mu $mu_file $out_tck $FOD_file $weights_file"
 if [ "$dryrun" = false ]; then
   eval "$tck_sh_1"
 else
-  check=($(ls -1 $T1file $mu_file $out_tck $seed_dy $weights_file))
+  check=($(ls -1 $T1file $mu_file $out_tck $FOD_file $weights_file))
   echo "$check[@]"
   echo "$tck_sh_1"
 fi
@@ -132,6 +132,8 @@ out_tck_100k_ACPC=${sub_dir}/${rel_path3}/whole_brain_100k_fibers_ACPC.tck
 warp_call="warpinit ${T1_acpc_fname} ${warp_fname} -force"
 mrtrans_call="mrtransform ${warp_fname} -linear ${ACPC_fname} ${Trans_fname} -template ${b0_fname} -interp cubic -nan -force"
 tcktrans_call="tcktransform ${out_tck_100k} ${Trans_fname} ${out_tck_100k_ACPC} -force"
+
+
 if [ "$dryrun" = false ]; then
   eval "$warp_call"
   eval "$mrtrans_call"
@@ -160,14 +162,15 @@ fi
 
 sr_out_tck_100K=${sub_dir}/SCIRun_files/whole_brain_100k
 py_call="python $CODEDIR/Python/MRtrix/tckConverter.py ${out_tck_100k_ACPC} ${sr_out_tck_100K}"
+SCIrun_call="python $CODEDIR/Python/MRtrix/edge_finder.py ${sr_out_tck_100K}.edge ${sr_out_tck_100K}.pts 2"
 
 if [ "$dryrun" = false ]; then
   eval "$py_call"
+  eval "$SCIRun_call"
 else
   check=($(ls -1 ${out_tck_100k_ACPC} ${sr_out_tck_100K}.edge ${sr_out_tck_100K}.pts ))
   echo "$check[@]"
   echo "$py_call"
+  echo "$SCIRun_call"
 fi
 
-
-#for file in Fibers/*_fibers_ACPC.tck; do filename=$(basename $file _fibers_ACPC.tck); python3 tckConverter.py $file SCIRun_files/$filename; done

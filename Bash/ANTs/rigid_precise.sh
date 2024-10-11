@@ -2,7 +2,7 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=16
-#SBATCH --mem=4gb
+#SBATCH --mem=64gb
 #SBATCH --time=1:00:00
 #SBATCH --job-name=ANTS_rigid
 #SBATCH --mail-type=ALL
@@ -17,9 +17,9 @@ img_moving=$2
 antsRegistration \
 -d 3 \
 -m MI[$img_fixed,$img_moving,1,100,Random,.2] \
--t Rigid[.001] \
--c [500x500x500,0,100] \
--s 1x.5x0vox \
+-t Rigid[.01] \
+-c [500x500x500,1e-6,100] \
+-s 2x2x1vox \
 -f 3x2x1 \
 -l 1 \
 -u \
