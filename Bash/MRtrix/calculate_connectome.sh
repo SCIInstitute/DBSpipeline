@@ -10,7 +10,7 @@
 #SBATCH --output=Connectome_%j.out
 
 # example call
-# sbatch --mail-user=jess.tate@ufl.edu calculate_connectome.sh -s  /blue/butsonc/Butson_Lab/Connectome/Testing/SubjectsShort.txt
+# sbatch --mail-user=jess.tate@ufl.edu calculate_connectome.sh -l  /blue/butsonc/Butson_Lab/Connectome/Testing/SubjectsShort.txt
 
 if [[ -z "$SYSNAME" ]]; then
 echo environment not set.  run makeSysConfig.sh
@@ -45,13 +45,14 @@ Help()
    echo "options:"
    echo "-h    Help Page"
 #   echo "-L    Path to Lookup Table"
-   echo "-s    Path to Subjects List"
+   echo "-l    Path to Subjects List"
    echo "-d  path to subjects directory (will run all subjects)"
    echo "-f  force rerun connectome maker"
    echo "-r  radius of assignment method [3]"
    echo "-t  test run"
    echo "-e  experiment tag to run"
    echo "-a  assignment method [\"assignment_radial_search 3\"].  options from MRtrix: https://mrtrix.readthedocs.io/en/dev/reference/commands/tck2connectome.html#options"
+   echo "-s run stimulated regions.  requires extra files"
    echo
 }
 
@@ -78,6 +79,7 @@ run_loop() {
   local radius=$5
   local mdist=$6
   local experiment=$7
+  local stim=$8
   
 #  files=($(ls -1 "${DATADIR}/${subject}/${rel_path1}/Stim/HCP_parc_all_"*".nii.gz"))
   
@@ -99,7 +101,7 @@ run_loop() {
 #      continue
 #    fi
 
-    echo "rerun: $rerun testrun: $testrun radius: $radius mdist: $mdist"
+    echo "rerun: $rerun testrun: $testrun radius: $radius mdist: $mdist stim: $stim"
     
     if [ $SYSNAME == "hipergator" ]
     then
@@ -109,6 +111,9 @@ run_loop() {
     python_call="python ${CODEDIR}/Python/Freesurfer/Connectome_maker.py -p ${file}"
     if [ $rerun = true ] ; then
       python_call=$python_call" -f"
+    fi
+    if [ $stim = true ] ; then
+      python_call=$python_call" -s"
     fi
     
     if [ $testrun = true ]; then
@@ -122,7 +127,12 @@ run_loop() {
         
     # heres where to add connectome maker
     python_call="python ${CODEDIR}/Python/MRtrix/makeConnectomeMatrix.py -p ${file} -a ${assignment} -r ${radius} -d ${mdist}"
-    
+    if [ $rerun = true ] ; then
+      python_call=$python_call" -f"
+    fi
+    if [ $stim = true ] ; then
+      python_call=$python_call" -s"
+    fi
     if [ $testrun = true ]; then
       echo "this is the call that would run: "
       echo $python_call
@@ -137,6 +147,13 @@ run_loop() {
 #    echo "${file}"
     
     python_call="python ${CODEDIR}/Python/MRtrix/calculate_connectome.py -p ${file}"
+    
+    if [ $rerun = true ] ; then
+      python_call=$python_call" -f"
+    fi
+    if [ $stim = true ] ; then
+      python_call=$python_call" -s"
+    fi
     
     if [ $testrun = true ]; then
       echo "this is the call that would run: "
@@ -157,16 +174,17 @@ run_loop() {
 testrun=false
 rerun=false
 
-while getopts "hd:s:a:r:tfm:e:" option; do
+while getopts "hd:l:a:r:tfm:e:s" option; do
    case $option in
       d) d_dir=$OPTARG;;
-      s) subjects=$OPTARG;;
+      l) subjects=$OPTARG;;
       a) assignment=$OPTARG;;
       r) radius=$OPTARG;;
       t) testrun=true;;
       f) rerun=true;;
       m) mdist=$OPTARG;;
       e) experiment=$OPTARG;;
+      s) stim=true;;
       h | * | :) Help && exit;;
    esac
 done
@@ -226,7 +244,7 @@ then
     then
       subject=$(basename "$sf")
       echo "valid subject: $subject"
-      run_loop "$subject" "$assignment" $rerun $testrun $radius $mdist $experiment
+      run_loop "$subject" "$assignment" $rerun $testrun $radius $mdist $experiment $stim
 #    else
 #      echo "skipping $sf"
     fi
@@ -247,7 +265,7 @@ else
     do
       echo "$subject"
       
-      run_loop "$subject" "$assignment" $rerun $testrun $radius $mdist $experiment
+      run_loop "$subject" "$assignment" $rerun $testrun $radius $mdist $experiment $stim
 
     done < "$subjects"
   fi

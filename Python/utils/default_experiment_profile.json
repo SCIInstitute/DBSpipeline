@@ -1,0 +1,11 @@
+{
+  "subject" : [ "S1" ],
+  "experiment_name" : "default"
+  "lookup_table" : "connectome_lookup.csv"
+  "left_ROI" : [1001],
+  "right_ROI" : [1016]
+}
+  
+  
+  
+

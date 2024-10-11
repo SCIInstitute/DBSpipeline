@@ -9,11 +9,13 @@ Convert MRTRIX3 tck file to SCIRun Pts/Edges
 import argparse
 from nibabel import streamlines
 import numpy as np
+import scipy.io
 
 def convertPtsEdges(filename, tract_datafile=None):
     extractedTckFile = streamlines.load(filename)
     pts = np.zeros((extractedTckFile.streamlines.total_nb_rows, 3))
     edges = np.zeros((extractedTckFile.streamlines.total_nb_rows - len(extractedTckFile.streamlines),2), dtype=int)
+    
     currentPts = 0
     currentEdges = 0
 
@@ -29,6 +31,7 @@ def convertPtsEdges(filename, tract_datafile=None):
     for track in extractedTckFile.streamlines:
         trackNodes = track.copy()
         pts[currentPts:currentPts+trackNodes.shape[0],:] = trackNodes * [-1,-1,1]
+        track_index[currentPts:currentPts+trackNodes.shape[0]] = k
         edges[currentEdges:currentEdges+trackNodes.shape[0]-1,0] = np.arange(currentPts,currentPts+trackNodes.shape[0]-1, dtype=int)
         edges[currentEdges:currentEdges+trackNodes.shape[0]-1,1] = np.arange(currentPts+1,currentPts+trackNodes.shape[0], dtype=int)
 
@@ -56,7 +59,10 @@ if __name__ == "__main__":
         np.savetxt(args.output_path + ".edge", edges, fmt="%d", delimiter=" ")
         np.savetxt(args.output_path + ".pts", pts, fmt="%.8f", delimiter=" ")
         np.savetxt(args.output_path + ".tckdata", tract_data, fmt="%.8f", delimiter=" ")
+        scipy.io.savemat(args.output_path + ".mat", {"edge" : edges, "pts" : pts, "data" : tract_data })
+        
     else:
         pts, edges = convertPtsEdges(args.input_tck, args.tract_data)
         np.savetxt(args.output_path + ".edge", edges, fmt="%d", delimiter=" ")
         np.savetxt(args.output_path + ".pts", pts, fmt="%.8f", delimiter=" ")
+        scipy.io.savemat(args.output_path + ".mat", {"edge" : edges, "pts" : pts })

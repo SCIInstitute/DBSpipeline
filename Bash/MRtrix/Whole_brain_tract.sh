@@ -68,15 +68,15 @@ mkdir -p ${sub_dir}/${rel_path3}
 # running in CWD, so run in subject dir?
 # ${subject}/Tractography dir
 T1file=${sub_dir}/${rel_path2}/T1_5tt.nii.gz
-seed_dy=${sub_dir}/${rel_path2}/wmfod_norm.mif
+FOD_file=${sub_dir}/${rel_path2}/wmfod_norm.mif
 out_tck=${sub_dir}/${rel_path3}/whole_brain_fibers.tck
 
-first_tckgen="tckgen -act $T1file -seed_dynamic $seed_dy -select 10000000 -cutoff 0.1 $seed_dy $out_tck -force"
+first_tckgen="tckgen -act $T1file -seed_dynamic $FOD_file -select 10000000 -cutoff 0.1 $FOD_file $out_tck -force"
 
 if [ "$dryrun" = false ]; then
   eval "$first_tckgen"
 else
-  check=($(ls -1 $T1file $seed_dy $out_tck ))
+  check=($(ls -1 $T1file $FOD_file $out_tck ))
   echo "$check[@]"
   echo "$first_tckgen"
 fi
@@ -99,11 +99,11 @@ done
 mu_file=${sub_dir}/${rel_path3}/sift2_mu.txt
 weights_file=${sub_dir}/${rel_path3}/sift2_weights.txt
 
-tck_sh_1="tcksift2 -act $T1file -out_mu $mu_file $out_tck $seed_dy $weights_file"
+tck_sh_1="tcksift2 -act $T1file -out_mu $mu_file $out_tck $FOD_file $weights_file"
 if [ "$dryrun" = false ]; then
   eval "$tck_sh_1"
 else
-  check=($(ls -1 $T1file $mu_file $out_tck $seed_dy $weights_file))
+  check=($(ls -1 $T1file $mu_file $out_tck $FOD_file $weights_file))
   echo "$check[@]"
   echo "$tck_sh_1"
 fi
@@ -132,6 +132,8 @@ out_tck_100k_ACPC=${sub_dir}/${rel_path3}/whole_brain_100k_fibers_ACPC.tck
 warp_call="warpinit ${T1_acpc_fname} ${warp_fname} -force"
 mrtrans_call="mrtransform ${warp_fname} -linear ${ACPC_fname} ${Trans_fname} -template ${b0_fname} -interp cubic -nan -force"
 tcktrans_call="tcktransform ${out_tck_100k} ${Trans_fname} ${out_tck_100k_ACPC} -force"
+
+
 if [ "$dryrun" = false ]; then
   eval "$warp_call"
   eval "$mrtrans_call"
