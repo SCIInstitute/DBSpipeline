@@ -83,7 +83,8 @@ def append_lookup_file(lookup, profile, **kwargs):
     stim_tags.append(stim_string)
     
     # TODO: ROIs need to be index of the connectome matrix, not the lookup table. Also left and right
-    ROIs = list(range(begin_idx, begin_idx+len(stim_fnames)))
+    n_stims = len(stim_fnames)
+    ROIs = list(range(begin_idx, begin_idx+n_stims))
     stim_output_files["ROIs"] = ROIs
 
     stim_output_files["nifti_lookup_outputfiles"].append( os.path.join(stim_out, "HCP_parc_all_"+experiment+"_"+stim_string+"_lookup.nii.gz"))
@@ -127,19 +128,19 @@ def table_2_atlas(lookup, profile, output_files ):
     seg_dirs = lookup['Path'][lookup['Filename'] == file].unique()[0]
     main_index = np.array(lookup['Index'][lookup['Filename'] == file])
     local_index = np.array(lookup['File Index'][lookup['Filename'] == file])
-
+    #
     fullfile = os.path.join(profile["segPath"], seg_dirs, file)
     if os.path.splitext(file)[1] == ".nrrd":
       img = readNRRD(fullfile)
     else:
       img = nibabel.load(fullfile)
-      
+    #
     img_resamp = nibabel.processing.resample_from_to(img, HCP,order=0)
     img_data = img_resamp.get_fdata()
     data_add = img_data.copy()
     for j in range(0,len(local_index)):
       data_add[img_data == local_index[j]] = int(main_index[j])
-
+    #
     All_data[data_add != 0] = data_add[data_add != 0]
 
   All_data = All_data.astype(int)
@@ -148,10 +149,10 @@ def table_2_atlas(lookup, profile, output_files ):
   nibabel.save(All_to_nii, output_files["nifti_lookup_outputfile"])
 
   #Create Key for MRtrix image
-  mrtrix_key = {}
-  mrtrix_key['Lookup Index'] = np.unique(All_data)[1:].tolist()
-  mrtrix_key['MRtrix Index'] = list(range(1,len(np.unique(All_data)[1:].tolist())+1))
-
+  mrtrix_key = {  'Lookup Index' : np.unique(All_data)[1:].tolist(),
+                  'MRtrix Index' : list(range(1,len(np.unique(All_data)[1:].tolist())+1))
+  }
+  
   mrtrix_data = All_data.copy()
   for i in range(0,len(mrtrix_key['Lookup Index'])):
       mrtrix_data[All_data == mrtrix_key['Lookup Index'][i]] = mrtrix_key['MRtrix Index'][i]
@@ -162,7 +163,7 @@ def table_2_atlas(lookup, profile, output_files ):
   
   mrtrix_save.to_csv(output_files["matkey_outputname"])
   
-  return
+  return mrtrix_save
   
   
 

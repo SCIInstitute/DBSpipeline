@@ -8,6 +8,11 @@ python3 calculate_connectome.py --matrix <connectome_matrix> --subject <subject>
 
 python3 calculate_connectome.py --matrix "/Users/jess/Dropbox/CT DBS Human/CENTURY S Patients/p102 (44)/MRtrix/Tractography/Cleaned/connectome_matrix_1.csv --subject "p102 (44)" --left_ROI 371 --right_ROI 372
 
+python calculate_connectome.py -p /Users/jess/UF_brainstim/HiperGator_Connectome/p363/Simprofile.json -s
+
+python calculate_connectome.py -p <profile.json> <flags -s>
+
+
 revised to match lookup table
 
 l - 1001
@@ -276,7 +281,7 @@ def main():
       stim_df_outputfile = os.path.join(profile["stimoutpath"], "Region_Connectivity_"+stim_experiment+".csv")
       stim_df_outputfiles.append(stim_df_outputfile)
       
-      stim_df_outputfile_ips = os.path.join(profile["stimoutpath"], "Region_Connectivity_"+stim_experiment+"ipsolateral.csv")
+      stim_df_outputfile_ips = os.path.join(profile["stimoutpath"], "Region_Connectivity_"+stim_experiment+"ipsilateral.csv")
       stim_df_outputfiles_ips.append(stim_df_outputfile_ips)
       
       stim_df_outputfile_con = os.path.join(profile["stimoutpath"], "Region_Connectivity_"+stim_experiment+"contralateral.csv")
