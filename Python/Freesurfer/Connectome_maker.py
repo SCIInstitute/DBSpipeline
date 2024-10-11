@@ -68,10 +68,13 @@ def append_lookup_file(lookup, profile, **kwargs):
 
   stim_tags =  []
   for row in stim_table.iterrows():
-    stim_string = "stim_"+str(row[0])+"-"
+    stim_string = experiment+"_stim_"+str(row[0])+"-"
     stim_fnames = []
     stim_labels = []
     for stim_key, stim_fname in row[1].items():
+#      print(stim_key, stim_fname)
+      if isinstance(stim_fname, float) and np.isnan(stim_fname):
+        continue
       stim_fnames.append(stim_fname)
       sfroot, ext = os.path.splitext(stim_fname)
       stript_sfroot = "_".join([ t for t in sfroot.split("_") if not ("stim".casefold() in t.casefold() or  stim_key.casefold() in t.casefold()) ])
@@ -81,11 +84,10 @@ def append_lookup_file(lookup, profile, **kwargs):
     stim_lookup_fname = os.path.join(stim_out, "connectome_lookup_"+stim_string+".csv")
     stim_output_files["lookup_tables"].append(stim_lookup_fname)
     stim_tags.append(stim_string)
-    
-    # TODO: ROIs need to be index of the connectome matrix, not the lookup table. Also left and right
+
     n_stims = len(stim_fnames)
     ROIs = list(range(begin_idx, begin_idx+n_stims))
-    stim_output_files["ROIs"] = ROIs
+    stim_output_files["ROIs"].append(ROIs)
 
     stim_output_files["nifti_lookup_outputfiles"].append( os.path.join(stim_out, "HCP_parc_all_"+experiment+"_"+stim_string+"_lookup.nii.gz"))
     stim_output_files["nifti_outputfiles"].append( os.path.join(stim_out, "HCP_parc_all_"+experiment+"_"+stim_string+".nii.gz"))
@@ -219,6 +221,14 @@ def main():
         json.dump(profile, fp, sort_keys=True, indent=2)
     else:
       print("output files exist.  Use '-f' to force overwrite")
+  else:
+    # make sure to run the anatomy data
+    # TODO: restructure to avoid all the repeat calls and profiles saves
+    table_2_atlas(lookup, profile, output_files )
+    profile["Connectome_maker"] = { "Output_files": output_files}
+    
+    with open(args.profile, 'w') as fp:
+      json.dump(profile, fp, sort_keys=True, indent=2)
   
   
   
@@ -260,6 +270,7 @@ def main():
 #      print(st_output_fs)
       
       table_2_atlas(st_lookup, profile, st_output_fs )
+    
     
     if "stim" in profile.keys():
       profile["stim"]["Connectome_maker"] = {
