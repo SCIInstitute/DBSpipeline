@@ -13,6 +13,21 @@ scriptpath = os.path.dirname(os.path.abspath(__file__))
 #   experiment : github? probably with the data
 #   subjects : centralized or in subject folder
 
+"""
+Some notes:
+luigi handles data workflows in python:
+https://github.com/spotify/luigi?tab=readme-ov-file
+
+still not sure that luigi would be work implementing for these pipelines, since I'm not sure what the overhead is, or what it actually supports
+There are some similarities to SCIRun.  Maybe we can include somekind of SCIrun pipeline manager into the mix in the proposal
+other packages for other frameworks exists, but luigi is python and open source. Others mentioned in sources: Apache Beam, Airflow, Dask, Prefect
+
+https://github.com/PrefectHQ/prefect
+https://github.com/apache/beam
+https://github.com/apache/airflow
+https://github.com/dask/dask
+
+"""
 
 def build_parser():
   parser = argparse.ArgumentParser(
