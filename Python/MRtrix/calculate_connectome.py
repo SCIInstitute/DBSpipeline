@@ -46,7 +46,7 @@ def build_parser():
                       help="include stimulations",
                       action = "store_true", dest="stim")
   parser.add_argument("-f", "--force", required=False,
-                      help="force a rewrite of files",
+                      help="force a rerun/rewrite of files",
                       action = "store_true", dest="rerun")
   return parser
 
