@@ -60,41 +60,37 @@ def run_calc_connectome(df_outputfile, df_outputfile_ips, df_outputfile_con, c_m
   
   lookup_main = pd.read_csv(lookup_table)
   lookup_key = pd.read_csv(matkey_outputname)
-
   
   ROI_list_left = lookup_key.loc[lookup_key["Lookup Index"].isin(ROI_list_left_index),'MRtrix Index'].tolist()
   ROI_list_right = lookup_key.loc[lookup_key["Lookup Index"].isin(ROI_list_right_index),'MRtrix Index'].tolist()
 
-
   data = connect_mat[1:,1:] * mu #Remove unassigned tracts, multiply "Fudge Factor"
-  if True in np.isnan(ROI_list_left):
+  if True in np.isnan(ROI_list_left) or len(ROI_list_left) == 0 :
       #raise Exception('Left region not given. Setting data to 0')
       print('Left region not given. Setting data to 0')
-      data_left = np.zeros((1,len(data)))
-      ROI_list_left = 0
+      data_left = np.zeros((len(data),1))
+      ROI_list_left = [0]
   else:
       ROI_list_left = np.array(ROI_list_left) - 1 #to deal with starting at 1
       data_left = data[:,ROI_list_left]
-      print(data_left.shape)
+#      print(data_left.shape)
       
-  if True in np.isnan(ROI_list_right):
+  if True in np.isnan(ROI_list_right) or len(ROI_list_right) == 0 :
       #raise Exception('Right region not given. Setting data to 0')
       print('Right region not given. Setting data to 0')
-      data_right = np.zeros((1,len(data)))
-      ROI_list_right = 0
+      data_right = np.zeros((len(data),1))
+      ROI_list_right = [0]
   else:
       ROI_list_right = np.array(ROI_list_right) - 1
       data_right = data[:,ROI_list_right]
       
       
   file_dir = profile["tractographyPath"]
-  
   ROI_left = np.sum(data_left,axis=1).flatten() #collapse all regions
-  print(ROI_left.shape)
   ROI_right = np.sum(data_right,axis=1).flatten()
   np.savetxt(os.path.join(file_dir, 'ROI_left.txt'), ROI_left,delimiter=',')
   np.savetxt(os.path.join(file_dir, 'ROI_right.txt'), ROI_right,delimiter=',')
-
+  
   #HCP Macro-regions
   connectome_file = os.path.join(os.environ["CODEDIR"], "Python/connectomics/connectome_maps/HCP_MacroRegions.json")
 
@@ -291,7 +287,11 @@ def main():
       matkey_outputname = profile["stim"]["Connectome_maker"]["Output_files"]["matkey_outputnames"][idx]
       lookup_table = profile["stim"]["Connectome_maker"]["Output_files"]["lookup_tables"][idx]
       
-      run_calc_connectome(stim_df_outputfile, stim_df_outputfile_ips, stim_df_outputfile_con, c_matrix, stim_experiment, [stim_ROIs[0]], [stim_ROIs[1]], lookup_table, matkey_outputname,  profile)
+      stim_right_ROI = [ roi for roi in [stim_ROIs["Right"][idx]] if ~np.isnan(roi)]
+      stim_left_ROI = [ roi for roi in [stim_ROIs["Left"][idx]] if ~np.isnan(roi)]
+      
+      
+      run_calc_connectome(stim_df_outputfile, stim_df_outputfile_ips, stim_df_outputfile_con, c_matrix, stim_experiment, stim_right_ROI, stim_left_ROI, lookup_table, matkey_outputname,  profile)
       
     profile["stim"]["calculate_connectome"] = { "Output_files":
         {"df_outputfile" : stim_df_outputfiles }
