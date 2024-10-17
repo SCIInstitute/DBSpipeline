@@ -49,7 +49,7 @@ def build_parser():
 default_lookup = os.path.join(os.environ["CODEDIR"], 'Bash/Freesurfer/connectome_lookup_v1.csv')
 default_experiment=""
 
-def append_lookup_file(lookup, profile, **kwargs):
+def append_lookup_file(profile, **kwargs):
   # stim regions will start with 3000s?
   # always want the stim regions to go last because of overwriting
   default_kwargs = { "begin_idx" : 3000 }
@@ -61,33 +61,43 @@ def append_lookup_file(lookup, profile, **kwargs):
   stim_table = pd.read_csv(profile["stim_table"],index_col=False)
   stim_out = profile["stimoutpath"]
   
+  lookup = pd.read_csv(profile["lookup_table"],index_col=False)
+  
   if not os.path.exists(stim_out):
     os.makedirs(stim_out)
   
-  stim_output_files = {"lookup_tables" : [], "nifti_lookup_outputfiles" : [], "nifti_outputfiles" : [], "matkey_outputnames" : [], "ROIs" : [] }
-
+  stim_output_files = {"lookup_tables" : [], "nifti_lookup_outputfiles" : [], "nifti_outputfiles" : [], "matkey_outputnames" : [], "ROIs" : {}}
+  
+  ROI_table = {}
+  for idx, col in enumerate(stim_table.columns):
+    stim_output_files["ROIs"][col] = []
+    ROI_table[col] = begin_idx + idx
+  
   stim_tags =  []
   for row in stim_table.iterrows():
-    stim_string = experiment+"_stim_"+str(row[0])+"-"
+    stim_string = "stim_"+str(row[0])+"-"
     stim_fnames = []
     stim_labels = []
+    #
+    ROIs = []
+    cnt = begin_idx
     for stim_key, stim_fname in row[1].items():
-#      print(stim_key, stim_fname)
+    #      print(stim_key, stim_fname)
       if isinstance(stim_fname, float) and np.isnan(stim_fname):
+        stim_output_files["ROIs"][stim_key].append(np.nan)
         continue
       stim_fnames.append(stim_fname)
       sfroot, ext = os.path.splitext(stim_fname)
       stript_sfroot = "_".join([ t for t in sfroot.split("_") if not ("stim".casefold() in t.casefold() or  stim_key.casefold() in t.casefold()) ])
       stim_labels.append(stim_key[0] + "_" + stript_sfroot)
       stim_string+=stim_key + "_" + stript_sfroot + "-"
+      stim_output_files["ROIs"][stim_key].append(cnt)
+      ROIs.append(cnt)
+      cnt += 1
       
     stim_lookup_fname = os.path.join(stim_out, "connectome_lookup_"+stim_string+".csv")
     stim_output_files["lookup_tables"].append(stim_lookup_fname)
     stim_tags.append(stim_string)
-
-    n_stims = len(stim_fnames)
-    ROIs = list(range(begin_idx, begin_idx+n_stims))
-    stim_output_files["ROIs"].append(ROIs)
 
     stim_output_files["nifti_lookup_outputfiles"].append( os.path.join(stim_out, "HCP_parc_all_"+experiment+"_"+stim_string+"_lookup.nii.gz"))
     stim_output_files["nifti_outputfiles"].append( os.path.join(stim_out, "HCP_parc_all_"+experiment+"_"+stim_string+".nii.gz"))
@@ -108,8 +118,13 @@ def append_lookup_file(lookup, profile, **kwargs):
   return stim_output_files
   
   
-def table_2_atlas(lookup, profile, output_files ):
+def table_2_atlas(lookup_file, profile, output_files ):
 
+  print("==========")
+  print("Making Atlas file from lookup table: ")
+  print(lookup_file)
+  
+  lookup = pd.read_csv(lookup_file,index_col=False)
   seg_files = lookup['Filename'].unique()
   #seg_dirs = lookup['Path'].unique()
   seg_dirs = lookup['Path'][lookup['Filename'] == seg_files[0]].unique()[0]
@@ -165,6 +180,9 @@ def table_2_atlas(lookup, profile, output_files ):
   
   mrtrix_save.to_csv(output_files["matkey_outputname"])
   
+  print("files generated:")
+  print(output_files)
+  
   return mrtrix_save
   
   
@@ -188,7 +206,6 @@ def main():
   #%%
 
   print(lookup_file)
-  lookup = pd.read_csv(lookup_file,index_col=False)
   
   print(experiment)
 
@@ -214,7 +231,7 @@ def main():
     print(args.rerun)
     if args.rerun:
       print("overwriting output files")
-      table_2_atlas(lookup, profile, output_files )
+      table_2_atlas(lookup_file, profile, output_files )
       profile["Connectome_maker"] = { "Output_files": output_files}
       
       with open(args.profile, 'w') as fp:
@@ -224,7 +241,7 @@ def main():
   else:
     # make sure to run the anatomy data
     # TODO: restructure to avoid all the repeat calls and profiles saves
-    table_2_atlas(lookup, profile, output_files )
+    table_2_atlas(lookup_file, profile, output_files )
     profile["Connectome_maker"] = { "Output_files": output_files}
     
     with open(args.profile, 'w') as fp:
@@ -240,7 +257,7 @@ def main():
     else:
       raise ValueError("Cannot run --stim (-s) option without stimulation table filepath (profile['stim_table'])")
 
-    stim_output_files = append_lookup_file(lookup, profile)
+    stim_output_files = append_lookup_file(profile)
 #    print("--- checking files ---")
 #    print(stim_output_files)
     
@@ -260,7 +277,8 @@ def main():
     
     for idx in range(len(stim_output_files["lookup_tables"])):
       
-      st_lookup = pd.read_csv(stim_output_files["lookup_tables"][idx], index_col=False)
+      st_lookup_file = stim_output_files["lookup_tables"][idx]
+#      st_lookup = pd.read_csv(stim_output_files["lookup_tables"][idx], index_col=False)
       st_output_fs = {"nifti_outputfile": stim_output_files["nifti_outputfiles"][idx],
           "nifti_lookup_outputfile" : stim_output_files["nifti_lookup_outputfiles"][idx],
           "matkey_outputname" : stim_output_files["matkey_outputnames"][idx]
@@ -269,20 +287,24 @@ def main():
 #      print("should make these files :")
 #      print(st_output_fs)
       
-      table_2_atlas(st_lookup, profile, st_output_fs )
+      table_2_atlas(st_lookup_file, profile, st_output_fs )
     
+    ROIs = stim_output_files["ROIs"]
+    stim_tags = stim_output_files["stim_tags"]
+    stim_output_files.pop("ROIs")
+    stim_output_files.pop("stim_tags")
     
     if "stim" in profile.keys():
       profile["stim"]["Connectome_maker"] = {
                              "Output_files" : stim_output_files,
-                             "ROIs" : stim_output_files["ROIs"],
-                             "stim_tags" : stim_output_files["stim_tags"]
+                             "ROIs" : ROIs,
+                             "stim_tags" : stim_tags
       }
     else:
       profile["stim"] = { "Connectome_maker" :
                             { "Output_files" : stim_output_files,
-                              "ROIs" : stim_output_files["ROIs"],
-                              "stim_tags" : stim_output_files["stim_tags"]
+                              "ROIs" : ROIs,
+                              "stim_tags" : stim_tags
                             }
                         }
                       

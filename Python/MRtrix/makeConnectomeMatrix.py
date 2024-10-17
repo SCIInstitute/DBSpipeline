@@ -50,6 +50,9 @@ def build_parser():
   parser.add_argument("-s", "--stim", required=False,
                       help="include stimulations",
                       action = "store_true", dest="stim")
+  parser.add_argument("-f", "--force", required=False,
+                      help="force rerun/rewrite of the pipeline",
+                      action = "store_true", dest="rerun")
   return parser
 
 def run_connectome_matrix(connectome_matrix, input_file, lookup_table,  experiment, profile, assignment, radius, distance):
