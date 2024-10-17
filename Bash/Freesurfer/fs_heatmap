@@ -4,13 +4,15 @@
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=16gb
-#SBATCH --time=12:00:00
+#SBATCH --time=24:00:00
 #SBATCH --job-name=freesurfer
 #SBATCH --mail-type=ALL
 #SBATCH --output=freesurfer_%j.out
 
 # example call
-# sbatch --mail-user=jess.tate@ufl.edu fs_heatmap fs_pDummy /blue/butsonc/Butson_Lab/Connectome/Testing/pDummy/Imaging/T1_pre_scirun.nii.gz pDummy
+# sbatch --mail-user=jess.tate@ufl.edu $CODEDIR/Bash/Freesurfer/fs_heatmap fs_pDummy T1_pre_scirun.nii.gz pDummy
+# OR
+# sbatch --mail-user=jess.tate@ufl.edu $CODEDIR/Bash/Freesurfer/fs_heatmap fs_pDummy T1_pre_scirun.nii.gz pDummy FLAIR_ACPC.nii.gz
 ###
 # TODO: figure out spaces in paths problem
 # TODO: FS ID lookup table
@@ -39,10 +41,17 @@ rel_path4="Segmentations/Hotspot"
 
 
 set -e
-echo recon-all -s "${1}" -i "${2}" -all -parallel -openmp 8
 
+if [ -z "${4}" ]
+then
+echo recon-all -s "${1}" -i "${2}" -all -parallel -openmp 8
+recon-all -s "${1}" -i "${2}" -all -parallel -openmp 8
+else
+echo recon-all -s "${1}" -i "${2}" -all -parallel -openmp 8 -FLAIR "${4}" -FLAIRpial
+recon-all -s "${1}" -i "${2}" -all -parallel -openmp 8 -FLAIR "${4}" -FLAIRpial
+fi
 # comment out this line to make faster
-recon-all -s "${1}" -i "${2}" -all -parallel -openmp 8 #-FLAIR $3 -FLAIRpial
+# recon-all -s "${1}" -i "${2}" -all -parallel -openmp 8 -FLAIR "${4}" -FLAIRpial
 
 m2m_id="$1"
 subject=${m2m_id}
