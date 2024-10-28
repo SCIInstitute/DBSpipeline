@@ -31,7 +31,7 @@ def convertPtsEdges(filename, tract_datafile=None):
     for track in extractedTckFile.streamlines:
         trackNodes = track.copy()
         pts[currentPts:currentPts+trackNodes.shape[0],:] = trackNodes * [-1,-1,1]
-        track_index[currentPts:currentPts+trackNodes.shape[0]] = counter
+#        track_index[currentPts:currentPts+trackNodes.shape[0]] = k
         edges[currentEdges:currentEdges+trackNodes.shape[0]-1,0] = np.arange(currentPts,currentPts+trackNodes.shape[0]-1, dtype=int)
         edges[currentEdges:currentEdges+trackNodes.shape[0]-1,1] = np.arange(currentPts+1,currentPts+trackNodes.shape[0], dtype=int)
 

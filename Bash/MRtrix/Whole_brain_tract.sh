@@ -24,6 +24,7 @@ if [[ -z $1 ]]; then
 fi
 
 dryrun=false
+#dryrun=true
 
 subject=$1
 sub_dir="${DATADIR}/${subject}"
@@ -168,8 +169,8 @@ if [ "$dryrun" = false ]; then
   eval "$py_call"
   eval "$SCIRun_call"
 else
-  check=($(ls -1 ${out_tck_100k_ACPC} ${sr_out_tck_100K}.edge ${sr_out_tck_100K}.pts ))
-  echo "$check[@]"
+#  check=($(ls -1 ${out_tck_100k_ACPC} ${sr_out_tck_100K}.edge ${sr_out_tck_100K}.pts ))
+#  echo "$check[@]"
   echo "$py_call"
   echo "$SCIRun_call"
 fi
