@@ -58,9 +58,8 @@ def segmentationVolumes(imgdata, volSize=1):
       cntr += 1
     #
     n_ck = np.where(checked == 0)
-    if len(n_ck)==0:
-      break
-    idx = (n_ck[0][0], n_ck[1][0], n_ck[2][0])
+    if len(n_ck)>0:
+      idx = (n_ck[0][0], n_ck[1][0], n_ck[2][0])
   #
   ord_ind = np.argsort(seg_ind)
   print(seg_vols)
