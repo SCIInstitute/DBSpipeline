@@ -10,7 +10,7 @@ from scipy import io
 def build_parser():
   parser = argparse.ArgumentParser(description='Inputs')
   parser.add_argument("-i", "--input", action="store", dest="inputFile", required=True, help="input file name.  nii or nrrd")
-  parser.add_argument("-o", "--output", action="store", dest="outputFile", required=True, help="output file name, saved as matlab file")
+  parser.add_argument("-o", "--output", action="store", dest="outputFile", required=False, help="output file name, saved as matlab file")
   return parser
   
   
@@ -103,8 +103,11 @@ def main():
     raise ValueError("input file not found:", inputFile)
   
   segVols = segVolumesFile(inputFile)
-    
-  outputFile = filename+".mat"
+   
+  if not args.outputFile:
+    outputFile = filename+".mat"
+  else:
+    outputFile = args.outputFile
   print(outputFile)
   
   io.savemat(outputFile, {"segmentationVolumes" : np.array(segVols)})
