@@ -9,7 +9,6 @@
 #SBATCH --partition=gpu
 #SBATCH --gpus=geforce:1
 #SBATCH --mail-type=ALL
-#SBATCH --mail-user=mphook@ufl.edu
 #SBATCH --output=Preproc_%j.out
 
 

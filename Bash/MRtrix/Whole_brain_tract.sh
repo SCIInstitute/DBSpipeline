@@ -6,11 +6,10 @@
 #SBATCH --time=20:00:00
 #SBATCH --job-name=tckgen
 #SBATCH --mail-type=ALL
-#SBATCH --mail-user=mphook@ufl.edu
 #SBATCH --output=tckgen_%j.out
 
 # example call
-# sbatch --mail-user=jess.tate@ufl.edu Whole_brain_tract.sh S1
+# sbatch --mail-user="user"@ufl.edu Whole_brain_tract.sh S1
 
 
 if [[ -z "$SYSNAME" ]]; then

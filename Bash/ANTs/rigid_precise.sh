@@ -6,7 +6,6 @@
 #SBATCH --time=1:00:00
 #SBATCH --job-name=ANTS_rigid
 #SBATCH --mail-type=ALL
-#SBATCH --mail-user=mphook@ufl.edu
 #SBATCH --output=ANTs_rigid_%j.out
 date;hostname;pwd
 

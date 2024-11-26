@@ -10,7 +10,6 @@ set -e
 #Takes HCP annotation file in fsaverage space and puts it in subject space. Also outputs the files for use in tck2connectome
 subject=$1
 
-#codedir=/mnt/z/Dropbox\ \(UFL\)/DataProcessing/Pipeline\ Code
 
 if [ -z "$subject" ]
 then

@@ -7,7 +7,6 @@
 #SBATCH --time=05:00:00
 #SBATCH --job-name=Preproc
 #SBATCH --mail-type=ALL
-#SBATCH --mail-user=mphook@ufl.edu
 #SBATCH --output=Preproc_%j.out
 
 

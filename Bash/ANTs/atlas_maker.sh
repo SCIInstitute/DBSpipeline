@@ -8,7 +8,6 @@
 #SBATCH --time=80:00:00
 #SBATCH --job-name=ANTs_atlas
 #SBATCH --mail-type=ALL
-#SBATCH --mail-user=mphook@ufl.edu
 #SBATCH --output=ANTs_atlas_%j.out
 
 

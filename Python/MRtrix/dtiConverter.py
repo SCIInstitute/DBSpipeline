@@ -22,7 +22,6 @@ fa_img = nib.load("fa.nii.gz")
 fa = fa_img.get_fdata()
 nrrd.write("fa.nrrd",fa)
 #dti_dim = np.asarray(matrix.shape) + 1
-#np.savetxt(r"C:\Users\Matthew\Dropbox (UFL)\Projects\NeuroPaceUH3\NeuroPaceLGS_Data_Analysis\UAB\S300-002\Tractography\Cleaned\dti_dim.txt", dti_dim[0:3], delimiter=',',fmt='%d')
 '''
 #MRtrix dti format
 D11 = matrix[:,:,:,0]
@@ -47,4 +46,4 @@ tensor = np.transpose(tensor)
 print(tensor.shape)
 print(np.min(tensor), np.max(tensor))
 '''
-#np.savetxt(r"C:\Users\Matthew\Dropbox (UFL)\Projects\NeuroPaceUH3\NeuroPaceLGS_Data_Analysis\UAB\S300-002\Tractography\Cleaned\tensor.txt", tensor, delimiter=',',fmt='%1.4e')
+

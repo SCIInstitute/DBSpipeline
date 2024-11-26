@@ -10,7 +10,7 @@
 #SBATCH --output=Connectome_%j.out
 
 # example call
-# sbatch --mail-user=jess.tate@ufl.edu calculate_connectome.sh -l  /blue/butsonc/Butson_Lab/Connectome/Testing/SubjectsShort.txt
+# sbatch --mail-user="user"@ufl.edu calculate_connectome.sh -l  /blue/butsonc/Butson_Lab/Connectome/Testing/SubjectsShort.txt
 
 if [[ -z "$SYSNAME" ]]; then
 echo environment not set.  run makeSysConfig.sh

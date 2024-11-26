@@ -7,7 +7,6 @@
 #SBATCH --time=3:00:00
 #SBATCH --job-name=simnibs
 #SBATCH --mail-type=ALL
-#SBATCH --mail-user=mphook@ufl.edu
 #SBATCH --output=simnibs_%j.out
 
 # . ./sysUtils.sh

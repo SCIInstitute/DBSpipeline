@@ -7,7 +7,6 @@
 #SBATCH --time=12:00:00
 #SBATCH --job-name=freesurf_recon_all
 #SBATCH --mail-type=ALL
-#SBATCH --mail-user=mphook@ufl.edu
 #SBATCH --output=recon_all_%j.out
 
 
