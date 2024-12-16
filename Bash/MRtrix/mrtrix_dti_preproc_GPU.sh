@@ -194,7 +194,7 @@ uniq_num=${#uniq[@]}
 #Fiber Orientation
 echo -e "\nFiber Orientation\n"
 dwi2response dhollander dwi_cleaned_resamp.mif wm.txt gm.txt csf.txt -voxels voxels.mif -force
-if (( $uniq_num > 3))
+if (( $uniq_num > 2))
 then
 	echo -e "\nRunning Multi-shell\n"
 	dwi2fod msmt_csd dwi_cleaned_resamp.mif -mask brain_mask.mif wm.txt wmfod.mif gm.txt gmfod.mif csf.txt csffod.mif -force
