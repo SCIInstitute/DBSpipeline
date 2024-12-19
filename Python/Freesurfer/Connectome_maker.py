@@ -76,7 +76,7 @@ def append_lookup_file(profile, **kwargs):
   
   stim_tags =  []
   for row in stim_table.iterrows():
-    stim_string = "stim_"+str(row[0])+"-"
+    stim_string = "stim_"
     stim_fnames = []
     stim_labels = []
     #
