@@ -22,7 +22,7 @@ module load fsl
 fi
 
 # TODO: figure out where the sif file should live
-apptainer run -B ${PWD}:${PWD} -W ${PWD} -u --cleanenv /home/mphook/blue_butsonc/mphook/THOMAS/thomas.sif bash -c "hipsthomas_csh -i $1"
+apptainer run -B ${PWD}:${PWD} -W ${PWD} -u --cleanenv /home/mphook/blue_butsonc/mphook/THOMAS/thomas.sif bash -c "hipsthomas_csh -i $1 $2" #$2 for -t1 flag
 
 #Left Side
 echo "Left Side"
