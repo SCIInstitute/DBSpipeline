@@ -10,9 +10,10 @@
 #SBATCH --output=freesurfer_%j.out
 
 # example call
-# sbatch --mail-user=jess.tate@ufl.edu $CODEDIR/Bash/Freesurfer/fs_heatmap fs_pDummy T1_pre_scirun.nii.gz pDummy
+# sbatch --mail-user=user@ufl.edu $CODEDIR/Bash/Freesurfer/fs_heatmap fs_pDummy T1_pre_scirun.nii.gz pDummy
 # OR
-# sbatch --mail-user=jess.tate@ufl.edu $CODEDIR/Bash/Freesurfer/fs_heatmap fs_pDummy T1_pre_scirun.nii.gz pDummy FLAIR_ACPC.nii.gz
+# sbatch --mail-user=user@ufl.edu $CODEDIR/Bash/Freesurfer/fs_heatmap fs_pDummy T1_pre_scirun.nii.gz pDummy -FLAIR FLAIR_ACPC.nii.gz -FLAIRpial
+# -FLAIR/FLAIRpial or -T2/T2pial
 ###
 # TODO: figure out spaces in paths problem
 # TODO: FS ID lookup table
@@ -47,8 +48,8 @@ then
 echo recon-all -s "${1}" -i "${2}" -all -parallel -openmp 8
 recon-all -s "${1}" -i "${2}" -all -parallel -openmp 8
 else
-echo recon-all -s "${1}" -i "${2}" -all -parallel -openmp 8 -FLAIR "${4}" -FLAIRpial
-recon-all -s "${1}" -i "${2}" -all -parallel -openmp 8 -FLAIR "${4}" -FLAIRpial
+echo recon-all -s "${1}" -i "${2}" -all -parallel -openmp 8 "${4}" "${5}" "${6}"
+recon-all -s "${1}" -i "${2}" -all -parallel -openmp 8 "${4}" "${5}" "${6}"
 fi
 # comment out this line to make faster
 # recon-all -s "${1}" -i "${2}" -all -parallel -openmp 8 -FLAIR "${4}" -FLAIRpial
