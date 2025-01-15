@@ -35,6 +35,31 @@ def parseSettingString(setting_str, **kwargs):
       "annodes" : re.findall(r"\-(\w+)",setting_str)
   }
   return values
+  
+def stringToMatrix(settings_df, contact_list=[], **kwargs):
+  # settingstr_tup = (left settings, right settings)
+  # one can be empty
+  # TODO: move to hardware parameter file
+  def_contact_list = [ "E0", "A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2", "C3", "E7"]
+  if not contact_list:
+    contact_list = def_contact_list
+   
+  n_settings = len(settings_df)
+  l_devices = settings_df["Left Device"]
+  r_devices = settings_df["Right Device"]
+  
+  devices_sett = [ (l_devices[k], r_devices[k]) for k in range(n_settings) ]
+  uniq_devices = list(set(devices_sett))
+  
+  num_contacts = sum([len(t) for t in uniq_devices])
+  
+  
+  
+  
+    
+  
+  
+  
 
 def main():
 
