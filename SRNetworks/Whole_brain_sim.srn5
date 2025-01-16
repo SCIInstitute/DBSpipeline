@@ -4704,7 +4704,7 @@ nan</value>
 									<name>FormatString</name>
 									<value object_id="_303">
 										<which>2</which>
-										<value>%sStim_Volumes/Stimulation_%s.nrrd</value>
+										<value>%s../Segmentations/Stim/Stimulation_%s.nrrd</value>
 									</value>
 								</second>
 							</item>
@@ -16672,7 +16672,7 @@ nan</value>
 									<name>Filename</name>
 									<value object_id="_1210">
 										<which>2</which>
-										<value>%SCIRUNDATADIR%/Stim_Volumes/StimVol_lead_2_contact_1_-0.933mA_-0.933mA_-0.933mA.nrrd</value>
+										<value>/Users/jess/UF_brainstim/HiperGator_Connectome/S1/SCIRun_Files/Stim_Volumes/Stimulation_RightCM_+E1C+E1B+E1A-CAN_maxAmp_3.5mA.nrrd</value>
 									</value>
 								</second>
 							</item>
@@ -21904,12 +21904,15 @@ p, li { white-space: pre-wrap; }
 		</item>
 	</moduleTags>
 	<disabledModules class_id="24" tracking_level="0" version="0">
-		<count>0</count>
+		<count>1</count>
 		<item_version>0</item_version>
+		<item>ShowField:89</item>
 	</disabledModules>
 	<disabledConnections>
-		<count>0</count>
+		<count>2</count>
 		<item_version>0</item_version>
+		<item>ShowField:89--CreateFieldData:2</item>
+		<item>ViewScene:0--ShowField:89</item>
 	</disabledConnections>
 	<moduleTagLabels class_id="25" tracking_level="0" version="0">
 		<count>0</count>
