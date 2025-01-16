@@ -160,7 +160,7 @@ def main():
   if not os.path.exists(stim_param_dir):
     os.makedirs(stim_param_dir)
   for fstr, mat in zip(all_filestrings, all_mats):
-    fname = "stim_params_"+fstr+".mat"
+    fname = fstr+".mat"
     stim_param_flist.append(fname)
     full_fn = os.path.join(stim_param_dir, fname)
     scipy.io.savemat(full_fn, {"params" : mat, "param_str" : fstr})
@@ -168,7 +168,7 @@ def main():
   profile["stim_param_files"] = stim_param_flist
   
   full_mat = np.vstack(all_mats).T
-  scipy.io.savemat(os.path.join(stim_param_dir, "all_params.mat"), {"params" : full_mat, "param_str" : all_filestrings})
+  scipy.io.savemat(os.path.join(stim_param_dir, "all_params.mat"), {"allparams" : full_mat, "allparam_str" : all_filestrings})
     
   
   tab_fname = profile["experiment"]+".csv"
