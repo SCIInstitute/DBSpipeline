@@ -22,7 +22,8 @@ def build_parser():
                       dest="profile")
   parser.add_argument("-n", "--network", required=False,
                       help="scirun network", dest="SR_net", type=str,  default = def_net)
-
+  parser.add_argument("-d", "--debug", required=False,
+                      help="enable debug mode", action = "store_true", dest="debug_mode" )
   return parser
   
   
@@ -35,17 +36,22 @@ def main():
     profile = json.load(js_file)
     
   p_dir = profile["stim_param_dir"]
+  
+  wh_sr = subprocess.run(["which", "scirun"], capture_output=True)
+  print(wh_sr)
+  
+  #SCIRun_call is an environment variable set to the the SCIRun executable path
+  SCIRun_call = os.environ["SCIRun_call"]
+  
   for p_fname in profile["stim_param_files"]:
     f_fname = os.path.join(p_dir, p_fname)
     print(f_fname)
     os.environ["PARAM_MATRIX"] = f_fname
-    
-    wh_sr = subprocess.run(["which", "scirun"], capture_output=True)
-    print(wh_sr)
-    
-    #SCIRun_call is an environment variable set to the the SCIRun executable path
-    SCIRun_call = os.environ["SCIRun_call"]
+
     sr_call = [SCIRun_call, "-x", "-0", "-E", args.SR_net]
+    if args.debug_mode:
+      sr_call.append("--verbose")
+      
     print(" ".join(sr_call))
     
     subprocess.run(sr_call)
