@@ -3483,7 +3483,7 @@ nan</value>
 									<name>Filename</name>
 									<value object_id="_227">
 										<which>2</which>
-										<value>/Users/jess/UF_brainstim/HiperGator_Connectome/S1/SCIRun_Files/Edge_data.mat</value>
+										<value>/Users/jess/UF_brainstim/HiperGator_Connectome/S1/SCIRun_files/Edge_data.mat</value>
 									</value>
 								</second>
 							</item>
@@ -4744,7 +4744,7 @@ nan</value>
 									<name>FormatString</name>
 									<value object_id="_305">
 										<which>2</which>
-										<value>%sMedtronic_B33015_new.bdl</value>
+										<value>%s/Electrode_Models/Medtronic_B33015_new.bdl</value>
 									</value>
 								</second>
 							</item>
@@ -5116,7 +5116,7 @@ nan</value>
 									<name>Filename</name>
 									<value object_id="_324">
 										<which>2</which>
-										<value>/Users/jess/UF_brainstim/HiperGator_Connectome/S1/SCIRun_Files/Medtronic_B33015_new.bdl</value>
+										<value>/Users/jess/UF_brainstim/HiperGator_ConnectomeElectrode_Models/Medtronic_B33015_new.bdl</value>
 									</value>
 								</second>
 							</item>
@@ -5192,7 +5192,7 @@ nan</value>
 									<name>Filename</name>
 									<value object_id="_329">
 										<which>2</which>
-										<value>/Users/jess/UF_brainstim/HiperGator_Connectome/S1/SCIRun_Files/brainmask_dilate.nrrd</value>
+										<value>/Users/jess/UF_brainstim/HiperGator_Connectome/S1/SCIRun_files/brainmask_dilate.nrrd</value>
 									</value>
 								</second>
 							</item>
@@ -5268,7 +5268,7 @@ nan</value>
 									<name>Filename</name>
 									<value object_id="_334">
 										<which>2</which>
-										<value>/Users/jess/UF_brainstim/HiperGator_Connectome/S1/SCIRun_Files/whole_brain_100k.edge</value>
+										<value>/Users/jess/UF_brainstim/HiperGator_Connectome/S1/SCIRun_files/whole_brain_100k.edge</value>
 									</value>
 								</second>
 							</item>
@@ -5344,7 +5344,7 @@ nan</value>
 									<name>Filename</name>
 									<value object_id="_339">
 										<which>2</which>
-										<value>/Users/jess/UF_brainstim/HiperGator_Connectome/S1/SCIRun_Files/T1_ACPC_slicer_5.nrrd</value>
+										<value>/Users/jess/UF_brainstim/HiperGator_Connectome/S1/SCIRun_files/T1_ACPC_slicer_5.nrrd</value>
 									</value>
 								</second>
 							</item>
@@ -5420,7 +5420,7 @@ nan</value>
 									<name>Filename</name>
 									<value object_id="_344">
 										<which>2</which>
-										<value>/Users/jess/UF_brainstim/HiperGator_Connectome/S1/SCIRun_Files/Rotation_Left_Pal.txt</value>
+										<value>/Users/jess/UF_brainstim/HiperGator_Connectome/S1/SCIRun_files/Rotation_Left_Pal.txt</value>
 									</value>
 								</second>
 							</item>
@@ -5496,7 +5496,7 @@ nan</value>
 									<name>Filename</name>
 									<value object_id="_349">
 										<which>2</which>
-										<value>/Users/jess/UF_brainstim/HiperGator_Connectome/S1/SCIRun_Files/Translation_Left_Pal.txt</value>
+										<value>/Users/jess/UF_brainstim/HiperGator_Connectome/S1/SCIRun_files/Translation_Left_Pal.txt</value>
 									</value>
 								</second>
 							</item>
@@ -5572,7 +5572,7 @@ nan</value>
 									<name>Filename</name>
 									<value object_id="_354">
 										<which>2</which>
-										<value>/Users/jess/UF_brainstim/HiperGator_Connectome/S1/SCIRun_Files/Ax_Rotation_Right_Pal.txt</value>
+										<value>/Users/jess/UF_brainstim/HiperGator_Connectome/S1/SCIRun_files/Ax_Rotation_Right_Pal.txt</value>
 									</value>
 								</second>
 							</item>
@@ -5648,7 +5648,7 @@ nan</value>
 									<name>Filename</name>
 									<value object_id="_359">
 										<which>2</which>
-										<value>/Users/jess/UF_brainstim/HiperGator_Connectome/S1/SCIRun_Files/Ax_Rotation_Right_Thal.txt</value>
+										<value>/Users/jess/UF_brainstim/HiperGator_Connectome/S1/SCIRun_files/Ax_Rotation_Right_Thal.txt</value>
 									</value>
 								</second>
 							</item>
@@ -5724,7 +5724,7 @@ nan</value>
 									<name>Filename</name>
 									<value object_id="_364">
 										<which>2</which>
-										<value>/Users/jess/UF_brainstim/HiperGator_Connectome/S1/SCIRun_Files/Rotation_Left_Thal.txt</value>
+										<value>/Users/jess/UF_brainstim/HiperGator_Connectome/S1/SCIRun_files/Rotation_Left_Thal.txt</value>
 									</value>
 								</second>
 							</item>
@@ -5876,7 +5876,7 @@ nan</value>
 									<name>Filename</name>
 									<value object_id="_374">
 										<which>2</which>
-										<value>/Users/jess/UF_brainstim/HiperGator_Connectome/S1/SCIRun_Files/Translation_Left_Thal.txt</value>
+										<value>/Users/jess/UF_brainstim/HiperGator_Connectome/S1/SCIRun_files/Translation_Left_Thal.txt</value>
 									</value>
 								</second>
 							</item>
@@ -5952,7 +5952,7 @@ nan</value>
 									<name>Filename</name>
 									<value object_id="_379">
 										<which>2</which>
-										<value>/Users/jess/UF_brainstim/HiperGator_Connectome/S1/SCIRun_Files/Ax_Rotation_Left_Pal.txt</value>
+										<value>/Users/jess/UF_brainstim/HiperGator_Connectome/S1/SCIRun_files/Ax_Rotation_Left_Pal.txt</value>
 									</value>
 								</second>
 							</item>
@@ -6028,7 +6028,7 @@ nan</value>
 									<name>Filename</name>
 									<value object_id="_384">
 										<which>2</which>
-										<value>/Users/jess/UF_brainstim/HiperGator_Connectome/S1/SCIRun_Files/Ax_Rotation_Left_Thal.txt</value>
+										<value>/Users/jess/UF_brainstim/HiperGator_Connectome/S1/SCIRun_files/Ax_Rotation_Left_Thal.txt</value>
 									</value>
 								</second>
 							</item>
@@ -6104,7 +6104,7 @@ nan</value>
 									<name>Filename</name>
 									<value object_id="_389">
 										<which>2</which>
-										<value>/Users/jess/UF_brainstim/HiperGator_Connectome/S1/SCIRun_Files/Rotation_Right_Pal.txt</value>
+										<value>/Users/jess/UF_brainstim/HiperGator_Connectome/S1/SCIRun_files/Rotation_Right_Pal.txt</value>
 									</value>
 								</second>
 							</item>
@@ -6180,7 +6180,7 @@ nan</value>
 									<name>Filename</name>
 									<value object_id="_394">
 										<which>2</which>
-										<value>/Users/jess/UF_brainstim/HiperGator_Connectome/S1/SCIRun_Files/Translation_Right_Pal.txt</value>
+										<value>/Users/jess/UF_brainstim/HiperGator_Connectome/S1/SCIRun_files/Translation_Right_Pal.txt</value>
 									</value>
 								</second>
 							</item>
@@ -6256,7 +6256,7 @@ nan</value>
 									<name>Filename</name>
 									<value object_id="_399">
 										<which>2</which>
-										<value>/Users/jess/UF_brainstim/HiperGator_Connectome/S1/SCIRun_Files/Rotation_Right_Thal.txt</value>
+										<value>/Users/jess/UF_brainstim/HiperGator_Connectome/S1/SCIRun_files/Rotation_Right_Thal.txt</value>
 									</value>
 								</second>
 							</item>
@@ -6332,7 +6332,7 @@ nan</value>
 									<name>Filename</name>
 									<value object_id="_404">
 										<which>2</which>
-										<value>/Users/jess/UF_brainstim/HiperGator_Connectome/S1/SCIRun_Files/Translation_Right_Thal.txt</value>
+										<value>/Users/jess/UF_brainstim/HiperGator_Connectome/S1/SCIRun_files/Translation_Right_Thal.txt</value>
 									</value>
 								</second>
 							</item>
@@ -16672,7 +16672,7 @@ nan</value>
 									<name>Filename</name>
 									<value object_id="_1210">
 										<which>2</which>
-										<value>/Users/jess/UF_brainstim/HiperGator_Connectome/S1/SCIRun_Files/../Segmentations/Stim/Stimulation_RightCM_+E1C+E1B+E1A-CAN_maxAmp_3.5mA.nrrd</value>
+										<value>/Users/jess/UF_brainstim/HiperGator_Connectome/S1/Segmentations/Stim/Stimulation_RightCM_+E1C+E1B+E1A-CAN_maxAmp_3.5mA.nrrd</value>
 									</value>
 								</second>
 							</item>
@@ -17465,6 +17465,18 @@ nan</value>
 				</port2_>
 			</item>
 			<item>
+				<moduleId1_>GetStringsFromBundle:0</moduleId1_>
+				<port1_>
+					<name>string2</name>
+					<id>0</id>
+				</port1_>
+				<moduleId2_>PrintStringIntoString:2</moduleId2_>
+				<port2_>
+					<name>Input</name>
+					<id>1</id>
+				</port2_>
+			</item>
+			<item>
 				<moduleId1_>ImportMatricesFromMatlab:3</moduleId1_>
 				<port1_>
 					<name>Matrix1</name>
@@ -17795,18 +17807,6 @@ nan</value>
 					<id>0</id>
 				</port1_>
 				<moduleId2_>PrintStringIntoString:27</moduleId2_>
-				<port2_>
-					<name>Input</name>
-					<id>0</id>
-				</port2_>
-			</item>
-			<item>
-				<moduleId1_>PrintStringIntoString:0</moduleId1_>
-				<port1_>
-					<name>Output</name>
-					<id>0</id>
-				</port1_>
-				<moduleId2_>PrintStringIntoString:2</moduleId2_>
 				<port2_>
 					<name>Input</name>
 					<id>0</id>
