@@ -41,7 +41,10 @@ for hemi in ['left', 'right']:
     atlas_new[CL_dilate==2] = 17 #add only where in thalamus bounds
     
     for nuc in nuclei:
-        nuc_num = int(nuc.split('-')[0])
+        try:
+            nuc_num = int(nuc.split('-')[0])
+        except:
+            continue #skip non-numbered files
         if nuc_num > 20:
             continue #skip VL conglomeration
         if nuc_num == 1:
@@ -63,7 +66,10 @@ for hemi in ['left', 'right']:
     
     # Save out relevant nuclei
     for nuc in nuclei:
-        nuc_num = int(nuc.split('-')[0])
+        try:
+            nuc_num = int(nuc.split('-')[0])
+        except:
+            continue
         nuc_name = nuc.split('-')[1].split('_')[0]
         if nuc_num in [7,11,12]:
             x,y,z = np.where(atlas_new == nuc_num)
