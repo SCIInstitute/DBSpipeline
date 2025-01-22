@@ -4704,7 +4704,7 @@ nan</value>
 									<name>FormatString</name>
 									<value object_id="_303">
 										<which>2</which>
-										<value>%s../Segmentations/Stim/Stimulation_%s.nrrd</value>
+										<value>%s/%s/Segmentations/Stim/Stimulation_%s.nrrd</value>
 									</value>
 								</second>
 							</item>
@@ -16706,7 +16706,7 @@ nan</value>
 			</item>
 		</modules>
 		<connections class_id="13" tracking_level="0" version="0">
-			<count>237</count>
+			<count>238</count>
 			<item_version>0</item_version>
 			<item class_id="14" tracking_level="0" version="0">
 				<moduleId1_>ApplyFEMCurrentSource:0</moduleId1_>
@@ -17189,6 +17189,18 @@ nan</value>
 				</port2_>
 			</item>
 			<item>
+				<moduleId1_>CreateString:2</moduleId1_>
+				<port1_>
+					<name>NewString</name>
+					<id>0</id>
+				</port1_>
+				<moduleId2_>PrintStringIntoString:18</moduleId2_>
+				<port2_>
+					<name>Input</name>
+					<id>5</id>
+				</port2_>
+			</item>
+			<item>
 				<moduleId1_>ExtractIsosurface:0</moduleId1_>
 				<port1_>
 					<name>OutputField</name>
@@ -17438,6 +17450,18 @@ nan</value>
 				<port2_>
 					<name>Input</name>
 					<id>0</id>
+				</port2_>
+			</item>
+			<item>
+				<moduleId1_>GetStringsFromBundle:0</moduleId1_>
+				<port1_>
+					<name>string2</name>
+					<id>0</id>
+				</port1_>
+				<moduleId2_>PrintStringIntoString:18</moduleId2_>
+				<port2_>
+					<name>Input</name>
+					<id>4</id>
 				</port2_>
 			</item>
 			<item>
@@ -17747,18 +17771,6 @@ nan</value>
 					<id>0</id>
 				</port1_>
 				<moduleId2_>PrintStringIntoString:17</moduleId2_>
-				<port2_>
-					<name>Input</name>
-					<id>0</id>
-				</port2_>
-			</item>
-			<item>
-				<moduleId1_>PrintStringIntoString:0</moduleId1_>
-				<port1_>
-					<name>Output</name>
-					<id>0</id>
-				</port1_>
-				<moduleId2_>PrintStringIntoString:18</moduleId2_>
 				<port2_>
 					<name>Input</name>
 					<id>0</id>
@@ -18973,7 +18985,7 @@ nan</value>
 				<moduleId2_>PrintStringIntoString:18</moduleId2_>
 				<port2_>
 					<name>Input</name>
-					<id>3</id>
+					<id>6</id>
 				</port2_>
 			</item>
 			<item>
@@ -19959,8 +19971,8 @@ nan</value>
 		<item>
 			<first>PrintStringIntoString:18</first>
 			<second>
-				<first>-5.75000000000000000e+02</first>
-				<second>-6.70000000000000000e+02</second>
+				<first>-6.94000000000000000e+02</first>
+				<second>-6.05000000000000000e+02</second>
 			</second>
 		</item>
 		<item>
@@ -20323,8 +20335,8 @@ nan</value>
 		<item>
 			<first>SplitFileName:0</first>
 			<second>
-				<first>-6.44000000000000000e+02</first>
-				<second>-8.80000000000000000e+02</second>
+				<first>-6.24000000000000000e+02</first>
+				<second>-8.77000000000000000e+02</second>
 			</second>
 		</item>
 		<item>
