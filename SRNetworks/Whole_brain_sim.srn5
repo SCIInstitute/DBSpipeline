@@ -4304,7 +4304,7 @@ nan</value>
 									<name>FormatString</name>
 									<value object_id="_283">
 										<which>2</which>
-										<value>%s/%s/SCIRun_Files/</value>
+										<value>%s/%s/SCIRun_files/</value>
 									</value>
 								</second>
 							</item>
