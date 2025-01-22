@@ -16672,7 +16672,7 @@ nan</value>
 									<name>Filename</name>
 									<value object_id="_1210">
 										<which>2</which>
-										<value>/Users/jess/UF_brainstim/HiperGator_Connectome/S1/SCIRun_Files/Stim_Volumes/Stimulation_RightCM_+E1C+E1B+E1A-CAN_maxAmp_3.5mA.nrrd</value>
+										<value>/Users/jess/UF_brainstim/HiperGator_Connectome/S1/SCIRun_Files/../Segmentations/Stim/Stimulation_RightCM_+E1C+E1B+E1A-CAN_maxAmp_3.5mA.nrrd</value>
 									</value>
 								</second>
 							</item>
@@ -19742,8 +19742,8 @@ nan</value>
 		<item>
 			<first>CreateString:2</first>
 			<second>
-				<first>-1.34300000000000000e+03</first>
-				<second>-2.54500000000000000e+03</second>
+				<first>-1.32400000000000000e+03</first>
+				<second>-2.65200000000000000e+03</second>
 			</second>
 		</item>
 		<item>

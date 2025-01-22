@@ -165,8 +165,9 @@ def main():
     full_fn = os.path.join(stim_param_dir, fname)
     scipy.io.savemat(full_fn, {"params" : mat, "param_str" : fstr})
   
-  profile["stim_param_files"] = stim_param_flist
+  profile["stim_param_files"] = list(set(stim_param_flist))
   
+  # TODO: still has redundant entries
   full_mat = np.vstack(all_mats).T
   scipy.io.savemat(os.path.join(stim_param_dir, "all_params.mat"), {"allparams" : full_mat, "allparam_str" : all_filestrings})
     
