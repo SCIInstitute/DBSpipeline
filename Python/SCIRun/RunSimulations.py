@@ -9,7 +9,7 @@ import re
 import scipy.io
 import subprocess
 
-def_net = os.path.join(os.environ["CODEDIR"], "SRNetworks", "Whole_brain_sim.srn5")
+def_net = os.path.join(os.environ["CODEDIR"], "SRNetworks", "Whole_brain_sim_script.srn5")
 
 def build_parser():
   parser = argparse.ArgumentParser(
