@@ -38,7 +38,7 @@ rel_path1="SCIRun"
 rel_path2="Connectome"
 rel_path3="Segmentations/HCP"
 rel_path4="Segmentations/Hotspot"
-
+rel_path5="Segmentations/White_matter"
 
 
 set -e
@@ -126,6 +126,10 @@ fi
 mrconvert -datatype uint32 ${subject}_HCP.mgz ${subject}_HCP.mif -force
 mkdir -p ${DATADIR}/${subject_LO}/$rel_path3
 labelconvert ${subject}_HCP.mif ${CODEDIR}/Bash/Freesurfer/hcpmmp1_original.txt ${CODEDIR}/Bash/Freesurfer/hcpmmp1_subcortex.txt ${DATADIR}/${subject_LO}/${rel_path3}/HCP_FS.nii.gz
+
+mkdir -p ${DATADIR}/${subject_LO}/$rel_path5
+mrcalc ${subject}_HCP.mif 2 -eq ${DATADIR}/${subject_LO}/$rel_path5/WM_left.nii.gz -force
+mrcalc ${subject}_HCP.mif 41 -eq ${DATADIR}/${subject_LO}/$rel_path5/WM_right.nii.gz -force
 
 echo $'\n\n******************Done!****************\n\n'
 
