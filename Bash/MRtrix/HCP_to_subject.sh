@@ -2,8 +2,8 @@
 
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=4
-#SBATCH --mem=1gb
+#SBATCH --cpus-per-task=8
+#SBATCH --mem=16gb
 #SBATCH --time=1:00:00
 #SBATCH --job-name=HCP_fs
 #SBATCH --mail-type=ALL
@@ -35,7 +35,8 @@ rel_path5="Segmentations/White_matter"
 set -e
 
 #Takes HCP annotation file in fsaverage space and puts it in subject space. Also outputs the files for use in tck2connectome
-subject=$1
+subject=fs_{$1}
+subject_LO=$1
 
 for hemi in lh rh
 do
