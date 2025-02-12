@@ -42,16 +42,15 @@ def main():
   
   # this is a fix for ImportMatricesFromMatlab scripting bug
   # The network is already modified for these files
+  sr_dir = profile["SRFilesPath"]
   tan_fn = os.path.join(sr_dir,"Edge_data_tans.mat")
   end_fn = os.path.join(sr_dir,"Edge_data_ends.mat")
 
   if not os.path.exists(tan_fn):
-    sr_dir = profile["SRFilesPath"]
     edgedata_fn = os.path.join(sr_dir,"Edge_data.mat")
     edgedata = scipy.io.loadmat(edgedata_fn)
     scipy.io.savemat(tan_fn, {"Tangents" : edgedata["Tangents"]})
   if not os.path.exists(end_fn):
-    sr_dir = profile["SRFilesPath"]
     edgedata_fn = os.path.join(sr_dir,"Edge_data.mat")
     edgedata = scipy.io.loadmat(edgedata_fn)
     scipy.io.savemat(end_fn, {"Ends" : edgedata["Ends"]})
