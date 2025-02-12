@@ -45,7 +45,8 @@ def main():
   tan_fn = os.path.join(sr_dir,"Edge_data_tans.mat")
   end_fn = os.path.join(sr_dir,"Edge_data_ends.mat")
 
-  if not os.path.exists(tan_fn):sr_dir = profile["SRFilesPath"]
+  if not os.path.exists(tan_fn):
+    sr_dir = profile["SRFilesPath"]
     edgedata_fn = os.path.join(sr_dir,"Edge_data.mat")
     edgedata = scipy.io.loadmat(edgedata_fn)
     scipy.io.savemat(tan_fn, {"Tangents" : edgedata["Tangents"]})
