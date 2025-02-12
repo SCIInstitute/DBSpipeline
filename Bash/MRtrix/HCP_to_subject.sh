@@ -35,7 +35,7 @@ rel_path5="Segmentations/White_matter"
 set -e
 
 #Takes HCP annotation file in fsaverage space and puts it in subject space. Also outputs the files for use in tck2connectome
-subject=fs_{$1}
+subject=fs_$1
 subject_LO=$1
 
 for hemi in lh rh
@@ -55,7 +55,7 @@ fi
 
 mrconvert -datatype uint32 ${subject}_HCP.mgz ${subject}_HCP.mif -force
 mkdir -p ${DATADIR}/${subject_LO}/$rel_path3
-labelconvert ${subject}_HCP.mif ${CODEDIR}/Bash/Freesurfer/hcpmmp1_original.txt ${CODEDIR}/Bash/Freesurfer/hcpmmp1_subcortex.txt ${DATADIR}/${subject_LO}/${rel_path3}/HCP_FS.nii.gz
+labelconvert ${subject}_HCP.mif ${CODEDIR}/Bash/Freesurfer/hcpmmp1_original.txt ${CODEDIR}/Bash/Freesurfer/hcpmmp1_subcortex.txt ${DATADIR}/${subject_LO}/${rel_path3}/HCP_FS.nii.gz -force
 
 mkdir -p ${DATADIR}/${subject_LO}/$rel_path5
 mrcalc ${subject}_HCP.mif 2 -eq ${DATADIR}/${subject_LO}/$rel_path5/WM_left.nii.gz -force
