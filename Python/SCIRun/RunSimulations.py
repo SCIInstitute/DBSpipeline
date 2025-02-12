@@ -47,8 +47,11 @@ def main():
     f_fname = os.path.join(p_dir, p_fname)
     print(f_fname)
     os.environ["PARAM_MATRIX"] = f_fname
+    
+#    print(os.environ["PARAM_MATRIX"])
 
     sr_call = [SCIRun_call, "-x", "-0", "-E", args.SR_net]
+#    sr_call = [SCIRun_call, "-e", args.SR_net]
     if args.debug_mode:
       sr_call.append("--verbose")
       
