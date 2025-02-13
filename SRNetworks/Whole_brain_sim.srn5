@@ -2622,11 +2622,11 @@ nan</value>
 									<name>IsovalueListString</name>
 									<value object_id="_165">
 										<which>2</which>
-										<value>-0.460159
-942.979
-1886.42
-2829.86
-3773.3
+										<value>-0.347536
+753.483
+1507.31
+2261.14
+3014.98
 </value>
 									</value>
 								</second>
@@ -6970,7 +6970,7 @@ stringOutput1 = fname[:-4]</value>
 									<name>FixedMax</name>
 									<value object_id="_446">
 										<which>1</which>
-										<value>3.77329585767945400e+03</value>
+										<value>3.01497563196551300e+03</value>
 									</value>
 								</second>
 							</item>
@@ -6982,7 +6982,7 @@ stringOutput1 = fname[:-4]</value>
 									<name>FixedMin</name>
 									<value object_id="_447">
 										<which>1</which>
-										<value>-4.60159176143221993e-01</value>
+										<value>-3.47535576638534183e-01</value>
 									</value>
 								</second>
 							</item>
@@ -16956,7 +16956,7 @@ stringOutput1 = fname[:-4]</value>
 									<name>Filename</name>
 									<value object_id="_1221">
 										<which>2</which>
-										<value>/Users/jess/UF_brainstim/HiperGator_Connectome/S1/Segmentations/Stim/Stimulation_RightCM_+E1C+E1B+E1A-CAN_maxAmp_3.5mA.nrrd</value>
+										<value>/Users/jess/UF_brainstim/HiperGator_Connectome/S1/Segmentations/Stim/Stimulation_LeftCM_+E1C+E1B+E1A-CAN_maxAmp_2.8mA.nrrd</value>
 									</value>
 								</second>
 							</item>
