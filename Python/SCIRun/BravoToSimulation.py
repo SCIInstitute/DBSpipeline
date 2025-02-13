@@ -63,6 +63,8 @@ def settingsToMatrix(settings_df, contact_list=[],  **kwargs):
   all_filestrings =[]
   all_mats = []
   stim_files={"Left" : [], "Right" : []}
+  file_set = set()
+#
   for row in settings_df.iterrows():
   #
     file_str, amp_mat = extractSettings(row, uniq_devices, contact_list, **kwargs )
@@ -74,9 +76,13 @@ def settingsToMatrix(settings_df, contact_list=[],  **kwargs):
       if not file_str[k]:
         stim_files[s_ky] = ""
         continue
+        #
+      if not file_str[k] in file_set:
+        all_filestrings.append(file_str[k])
+        all_mats.append(amp_mat[k])
+        #
       stim_files[s_ky].append("Stimulation_"+file_str[k]+".nrrd")
-      all_filestrings.append(file_str[k])
-      all_mats.append(amp_mat[k])
+      file_set.add(file_str[k])
   #
   return stim_files, all_mats, all_filestrings
       
@@ -165,9 +171,8 @@ def main():
     full_fn = os.path.join(stim_param_dir, fname)
     scipy.io.savemat(full_fn, {"params" : mat, "param_str" : fstr})
   
-  profile["stim_param_files"] = list(set(stim_param_flist))
+  profile["stim_param_files"] = stim_param_flist
   
-  # TODO: still has redundant entries
   full_mat = np.vstack(all_mats).T
   scipy.io.savemat(os.path.join(stim_param_dir, "all_params.mat"), {"allparams" : full_mat, "allparam_str" : all_filestrings})
     
