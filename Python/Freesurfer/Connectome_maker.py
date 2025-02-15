@@ -22,8 +22,11 @@ import argparse
 import os
 import sys
 import nrrd
-print(os.path.join(os.path.dirname(__file__), "..", "MRtrix" ))
-sys.path.append(os.path.join(os.path.dirname(__file__), "..", "MRtrix" ))
+#print(os.path.join(os.path.dirname(__file__), "..", "MRtrix" ))
+#sys.path.append(os.path.join(os.path.dirname(__file__), "..", "MRtrix" ))
+print(os.path.join(os.environ["CODEDIR"], "Python/MRtrix" ))
+sys.path.append(os.path.join(os.environ["CODEDIR"], "Python/MRtrix" ))
+ 
 from NRRDConverter import readNRRD
 
 def build_parser():
@@ -118,8 +121,29 @@ def append_lookup_file(profile, **kwargs):
     
   return stim_output_files
   
+def table_2_atlas_stim(lookup_file, profile, output_files, **kwargs ):
+  default_kwargs = {"rerun" : False}
+  kwargs = { **default_kwargs, **kwargs}
+
+  print("==========")
+  print("Appending Atlas file from for stim lookup table: ")
+  print(lookup_file)
   
-def table_2_atlas(lookup_file, profile, output_files ):
+  anat_output_files =  profil["Connectome_maker"]["Output_files"]
+
+  anat_out_check = [os.path.exists(f_name ) for f_var, f_name in anat_output_files.items() ]
+  # next steps :
+  #    check these anat_out_files against lookup_file
+  #        look at other scripts for readers
+  #    append nifti files with stim vols
+  
+  
+  
+  
+  
+def table_2_atlas(lookup_file, profile, output_files, **kwargs ):
+  default_kwargs = {"rerun" : False}
+  kwargs = { **default_kwargs, **kwargs}
 
   print("==========")
   print("Making Atlas file from lookup table: ")
@@ -148,12 +172,27 @@ def table_2_atlas(lookup_file, profile, output_files ):
     local_index = np.array(lookup['File Index'][lookup['Filename'] == file])
     #
     fullfile = os.path.join(profile["segPath"], seg_dirs, file)
+    #
+#    # saving resampled images to save time
+#    froot, ext = os.path.splitext(file)
+#    if ext == ".gz":
+#      froot_, ext_ = os.path.splitext(froot)
+#      if ext_ == ".nii":
+#        froot = froot_
+#        ext = ext_ + ext
+#        
+#    resamp_file = froot + "_resample" + ".nii.gz"
+#    resamp_fullfile = os.path.join(profile["segPath"], seg_dirs, resamp_file)
+#    
+#    if kwargs["rerun"] or not os.path.exists(resamp_fullfile):
+#
     if os.path.splitext(file)[1] == ".nrrd":
       img = readNRRD(fullfile)
     else:
       img = nibabel.load(fullfile)
     #
     img_resamp = nibabel.processing.resample_from_to(img, HCP,order=0)
+    print(img_resamp)
     img_data = img_resamp.get_fdata()
     data_add = img_data.copy()
     for j in range(0,len(local_index)):
@@ -218,11 +257,11 @@ def main():
   nifti_lookup_outputfile = os.path.join(profile["connectomePath"], 'HCP_parc_all_'+experiment+'_lookup.nii.gz')
   nifti_outputfile = os.path.join(profile["connectomePath"], 'HCP_parc_all_'+experiment+'.nii.gz')
   matkey_outputname=os.path.join(profile["connectomePath"], 'MRtrix_index_key_'+experiment+'.csv')
-  
+
   output_files =  {"nifti_outputfile": nifti_outputfile,
           "nifti_lookup_outputfile" : nifti_lookup_outputfile,
           "matkey_outputname" : matkey_outputname}
-  
+
   out_check = [os.path.exists(f_name ) for f_var, f_name in output_files.items() ]
   
 #  print(out_check)
@@ -232,7 +271,7 @@ def main():
     print(args.rerun)
     if args.rerun:
       print("overwriting output files")
-      table_2_atlas(lookup_file, profile, output_files )
+      table_2_atlas(lookup_file, profile, output_files, rerun = args.rerun  )
       profile["Connectome_maker"] = { "Output_files": output_files}
       
       with open(args.profile, 'w') as fp:
@@ -242,7 +281,7 @@ def main():
   else:
     # make sure to run the anatomy data
     # TODO: restructure to avoid all the repeat calls and profiles saves
-    table_2_atlas(lookup_file, profile, output_files )
+    table_2_atlas(lookup_file, profile, output_files, rerun = args.rerun  )
     profile["Connectome_maker"] = { "Output_files": output_files}
     
     with open(args.profile, 'w') as fp:
@@ -288,7 +327,7 @@ def main():
 #      print("should make these files :")
 #      print(st_output_fs)
       
-      table_2_atlas(st_lookup_file, profile, st_output_fs )
+      table_2_atlas_stim(st_lookup_file, profile, st_output_fs, rerun = args.rerun )
     
     ROIs = stim_output_files["ROIs"]
     stim_tags = stim_output_files["stim_tags"]
