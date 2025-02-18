@@ -86,8 +86,8 @@ cd ${SUBJECTS_DIR}/${subject}/surf
 
 for hemi in lh rh
 do
-  mris_convert -c ${hemi}.thresh.mgh ${hemi}.pial ${hemi}.thresh.vtk
-  mris_convert -c ${hemi}.heatmap.mgh ${hemi}.pial ${hemi}.heatmap.vtk
+  mris_convert --to-scanner -c ${hemi}.thresh.mgh ${hemi}.pial ${hemi}.thresh.vtk
+  mris_convert --to-scanner -c ${hemi}.heatmap.mgh ${hemi}.pial ${hemi}.heatmap.vtk
 done
 
 #Convert thresh map to volume
