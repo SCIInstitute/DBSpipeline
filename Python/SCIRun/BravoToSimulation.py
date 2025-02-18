@@ -68,13 +68,20 @@ def settingsToMatrix(settings_df, contact_list=[],  **kwargs):
   for row in settings_df.iterrows():
   #
     file_str, amp_mat = extractSettings(row, uniq_devices, contact_list, **kwargs )
-    print(file_str)
-    print(amp_mat)
+#    print("row iter")
+#    print(file_str)
+#    print(amp_mat)
     #
     for k in range(len(file_str)):
       s_ky = list(stim_files.keys())[k]
+#      print("amplitude value")
+#      print(amp_mat[k])
+      amp_check = np.max(np.abs(amp_mat[k][np.isfinite(amp_mat[k])]))
+#      print(amp_check)
       if not file_str[k]:
         stim_files[s_ky] = ""
+        continue
+      if amp_check==0:
         continue
         #
       if not file_str[k] in file_set:
