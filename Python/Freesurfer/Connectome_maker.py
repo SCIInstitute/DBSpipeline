@@ -22,8 +22,11 @@ import argparse
 import os
 import sys
 import nrrd
-print(os.path.join(os.path.dirname(__file__), "..", "MRtrix" ))
-sys.path.append(os.path.join(os.path.dirname(__file__), "..", "MRtrix" ))
+#print(os.path.join(os.path.dirname(__file__), "..", "MRtrix" ))
+#sys.path.append(os.path.join(os.path.dirname(__file__), "..", "MRtrix" ))
+print(os.path.join(os.environ["CODEDIR"], "Python/MRtrix" ))
+sys.path.append(os.path.join(os.environ["CODEDIR"], "Python/MRtrix" ))
+ 
 from NRRDConverter import readNRRD
 
 def build_parser():
@@ -118,49 +121,89 @@ def append_lookup_file(profile, **kwargs):
     
   return stim_output_files
   
+def check_lookup_files(anat_lookup_file, lookup_file):
+# TODO: not sure if needed, but will need to be implemented
+  anat_lookup = pd.read_csv(anat_lookup_file,index_col=False)
+  stim_lookup = pd.read_csv(lookup_file,index_col=False)
   
-def table_2_atlas(lookup_file, profile, output_files ):
+  return
+  
+  
+def table_2_atlas_stim(st_lookup_file, profile, output_files, **kwargs ):
+  default_kwargs = {"rerun" : False}
+  kwargs = { **default_kwargs, **kwargs}
 
   print("==========")
-  print("Making Atlas file from lookup table: ")
-  print(lookup_file)
+  print("Appending Atlas file from for stim lookup table: ")
+  print(st_lookup_file)
   
-  lookup = pd.read_csv(lookup_file,index_col=False)
-  seg_files = lookup['Filename'].unique()
-  #seg_dirs = lookup['Path'].unique()
-  seg_dirs = lookup['Path'][lookup['Filename'] == seg_files[0]].unique()[0]
+  anat_output_files =  profile["Connectome_maker"]["Output_files"]
 
-  #Load HCP first always. This will be the reference
-#  print(seg_files)
-  HCP = nibabel.load(os.path.join(profile["segPath"], seg_dirs, seg_files[0]))
-  HCP_data = HCP.get_fdata()
-  main_index = np.array(lookup['Index'][lookup['Filename'] == seg_files[0]])
-  local_index = np.array(lookup['File Index'][lookup['Filename'] == seg_files[0]])
+  anat_out_check = [os.path.exists(f_name ) for f_var, f_name in anat_output_files.items() ]
+  
+  if not all(anat_out_check):
+    raise ValueError("some how base files do not exist, yet they are needed for the stimulation pipelines")
+  
+#  anat_lookup_file = profile["lookup_table"]
+  
+#  check_lookup_files(anat_lookup_file, st_lookup_file)
 
-  All_data = HCP_data.copy()
-  for i in range(0,len(local_index)):
-      All_data[HCP_data == local_index[i]] = int(main_index[i])
-          
-  #Rest of the data
+  stim_lookup = pd.read_csv(st_lookup_file,index_col=False)
+  anat_lookup = pd.read_csv(profile["lookup_table"],index_col=False)
+  
+  HCP = nibabel.load(anat_output_files["nifti_lookup_outputfile"])
+  All_data = HCP.get_fdata()
+  
+  st_index = np.array(stim_lookup['Index'])
+  anat_index = np.array(anat_lookup['Index'])
+  
+  l_anat_idx = np.nonzero(st_index == anat_index[-1])[0][0]
+  
+  seg_files = stim_lookup['Filename'][l_anat_idx+1:].unique()
+  
+  return add_files_2_atlas(All_data, HCP, stim_lookup, seg_files, profile, output_files)
+  
+    
+  
+
+def add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, **kwargs):
+
+  
+
   for file in seg_files:
     seg_dirs = lookup['Path'][lookup['Filename'] == file].unique()[0]
     main_index = np.array(lookup['Index'][lookup['Filename'] == file])
     local_index = np.array(lookup['File Index'][lookup['Filename'] == file])
     #
     fullfile = os.path.join(profile["segPath"], seg_dirs, file)
+    #
+  #    # saving resampled images to save time
+  #    froot, ext = os.path.splitext(file)
+  #    if ext == ".gz":
+  #      froot_, ext_ = os.path.splitext(froot)
+  #      if ext_ == ".nii":
+  #        froot = froot_
+  #        ext = ext_ + ext
+  #
+  #    resamp_file = froot + "_resample" + ".nii.gz"
+  #    resamp_fullfile = os.path.join(profile["segPath"], seg_dirs, resamp_file)
+  #
+  #    if kwargs["rerun"] or not os.path.exists(resamp_fullfile):
+  #
     if os.path.splitext(file)[1] == ".nrrd":
       img = readNRRD(fullfile)
     else:
       img = nibabel.load(fullfile)
     #
     img_resamp = nibabel.processing.resample_from_to(img, HCP,order=0)
+#    print(img_resamp)
     img_data = img_resamp.get_fdata()
     data_add = img_data.copy()
     for j in range(0,len(local_index)):
       data_add[img_data == local_index[j]] = int(main_index[j])
     #
     All_data[data_add != 0] = data_add[data_add != 0]
-
+    
   All_data = All_data.astype(int)
   All_to_nii = nibabel.Nifti1Image(All_data, HCP.affine, HCP.header)
   
@@ -185,6 +228,36 @@ def table_2_atlas(lookup_file, profile, output_files ):
   print(output_files)
   
   return mrtrix_save
+  
+  
+  
+def table_2_atlas(lookup_file, profile, output_files, **kwargs ):
+  default_kwargs = {"rerun" : False}
+  kwargs = { **default_kwargs, **kwargs}
+
+  print("==========")
+  print("Making Atlas file from lookup table: ")
+  print(lookup_file)
+  
+  lookup = pd.read_csv(lookup_file,index_col=False)
+  seg_files = lookup['Filename'].unique()
+  #seg_dirs = lookup['Path'].unique()
+  seg_dirs = lookup['Path'][lookup['Filename'] == seg_files[0]].unique()[0]
+
+  #Load HCP first always. This will be the reference
+#  print(seg_files)
+  HCP = nibabel.load(os.path.join(profile["segPath"], seg_dirs, seg_files[0]))
+  
+  HCP_data = HCP.get_fdata()
+  main_index = np.array(lookup['Index'][lookup['Filename'] == seg_files[0]])
+  local_index = np.array(lookup['File Index'][lookup['Filename'] == seg_files[0]])
+
+  All_data = HCP_data.copy()
+  for i in range(0,len(local_index)):
+    All_data[HCP_data == local_index[i]] = int(main_index[i])
+
+
+  return add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files)
   
   
 
@@ -218,11 +291,11 @@ def main():
   nifti_lookup_outputfile = os.path.join(profile["connectomePath"], 'HCP_parc_all_'+experiment+'_lookup.nii.gz')
   nifti_outputfile = os.path.join(profile["connectomePath"], 'HCP_parc_all_'+experiment+'.nii.gz')
   matkey_outputname=os.path.join(profile["connectomePath"], 'MRtrix_index_key_'+experiment+'.csv')
-  
+
   output_files =  {"nifti_outputfile": nifti_outputfile,
           "nifti_lookup_outputfile" : nifti_lookup_outputfile,
           "matkey_outputname" : matkey_outputname}
-  
+
   out_check = [os.path.exists(f_name ) for f_var, f_name in output_files.items() ]
   
 #  print(out_check)
@@ -232,7 +305,7 @@ def main():
     print(args.rerun)
     if args.rerun:
       print("overwriting output files")
-      table_2_atlas(lookup_file, profile, output_files )
+      table_2_atlas(lookup_file, profile, output_files, rerun = args.rerun  )
       profile["Connectome_maker"] = { "Output_files": output_files}
       
       with open(args.profile, 'w') as fp:
@@ -242,7 +315,7 @@ def main():
   else:
     # make sure to run the anatomy data
     # TODO: restructure to avoid all the repeat calls and profiles saves
-    table_2_atlas(lookup_file, profile, output_files )
+    table_2_atlas(lookup_file, profile, output_files, rerun = args.rerun  )
     profile["Connectome_maker"] = { "Output_files": output_files}
     
     with open(args.profile, 'w') as fp:
@@ -288,7 +361,7 @@ def main():
 #      print("should make these files :")
 #      print(st_output_fs)
       
-      table_2_atlas(st_lookup_file, profile, st_output_fs )
+      table_2_atlas_stim(st_lookup_file, profile, st_output_fs, rerun = args.rerun )
     
     ROIs = stim_output_files["ROIs"]
     stim_tags = stim_output_files["stim_tags"]
