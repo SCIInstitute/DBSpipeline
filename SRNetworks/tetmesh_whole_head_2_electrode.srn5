@@ -4,7 +4,7 @@
 <networkFile class_id="0" tracking_level="0" version="6">
 	<networkInfo class_id="1" tracking_level="0" version="0">
 		<modules class_id="2" tracking_level="0" version="0">
-			<count>66</count>
+			<count>68</count>
 			<item_version>0</item_version>
 			<item class_id="3" tracking_level="0" version="0">
 				<first>CalculateDistanceToField:0</first>
@@ -2032,7 +2032,7 @@ RESULT = ((X-x(C))*(X-x(C))/(x(R)*x(R)*ratio)) + ((Y-y(C))*(Y-y(C))/(y(R)*y(R)*r
 					</module>
 					<state>
 						<stateMap>
-							<count>4</count>
+							<count>5</count>
 							<item_version>0</item_version>
 							<item>
 								<first>
@@ -2075,11 +2075,23 @@ RESULT = ((X-x(C))*(X-x(C))/(x(R)*x(R)*ratio)) + ((Y-y(C))*(Y-y(C))/(y(R)*y(R)*r
 							</item>
 							<item>
 								<first>
+									<name>InputFields:2</name>
+								</first>
+								<second>
+									<name>InputFields:2</name>
+									<value object_id="_144">
+										<which>2</which>
+										<value>fieldsInput3</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
 									<name>ProgrammableInputPortEnabled</name>
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_144">
+									<value object_id="_145">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -2107,7 +2119,7 @@ RESULT = ((X-x(C))*(X-x(C))/(x(R)*x(R)*ratio)) + ((Y-y(C))*(Y-y(C))/(y(R)*y(R)*r
 								</first>
 								<second>
 									<name>InputField:0</name>
-									<value object_id="_145">
+									<value object_id="_146">
 										<which>2</which>
 										<value>ellipse</value>
 									</value>
@@ -2119,7 +2131,7 @@ RESULT = ((X-x(C))*(X-x(C))/(x(R)*x(R)*ratio)) + ((Y-y(C))*(Y-y(C))/(y(R)*y(R)*r
 								</first>
 								<second>
 									<name>NumberOfRetries</name>
-									<value object_id="_146">
+									<value object_id="_147">
 										<which>0</which>
 										<value>50</value>
 									</value>
@@ -2131,7 +2143,7 @@ RESULT = ((X-x(C))*(X-x(C))/(x(R)*x(R)*ratio)) + ((Y-y(C))*(Y-y(C))/(y(R)*y(R)*r
 								</first>
 								<second>
 									<name>PollingIntervalMilliseconds</name>
-									<value object_id="_147">
+									<value object_id="_148">
 										<which>0</which>
 										<value>200</value>
 									</value>
@@ -2143,7 +2155,7 @@ RESULT = ((X-x(C))*(X-x(C))/(x(R)*x(R)*ratio)) + ((Y-y(C))*(Y-y(C))/(y(R)*y(R)*r
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_148">
+									<value object_id="_149">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -2155,7 +2167,7 @@ RESULT = ((X-x(C))*(X-x(C))/(x(R)*x(R)*ratio)) + ((Y-y(C))*(Y-y(C))/(y(R)*y(R)*r
 								</first>
 								<second>
 									<name>PythonCode</name>
-									<value object_id="_149">
+									<value object_id="_150">
 										<which>2</which>
 										<value># Insert your Python code here. The SCIRun API package is automatically imported.
 
@@ -2215,7 +2227,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>PythonOutputField1Name</name>
-									<value object_id="_150">
+									<value object_id="_151">
 										<which>2</which>
 										<value>fieldOutput1</value>
 									</value>
@@ -2227,7 +2239,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>PythonOutputField2Name</name>
-									<value object_id="_151">
+									<value object_id="_152">
 										<which>2</which>
 										<value>fieldOutput2</value>
 									</value>
@@ -2239,7 +2251,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>PythonOutputField3Name</name>
-									<value object_id="_152">
+									<value object_id="_153">
 										<which>2</which>
 										<value>fieldOutput3</value>
 									</value>
@@ -2251,7 +2263,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>PythonOutputMatrix1Name</name>
-									<value object_id="_153">
+									<value object_id="_154">
 										<which>2</which>
 										<value>mat_out</value>
 									</value>
@@ -2263,7 +2275,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>PythonOutputMatrix2Name</name>
-									<value object_id="_154">
+									<value object_id="_155">
 										<which>2</which>
 										<value>matrixOutput2</value>
 									</value>
@@ -2275,7 +2287,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>PythonOutputMatrix3Name</name>
-									<value object_id="_155">
+									<value object_id="_156">
 										<which>2</which>
 										<value>matrixOutput3</value>
 									</value>
@@ -2287,7 +2299,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>PythonOutputString1Name</name>
-									<value object_id="_156">
+									<value object_id="_157">
 										<which>2</which>
 										<value>stringOutput1</value>
 									</value>
@@ -2299,7 +2311,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>PythonOutputString2Name</name>
-									<value object_id="_157">
+									<value object_id="_158">
 										<which>2</which>
 										<value>stringOutput2</value>
 									</value>
@@ -2311,7 +2323,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>PythonOutputString3Name</name>
-									<value object_id="_158">
+									<value object_id="_159">
 										<which>2</which>
 										<value>stringOutput3</value>
 									</value>
@@ -2323,7 +2335,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>PythonTopLevelCode</name>
-									<value object_id="_159">
+									<value object_id="_160">
 										<which>2</which>
 										<value># Main namespace/top level context code goes here; for example, import statements and global variables.
 # This code will be executed before the &apos;Code&apos; tab, and no input/output variables are available.</value>
@@ -2352,7 +2364,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>AssignFlag</name>
-									<value object_id="_160">
+									<value object_id="_161">
 										<which>3</which>
 										<value>1</value>
 									</value>
@@ -2364,7 +2376,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>DetectIntersectionsFlag</name>
-									<value object_id="_161">
+									<value object_id="_162">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -2376,7 +2388,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>MaxVolConstraint</name>
-									<value object_id="_162">
+									<value object_id="_163">
 										<which>1</which>
 										<value>1.00000000000000006e-01</value>
 									</value>
@@ -2388,7 +2400,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>MinRadius</name>
-									<value object_id="_163">
+									<value object_id="_164">
 										<which>1</which>
 										<value>2.00000000000000000e+00</value>
 									</value>
@@ -2400,7 +2412,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>MoreSwitches</name>
-									<value object_id="_164">
+									<value object_id="_165">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -2412,44 +2424,44 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>PiecewiseFlag</name>
-									<value object_id="_165">
-										<which>3</which>
-										<value>1</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>ProgrammableInputPortEnabled</name>
-								</first>
-								<second>
-									<name>ProgrammableInputPortEnabled</name>
 									<value object_id="_166">
 										<which>3</which>
-										<value>0</value>
+										<value>1</value>
 									</value>
 								</second>
 							</item>
 							<item>
 								<first>
-									<name>QualityFlag</name>
+									<name>ProgrammableInputPortEnabled</name>
 								</first>
 								<second>
-									<name>QualityFlag</name>
+									<name>ProgrammableInputPortEnabled</name>
 									<value object_id="_167">
 										<which>3</which>
-										<value>1</value>
+										<value>0</value>
 									</value>
 								</second>
 							</item>
 							<item>
 								<first>
-									<name>SetMaxVolConstraintFlag</name>
+									<name>QualityFlag</name>
 								</first>
 								<second>
-									<name>SetMaxVolConstraintFlag</name>
+									<name>QualityFlag</name>
 									<value object_id="_168">
 										<which>3</which>
+										<value>1</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>SetMaxVolConstraintFlag</name>
+								</first>
+								<second>
+									<name>SetMaxVolConstraintFlag</name>
+									<value object_id="_169">
+										<which>3</which>
 										<value>0</value>
 									</value>
 								</second>
@@ -2460,7 +2472,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>SetNonzeroAttributeFlag</name>
-									<value object_id="_169">
+									<value object_id="_170">
 										<which>3</which>
 										<value>1</value>
 									</value>
@@ -2472,18 +2484,6 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>SetRatioFlag</name>
-									<value object_id="_170">
-										<which>3</which>
-										<value>0</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>SetSplitFlag</name>
-								</first>
-								<second>
-									<name>SetSplitFlag</name>
 									<value object_id="_171">
 										<which>3</which>
 										<value>0</value>
@@ -2492,11 +2492,23 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 							</item>
 							<item>
 								<first>
+									<name>SetSplitFlag</name>
+								</first>
+								<second>
+									<name>SetSplitFlag</name>
+									<value object_id="_172">
+										<which>3</which>
+										<value>0</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
 									<name>SuppressSplitFlag</name>
 								</first>
 								<second>
 									<name>SuppressSplitFlag</name>
-									<value object_id="_172">
+									<value object_id="_173">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -2508,7 +2520,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>VolConstraintFlag</name>
-									<value object_id="_173">
+									<value object_id="_174">
 										<which>3</which>
 										<value>1</value>
 									</value>
@@ -2536,7 +2548,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>AssignFlag</name>
-									<value object_id="_174">
+									<value object_id="_175">
 										<which>3</which>
 										<value>1</value>
 									</value>
@@ -2548,7 +2560,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>DetectIntersectionsFlag</name>
-									<value object_id="_175">
+									<value object_id="_176">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -2560,7 +2572,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>MaxVolConstraint</name>
-									<value object_id="_176">
+									<value object_id="_177">
 										<which>1</which>
 										<value>1.00000000000000006e-01</value>
 									</value>
@@ -2572,7 +2584,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>MinRadius</name>
-									<value object_id="_177">
+									<value object_id="_178">
 										<which>1</which>
 										<value>2.00000000000000000e+00</value>
 									</value>
@@ -2584,7 +2596,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>MoreSwitches</name>
-									<value object_id="_178">
+									<value object_id="_179">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -2596,20 +2608,20 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>PiecewiseFlag</name>
-									<value object_id="_179">
-										<which>3</which>
-										<value>1</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>ProgrammableInputPortEnabled</name>
-								</first>
-								<second>
-									<name>ProgrammableInputPortEnabled</name>
 									<value object_id="_180">
 										<which>3</which>
+										<value>1</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>ProgrammableInputPortEnabled</name>
+								</first>
+								<second>
+									<name>ProgrammableInputPortEnabled</name>
+									<value object_id="_181">
+										<which>3</which>
 										<value>0</value>
 									</value>
 								</second>
@@ -2620,7 +2632,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>QualityFlag</name>
-									<value object_id="_181">
+									<value object_id="_182">
 										<which>3</which>
 										<value>1</value>
 									</value>
@@ -2632,18 +2644,6 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>SetMaxVolConstraintFlag</name>
-									<value object_id="_182">
-										<which>3</which>
-										<value>0</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>SetNonzeroAttributeFlag</name>
-								</first>
-								<second>
-									<name>SetNonzeroAttributeFlag</name>
 									<value object_id="_183">
 										<which>3</which>
 										<value>0</value>
@@ -2652,10 +2652,10 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 							</item>
 							<item>
 								<first>
-									<name>SetRatioFlag</name>
+									<name>SetNonzeroAttributeFlag</name>
 								</first>
 								<second>
-									<name>SetRatioFlag</name>
+									<name>SetNonzeroAttributeFlag</name>
 									<value object_id="_184">
 										<which>3</which>
 										<value>0</value>
@@ -2664,10 +2664,10 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 							</item>
 							<item>
 								<first>
-									<name>SetSplitFlag</name>
+									<name>SetRatioFlag</name>
 								</first>
 								<second>
-									<name>SetSplitFlag</name>
+									<name>SetRatioFlag</name>
 									<value object_id="_185">
 										<which>3</which>
 										<value>0</value>
@@ -2676,11 +2676,23 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 							</item>
 							<item>
 								<first>
+									<name>SetSplitFlag</name>
+								</first>
+								<second>
+									<name>SetSplitFlag</name>
+									<value object_id="_186">
+										<which>3</which>
+										<value>0</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
 									<name>SuppressSplitFlag</name>
 								</first>
 								<second>
 									<name>SuppressSplitFlag</name>
-									<value object_id="_186">
+									<value object_id="_187">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -2692,7 +2704,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>VolConstraintFlag</name>
-									<value object_id="_187">
+									<value object_id="_188">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -2720,18 +2732,6 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ForcePointCloud</name>
-									<value object_id="_188">
-										<which>3</which>
-										<value>0</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>ProgrammableInputPortEnabled</name>
-								</first>
-								<second>
-									<name>ProgrammableInputPortEnabled</name>
 									<value object_id="_189">
 										<which>3</which>
 										<value>0</value>
@@ -2740,10 +2740,10 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 							</item>
 							<item>
 								<first>
-									<name>make_no_data</name>
+									<name>ProgrammableInputPortEnabled</name>
 								</first>
 								<second>
-									<name>make_no_data</name>
+									<name>ProgrammableInputPortEnabled</name>
 									<value object_id="_190">
 										<which>3</which>
 										<value>0</value>
@@ -2752,10 +2752,10 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 							</item>
 							<item>
 								<first>
-									<name>match_node_values</name>
+									<name>make_no_data</name>
 								</first>
 								<second>
-									<name>match_node_values</name>
+									<name>make_no_data</name>
 									<value object_id="_191">
 										<which>3</which>
 										<value>0</value>
@@ -2764,11 +2764,23 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 							</item>
 							<item>
 								<first>
+									<name>match_node_values</name>
+								</first>
+								<second>
+									<name>match_node_values</name>
+									<value object_id="_192">
+										<which>3</which>
+										<value>0</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
 									<name>merge_elems</name>
 								</first>
 								<second>
 									<name>merge_elems</name>
-									<value object_id="_192">
+									<value object_id="_193">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -2780,7 +2792,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>merge_nodes</name>
-									<value object_id="_193">
+									<value object_id="_194">
 										<which>3</which>
 										<value>1</value>
 									</value>
@@ -2792,7 +2804,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>tolerance</name>
-									<value object_id="_194">
+									<value object_id="_195">
 										<which>1</which>
 										<value>9.99999999999999955e-07</value>
 									</value>
@@ -2820,18 +2832,6 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ForcePointCloud</name>
-									<value object_id="_195">
-										<which>3</which>
-										<value>0</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>ProgrammableInputPortEnabled</name>
-								</first>
-								<second>
-									<name>ProgrammableInputPortEnabled</name>
 									<value object_id="_196">
 										<which>3</which>
 										<value>0</value>
@@ -2840,10 +2840,10 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 							</item>
 							<item>
 								<first>
-									<name>make_no_data</name>
+									<name>ProgrammableInputPortEnabled</name>
 								</first>
 								<second>
-									<name>make_no_data</name>
+									<name>ProgrammableInputPortEnabled</name>
 									<value object_id="_197">
 										<which>3</which>
 										<value>0</value>
@@ -2852,10 +2852,10 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 							</item>
 							<item>
 								<first>
-									<name>match_node_values</name>
+									<name>make_no_data</name>
 								</first>
 								<second>
-									<name>match_node_values</name>
+									<name>make_no_data</name>
 									<value object_id="_198">
 										<which>3</which>
 										<value>0</value>
@@ -2864,11 +2864,23 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 							</item>
 							<item>
 								<first>
+									<name>match_node_values</name>
+								</first>
+								<second>
+									<name>match_node_values</name>
+									<value object_id="_199">
+										<which>3</which>
+										<value>0</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
 									<name>merge_elems</name>
 								</first>
 								<second>
 									<name>merge_elems</name>
-									<value object_id="_199">
+									<value object_id="_200">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -2880,7 +2892,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>merge_nodes</name>
-									<value object_id="_200">
+									<value object_id="_201">
 										<which>3</which>
 										<value>1</value>
 									</value>
@@ -2892,7 +2904,107 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>tolerance</name>
-									<value object_id="_201">
+									<value object_id="_202">
+										<which>1</which>
+										<value>9.99999999999999955e-07</value>
+									</value>
+								</second>
+							</item>
+						</stateMap>
+					</state>
+				</second>
+			</item>
+			<item>
+				<first>JoinFields:2</first>
+				<second>
+					<module>
+						<package_name_>SCIRun</package_name_>
+						<category_name_>NewField</category_name_>
+						<module_name_>JoinFields</module_name_>
+					</module>
+					<state>
+						<stateMap>
+							<count>7</count>
+							<item_version>0</item_version>
+							<item>
+								<first>
+									<name>ForcePointCloud</name>
+								</first>
+								<second>
+									<name>ForcePointCloud</name>
+									<value object_id="_203">
+										<which>3</which>
+										<value>0</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>ProgrammableInputPortEnabled</name>
+								</first>
+								<second>
+									<name>ProgrammableInputPortEnabled</name>
+									<value object_id="_204">
+										<which>3</which>
+										<value>0</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>make_no_data</name>
+								</first>
+								<second>
+									<name>make_no_data</name>
+									<value object_id="_205">
+										<which>3</which>
+										<value>0</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>match_node_values</name>
+								</first>
+								<second>
+									<name>match_node_values</name>
+									<value object_id="_206">
+										<which>3</which>
+										<value>0</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>merge_elems</name>
+								</first>
+								<second>
+									<name>merge_elems</name>
+									<value object_id="_207">
+										<which>3</which>
+										<value>0</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>merge_nodes</name>
+								</first>
+								<second>
+									<name>merge_nodes</name>
+									<value object_id="_208">
+										<which>3</which>
+										<value>1</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>tolerance</name>
+								</first>
+								<second>
+									<name>tolerance</name>
+									<value object_id="_209">
 										<which>1</which>
 										<value>9.99999999999999955e-07</value>
 									</value>
@@ -2920,7 +3032,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>InterpolationModel</name>
-									<value object_id="_202">
+									<value object_id="_210">
 										<which>2</which>
 										<value>interpolateddata</value>
 									</value>
@@ -2932,7 +3044,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>MaxDistance</name>
-									<value object_id="_203">
+									<value object_id="_211">
 										<which>1</which>
 										<value>1.79769313486231571e+308</value>
 									</value>
@@ -2944,7 +3056,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>OutsideValue</name>
-									<value object_id="_204">
+									<value object_id="_212">
 										<which>1</which>
 										<value>4.00000000000000000e+01</value>
 									</value>
@@ -2956,7 +3068,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_205">
+									<value object_id="_213">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -2968,7 +3080,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>Quantity</name>
-									<value object_id="_206">
+									<value object_id="_214">
 										<which>2</which>
 										<value>value</value>
 									</value>
@@ -2980,7 +3092,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>SampleMethod</name>
-									<value object_id="_207">
+									<value object_id="_215">
 										<which>2</which>
 										<value>average</value>
 									</value>
@@ -2992,7 +3104,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>SamplePoints</name>
-									<value object_id="_208">
+									<value object_id="_216">
 										<which>2</which>
 										<value>regular1</value>
 									</value>
@@ -3020,7 +3132,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>FileTypeName</name>
-									<value object_id="_209">
+									<value object_id="_217">
 										<which>2</which>
 										<value>SCIRun Bundle File</value>
 									</value>
@@ -3032,7 +3144,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>Filename</name>
-									<value object_id="_210">
+									<value object_id="_218">
 										<which>2</which>
 										<value>%SCIRUNDATADIR%/NP_depth_lead_other.bdl</value>
 									</value>
@@ -3044,7 +3156,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>GuiFileTypeName</name>
-									<value object_id="_211">
+									<value object_id="_219">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -3056,7 +3168,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_212">
+									<value object_id="_220">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -3068,7 +3180,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ScriptEnvironmentVariable</name>
-									<value object_id="_213">
+									<value object_id="_221">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -3096,7 +3208,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>FileTypeName</name>
-									<value object_id="_214">
+									<value object_id="_222">
 										<which>2</which>
 										<value>SCIRun Bundle File</value>
 									</value>
@@ -3108,7 +3220,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>Filename</name>
-									<value object_id="_215">
+									<value object_id="_223">
 										<which>2</which>
 										<value>%SCIRUNDATADIR%/NP_depth_lead_other.bdl</value>
 									</value>
@@ -3120,7 +3232,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>GuiFileTypeName</name>
-									<value object_id="_216">
+									<value object_id="_224">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -3132,7 +3244,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_217">
+									<value object_id="_225">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -3144,7 +3256,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ScriptEnvironmentVariable</name>
-									<value object_id="_218">
+									<value object_id="_226">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -3172,7 +3284,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>FileTypeName</name>
-									<value object_id="_219">
+									<value object_id="_227">
 										<which>2</which>
 										<value>TriSurfFieldSTL[Binary]</value>
 									</value>
@@ -3184,7 +3296,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>Filename</name>
-									<value object_id="_220">
+									<value object_id="_228">
 										<which>2</which>
 										<value>%SCIRUNDATADIR%/Transform_Plans/IPG_left_plan.stl</value>
 									</value>
@@ -3196,7 +3308,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>GuiFileTypeName</name>
-									<value object_id="_221">
+									<value object_id="_229">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -3208,7 +3320,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_222">
+									<value object_id="_230">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -3220,7 +3332,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ScriptEnvironmentVariable</name>
-									<value object_id="_223">
+									<value object_id="_231">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -3248,7 +3360,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>FileTypeName</name>
-									<value object_id="_224">
+									<value object_id="_232">
 										<which>2</which>
 										<value>TriSurfFieldSTL[Binary]</value>
 									</value>
@@ -3260,7 +3372,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>Filename</name>
-									<value object_id="_225">
+									<value object_id="_233">
 										<which>2</which>
 										<value>%SCIRUNDATADIR%/Transform_Plans/IPG_left_plan.stl</value>
 									</value>
@@ -3272,7 +3384,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>GuiFileTypeName</name>
-									<value object_id="_226">
+									<value object_id="_234">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -3284,7 +3396,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_227">
+									<value object_id="_235">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -3296,7 +3408,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ScriptEnvironmentVariable</name>
-									<value object_id="_228">
+									<value object_id="_236">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -3324,7 +3436,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>FileTypeName</name>
-									<value object_id="_229">
+									<value object_id="_237">
 										<which>2</which>
 										<value>Matlab Field</value>
 									</value>
@@ -3336,7 +3448,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>Filename</name>
-									<value object_id="_230">
+									<value object_id="_238">
 										<which>2</which>
 										<value>%SCIRUNDATADIR%/headmesh_tetvol.mat</value>
 									</value>
@@ -3348,7 +3460,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>GuiFileTypeName</name>
-									<value object_id="_231">
+									<value object_id="_239">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -3360,7 +3472,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_232">
+									<value object_id="_240">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -3372,7 +3484,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ScriptEnvironmentVariable</name>
-									<value object_id="_233">
+									<value object_id="_241">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -3400,7 +3512,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>FileTypeName</name>
-									<value object_id="_234">
+									<value object_id="_242">
 										<which>2</which>
 										<value>SimpleTextFile</value>
 									</value>
@@ -3412,7 +3524,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>Filename</name>
-									<value object_id="_235">
+									<value object_id="_243">
 										<which>2</which>
 										<value>%SCIRUNDATADIR%/Transform_Plans/Left_depth_rotation.txt</value>
 									</value>
@@ -3424,7 +3536,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>GuiFileTypeName</name>
-									<value object_id="_236">
+									<value object_id="_244">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -3436,7 +3548,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_237">
+									<value object_id="_245">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -3448,7 +3560,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ScriptEnvironmentVariable</name>
-									<value object_id="_238">
+									<value object_id="_246">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -3476,7 +3588,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>FileTypeName</name>
-									<value object_id="_239">
+									<value object_id="_247">
 										<which>2</which>
 										<value>SimpleTextFile</value>
 									</value>
@@ -3488,7 +3600,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>Filename</name>
-									<value object_id="_240">
+									<value object_id="_248">
 										<which>2</which>
 										<value>%SCIRUNDATADIR%/Transform_Plans/Left_depth_translation.txt</value>
 									</value>
@@ -3500,7 +3612,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>GuiFileTypeName</name>
-									<value object_id="_241">
+									<value object_id="_249">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -3512,7 +3624,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_242">
+									<value object_id="_250">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -3524,7 +3636,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ScriptEnvironmentVariable</name>
-									<value object_id="_243">
+									<value object_id="_251">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -3552,7 +3664,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>FileTypeName</name>
-									<value object_id="_244">
+									<value object_id="_252">
 										<which>2</which>
 										<value>SimpleTextFile</value>
 									</value>
@@ -3564,7 +3676,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>Filename</name>
-									<value object_id="_245">
+									<value object_id="_253">
 										<which>2</which>
 										<value>%SCIRUNDATADIR%/Transform_Plans/Left_depth_rotation.txt</value>
 									</value>
@@ -3576,7 +3688,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>GuiFileTypeName</name>
-									<value object_id="_246">
+									<value object_id="_254">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -3588,7 +3700,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_247">
+									<value object_id="_255">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -3600,7 +3712,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ScriptEnvironmentVariable</name>
-									<value object_id="_248">
+									<value object_id="_256">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -3628,7 +3740,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>FileTypeName</name>
-									<value object_id="_249">
+									<value object_id="_257">
 										<which>2</which>
 										<value>SimpleTextFile</value>
 									</value>
@@ -3640,7 +3752,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>Filename</name>
-									<value object_id="_250">
+									<value object_id="_258">
 										<which>2</which>
 										<value>%SCIRUNDATADIR%/Transform_Plans/Left_depth_translation.txt</value>
 									</value>
@@ -3652,7 +3764,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>GuiFileTypeName</name>
-									<value object_id="_251">
+									<value object_id="_259">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -3664,7 +3776,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_252">
+									<value object_id="_260">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -3676,7 +3788,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ScriptEnvironmentVariable</name>
-									<value object_id="_253">
+									<value object_id="_261">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -3704,7 +3816,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>FileTypeName</name>
-									<value object_id="_254">
+									<value object_id="_262">
 										<which>2</which>
 										<value>SCIRun Matrix File (*.mat)</value>
 									</value>
@@ -3716,7 +3828,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>Filename</name>
-									<value object_id="_255">
+									<value object_id="_263">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -3728,7 +3840,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>GuiFileTypeName</name>
-									<value object_id="_256">
+									<value object_id="_264">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -3740,7 +3852,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_257">
+									<value object_id="_265">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -3752,7 +3864,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ScriptEnvironmentVariable</name>
-									<value object_id="_258">
+									<value object_id="_266">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -3780,7 +3892,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>FileTypeName</name>
-									<value object_id="_259">
+									<value object_id="_267">
 										<which>2</which>
 										<value>SCIRun Matrix File (*.mat)</value>
 									</value>
@@ -3792,7 +3904,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>Filename</name>
-									<value object_id="_260">
+									<value object_id="_268">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -3804,7 +3916,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>GuiFileTypeName</name>
-									<value object_id="_261">
+									<value object_id="_269">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -3816,7 +3928,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_262">
+									<value object_id="_270">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -3828,7 +3940,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ScriptEnvironmentVariable</name>
-									<value object_id="_263">
+									<value object_id="_271">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -3856,7 +3968,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_264">
+									<value object_id="_272">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -3884,7 +3996,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_265">
+									<value object_id="_273">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -3912,7 +4024,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_266">
+									<value object_id="_274">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -3924,7 +4036,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>columnCheckBox</name>
-									<value object_id="_267">
+									<value object_id="_275">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -3936,7 +4048,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>columnEndSpinBox</name>
-									<value object_id="_268">
+									<value object_id="_276">
 										<which>0</which>
 										<value>0</value>
 									</value>
@@ -3948,7 +4060,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>columnStartSpinBox</name>
-									<value object_id="_269">
+									<value object_id="_277">
 										<which>0</which>
 										<value>0</value>
 									</value>
@@ -3960,7 +4072,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>rowCheckBox</name>
-									<value object_id="_270">
+									<value object_id="_278">
 										<which>3</which>
 										<value>1</value>
 									</value>
@@ -3972,7 +4084,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>rowEndSpinBox</name>
-									<value object_id="_271">
+									<value object_id="_279">
 										<which>0</which>
 										<value>2</value>
 									</value>
@@ -3984,7 +4096,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>rowStartSpinBox</name>
-									<value object_id="_272">
+									<value object_id="_280">
 										<which>0</which>
 										<value>2</value>
 									</value>
@@ -4012,7 +4124,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_273">
+									<value object_id="_281">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -4024,7 +4136,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>keepTypeCheckBox</name>
-									<value object_id="_274">
+									<value object_id="_282">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -4052,7 +4164,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>BasisOrder</name>
-									<value object_id="_275">
+									<value object_id="_283">
 										<which>2</which>
 										<value>same as input</value>
 									</value>
@@ -4064,7 +4176,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>DataType</name>
-									<value object_id="_276">
+									<value object_id="_284">
 										<which>2</which>
 										<value>same as input</value>
 									</value>
@@ -4076,7 +4188,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_277">
+									<value object_id="_285">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -4088,7 +4200,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>Value</name>
-									<value object_id="_278">
+									<value object_id="_286">
 										<which>1</which>
 										<value>3.20000000000000000e+01</value>
 									</value>
@@ -4116,7 +4228,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>BasisOrder</name>
-									<value object_id="_279">
+									<value object_id="_287">
 										<which>2</which>
 										<value>same as input</value>
 									</value>
@@ -4128,7 +4240,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>DataType</name>
-									<value object_id="_280">
+									<value object_id="_288">
 										<which>2</which>
 										<value>same as input</value>
 									</value>
@@ -4140,7 +4252,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_281">
+									<value object_id="_289">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -4152,9 +4264,73 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>Value</name>
-									<value object_id="_282">
+									<value object_id="_290">
 										<which>1</which>
 										<value>3.20000000000000000e+01</value>
+									</value>
+								</second>
+							</item>
+						</stateMap>
+					</state>
+				</second>
+			</item>
+			<item>
+				<first>SetFieldDataToConstantValue:8</first>
+				<second>
+					<module>
+						<package_name_>SCIRun</package_name_>
+						<category_name_>ChangeFieldData</category_name_>
+						<module_name_>SetFieldDataToConstantValue</module_name_>
+					</module>
+					<state>
+						<stateMap>
+							<count>4</count>
+							<item_version>0</item_version>
+							<item>
+								<first>
+									<name>BasisOrder</name>
+								</first>
+								<second>
+									<name>BasisOrder</name>
+									<value object_id="_291">
+										<which>2</which>
+										<value>same as input</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>DataType</name>
+								</first>
+								<second>
+									<name>DataType</name>
+									<value object_id="_292">
+										<which>2</which>
+										<value>same as input</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>ProgrammableInputPortEnabled</name>
+								</first>
+								<second>
+									<name>ProgrammableInputPortEnabled</name>
+									<value object_id="_293">
+										<which>3</which>
+										<value>0</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>Value</name>
+								</first>
+								<second>
+									<name>Value</name>
+									<value object_id="_294">
+										<which>1</which>
+										<value>0.00000000000000000e+00</value>
 									</value>
 								</second>
 							</item>
@@ -4180,7 +4356,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>CullBackfacingText</name>
-									<value object_id="_283">
+									<value object_id="_295">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -4192,7 +4368,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>CylinderRadius</name>
-									<value object_id="_284">
+									<value object_id="_296">
 										<which>1</which>
 										<value>1.00000000000000006e-01</value>
 									</value>
@@ -4204,7 +4380,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>CylinderResolution</name>
-									<value object_id="_285">
+									<value object_id="_297">
 										<which>0</which>
 										<value>5</value>
 									</value>
@@ -4216,7 +4392,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>DefaultMeshColor</name>
-									<value object_id="_286">
+									<value object_id="_298">
 										<which>2</which>
 										<value>Color(0.5,0.5,0.5)</value>
 									</value>
@@ -4228,7 +4404,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>DefaultTextColor</name>
-									<value object_id="_287">
+									<value object_id="_299">
 										<which>2</which>
 										<value>Color(1,1,1)</value>
 									</value>
@@ -4240,7 +4416,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>EdgeTransparency</name>
-									<value object_id="_288">
+									<value object_id="_300">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -4252,7 +4428,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>EdgeTransparencyValue</name>
-									<value object_id="_289">
+									<value object_id="_301">
 										<which>1</which>
 										<value>6.49999976158142090e-01</value>
 									</value>
@@ -4264,7 +4440,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>EdgesAsCylinders</name>
-									<value object_id="_290">
+									<value object_id="_302">
 										<which>0</which>
 										<value>0</value>
 									</value>
@@ -4276,7 +4452,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>EdgesAvailable</name>
-									<value object_id="_291">
+									<value object_id="_303">
 										<which>3</which>
 										<value>1</value>
 									</value>
@@ -4288,7 +4464,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>EdgesColoring</name>
-									<value object_id="_292">
+									<value object_id="_304">
 										<which>0</which>
 										<value>0</value>
 									</value>
@@ -4300,7 +4476,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>FaceInvertNormals</name>
-									<value object_id="_293">
+									<value object_id="_305">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -4312,7 +4488,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>FaceTransparency</name>
-									<value object_id="_294">
+									<value object_id="_306">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -4324,7 +4500,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>FaceTransparencyValue</name>
-									<value object_id="_295">
+									<value object_id="_307">
 										<which>1</which>
 										<value>6.49999976158142090e-01</value>
 									</value>
@@ -4336,7 +4512,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>FacesAvailable</name>
-									<value object_id="_296">
+									<value object_id="_308">
 										<which>3</which>
 										<value>1</value>
 									</value>
@@ -4348,7 +4524,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>FacesColoring</name>
-									<value object_id="_297">
+									<value object_id="_309">
 										<which>0</which>
 										<value>0</value>
 									</value>
@@ -4360,7 +4536,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>FieldName</name>
-									<value object_id="_298">
+									<value object_id="_310">
 										<which>2</which>
 										<value>IPG</value>
 									</value>
@@ -4372,7 +4548,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>NodeAsSpheres</name>
-									<value object_id="_299">
+									<value object_id="_311">
 										<which>0</which>
 										<value>0</value>
 									</value>
@@ -4384,7 +4560,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>NodeTransparency</name>
-									<value object_id="_300">
+									<value object_id="_312">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -4396,7 +4572,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>NodeTransparencyValue</name>
-									<value object_id="_301">
+									<value object_id="_313">
 										<which>1</which>
 										<value>6.49999976158142090e-01</value>
 									</value>
@@ -4408,7 +4584,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>NodesAvailable</name>
-									<value object_id="_302">
+									<value object_id="_314">
 										<which>3</which>
 										<value>1</value>
 									</value>
@@ -4420,7 +4596,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>NodesColoring</name>
-									<value object_id="_303">
+									<value object_id="_315">
 										<which>0</which>
 										<value>0</value>
 									</value>
@@ -4432,7 +4608,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_304">
+									<value object_id="_316">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -4444,7 +4620,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>RenderAsLocation</name>
-									<value object_id="_305">
+									<value object_id="_317">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -4456,7 +4632,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ShowCellIndices</name>
-									<value object_id="_306">
+									<value object_id="_318">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -4468,7 +4644,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ShowDataValues</name>
-									<value object_id="_307">
+									<value object_id="_319">
 										<which>3</which>
 										<value>1</value>
 									</value>
@@ -4480,7 +4656,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ShowEdgeIndices</name>
-									<value object_id="_308">
+									<value object_id="_320">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -4492,7 +4668,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ShowEdges</name>
-									<value object_id="_309">
+									<value object_id="_321">
 										<which>3</which>
 										<value>1</value>
 									</value>
@@ -4504,7 +4680,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ShowFaceIndices</name>
-									<value object_id="_310">
+									<value object_id="_322">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -4516,7 +4692,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ShowFaces</name>
-									<value object_id="_311">
+									<value object_id="_323">
 										<which>3</which>
 										<value>1</value>
 									</value>
@@ -4528,7 +4704,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ShowNodeIndices</name>
-									<value object_id="_312">
+									<value object_id="_324">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -4540,7 +4716,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ShowNodes</name>
-									<value object_id="_313">
+									<value object_id="_325">
 										<which>3</which>
 										<value>1</value>
 									</value>
@@ -4552,7 +4728,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ShowText</name>
-									<value object_id="_314">
+									<value object_id="_326">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -4564,7 +4740,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>SphereResolution</name>
-									<value object_id="_315">
+									<value object_id="_327">
 										<which>0</which>
 										<value>5</value>
 									</value>
@@ -4576,7 +4752,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>SphereScaleValue</name>
-									<value object_id="_316">
+									<value object_id="_328">
 										<which>1</which>
 										<value>2.99999999999999989e-02</value>
 									</value>
@@ -4588,7 +4764,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>TextAlwaysVisible</name>
-									<value object_id="_317">
+									<value object_id="_329">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -4600,7 +4776,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>TextColoring</name>
-									<value object_id="_318">
+									<value object_id="_330">
 										<which>0</which>
 										<value>0</value>
 									</value>
@@ -4612,7 +4788,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>TextPrecision</name>
-									<value object_id="_319">
+									<value object_id="_331">
 										<which>0</which>
 										<value>3</value>
 									</value>
@@ -4624,7 +4800,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>TextSize</name>
-									<value object_id="_320">
+									<value object_id="_332">
 										<which>0</which>
 										<value>8</value>
 									</value>
@@ -4636,7 +4812,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>UseFaceNormals</name>
-									<value object_id="_321">
+									<value object_id="_333">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -4664,7 +4840,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>CullBackfacingText</name>
-									<value object_id="_322">
+									<value object_id="_334">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -4676,7 +4852,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>CylinderRadius</name>
-									<value object_id="_323">
+									<value object_id="_335">
 										<which>1</which>
 										<value>1.00000000000000006e-01</value>
 									</value>
@@ -4688,7 +4864,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>CylinderResolution</name>
-									<value object_id="_324">
+									<value object_id="_336">
 										<which>0</which>
 										<value>5</value>
 									</value>
@@ -4700,7 +4876,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>DefaultMeshColor</name>
-									<value object_id="_325">
+									<value object_id="_337">
 										<which>2</which>
 										<value>Color(0.5,0.5,0.5)</value>
 									</value>
@@ -4712,7 +4888,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>DefaultTextColor</name>
-									<value object_id="_326">
+									<value object_id="_338">
 										<which>2</which>
 										<value>Color(1,1,1)</value>
 									</value>
@@ -4724,7 +4900,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>EdgeTransparency</name>
-									<value object_id="_327">
+									<value object_id="_339">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -4736,7 +4912,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>EdgeTransparencyValue</name>
-									<value object_id="_328">
+									<value object_id="_340">
 										<which>1</which>
 										<value>6.49999976158142090e-01</value>
 									</value>
@@ -4748,7 +4924,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>EdgesAsCylinders</name>
-									<value object_id="_329">
+									<value object_id="_341">
 										<which>0</which>
 										<value>0</value>
 									</value>
@@ -4760,7 +4936,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>EdgesAvailable</name>
-									<value object_id="_330">
+									<value object_id="_342">
 										<which>3</which>
 										<value>1</value>
 									</value>
@@ -4772,7 +4948,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>EdgesColoring</name>
-									<value object_id="_331">
+									<value object_id="_343">
 										<which>0</which>
 										<value>0</value>
 									</value>
@@ -4784,7 +4960,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>FaceInvertNormals</name>
-									<value object_id="_332">
+									<value object_id="_344">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -4796,7 +4972,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>FaceTransparency</name>
-									<value object_id="_333">
+									<value object_id="_345">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -4808,7 +4984,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>FaceTransparencyValue</name>
-									<value object_id="_334">
+									<value object_id="_346">
 										<which>1</which>
 										<value>6.49999976158142090e-01</value>
 									</value>
@@ -4820,7 +4996,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>FacesAvailable</name>
-									<value object_id="_335">
+									<value object_id="_347">
 										<which>3</which>
 										<value>1</value>
 									</value>
@@ -4832,7 +5008,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>FacesColoring</name>
-									<value object_id="_336">
+									<value object_id="_348">
 										<which>0</which>
 										<value>0</value>
 									</value>
@@ -4844,7 +5020,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>FieldName</name>
-									<value object_id="_337">
+									<value object_id="_349">
 										<which>2</which>
 										<value>Depth</value>
 									</value>
@@ -4856,7 +5032,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>NodeAsSpheres</name>
-									<value object_id="_338">
+									<value object_id="_350">
 										<which>0</which>
 										<value>0</value>
 									</value>
@@ -4868,7 +5044,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>NodeTransparency</name>
-									<value object_id="_339">
+									<value object_id="_351">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -4880,7 +5056,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>NodeTransparencyValue</name>
-									<value object_id="_340">
+									<value object_id="_352">
 										<which>1</which>
 										<value>6.49999976158142090e-01</value>
 									</value>
@@ -4892,7 +5068,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>NodesAvailable</name>
-									<value object_id="_341">
+									<value object_id="_353">
 										<which>3</which>
 										<value>1</value>
 									</value>
@@ -4904,7 +5080,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>NodesColoring</name>
-									<value object_id="_342">
+									<value object_id="_354">
 										<which>0</which>
 										<value>0</value>
 									</value>
@@ -4916,7 +5092,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_343">
+									<value object_id="_355">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -4928,7 +5104,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>RenderAsLocation</name>
-									<value object_id="_344">
+									<value object_id="_356">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -4940,7 +5116,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ShowCellIndices</name>
-									<value object_id="_345">
+									<value object_id="_357">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -4952,7 +5128,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ShowDataValues</name>
-									<value object_id="_346">
+									<value object_id="_358">
 										<which>3</which>
 										<value>1</value>
 									</value>
@@ -4964,7 +5140,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ShowEdgeIndices</name>
-									<value object_id="_347">
+									<value object_id="_359">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -4976,7 +5152,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ShowEdges</name>
-									<value object_id="_348">
+									<value object_id="_360">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -4988,7 +5164,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ShowFaceIndices</name>
-									<value object_id="_349">
+									<value object_id="_361">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -5000,7 +5176,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ShowFaces</name>
-									<value object_id="_350">
+									<value object_id="_362">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -5012,7 +5188,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ShowNodeIndices</name>
-									<value object_id="_351">
+									<value object_id="_363">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -5024,7 +5200,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ShowNodes</name>
-									<value object_id="_352">
+									<value object_id="_364">
 										<which>3</which>
 										<value>1</value>
 									</value>
@@ -5036,7 +5212,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ShowText</name>
-									<value object_id="_353">
+									<value object_id="_365">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -5048,7 +5224,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>SphereResolution</name>
-									<value object_id="_354">
+									<value object_id="_366">
 										<which>0</which>
 										<value>5</value>
 									</value>
@@ -5060,7 +5236,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>SphereScaleValue</name>
-									<value object_id="_355">
+									<value object_id="_367">
 										<which>1</which>
 										<value>2.99999999999999989e-02</value>
 									</value>
@@ -5072,7 +5248,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>TextAlwaysVisible</name>
-									<value object_id="_356">
+									<value object_id="_368">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -5084,7 +5260,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>TextColoring</name>
-									<value object_id="_357">
+									<value object_id="_369">
 										<which>0</which>
 										<value>0</value>
 									</value>
@@ -5096,7 +5272,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>TextPrecision</name>
-									<value object_id="_358">
+									<value object_id="_370">
 										<which>0</which>
 										<value>3</value>
 									</value>
@@ -5108,7 +5284,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>TextSize</name>
-									<value object_id="_359">
+									<value object_id="_371">
 										<which>0</which>
 										<value>8</value>
 									</value>
@@ -5120,7 +5296,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>UseFaceNormals</name>
-									<value object_id="_360">
+									<value object_id="_372">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -5148,7 +5324,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>CullBackfacingText</name>
-									<value object_id="_361">
+									<value object_id="_373">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -5160,7 +5336,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>CylinderRadius</name>
-									<value object_id="_362">
+									<value object_id="_374">
 										<which>1</which>
 										<value>1.00000000000000006e-01</value>
 									</value>
@@ -5172,7 +5348,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>CylinderResolution</name>
-									<value object_id="_363">
+									<value object_id="_375">
 										<which>0</which>
 										<value>5</value>
 									</value>
@@ -5184,7 +5360,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>DefaultMeshColor</name>
-									<value object_id="_364">
+									<value object_id="_376">
 										<which>2</which>
 										<value>Color(0.5,0.5,0.5)</value>
 									</value>
@@ -5196,7 +5372,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>DefaultTextColor</name>
-									<value object_id="_365">
+									<value object_id="_377">
 										<which>2</which>
 										<value>Color(1,1,1)</value>
 									</value>
@@ -5208,7 +5384,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>EdgeTransparency</name>
-									<value object_id="_366">
+									<value object_id="_378">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -5220,7 +5396,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>EdgeTransparencyValue</name>
-									<value object_id="_367">
+									<value object_id="_379">
 										<which>1</which>
 										<value>6.49999976158142090e-01</value>
 									</value>
@@ -5232,7 +5408,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>EdgesAsCylinders</name>
-									<value object_id="_368">
+									<value object_id="_380">
 										<which>0</which>
 										<value>0</value>
 									</value>
@@ -5244,7 +5420,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>EdgesAvailable</name>
-									<value object_id="_369">
+									<value object_id="_381">
 										<which>3</which>
 										<value>1</value>
 									</value>
@@ -5256,7 +5432,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>EdgesColoring</name>
-									<value object_id="_370">
+									<value object_id="_382">
 										<which>0</which>
 										<value>0</value>
 									</value>
@@ -5268,7 +5444,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>FaceInvertNormals</name>
-									<value object_id="_371">
+									<value object_id="_383">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -5280,7 +5456,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>FaceTransparency</name>
-									<value object_id="_372">
+									<value object_id="_384">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -5292,7 +5468,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>FaceTransparencyValue</name>
-									<value object_id="_373">
+									<value object_id="_385">
 										<which>1</which>
 										<value>6.49999976158142090e-01</value>
 									</value>
@@ -5304,7 +5480,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>FacesAvailable</name>
-									<value object_id="_374">
+									<value object_id="_386">
 										<which>3</which>
 										<value>1</value>
 									</value>
@@ -5316,7 +5492,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>FacesColoring</name>
-									<value object_id="_375">
+									<value object_id="_387">
 										<which>0</which>
 										<value>0</value>
 									</value>
@@ -5328,7 +5504,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>FieldName</name>
-									<value object_id="_376">
+									<value object_id="_388">
 										<which>2</which>
 										<value>Z Clip</value>
 									</value>
@@ -5340,7 +5516,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>NodeAsSpheres</name>
-									<value object_id="_377">
+									<value object_id="_389">
 										<which>0</which>
 										<value>0</value>
 									</value>
@@ -5352,7 +5528,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>NodeTransparency</name>
-									<value object_id="_378">
+									<value object_id="_390">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -5364,7 +5540,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>NodeTransparencyValue</name>
-									<value object_id="_379">
+									<value object_id="_391">
 										<which>1</which>
 										<value>6.49999976158142090e-01</value>
 									</value>
@@ -5376,7 +5552,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>NodesAvailable</name>
-									<value object_id="_380">
+									<value object_id="_392">
 										<which>3</which>
 										<value>1</value>
 									</value>
@@ -5388,7 +5564,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>NodesColoring</name>
-									<value object_id="_381">
+									<value object_id="_393">
 										<which>0</which>
 										<value>0</value>
 									</value>
@@ -5400,7 +5576,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_382">
+									<value object_id="_394">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -5412,7 +5588,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>RenderAsLocation</name>
-									<value object_id="_383">
+									<value object_id="_395">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -5424,7 +5600,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ShowCellIndices</name>
-									<value object_id="_384">
+									<value object_id="_396">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -5436,7 +5612,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ShowDataValues</name>
-									<value object_id="_385">
+									<value object_id="_397">
 										<which>3</which>
 										<value>1</value>
 									</value>
@@ -5448,7 +5624,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ShowEdgeIndices</name>
-									<value object_id="_386">
+									<value object_id="_398">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -5460,7 +5636,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ShowEdges</name>
-									<value object_id="_387">
+									<value object_id="_399">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -5472,7 +5648,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ShowFaceIndices</name>
-									<value object_id="_388">
+									<value object_id="_400">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -5484,7 +5660,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ShowFaces</name>
-									<value object_id="_389">
+									<value object_id="_401">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -5496,7 +5672,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ShowNodeIndices</name>
-									<value object_id="_390">
+									<value object_id="_402">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -5508,7 +5684,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ShowNodes</name>
-									<value object_id="_391">
+									<value object_id="_403">
 										<which>3</which>
 										<value>1</value>
 									</value>
@@ -5520,7 +5696,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ShowText</name>
-									<value object_id="_392">
+									<value object_id="_404">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -5532,7 +5708,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>SphereResolution</name>
-									<value object_id="_393">
+									<value object_id="_405">
 										<which>0</which>
 										<value>5</value>
 									</value>
@@ -5544,7 +5720,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>SphereScaleValue</name>
-									<value object_id="_394">
+									<value object_id="_406">
 										<which>1</which>
 										<value>2.99999999999999989e-02</value>
 									</value>
@@ -5556,7 +5732,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>TextAlwaysVisible</name>
-									<value object_id="_395">
+									<value object_id="_407">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -5568,7 +5744,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>TextColoring</name>
-									<value object_id="_396">
+									<value object_id="_408">
 										<which>0</which>
 										<value>0</value>
 									</value>
@@ -5580,7 +5756,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>TextPrecision</name>
-									<value object_id="_397">
+									<value object_id="_409">
 										<which>0</which>
 										<value>3</value>
 									</value>
@@ -5592,7 +5768,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>TextSize</name>
-									<value object_id="_398">
+									<value object_id="_410">
 										<which>0</which>
 										<value>8</value>
 									</value>
@@ -5604,7 +5780,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>UseFaceNormals</name>
-									<value object_id="_399">
+									<value object_id="_411">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -5632,7 +5808,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>CullBackfacingText</name>
-									<value object_id="_400">
+									<value object_id="_412">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -5644,7 +5820,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>CylinderRadius</name>
-									<value object_id="_401">
+									<value object_id="_413">
 										<which>1</which>
 										<value>1.00000000000000006e-01</value>
 									</value>
@@ -5656,7 +5832,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>CylinderResolution</name>
-									<value object_id="_402">
+									<value object_id="_414">
 										<which>0</which>
 										<value>5</value>
 									</value>
@@ -5668,7 +5844,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>DefaultMeshColor</name>
-									<value object_id="_403">
+									<value object_id="_415">
 										<which>2</which>
 										<value>Color(0.5,0.5,0.5)</value>
 									</value>
@@ -5680,7 +5856,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>DefaultTextColor</name>
-									<value object_id="_404">
+									<value object_id="_416">
 										<which>2</which>
 										<value>Color(1,1,1)</value>
 									</value>
@@ -5692,7 +5868,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>EdgeTransparency</name>
-									<value object_id="_405">
+									<value object_id="_417">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -5704,7 +5880,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>EdgeTransparencyValue</name>
-									<value object_id="_406">
+									<value object_id="_418">
 										<which>1</which>
 										<value>6.49999976158142090e-01</value>
 									</value>
@@ -5716,7 +5892,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>EdgesAsCylinders</name>
-									<value object_id="_407">
+									<value object_id="_419">
 										<which>0</which>
 										<value>0</value>
 									</value>
@@ -5728,7 +5904,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>EdgesAvailable</name>
-									<value object_id="_408">
+									<value object_id="_420">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -5740,7 +5916,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>EdgesColoring</name>
-									<value object_id="_409">
+									<value object_id="_421">
 										<which>0</which>
 										<value>0</value>
 									</value>
@@ -5752,7 +5928,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>FaceInvertNormals</name>
-									<value object_id="_410">
+									<value object_id="_422">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -5764,7 +5940,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>FaceTransparency</name>
-									<value object_id="_411">
+									<value object_id="_423">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -5776,7 +5952,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>FaceTransparencyValue</name>
-									<value object_id="_412">
+									<value object_id="_424">
 										<which>1</which>
 										<value>6.49999976158142090e-01</value>
 									</value>
@@ -5788,7 +5964,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>FacesAvailable</name>
-									<value object_id="_413">
+									<value object_id="_425">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -5800,7 +5976,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>FacesColoring</name>
-									<value object_id="_414">
+									<value object_id="_426">
 										<which>0</which>
 										<value>0</value>
 									</value>
@@ -5812,7 +5988,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>FieldName</name>
-									<value object_id="_415">
+									<value object_id="_427">
 										<which>2</which>
 										<value>Control Points</value>
 									</value>
@@ -5824,7 +6000,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>NodeAsSpheres</name>
-									<value object_id="_416">
+									<value object_id="_428">
 										<which>0</which>
 										<value>1</value>
 									</value>
@@ -5836,7 +6012,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>NodeTransparency</name>
-									<value object_id="_417">
+									<value object_id="_429">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -5848,7 +6024,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>NodeTransparencyValue</name>
-									<value object_id="_418">
+									<value object_id="_430">
 										<which>1</which>
 										<value>6.49999976158142090e-01</value>
 									</value>
@@ -5860,7 +6036,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>NodesAvailable</name>
-									<value object_id="_419">
+									<value object_id="_431">
 										<which>3</which>
 										<value>1</value>
 									</value>
@@ -5872,7 +6048,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>NodesColoring</name>
-									<value object_id="_420">
+									<value object_id="_432">
 										<which>0</which>
 										<value>0</value>
 									</value>
@@ -5884,7 +6060,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_421">
+									<value object_id="_433">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -5896,7 +6072,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>RenderAsLocation</name>
-									<value object_id="_422">
+									<value object_id="_434">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -5908,7 +6084,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ShowCellIndices</name>
-									<value object_id="_423">
+									<value object_id="_435">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -5920,7 +6096,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ShowDataValues</name>
-									<value object_id="_424">
+									<value object_id="_436">
 										<which>3</which>
 										<value>1</value>
 									</value>
@@ -5932,7 +6108,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ShowEdgeIndices</name>
-									<value object_id="_425">
+									<value object_id="_437">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -5944,7 +6120,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ShowEdges</name>
-									<value object_id="_426">
+									<value object_id="_438">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -5956,7 +6132,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ShowFaceIndices</name>
-									<value object_id="_427">
+									<value object_id="_439">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -5968,7 +6144,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ShowFaces</name>
-									<value object_id="_428">
+									<value object_id="_440">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -5980,7 +6156,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ShowNodeIndices</name>
-									<value object_id="_429">
+									<value object_id="_441">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -5992,7 +6168,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ShowNodes</name>
-									<value object_id="_430">
+									<value object_id="_442">
 										<which>3</which>
 										<value>1</value>
 									</value>
@@ -6004,7 +6180,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ShowText</name>
-									<value object_id="_431">
+									<value object_id="_443">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -6016,7 +6192,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>SphereResolution</name>
-									<value object_id="_432">
+									<value object_id="_444">
 										<which>0</which>
 										<value>5</value>
 									</value>
@@ -6028,7 +6204,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>SphereScaleValue</name>
-									<value object_id="_433">
+									<value object_id="_445">
 										<which>1</which>
 										<value>1.00000000000000006e-01</value>
 									</value>
@@ -6040,7 +6216,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>TextAlwaysVisible</name>
-									<value object_id="_434">
+									<value object_id="_446">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -6052,7 +6228,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>TextColoring</name>
-									<value object_id="_435">
+									<value object_id="_447">
 										<which>0</which>
 										<value>0</value>
 									</value>
@@ -6064,7 +6240,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>TextPrecision</name>
-									<value object_id="_436">
+									<value object_id="_448">
 										<which>0</which>
 										<value>3</value>
 									</value>
@@ -6076,7 +6252,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>TextSize</name>
-									<value object_id="_437">
+									<value object_id="_449">
 										<which>0</which>
 										<value>8</value>
 									</value>
@@ -6088,7 +6264,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>UseFaceNormals</name>
-									<value object_id="_438">
+									<value object_id="_450">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -6116,7 +6292,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>CullBackfacingText</name>
-									<value object_id="_439">
+									<value object_id="_451">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -6128,7 +6304,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>CylinderRadius</name>
-									<value object_id="_440">
+									<value object_id="_452">
 										<which>1</which>
 										<value>1.00000000000000006e-01</value>
 									</value>
@@ -6140,7 +6316,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>CylinderResolution</name>
-									<value object_id="_441">
+									<value object_id="_453">
 										<which>0</which>
 										<value>5</value>
 									</value>
@@ -6152,7 +6328,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>DefaultMeshColor</name>
-									<value object_id="_442">
+									<value object_id="_454">
 										<which>2</which>
 										<value>Color(0.5,0.5,0.5)</value>
 									</value>
@@ -6164,7 +6340,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>DefaultTextColor</name>
-									<value object_id="_443">
+									<value object_id="_455">
 										<which>2</which>
 										<value>Color(1,1,1)</value>
 									</value>
@@ -6176,7 +6352,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>EdgeTransparency</name>
-									<value object_id="_444">
+									<value object_id="_456">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -6188,7 +6364,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>EdgeTransparencyValue</name>
-									<value object_id="_445">
+									<value object_id="_457">
 										<which>1</which>
 										<value>6.49999976158142090e-01</value>
 									</value>
@@ -6200,7 +6376,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>EdgesAsCylinders</name>
-									<value object_id="_446">
+									<value object_id="_458">
 										<which>0</which>
 										<value>0</value>
 									</value>
@@ -6212,7 +6388,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>EdgesAvailable</name>
-									<value object_id="_447">
+									<value object_id="_459">
 										<which>3</which>
 										<value>1</value>
 									</value>
@@ -6224,7 +6400,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>EdgesColoring</name>
-									<value object_id="_448">
+									<value object_id="_460">
 										<which>0</which>
 										<value>0</value>
 									</value>
@@ -6236,7 +6412,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>FaceInvertNormals</name>
-									<value object_id="_449">
+									<value object_id="_461">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -6248,7 +6424,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>FaceTransparency</name>
-									<value object_id="_450">
+									<value object_id="_462">
 										<which>3</which>
 										<value>1</value>
 									</value>
@@ -6260,7 +6436,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>FaceTransparencyValue</name>
-									<value object_id="_451">
+									<value object_id="_463">
 										<which>1</which>
 										<value>2.50000000000000000e-01</value>
 									</value>
@@ -6272,7 +6448,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>FacesAvailable</name>
-									<value object_id="_452">
+									<value object_id="_464">
 										<which>3</which>
 										<value>1</value>
 									</value>
@@ -6284,7 +6460,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>FacesColoring</name>
-									<value object_id="_453">
+									<value object_id="_465">
 										<which>0</which>
 										<value>0</value>
 									</value>
@@ -6296,7 +6472,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>FieldName</name>
-									<value object_id="_454">
+									<value object_id="_466">
 										<which>2</which>
 										<value>Ellipse</value>
 									</value>
@@ -6308,7 +6484,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>NodeAsSpheres</name>
-									<value object_id="_455">
+									<value object_id="_467">
 										<which>0</which>
 										<value>0</value>
 									</value>
@@ -6320,7 +6496,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>NodeTransparency</name>
-									<value object_id="_456">
+									<value object_id="_468">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -6332,7 +6508,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>NodeTransparencyValue</name>
-									<value object_id="_457">
+									<value object_id="_469">
 										<which>1</which>
 										<value>6.49999976158142090e-01</value>
 									</value>
@@ -6344,7 +6520,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>NodesAvailable</name>
-									<value object_id="_458">
+									<value object_id="_470">
 										<which>3</which>
 										<value>1</value>
 									</value>
@@ -6356,7 +6532,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>NodesColoring</name>
-									<value object_id="_459">
+									<value object_id="_471">
 										<which>0</which>
 										<value>1</value>
 									</value>
@@ -6368,7 +6544,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_460">
+									<value object_id="_472">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -6380,7 +6556,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>RenderAsLocation</name>
-									<value object_id="_461">
+									<value object_id="_473">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -6392,7 +6568,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ShowCellIndices</name>
-									<value object_id="_462">
+									<value object_id="_474">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -6404,7 +6580,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ShowDataValues</name>
-									<value object_id="_463">
+									<value object_id="_475">
 										<which>3</which>
 										<value>1</value>
 									</value>
@@ -6416,7 +6592,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ShowEdgeIndices</name>
-									<value object_id="_464">
+									<value object_id="_476">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -6428,7 +6604,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ShowEdges</name>
-									<value object_id="_465">
+									<value object_id="_477">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -6440,7 +6616,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ShowFaceIndices</name>
-									<value object_id="_466">
+									<value object_id="_478">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -6452,7 +6628,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ShowFaces</name>
-									<value object_id="_467">
+									<value object_id="_479">
 										<which>3</which>
 										<value>1</value>
 									</value>
@@ -6464,7 +6640,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ShowNodeIndices</name>
-									<value object_id="_468">
+									<value object_id="_480">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -6476,7 +6652,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ShowNodes</name>
-									<value object_id="_469">
+									<value object_id="_481">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -6488,7 +6664,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ShowText</name>
-									<value object_id="_470">
+									<value object_id="_482">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -6500,7 +6676,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>SphereResolution</name>
-									<value object_id="_471">
+									<value object_id="_483">
 										<which>0</which>
 										<value>5</value>
 									</value>
@@ -6512,7 +6688,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>SphereScaleValue</name>
-									<value object_id="_472">
+									<value object_id="_484">
 										<which>1</which>
 										<value>2.99999999999999989e-02</value>
 									</value>
@@ -6524,7 +6700,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>TextAlwaysVisible</name>
-									<value object_id="_473">
+									<value object_id="_485">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -6536,7 +6712,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>TextColoring</name>
-									<value object_id="_474">
+									<value object_id="_486">
 										<which>0</which>
 										<value>0</value>
 									</value>
@@ -6548,7 +6724,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>TextPrecision</name>
-									<value object_id="_475">
+									<value object_id="_487">
 										<which>0</which>
 										<value>3</value>
 									</value>
@@ -6560,7 +6736,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>TextSize</name>
-									<value object_id="_476">
+									<value object_id="_488">
 										<which>0</which>
 										<value>8</value>
 									</value>
@@ -6572,7 +6748,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>UseFaceNormals</name>
-									<value object_id="_477">
+									<value object_id="_489">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -6600,7 +6776,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_478">
+									<value object_id="_490">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -6628,7 +6804,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_479">
+									<value object_id="_491">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -6656,7 +6832,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_480">
+									<value object_id="_492">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -6684,7 +6860,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_481">
+									<value object_id="_493">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -6712,7 +6888,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_482">
+									<value object_id="_494">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -6740,7 +6916,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_483">
+									<value object_id="_495">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -6768,7 +6944,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_484">
+									<value object_id="_496">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -6796,7 +6972,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_485">
+									<value object_id="_497">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -6824,7 +7000,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_486">
+									<value object_id="_498">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -6852,7 +7028,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_487">
+									<value object_id="_499">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -6880,7 +7056,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_488">
+									<value object_id="_500">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -6908,7 +7084,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_489">
+									<value object_id="_501">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -6936,7 +7112,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_490">
+									<value object_id="_502">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -6964,7 +7140,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_491">
+									<value object_id="_503">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -6992,7 +7168,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_492">
+									<value object_id="_504">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -7020,7 +7196,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>Ambient</name>
-									<value object_id="_493">
+									<value object_id="_505">
 										<which>1</which>
 										<value>2.00000000000000011e-01</value>
 									</value>
@@ -7032,7 +7208,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>AxesSize</name>
-									<value object_id="_494">
+									<value object_id="_506">
 										<which>0</which>
 										<value>10</value>
 									</value>
@@ -7044,7 +7220,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>AxesVisible</name>
-									<value object_id="_495">
+									<value object_id="_507">
 										<which>3</which>
 										<value>1</value>
 									</value>
@@ -7056,7 +7232,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>AxesX</name>
-									<value object_id="_496">
+									<value object_id="_508">
 										<which>0</which>
 										<value>100</value>
 									</value>
@@ -7068,7 +7244,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>AxesY</name>
-									<value object_id="_497">
+									<value object_id="_509">
 										<which>0</which>
 										<value>100</value>
 									</value>
@@ -7080,7 +7256,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>BackgroundColor</name>
-									<value object_id="_498">
+									<value object_id="_510">
 										<which>2</which>
 										<value>Color(0,0,0)</value>
 									</value>
@@ -7092,7 +7268,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>CameraDistance</name>
-									<value object_id="_499">
+									<value object_id="_511">
 										<which>1</which>
 										<value>2.22322189331054688e+02</value>
 									</value>
@@ -7104,7 +7280,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>CameraDistanceMinimum</name>
-									<value object_id="_500">
+									<value object_id="_512">
 										<which>1</which>
 										<value>1.00000000000000004e-10</value>
 									</value>
@@ -7116,28 +7292,28 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>CameraLookAt</name>
-									<value object_id="_501">
+									<value object_id="_513">
 										<which>5</which>
 										<value>
 											<count>3</count>
 											<item_version>0</item_version>
 											<item>
 												<name>listElement</name>
-												<value object_id="_502">
+												<value object_id="_514">
 													<which>1</which>
 													<value>1.43238067626953125e+01</value>
 												</value>
 											</item>
 											<item>
 												<name>listElement</name>
-												<value object_id="_503">
+												<value object_id="_515">
 													<which>1</which>
 													<value>8.10304355621337891e+00</value>
 												</value>
 											</item>
 											<item>
 												<name>listElement</name>
-												<value object_id="_504">
+												<value object_id="_516">
 													<which>1</which>
 													<value>1.68100929260253906e+01</value>
 												</value>
@@ -7152,35 +7328,35 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>CameraRotation</name>
-									<value object_id="_505">
+									<value object_id="_517">
 										<which>5</which>
 										<value>
 											<count>4</count>
 											<item_version>0</item_version>
 											<item>
 												<name>listElement</name>
-												<value object_id="_506">
+												<value object_id="_518">
 													<which>1</which>
 													<value>-1.87872201204299927e-01</value>
 												</value>
 											</item>
 											<item>
 												<name>listElement</name>
-												<value object_id="_507">
+												<value object_id="_519">
 													<which>1</which>
 													<value>1.24948211014270782e-02</value>
 												</value>
 											</item>
 											<item>
 												<name>listElement</name>
-												<value object_id="_508">
+												<value object_id="_520">
 													<which>1</which>
 													<value>4.75049853324890137e-01</value>
 												</value>
 											</item>
 											<item>
 												<name>listElement</name>
-												<value object_id="_509">
+												<value object_id="_521">
 													<which>1</which>
 													<value>8.59578907489776611e-01</value>
 												</value>
@@ -7195,160 +7371,68 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ClippingPlaneD</name>
-									<value object_id="_510">
+									<value object_id="_522">
 										<which>5</which>
 										<value>
 											<count>6</count>
 											<item_version>0</item_version>
-											<item>
-												<name></name>
-												<value object_id="_511">
-													<which>1</which>
-													<value>0.00000000000000000e+00</value>
-												</value>
-											</item>
-											<item>
-												<name></name>
-												<value object_id="_512">
-													<which>1</which>
-													<value>0.00000000000000000e+00</value>
-												</value>
-											</item>
-											<item>
-												<name></name>
-												<value object_id="_513">
-													<which>1</which>
-													<value>0.00000000000000000e+00</value>
-												</value>
-											</item>
-											<item>
-												<name></name>
-												<value object_id="_514">
-													<which>1</which>
-													<value>0.00000000000000000e+00</value>
-												</value>
-											</item>
-											<item>
-												<name></name>
-												<value object_id="_515">
-													<which>1</which>
-													<value>0.00000000000000000e+00</value>
-												</value>
-											</item>
-											<item>
-												<name></name>
-												<value object_id="_516">
-													<which>1</which>
-													<value>0.00000000000000000e+00</value>
-												</value>
-											</item>
-										</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>ClippingPlaneEnabled</name>
-								</first>
-								<second>
-									<name>ClippingPlaneEnabled</name>
-									<value object_id="_517">
-										<which>5</which>
-										<value>
-											<count>6</count>
-											<item_version>0</item_version>
-											<item>
-												<name></name>
-												<value object_id="_518">
-													<which>3</which>
-													<value>0</value>
-												</value>
-											</item>
-											<item>
-												<name></name>
-												<value object_id="_519">
-													<which>3</which>
-													<value>0</value>
-												</value>
-											</item>
-											<item>
-												<name></name>
-												<value object_id="_520">
-													<which>3</which>
-													<value>0</value>
-												</value>
-											</item>
-											<item>
-												<name></name>
-												<value object_id="_521">
-													<which>3</which>
-													<value>0</value>
-												</value>
-											</item>
-											<item>
-												<name></name>
-												<value object_id="_522">
-													<which>3</which>
-													<value>0</value>
-												</value>
-											</item>
 											<item>
 												<name></name>
 												<value object_id="_523">
-													<which>3</which>
-													<value>0</value>
+													<which>1</which>
+													<value>0.00000000000000000e+00</value>
 												</value>
 											</item>
-										</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>ClippingPlaneNormalReversed</name>
-								</first>
-								<second>
-									<name>ClippingPlaneNormalReversed</name>
-									<value object_id="_524">
-										<which>5</which>
-										<value>
-											<count>6</count>
-											<item_version>0</item_version>
+											<item>
+												<name></name>
+												<value object_id="_524">
+													<which>1</which>
+													<value>0.00000000000000000e+00</value>
+												</value>
+											</item>
 											<item>
 												<name></name>
 												<value object_id="_525">
-													<which>3</which>
-													<value>0</value>
+													<which>1</which>
+													<value>0.00000000000000000e+00</value>
 												</value>
 											</item>
 											<item>
 												<name></name>
 												<value object_id="_526">
-													<which>3</which>
-													<value>0</value>
+													<which>1</which>
+													<value>0.00000000000000000e+00</value>
 												</value>
 											</item>
 											<item>
 												<name></name>
 												<value object_id="_527">
-													<which>3</which>
-													<value>0</value>
+													<which>1</which>
+													<value>0.00000000000000000e+00</value>
 												</value>
 											</item>
 											<item>
 												<name></name>
 												<value object_id="_528">
-													<which>3</which>
-													<value>0</value>
+													<which>1</which>
+													<value>0.00000000000000000e+00</value>
 												</value>
 											</item>
-											<item>
-												<name></name>
-												<value object_id="_529">
-													<which>3</which>
-													<value>0</value>
-												</value>
-											</item>
+										</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>ClippingPlaneEnabled</name>
+								</first>
+								<second>
+									<name>ClippingPlaneEnabled</name>
+									<value object_id="_529">
+										<which>5</which>
+										<value>
+											<count>6</count>
+											<item_version>0</item_version>
 											<item>
 												<name></name>
 												<value object_id="_530">
@@ -7356,6 +7440,98 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 													<value>0</value>
 												</value>
 											</item>
+											<item>
+												<name></name>
+												<value object_id="_531">
+													<which>3</which>
+													<value>0</value>
+												</value>
+											</item>
+											<item>
+												<name></name>
+												<value object_id="_532">
+													<which>3</which>
+													<value>0</value>
+												</value>
+											</item>
+											<item>
+												<name></name>
+												<value object_id="_533">
+													<which>3</which>
+													<value>0</value>
+												</value>
+											</item>
+											<item>
+												<name></name>
+												<value object_id="_534">
+													<which>3</which>
+													<value>0</value>
+												</value>
+											</item>
+											<item>
+												<name></name>
+												<value object_id="_535">
+													<which>3</which>
+													<value>0</value>
+												</value>
+											</item>
+										</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>ClippingPlaneNormalReversed</name>
+								</first>
+								<second>
+									<name>ClippingPlaneNormalReversed</name>
+									<value object_id="_536">
+										<which>5</which>
+										<value>
+											<count>6</count>
+											<item_version>0</item_version>
+											<item>
+												<name></name>
+												<value object_id="_537">
+													<which>3</which>
+													<value>0</value>
+												</value>
+											</item>
+											<item>
+												<name></name>
+												<value object_id="_538">
+													<which>3</which>
+													<value>0</value>
+												</value>
+											</item>
+											<item>
+												<name></name>
+												<value object_id="_539">
+													<which>3</which>
+													<value>0</value>
+												</value>
+											</item>
+											<item>
+												<name></name>
+												<value object_id="_540">
+													<which>3</which>
+													<value>0</value>
+												</value>
+											</item>
+											<item>
+												<name></name>
+												<value object_id="_541">
+													<which>3</which>
+													<value>0</value>
+												</value>
+											</item>
+											<item>
+												<name></name>
+												<value object_id="_542">
+													<which>3</which>
+													<value>0</value>
+												</value>
+											</item>
 										</value>
 									</value>
 								</second>
@@ -7366,125 +7542,25 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ClippingPlaneX</name>
-									<value object_id="_531">
+									<value object_id="_543">
 										<which>5</which>
 										<value>
 											<count>6</count>
 											<item_version>0</item_version>
 											<item>
 												<name></name>
-												<value object_id="_532">
+												<value object_id="_544">
 													<which>1</which>
 													<value>-8.00000000000000017e-02</value>
 												</value>
 											</item>
 											<item>
 												<name></name>
-												<value object_id="_533">
+												<value object_id="_545">
 													<which>1</which>
 													<value>0.00000000000000000e+00</value>
 												</value>
 											</item>
-											<item>
-												<name></name>
-												<value object_id="_534">
-													<which>1</which>
-													<value>0.00000000000000000e+00</value>
-												</value>
-											</item>
-											<item>
-												<name></name>
-												<value object_id="_535">
-													<which>1</which>
-													<value>0.00000000000000000e+00</value>
-												</value>
-											</item>
-											<item>
-												<name></name>
-												<value object_id="_536">
-													<which>1</which>
-													<value>0.00000000000000000e+00</value>
-												</value>
-											</item>
-											<item>
-												<name></name>
-												<value object_id="_537">
-													<which>1</which>
-													<value>0.00000000000000000e+00</value>
-												</value>
-											</item>
-										</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>ClippingPlaneY</name>
-								</first>
-								<second>
-									<name>ClippingPlaneY</name>
-									<value object_id="_538">
-										<which>5</which>
-										<value>
-											<count>6</count>
-											<item_version>0</item_version>
-											<item>
-												<name></name>
-												<value object_id="_539">
-													<which>1</which>
-													<value>0.00000000000000000e+00</value>
-												</value>
-											</item>
-											<item>
-												<name></name>
-												<value object_id="_540">
-													<which>1</which>
-													<value>0.00000000000000000e+00</value>
-												</value>
-											</item>
-											<item>
-												<name></name>
-												<value object_id="_541">
-													<which>1</which>
-													<value>0.00000000000000000e+00</value>
-												</value>
-											</item>
-											<item>
-												<name></name>
-												<value object_id="_542">
-													<which>1</which>
-													<value>0.00000000000000000e+00</value>
-												</value>
-											</item>
-											<item>
-												<name></name>
-												<value object_id="_543">
-													<which>1</which>
-													<value>0.00000000000000000e+00</value>
-												</value>
-											</item>
-											<item>
-												<name></name>
-												<value object_id="_544">
-													<which>1</which>
-													<value>0.00000000000000000e+00</value>
-												</value>
-											</item>
-										</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>ClippingPlaneZ</name>
-								</first>
-								<second>
-									<name>ClippingPlaneZ</name>
-									<value object_id="_545">
-										<which>5</which>
-										<value>
-											<count>6</count>
-											<item_version>0</item_version>
 											<item>
 												<name></name>
 												<value object_id="_546">
@@ -7513,16 +7589,116 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 													<value>0.00000000000000000e+00</value>
 												</value>
 											</item>
+										</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>ClippingPlaneY</name>
+								</first>
+								<second>
+									<name>ClippingPlaneY</name>
+									<value object_id="_550">
+										<which>5</which>
+										<value>
+											<count>6</count>
+											<item_version>0</item_version>
 											<item>
 												<name></name>
-												<value object_id="_550">
+												<value object_id="_551">
 													<which>1</which>
 													<value>0.00000000000000000e+00</value>
 												</value>
 											</item>
 											<item>
 												<name></name>
-												<value object_id="_551">
+												<value object_id="_552">
+													<which>1</which>
+													<value>0.00000000000000000e+00</value>
+												</value>
+											</item>
+											<item>
+												<name></name>
+												<value object_id="_553">
+													<which>1</which>
+													<value>0.00000000000000000e+00</value>
+												</value>
+											</item>
+											<item>
+												<name></name>
+												<value object_id="_554">
+													<which>1</which>
+													<value>0.00000000000000000e+00</value>
+												</value>
+											</item>
+											<item>
+												<name></name>
+												<value object_id="_555">
+													<which>1</which>
+													<value>0.00000000000000000e+00</value>
+												</value>
+											</item>
+											<item>
+												<name></name>
+												<value object_id="_556">
+													<which>1</which>
+													<value>0.00000000000000000e+00</value>
+												</value>
+											</item>
+										</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>ClippingPlaneZ</name>
+								</first>
+								<second>
+									<name>ClippingPlaneZ</name>
+									<value object_id="_557">
+										<which>5</which>
+										<value>
+											<count>6</count>
+											<item_version>0</item_version>
+											<item>
+												<name></name>
+												<value object_id="_558">
+													<which>1</which>
+													<value>0.00000000000000000e+00</value>
+												</value>
+											</item>
+											<item>
+												<name></name>
+												<value object_id="_559">
+													<which>1</which>
+													<value>0.00000000000000000e+00</value>
+												</value>
+											</item>
+											<item>
+												<name></name>
+												<value object_id="_560">
+													<which>1</which>
+													<value>0.00000000000000000e+00</value>
+												</value>
+											</item>
+											<item>
+												<name></name>
+												<value object_id="_561">
+													<which>1</which>
+													<value>0.00000000000000000e+00</value>
+												</value>
+											</item>
+											<item>
+												<name></name>
+												<value object_id="_562">
+													<which>1</which>
+													<value>0.00000000000000000e+00</value>
+												</value>
+											</item>
+											<item>
+												<name></name>
+												<value object_id="_563">
 													<which>1</which>
 													<value>0.00000000000000000e+00</value>
 												</value>
@@ -7537,7 +7713,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>Diffuse</name>
-									<value object_id="_552">
+									<value object_id="_564">
 										<which>1</which>
 										<value>1.00000000000000000e+00</value>
 									</value>
@@ -7549,7 +7725,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>Emission</name>
-									<value object_id="_553">
+									<value object_id="_565">
 										<which>1</which>
 										<value>0.00000000000000000e+00</value>
 									</value>
@@ -7561,7 +7737,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>FogColor</name>
-									<value object_id="_554">
+									<value object_id="_566">
 										<which>2</which>
 										<value>Color(0,0,255)</value>
 									</value>
@@ -7573,7 +7749,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>FogEnd</name>
-									<value object_id="_555">
+									<value object_id="_567">
 										<which>1</which>
 										<value>7.09999999999999964e-01</value>
 									</value>
@@ -7585,7 +7761,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>FogOn</name>
-									<value object_id="_556">
+									<value object_id="_568">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -7597,7 +7773,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>FogStart</name>
-									<value object_id="_557">
+									<value object_id="_569">
 										<which>1</which>
 										<value>0.00000000000000000e+00</value>
 									</value>
@@ -7609,164 +7785,164 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>HasNewGeometry</name>
-									<value object_id="_558">
-										<which>3</which>
-										<value>1</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>HeadLightAzimuth</name>
-								</first>
-								<second>
-									<name>HeadLightAzimuth</name>
-									<value object_id="_559">
-										<which>0</which>
-										<value>180</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>HeadLightColor</name>
-								</first>
-								<second>
-									<name>HeadLightColor</name>
-									<value object_id="_560">
-										<which>2</which>
-										<value>Color(1,1,1)</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>HeadLightInclination</name>
-								</first>
-								<second>
-									<name>HeadLightInclination</name>
-									<value object_id="_561">
-										<which>0</which>
-										<value>90</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>HeadLightOn</name>
-								</first>
-								<second>
-									<name>HeadLightOn</name>
-									<value object_id="_562">
-										<which>3</which>
-										<value>1</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>IsExecuting</name>
-								</first>
-								<second>
-									<name>IsExecuting</name>
-									<value object_id="_563">
-										<which>3</which>
-										<value>0</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>IsFloating</name>
-								</first>
-								<second>
-									<name>IsFloating</name>
-									<value object_id="_564">
-										<which>3</which>
-										<value>1</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>Light1Azimuth</name>
-								</first>
-								<second>
-									<name>Light1Azimuth</name>
-									<value object_id="_565">
-										<which>0</which>
-										<value>180</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>Light1Color</name>
-								</first>
-								<second>
-									<name>Light1Color</name>
-									<value object_id="_566">
-										<which>2</which>
-										<value>Color(1,1,1)</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>Light1Inclination</name>
-								</first>
-								<second>
-									<name>Light1Inclination</name>
-									<value object_id="_567">
-										<which>0</which>
-										<value>90</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>Light1On</name>
-								</first>
-								<second>
-									<name>Light1On</name>
-									<value object_id="_568">
-										<which>3</which>
-										<value>0</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>Light2Azimuth</name>
-								</first>
-								<second>
-									<name>Light2Azimuth</name>
-									<value object_id="_569">
-										<which>0</which>
-										<value>180</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>Light2Color</name>
-								</first>
-								<second>
-									<name>Light2Color</name>
 									<value object_id="_570">
-										<which>2</which>
-										<value>Color(1,1,1)</value>
+										<which>3</which>
+										<value>1</value>
 									</value>
 								</second>
 							</item>
 							<item>
 								<first>
-									<name>Light2Inclination</name>
+									<name>HeadLightAzimuth</name>
 								</first>
 								<second>
-									<name>Light2Inclination</name>
+									<name>HeadLightAzimuth</name>
 									<value object_id="_571">
 										<which>0</which>
+										<value>180</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>HeadLightColor</name>
+								</first>
+								<second>
+									<name>HeadLightColor</name>
+									<value object_id="_572">
+										<which>2</which>
+										<value>Color(1,1,1)</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>HeadLightInclination</name>
+								</first>
+								<second>
+									<name>HeadLightInclination</name>
+									<value object_id="_573">
+										<which>0</which>
+										<value>90</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>HeadLightOn</name>
+								</first>
+								<second>
+									<name>HeadLightOn</name>
+									<value object_id="_574">
+										<which>3</which>
+										<value>1</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>IsExecuting</name>
+								</first>
+								<second>
+									<name>IsExecuting</name>
+									<value object_id="_575">
+										<which>3</which>
+										<value>0</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>IsFloating</name>
+								</first>
+								<second>
+									<name>IsFloating</name>
+									<value object_id="_576">
+										<which>3</which>
+										<value>1</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>Light1Azimuth</name>
+								</first>
+								<second>
+									<name>Light1Azimuth</name>
+									<value object_id="_577">
+										<which>0</which>
+										<value>180</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>Light1Color</name>
+								</first>
+								<second>
+									<name>Light1Color</name>
+									<value object_id="_578">
+										<which>2</which>
+										<value>Color(1,1,1)</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>Light1Inclination</name>
+								</first>
+								<second>
+									<name>Light1Inclination</name>
+									<value object_id="_579">
+										<which>0</which>
+										<value>90</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>Light1On</name>
+								</first>
+								<second>
+									<name>Light1On</name>
+									<value object_id="_580">
+										<which>3</which>
+										<value>0</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>Light2Azimuth</name>
+								</first>
+								<second>
+									<name>Light2Azimuth</name>
+									<value object_id="_581">
+										<which>0</which>
+										<value>180</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>Light2Color</name>
+								</first>
+								<second>
+									<name>Light2Color</name>
+									<value object_id="_582">
+										<which>2</which>
+										<value>Color(1,1,1)</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>Light2Inclination</name>
+								</first>
+								<second>
+									<name>Light2Inclination</name>
+									<value object_id="_583">
+										<which>0</which>
 										<value>90</value>
 									</value>
 								</second>
@@ -7777,7 +7953,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>Light2On</name>
-									<value object_id="_572">
+									<value object_id="_584">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -7789,7 +7965,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>Light3Azimuth</name>
-									<value object_id="_573">
+									<value object_id="_585">
 										<which>0</which>
 										<value>180</value>
 									</value>
@@ -7801,7 +7977,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>Light3Color</name>
-									<value object_id="_574">
+									<value object_id="_586">
 										<which>2</which>
 										<value>Color(1,1,1)</value>
 									</value>
@@ -7813,7 +7989,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>Light3Inclination</name>
-									<value object_id="_575">
+									<value object_id="_587">
 										<which>0</which>
 										<value>90</value>
 									</value>
@@ -7825,7 +8001,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>Light3On</name>
-									<value object_id="_576">
+									<value object_id="_588">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -7837,7 +8013,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ObjectsOnly</name>
-									<value object_id="_577">
+									<value object_id="_589">
 										<which>3</which>
 										<value>1</value>
 									</value>
@@ -7849,7 +8025,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_578">
+									<value object_id="_590">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -7861,7 +8037,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ScaleBarFontSize</name>
-									<value object_id="_579">
+									<value object_id="_591">
 										<which>0</which>
 										<value>8</value>
 									</value>
@@ -7873,7 +8049,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ScaleBarHeight</name>
-									<value object_id="_580">
+									<value object_id="_592">
 										<which>1</which>
 										<value>1.00000000000000000e+00</value>
 									</value>
@@ -7885,7 +8061,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ScaleBarLength</name>
-									<value object_id="_581">
+									<value object_id="_593">
 										<which>1</which>
 										<value>1.00000000000000000e+00</value>
 									</value>
@@ -7897,7 +8073,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ScaleBarLineColor</name>
-									<value object_id="_582">
+									<value object_id="_594">
 										<which>1</which>
 										<value>1.00000000000000000e+00</value>
 									</value>
@@ -7909,7 +8085,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ScaleBarLineWidth</name>
-									<value object_id="_583">
+									<value object_id="_595">
 										<which>1</which>
 										<value>1.00000000000000000e+00</value>
 									</value>
@@ -7921,7 +8097,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ScaleBarMultiplier</name>
-									<value object_id="_584">
+									<value object_id="_596">
 										<which>1</which>
 										<value>1.00000000000000000e+00</value>
 									</value>
@@ -7933,7 +8109,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ScaleBarNumTicks</name>
-									<value object_id="_585">
+									<value object_id="_597">
 										<which>0</which>
 										<value>11</value>
 									</value>
@@ -7945,7 +8121,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ScaleBarUnitValue</name>
-									<value object_id="_586">
+									<value object_id="_598">
 										<which>2</which>
 										<value>mm</value>
 									</value>
@@ -7957,7 +8133,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ScreenshotDirectory</name>
-									<value object_id="_587">
+									<value object_id="_599">
 										<which>2</which>
 										<value>D:/Dropbox (UFL)/Projects/NeuroPaceUH3/NeuroPaceLGS_Data_Analysis/UCSF/S301-001/Snippets/Milestone2.2</value>
 									</value>
@@ -7969,7 +8145,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>Shine</name>
-									<value object_id="_588">
+									<value object_id="_600">
 										<which>1</which>
 										<value>5.00000000000000000e-01</value>
 									</value>
@@ -7981,7 +8157,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ShowScaleBar</name>
-									<value object_id="_589">
+									<value object_id="_601">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -7993,7 +8169,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ShowViewer</name>
-									<value object_id="_590">
+									<value object_id="_602">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -8005,7 +8181,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>Specular</name>
-									<value object_id="_591">
+									<value object_id="_603">
 										<which>1</which>
 										<value>2.99999999999999989e-01</value>
 									</value>
@@ -8017,7 +8193,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ToolBarAdvancedPosition</name>
-									<value object_id="_592">
+									<value object_id="_604">
 										<which>0</which>
 										<value>2</value>
 									</value>
@@ -8029,7 +8205,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ToolBarMainPosition</name>
-									<value object_id="_593">
+									<value object_id="_605">
 										<which>0</which>
 										<value>4</value>
 									</value>
@@ -8041,7 +8217,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ToolBarRenderPosition</name>
-									<value object_id="_594">
+									<value object_id="_606">
 										<which>0</which>
 										<value>1</value>
 									</value>
@@ -8053,7 +8229,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>UseBGColor</name>
-									<value object_id="_595">
+									<value object_id="_607">
 										<which>3</which>
 										<value>1</value>
 									</value>
@@ -8065,42 +8241,42 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>VisibleItemListState</name>
-									<value object_id="_596">
+									<value object_id="_608">
 										<which>5</which>
 										<value>
 											<count>6</count>
 											<item_version>0</item_version>
 											<item>
 												<name>graphicsItem</name>
-												<value object_id="_597">
+												<value object_id="_609">
 													<which>5</which>
 													<value>
 														<count>4</count>
 														<item_version>0</item_version>
 														<item>
 															<name>Control Points (from ShowField:79)</name>
-															<value object_id="_598">
+															<value object_id="_610">
 																<which>3</which>
 																<value>1</value>
 															</value>
 														</item>
 														<item>
 															<name>Edges</name>
-															<value object_id="_599">
+															<value object_id="_611">
 																<which>3</which>
 																<value>1</value>
 															</value>
 														</item>
 														<item>
 															<name>Faces</name>
-															<value object_id="_600">
+															<value object_id="_612">
 																<which>3</which>
 																<value>1</value>
 															</value>
 														</item>
 														<item>
 															<name>Nodes</name>
-															<value object_id="_601">
+															<value object_id="_613">
 																<which>3</which>
 																<value>1</value>
 															</value>
@@ -8110,111 +8286,35 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 											</item>
 											<item>
 												<name>graphicsItem</name>
-												<value object_id="_602">
+												<value object_id="_614">
 													<which>5</which>
 													<value>
 														<count>4</count>
 														<item_version>0</item_version>
 														<item>
 															<name>Depth (from ShowField:66)</name>
-															<value object_id="_603">
-																<which>3</which>
-																<value>1</value>
-															</value>
-														</item>
-														<item>
-															<name>Edges</name>
-															<value object_id="_604">
-																<which>3</which>
-																<value>1</value>
-															</value>
-														</item>
-														<item>
-															<name>Faces</name>
-															<value object_id="_605">
-																<which>3</which>
-																<value>1</value>
-															</value>
-														</item>
-														<item>
-															<name>Nodes</name>
-															<value object_id="_606">
-																<which>3</which>
-																<value>1</value>
-															</value>
-														</item>
-													</value>
-												</value>
-											</item>
-											<item>
-												<name>graphicsItem</name>
-												<value object_id="_607">
-													<which>5</which>
-													<value>
-														<count>4</count>
-														<item_version>0</item_version>
-														<item>
-															<name>Ellipse (from ShowField:80)</name>
-															<value object_id="_608">
-																<which>3</which>
-																<value>0</value>
-															</value>
-														</item>
-														<item>
-															<name>Edges</name>
-															<value object_id="_609">
-																<which>3</which>
-																<value>0</value>
-															</value>
-														</item>
-														<item>
-															<name>Faces</name>
-															<value object_id="_610">
-																<which>3</which>
-																<value>0</value>
-															</value>
-														</item>
-														<item>
-															<name>Nodes</name>
-															<value object_id="_611">
-																<which>3</which>
-																<value>1</value>
-															</value>
-														</item>
-													</value>
-												</value>
-											</item>
-											<item>
-												<name>graphicsItem</name>
-												<value object_id="_612">
-													<which>5</which>
-													<value>
-														<count>4</count>
-														<item_version>0</item_version>
-														<item>
-															<name>IPG (from ShowField:0)</name>
-															<value object_id="_613">
-																<which>3</which>
-																<value>1</value>
-															</value>
-														</item>
-														<item>
-															<name>Edges</name>
-															<value object_id="_614">
-																<which>3</which>
-																<value>1</value>
-															</value>
-														</item>
-														<item>
-															<name>Faces</name>
 															<value object_id="_615">
 																<which>3</which>
 																<value>1</value>
 															</value>
 														</item>
 														<item>
-															<name>Nodes</name>
+															<name>Edges</name>
 															<value object_id="_616">
+																<which>3</which>
+																<value>1</value>
+															</value>
+														</item>
+														<item>
+															<name>Faces</name>
+															<value object_id="_617">
+																<which>3</which>
+																<value>1</value>
+															</value>
+														</item>
+														<item>
+															<name>Nodes</name>
+															<value object_id="_618">
 																<which>3</which>
 																<value>1</value>
 															</value>
@@ -8224,35 +8324,35 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 											</item>
 											<item>
 												<name>graphicsItem</name>
-												<value object_id="_617">
+												<value object_id="_619">
 													<which>5</which>
 													<value>
 														<count>4</count>
 														<item_version>0</item_version>
 														<item>
-															<name>T1 (from ShowField:81)</name>
-															<value object_id="_618">
-																<which>3</which>
-																<value>0</value>
-															</value>
-														</item>
-														<item>
-															<name>Edges</name>
-															<value object_id="_619">
-																<which>3</which>
-																<value>0</value>
-															</value>
-														</item>
-														<item>
-															<name>Faces</name>
+															<name>Ellipse (from ShowField:80)</name>
 															<value object_id="_620">
 																<which>3</which>
 																<value>0</value>
 															</value>
 														</item>
 														<item>
-															<name>Nodes</name>
+															<name>Edges</name>
 															<value object_id="_621">
+																<which>3</which>
+																<value>0</value>
+															</value>
+														</item>
+														<item>
+															<name>Faces</name>
+															<value object_id="_622">
+																<which>3</which>
+																<value>0</value>
+															</value>
+														</item>
+														<item>
+															<name>Nodes</name>
+															<value object_id="_623">
 																<which>3</which>
 																<value>1</value>
 															</value>
@@ -8262,35 +8362,111 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 											</item>
 											<item>
 												<name>graphicsItem</name>
-												<value object_id="_622">
+												<value object_id="_624">
 													<which>5</which>
 													<value>
 														<count>4</count>
 														<item_version>0</item_version>
 														<item>
-															<name>Z Clip (from ShowField:67)</name>
-															<value object_id="_623">
+															<name>IPG (from ShowField:0)</name>
+															<value object_id="_625">
+																<which>3</which>
+																<value>1</value>
+															</value>
+														</item>
+														<item>
+															<name>Edges</name>
+															<value object_id="_626">
+																<which>3</which>
+																<value>1</value>
+															</value>
+														</item>
+														<item>
+															<name>Faces</name>
+															<value object_id="_627">
+																<which>3</which>
+																<value>1</value>
+															</value>
+														</item>
+														<item>
+															<name>Nodes</name>
+															<value object_id="_628">
+																<which>3</which>
+																<value>1</value>
+															</value>
+														</item>
+													</value>
+												</value>
+											</item>
+											<item>
+												<name>graphicsItem</name>
+												<value object_id="_629">
+													<which>5</which>
+													<value>
+														<count>4</count>
+														<item_version>0</item_version>
+														<item>
+															<name>T1 (from ShowField:81)</name>
+															<value object_id="_630">
 																<which>3</which>
 																<value>0</value>
 															</value>
 														</item>
 														<item>
 															<name>Edges</name>
-															<value object_id="_624">
+															<value object_id="_631">
 																<which>3</which>
 																<value>0</value>
 															</value>
 														</item>
 														<item>
 															<name>Faces</name>
-															<value object_id="_625">
+															<value object_id="_632">
 																<which>3</which>
 																<value>0</value>
 															</value>
 														</item>
 														<item>
 															<name>Nodes</name>
-															<value object_id="_626">
+															<value object_id="_633">
+																<which>3</which>
+																<value>1</value>
+															</value>
+														</item>
+													</value>
+												</value>
+											</item>
+											<item>
+												<name>graphicsItem</name>
+												<value object_id="_634">
+													<which>5</which>
+													<value>
+														<count>4</count>
+														<item_version>0</item_version>
+														<item>
+															<name>Z Clip (from ShowField:67)</name>
+															<value object_id="_635">
+																<which>3</which>
+																<value>0</value>
+															</value>
+														</item>
+														<item>
+															<name>Edges</name>
+															<value object_id="_636">
+																<which>3</which>
+																<value>0</value>
+															</value>
+														</item>
+														<item>
+															<name>Faces</name>
+															<value object_id="_637">
+																<which>3</which>
+																<value>0</value>
+															</value>
+														</item>
+														<item>
+															<name>Nodes</name>
+															<value object_id="_638">
 																<which>3</which>
 																<value>0</value>
 															</value>
@@ -8308,7 +8484,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>WindowPositionX</name>
-									<value object_id="_627">
+									<value object_id="_639">
 										<which>0</which>
 										<value>52</value>
 									</value>
@@ -8320,7 +8496,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>WindowPositionY</name>
-									<value object_id="_628">
+									<value object_id="_640">
 										<which>0</which>
 										<value>1511</value>
 									</value>
@@ -8332,7 +8508,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>WindowSizeX</name>
-									<value object_id="_629">
+									<value object_id="_641">
 										<which>0</which>
 										<value>3841</value>
 									</value>
@@ -8344,7 +8520,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>WindowSizeY</name>
-									<value object_id="_630">
+									<value object_id="_642">
 										<which>0</which>
 										<value>2043</value>
 									</value>
@@ -8372,7 +8548,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>FileTypeName</name>
-									<value object_id="_631">
+									<value object_id="_643">
 										<which>2</which>
 										<value>*.bdl</value>
 									</value>
@@ -8384,7 +8560,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>Filename</name>
-									<value object_id="_632">
+									<value object_id="_644">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -8396,7 +8572,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>GuiFileTypeName</name>
-									<value object_id="_633">
+									<value object_id="_645">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -8408,7 +8584,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_634">
+									<value object_id="_646">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -8420,7 +8596,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 			</item>
 		</modules>
 		<connections class_id="13" tracking_level="0" version="0">
-			<count>92</count>
+			<count>96</count>
 			<item_version>0</item_version>
 			<item class_id="14" tracking_level="0" version="0">
 				<moduleId1_>CalculateDistanceToField:0</moduleId1_>
@@ -8891,6 +9067,18 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 				</port2_>
 			</item>
 			<item>
+				<moduleId1_>JoinFields:2</moduleId1_>
+				<port1_>
+					<name>OutputField</name>
+					<id>0</id>
+				</port1_>
+				<moduleId2_>SetFieldDataToConstantValue:8</moduleId2_>
+				<port2_>
+					<name>InputField</name>
+					<id>0</id>
+				</port2_>
+			</item>
+			<item>
 				<moduleId1_>MapFieldDataOntoElements:0</moduleId1_>
 				<port1_>
 					<name>OutputField</name>
@@ -8932,6 +9120,18 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 					<name>Field</name>
 					<id>0</id>
 				</port1_>
+				<moduleId2_>JoinFields:2</moduleId2_>
+				<port2_>
+					<name>InputFields</name>
+					<id>0</id>
+				</port2_>
+			</item>
+			<item>
+				<moduleId1_>ReadField:18</moduleId1_>
+				<port1_>
+					<name>Field</name>
+					<id>0</id>
+				</port1_>
 				<moduleId2_>SetFieldDataToConstantValue:6</moduleId2_>
 				<port2_>
 					<name>InputField</name>
@@ -8948,6 +9148,18 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 				<port2_>
 					<name>Field</name>
 					<id>0</id>
+				</port2_>
+			</item>
+			<item>
+				<moduleId1_>ReadField:19</moduleId1_>
+				<port1_>
+					<name>Field</name>
+					<id>0</id>
+				</port1_>
+				<moduleId2_>JoinFields:2</moduleId2_>
+				<port2_>
+					<name>InputFields</name>
+					<id>1</id>
 				</port2_>
 			</item>
 			<item>
@@ -9263,6 +9475,18 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 				</port2_>
 			</item>
 			<item>
+				<moduleId1_>SetFieldDataToConstantValue:8</moduleId1_>
+				<port1_>
+					<name>OutputField</name>
+					<id>0</id>
+				</port1_>
+				<moduleId2_>InsertFieldsIntoBundle:0</moduleId2_>
+				<port2_>
+					<name>InputFields</name>
+					<id>2</id>
+				</port2_>
+			</item>
+			<item>
 				<moduleId1_>ShowField:10</moduleId1_>
 				<port1_>
 					<name>SceneGraph</name>
@@ -9529,7 +9753,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 		</connections>
 	</networkInfo>
 	<modulePositions class_id="16" tracking_level="0" version="0">
-		<count>66</count>
+		<count>68</count>
 		<item_version>0</item_version>
 		<item class_id="17" tracking_level="0" version="0">
 			<first>CalculateDistanceToField:0</first>
@@ -9714,6 +9938,13 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 			</second>
 		</item>
 		<item>
+			<first>JoinFields:2</first>
+			<second>
+				<first>1.72500000000000000e+03</first>
+				<second>-2.68700000000000000e+03</second>
+			</second>
+		</item>
+		<item>
 			<first>MapFieldDataOntoElements:0</first>
 			<second>
 				<first>5.42000000000000000e+02</first>
@@ -9837,6 +10068,13 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 			<second>
 				<first>1.90000000000000000e+03</first>
 				<second>-2.96400000000000000e+03</second>
+			</second>
+		</item>
+		<item>
+			<first>SetFieldDataToConstantValue:8</first>
+			<second>
+				<first>1.52000000000000000e+03</first>
+				<second>-2.58400000000000000e+03</second>
 			</second>
 		</item>
 		<item>
@@ -9995,7 +10233,7 @@ mat_out = [[1, 0, 0, 0], [0, 1, 0, move_dist_y], [0, 0, 1, move_dist_z], [0, 0, 
 		</item>
 	</modulePositions>
 	<moduleNotes class_id="19" tracking_level="0" version="0">
-		<count>23</count>
+		<count>24</count>
 		<item_version>0</item_version>
 		<item class_id="20" tracking_level="0" version="0">
 			<first>CalculateFieldData:0</first>
@@ -10182,6 +10420,19 @@ p, li { white-space: pre-wrap; }
 			</second>
 		</item>
 		<item>
+			<first>SetFieldDataToConstantValue:8</first>
+			<second>
+				<noteHTML>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Sink Geometry&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</noteHTML>
+				<noteText>Sink Geometry</noteText>
+				<position>0</position>
+				<fontSize>8</fontSize>
+			</second>
+		</item>
+		<item>
 			<first>ShowField:10</first>
 			<second>
 				<noteHTML>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -10304,7 +10555,7 @@ p, li { white-space: pre-wrap; }
 		<item_version>0</item_version>
 	</connectionNotes>
 	<moduleTags class_id="22" tracking_level="0" version="0">
-		<count>66</count>
+		<count>68</count>
 		<item_version>0</item_version>
 		<item class_id="23" tracking_level="0" version="0">
 			<first>CalculateDistanceToField:0</first>
@@ -10411,6 +10662,10 @@ p, li { white-space: pre-wrap; }
 			<second>-1</second>
 		</item>
 		<item>
+			<first>JoinFields:2</first>
+			<second>-1</second>
+		</item>
+		<item>
 			<first>MapFieldDataOntoElements:0</first>
 			<second>-1</second>
 		</item>
@@ -10480,6 +10735,10 @@ p, li { white-space: pre-wrap; }
 		</item>
 		<item>
 			<first>SetFieldDataToConstantValue:7</first>
+			<second>-1</second>
+		</item>
+		<item>
+			<first>SetFieldDataToConstantValue:8</first>
 			<second>-1</second>
 		</item>
 		<item>
