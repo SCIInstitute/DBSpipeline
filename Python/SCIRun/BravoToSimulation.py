@@ -70,7 +70,7 @@ def settingsToMatrix(settings_df, contact_list=[],  **kwargs):
     file_str, amp_mat = extractSettings(row, uniq_devices, contact_list, **kwargs )
 #    print("row iter")
 #    print(file_str)
-#    print(amp_mat)
+  #  print(amp_mat)
     #
     for k in range(len(file_str)):
       s_ky = list(stim_files.keys())[k]
@@ -104,6 +104,7 @@ def settingsToMatrix(settings_df, contact_list=[],  **kwargs):
 def extractSettings(df_row, uniq_devices, contact_list, **kwargs ):
   #
   num_contacts = len(contact_list)
+  lead_order = ['Left GPi','Left CM','Right GPi','Right CM']
   #
   r_amp_dict = {}
   l_amp_dict = {}
@@ -145,8 +146,16 @@ def extractSettings(df_row, uniq_devices, contact_list, **kwargs ):
   l_fstring = re.sub(r"\s+", "", l_dev) + "_+" + "+".join(l_sett["cathodes"]) + "-" + "-".join(l_sett["annodes"]) + "_maxAmp_"+ str(l_maxAmp) + amp_unit
   r_fstring = re.sub(r"\s+", "", r_dev) + "_+" + "+".join(r_sett["cathodes"]) + "-" + "-".join(r_sett["annodes"]) + "_maxAmp_"+ str(r_maxAmp) + amp_unit
   #
-  l_amp_mat = np.concatenate(list(l_amp_dict.values()))
-  r_amp_mat = np.concatenate(list(r_amp_dict.values()))
+  l_amp_ordered = []
+  r_amp_ordered = []
+  for nuclei in lead_order:
+    l_amp_ordered.append(l_amp_dict[nuclei])
+    r_amp_ordered.append(r_amp_dict[nuclei])
+  l_amp_mat = np.concatenate(l_amp_ordered)
+  r_amp_mat = np.concatenate(r_amp_ordered)
+  print(l_fstring,l_amp_mat)
+  # l_amp_mat = np.concatenate(list(l_amp_dict.values()))
+  # r_amp_mat = np.concatenate(list(r_amp_dict.values()))
   #
   return (l_fstring, r_fstring), [l_amp_mat, r_amp_mat]
     
