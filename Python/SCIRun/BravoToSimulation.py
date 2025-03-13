@@ -163,8 +163,8 @@ def extractSettings(df_row, device_list, contact_list, **kwargs ):
   l_fstring = re.sub(r"\s+", "", l_dev) + "_+" + "+".join(l_sett["cathodes"]) + "-" + "-".join(l_sett["annodes"]) + "_maxAmp_"+ str(l_maxAmp) + amp_unit
   r_fstring = re.sub(r"\s+", "", r_dev) + "_+" + "+".join(r_sett["cathodes"]) + "-" + "-".join(r_sett["annodes"]) + "_maxAmp_"+ str(r_maxAmp) + amp_unit
   #
-  # l_amp_mat = np.concatenate(list(l_amp_dict.values()))
-  # r_amp_mat = np.concatenate(list(r_amp_dict.values()))
+   l_amp_mat = np.concatenate(list(l_amp_dict.values()))
+   r_amp_mat = np.concatenate(list(r_amp_dict.values()))
   #
   return (l_fstring, r_fstring), [l_amp_mat, r_amp_mat]
     
