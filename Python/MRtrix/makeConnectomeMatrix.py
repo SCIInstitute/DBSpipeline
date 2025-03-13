@@ -81,7 +81,7 @@ def run_connectome_matrix(connectome_matrix, input_file, lookup_table,  experime
   
   print(connectome_matrix)
   print(assignment)
-  cl_call2 = [apppath+"tck2connectome", os.path.join(fibertractPath, "whole_brain_fibers.tck"), os.path.join(connectomePath, hcp_pattern+"b0space.nii.gz"), connectome_matrix,  "-tck_weights_in", os.path.join(fibertractPath, "sift2_weights.txt"),   "-keep_unassigned",  "-out_assignments", os.path.join(cleantractPath, "assignments_" + experiment + ".txt"), "-symmetric", "-scale_invnodevol" ]
+  cl_call2 = [apppath+"tck2connectome", os.path.join(fibertractPath, "whole_brain_fibers.tck"), os.path.join(connectomePath, hcp_pattern+"b0space.nii.gz"), connectome_matrix,  "-tck_weights_in", os.path.join(fibertractPath, "sift2_weights.txt"),   "-keep_unassigned",  "-out_assignments", os.path.join(cleantractPath, "assignments_" + experiment + ".txt"), "-symmetric" ]
   if rerun:
     cl_call2.append("-force")
   
