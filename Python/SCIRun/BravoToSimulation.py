@@ -38,7 +38,14 @@ def parseSettingString(setting_str, **kwargs):
   
 def settingsToMatrix(settings_df, contact_list=[],  **kwargs):
   # TODO: move to hardware parameter file
-  def_contact_list = [ "E0","E1A", "E1B", "E1C", "E2A", "E2B", "E2C", "E7"]
+  def_contact_list = [ "E0", "E1A", "E1B", "E1C", "E2A", "E2B", "E2C", "E7"]
+  # from Matthew
+  #  Electrode 1: Left GPi
+  #  Electrode 2: Left CM
+  #  Electrode 3: Right GPi
+  #  Electrode 4: Right CM
+  device_list = [ "Left GPi", "Left CM", "Right GPi", "Right CM" ]
+  
   if not contact_list:
     contact_list = def_contact_list
   #
@@ -54,8 +61,19 @@ def settingsToMatrix(settings_df, contact_list=[],  **kwargs):
   #
   # assumes in-name labeling (left/right)
   devices_sett = list(l_devices) + list(r_devices)
-  uniq_devices = list(set(devices_sett))
-  num_leads = len(uniq_devices)
+  in_dev = []
+  out_dev = []
+  for dev in devices_sett:
+    if dev in device_list:
+      in_dev.append(dev)
+    else:
+      out_dev.append(dev)
+  
+  uniq_known_devices = list(set(in_dev))
+  uniq_unknown_devices = list(set(out_dev))
+  num_leads = len(uniq_known_devices)
+  if (not num_leads == len(device_list)) or len(uniq_unknown_devices)>0:
+    raise ValueError("unknown device or device set detected.  Need to implement more stuff")
   #
   num_contacts = len(contact_list)
   num_contacts_tot = num_contacts*num_leads
@@ -67,7 +85,7 @@ def settingsToMatrix(settings_df, contact_list=[],  **kwargs):
 #
   for row in settings_df.iterrows():
   #
-    file_str, amp_mat = extractSettings(row, uniq_devices, contact_list, **kwargs )
+    file_str, amp_mat = extractSettings(row, device_list, contact_list, **kwargs )
 #    print("row iter")
 #    print(file_str)
 #    print(amp_mat)
@@ -101,13 +119,13 @@ def settingsToMatrix(settings_df, contact_list=[],  **kwargs):
 #    print(row[1].keys())
 #    print(parseSettingString(row[1]["Left Therapy Description"]))
     
-def extractSettings(df_row, uniq_devices, contact_list, **kwargs ):
+def extractSettings(df_row, device_list, contact_list, **kwargs ):
   #
   num_contacts = len(contact_list)
   #
   r_amp_dict = {}
   l_amp_dict = {}
-  for dev in uniq_devices:
+  for dev in device_list:
     r_amp_dict[dev] = np.empty(num_contacts)
     r_amp_dict[dev][:] = np.nan
     l_amp_dict[dev] = np.empty(num_contacts)
