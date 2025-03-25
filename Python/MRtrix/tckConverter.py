@@ -56,13 +56,15 @@ if __name__ == "__main__":
     args = parser.parse_args()
     if args.tract_data:
         pts, edges, tract_data = convertPtsEdges(args.input_tck, args.tract_data)
+        wb = { "node" : pts.T,"edge" : edges.astype(dtype=np.uint32).T,"data" : tract_data}
         np.savetxt(args.output_path + ".edge", edges, fmt="%d", delimiter=" ")
         np.savetxt(args.output_path + ".pts", pts, fmt="%.8f", delimiter=" ")
         np.savetxt(args.output_path + ".tckdata", tract_data, fmt="%.8f", delimiter=" ")
-        scipy.io.savemat(args.output_path + ".mat", {"edge" : edges, "pts" : pts, "data" : tract_data })
+        scipy.io.savemat(args.output_path + ".mat", {"scirunfield" : wb})
         
     else:
         pts, edges = convertPtsEdges(args.input_tck, args.tract_data)
+        wb = { "node" : pts.T,"edge" : edges.astype(dtype=np.uint32).T}
         np.savetxt(args.output_path + ".edge", edges, fmt="%d", delimiter=" ")
         np.savetxt(args.output_path + ".pts", pts, fmt="%.8f", delimiter=" ")
-        scipy.io.savemat(args.output_path + ".mat", {"edge" : edges, "pts" : pts })
+        scipy.io.savemat(args.output_path + ".mat", {"scirunfield" : wb})
