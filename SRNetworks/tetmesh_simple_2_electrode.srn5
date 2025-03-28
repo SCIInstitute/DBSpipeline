@@ -4,27 +4,67 @@
 <networkFile class_id="0" tracking_level="0" version="6">
 	<networkInfo class_id="1" tracking_level="0" version="0">
 		<modules class_id="2" tracking_level="0" version="0">
-			<count>45</count>
+			<count>55</count>
 			<item_version>0</item_version>
 			<item class_id="3" tracking_level="0" version="0">
-				<first>CreateGeometricTransform:2</first>
+				<first>AppendMatrix:0</first>
 				<second class_id="4" tracking_level="0" version="0">
 					<module class_id="5" tracking_level="0" version="0">
 						<package_name_>SCIRun</package_name_>
 						<category_name_>Math</category_name_>
-						<module_name_>CreateGeometricTransform</module_name_>
+						<module_name_>AppendMatrix</module_name_>
 					</module>
 					<state class_id="6" tracking_level="0" version="0">
 						<stateMap class_id="7" tracking_level="0" version="0">
-							<count>36</count>
+							<count>2</count>
 							<item_version>0</item_version>
 							<item class_id="8" tracking_level="0" version="0">
 								<first class_id="9" tracking_level="0" version="0">
-									<name>FieldMapX</name>
+									<name>ProgrammableInputPortEnabled</name>
 								</first>
 								<second class_id="10" tracking_level="0" version="0">
-									<name>FieldMapX</name>
+									<name>ProgrammableInputPortEnabled</name>
 									<value class_id="11" tracking_level="1" version="0" object_id="_0">
+										<which>3</which>
+										<value>0</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>RowsOrColumns</name>
+								</first>
+								<second>
+									<name>RowsOrColumns</name>
+									<value object_id="_1">
+										<which>0</which>
+										<value>0</value>
+									</value>
+								</second>
+							</item>
+						</stateMap>
+					</state>
+				</second>
+			</item>
+			<item>
+				<first>CreateGeometricTransform:2</first>
+				<second>
+					<module>
+						<package_name_>SCIRun</package_name_>
+						<category_name_>Math</category_name_>
+						<module_name_>CreateGeometricTransform</module_name_>
+					</module>
+					<state>
+						<stateMap>
+							<count>36</count>
+							<item_version>0</item_version>
+							<item>
+								<first>
+									<name>FieldMapX</name>
+								</first>
+								<second>
+									<name>FieldMapX</name>
+									<value object_id="_2">
 										<which>2</which>
 										<value>x+</value>
 									</value>
@@ -36,7 +76,7 @@
 								</first>
 								<second>
 									<name>FieldMapY</name>
-									<value object_id="_1">
+									<value object_id="_3">
 										<which>2</which>
 										<value>y+</value>
 									</value>
@@ -48,7 +88,7 @@
 								</first>
 								<second>
 									<name>FieldMapZ</name>
-									<value object_id="_2">
+									<value object_id="_4">
 										<which>2</which>
 										<value>z+</value>
 									</value>
@@ -60,7 +100,7 @@
 								</first>
 								<second>
 									<name>IgnoreChanges</name>
-									<value object_id="_3">
+									<value object_id="_5">
 										<which>3</which>
 										<value>1</value>
 									</value>
@@ -72,30 +112,6 @@
 								</first>
 								<second>
 									<name>LogScale</name>
-									<value object_id="_4">
-										<which>1</which>
-										<value>0.00000000000000000e+00</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>LogScaleX</name>
-								</first>
-								<second>
-									<name>LogScaleX</name>
-									<value object_id="_5">
-										<which>1</which>
-										<value>0.00000000000000000e+00</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>LogScaleY</name>
-								</first>
-								<second>
-									<name>LogScaleY</name>
 									<value object_id="_6">
 										<which>1</which>
 										<value>0.00000000000000000e+00</value>
@@ -104,11 +120,35 @@
 							</item>
 							<item>
 								<first>
+									<name>LogScaleX</name>
+								</first>
+								<second>
+									<name>LogScaleX</name>
+									<value object_id="_7">
+										<which>1</which>
+										<value>0.00000000000000000e+00</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>LogScaleY</name>
+								</first>
+								<second>
+									<name>LogScaleY</name>
+									<value object_id="_8">
+										<which>1</which>
+										<value>0.00000000000000000e+00</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
 									<name>LogScaleZ</name>
 								</first>
 								<second>
 									<name>LogScaleZ</name>
-									<value object_id="_7">
+									<value object_id="_9">
 										<which>1</which>
 										<value>0.00000000000000000e+00</value>
 									</value>
@@ -120,31 +160,31 @@
 								</first>
 								<second>
 									<name>MultiplyRadioButton</name>
-									<value object_id="_8">
-										<which>0</which>
-										<value>1</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>PermuteX</name>
-								</first>
-								<second>
-									<name>PermuteX</name>
-									<value object_id="_9">
-										<which>0</which>
-										<value>1</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>PermuteY</name>
-								</first>
-								<second>
-									<name>PermuteY</name>
 									<value object_id="_10">
+										<which>0</which>
+										<value>1</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>PermuteX</name>
+								</first>
+								<second>
+									<name>PermuteX</name>
+									<value object_id="_11">
+										<which>0</which>
+										<value>1</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>PermuteY</name>
+								</first>
+								<second>
+									<name>PermuteY</name>
+									<value object_id="_12">
 										<which>0</which>
 										<value>2</value>
 									</value>
@@ -156,7 +196,7 @@
 								</first>
 								<second>
 									<name>PermuteZ</name>
-									<value object_id="_11">
+									<value object_id="_13">
 										<which>0</which>
 										<value>3</value>
 									</value>
@@ -168,7 +208,7 @@
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_12">
+									<value object_id="_14">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -180,7 +220,7 @@
 								</first>
 								<second>
 									<name>ResizeSeparably</name>
-									<value object_id="_13">
+									<value object_id="_15">
 										<which>3</which>
 										<value>1</value>
 									</value>
@@ -192,42 +232,18 @@
 								</first>
 								<second>
 									<name>RotateAxisX</name>
-									<value object_id="_14">
-										<which>1</which>
-										<value>0.00000000000000000e+00</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>RotateAxisY</name>
-								</first>
-								<second>
-									<name>RotateAxisY</name>
-									<value object_id="_15">
-										<which>1</which>
-										<value>0.00000000000000000e+00</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>RotateAxisZ</name>
-								</first>
-								<second>
-									<name>RotateAxisZ</name>
 									<value object_id="_16">
 										<which>1</which>
-										<value>1.00000000000000000e+00</value>
+										<value>0.00000000000000000e+00</value>
 									</value>
 								</second>
 							</item>
 							<item>
 								<first>
-									<name>RotatePointX</name>
+									<name>RotateAxisY</name>
 								</first>
 								<second>
-									<name>RotatePointX</name>
+									<name>RotateAxisY</name>
 									<value object_id="_17">
 										<which>1</which>
 										<value>0.00000000000000000e+00</value>
@@ -236,22 +252,22 @@
 							</item>
 							<item>
 								<first>
-									<name>RotatePointY</name>
+									<name>RotateAxisZ</name>
 								</first>
 								<second>
-									<name>RotatePointY</name>
+									<name>RotateAxisZ</name>
 									<value object_id="_18">
 										<which>1</which>
-										<value>0.00000000000000000e+00</value>
+										<value>1.00000000000000000e+00</value>
 									</value>
 								</second>
 							</item>
 							<item>
 								<first>
-									<name>RotatePointZ</name>
+									<name>RotatePointX</name>
 								</first>
 								<second>
-									<name>RotatePointZ</name>
+									<name>RotatePointX</name>
 									<value object_id="_19">
 										<which>1</which>
 										<value>0.00000000000000000e+00</value>
@@ -260,10 +276,10 @@
 							</item>
 							<item>
 								<first>
-									<name>RotateTheta</name>
+									<name>RotatePointY</name>
 								</first>
 								<second>
-									<name>RotateTheta</name>
+									<name>RotatePointY</name>
 									<value object_id="_20">
 										<which>1</which>
 										<value>0.00000000000000000e+00</value>
@@ -272,10 +288,10 @@
 							</item>
 							<item>
 								<first>
-									<name>ScalePointX</name>
+									<name>RotatePointZ</name>
 								</first>
 								<second>
-									<name>ScalePointX</name>
+									<name>RotatePointZ</name>
 									<value object_id="_21">
 										<which>1</which>
 										<value>0.00000000000000000e+00</value>
@@ -284,10 +300,10 @@
 							</item>
 							<item>
 								<first>
-									<name>ScalePointY</name>
+									<name>RotateTheta</name>
 								</first>
 								<second>
-									<name>ScalePointY</name>
+									<name>RotateTheta</name>
 									<value object_id="_22">
 										<which>1</which>
 										<value>0.00000000000000000e+00</value>
@@ -296,10 +312,10 @@
 							</item>
 							<item>
 								<first>
-									<name>ScalePointZ</name>
+									<name>ScalePointX</name>
 								</first>
 								<second>
-									<name>ScalePointZ</name>
+									<name>ScalePointX</name>
 									<value object_id="_23">
 										<which>1</which>
 										<value>0.00000000000000000e+00</value>
@@ -308,10 +324,10 @@
 							</item>
 							<item>
 								<first>
-									<name>ShearPlaneA</name>
+									<name>ScalePointY</name>
 								</first>
 								<second>
-									<name>ShearPlaneA</name>
+									<name>ScalePointY</name>
 									<value object_id="_24">
 										<which>1</which>
 										<value>0.00000000000000000e+00</value>
@@ -320,10 +336,10 @@
 							</item>
 							<item>
 								<first>
-									<name>ShearPlaneB</name>
+									<name>ScalePointZ</name>
 								</first>
 								<second>
-									<name>ShearPlaneB</name>
+									<name>ScalePointZ</name>
 									<value object_id="_25">
 										<which>1</which>
 										<value>0.00000000000000000e+00</value>
@@ -332,11 +348,35 @@
 							</item>
 							<item>
 								<first>
+									<name>ShearPlaneA</name>
+								</first>
+								<second>
+									<name>ShearPlaneA</name>
+									<value object_id="_26">
+										<which>1</which>
+										<value>0.00000000000000000e+00</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>ShearPlaneB</name>
+								</first>
+								<second>
+									<name>ShearPlaneB</name>
+									<value object_id="_27">
+										<which>1</which>
+										<value>0.00000000000000000e+00</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
 									<name>ShearPlaneC</name>
 								</first>
 								<second>
 									<name>ShearPlaneC</name>
-									<value object_id="_26">
+									<value object_id="_28">
 										<which>1</which>
 										<value>0.00000000000000000e+00</value>
 									</value>
@@ -348,7 +388,7 @@
 								</first>
 								<second>
 									<name>ShearPlaneD</name>
-									<value object_id="_27">
+									<value object_id="_29">
 										<which>1</which>
 										<value>1.00000000000000000e+00</value>
 									</value>
@@ -360,30 +400,6 @@
 								</first>
 								<second>
 									<name>ShearVectorX</name>
-									<value object_id="_28">
-										<which>1</which>
-										<value>0.00000000000000000e+00</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>ShearVectorY</name>
-								</first>
-								<second>
-									<name>ShearVectorY</name>
-									<value object_id="_29">
-										<which>1</which>
-										<value>0.00000000000000000e+00</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>ShearVectorZ</name>
-								</first>
-								<second>
-									<name>ShearVectorZ</name>
 									<value object_id="_30">
 										<which>1</which>
 										<value>0.00000000000000000e+00</value>
@@ -392,11 +408,35 @@
 							</item>
 							<item>
 								<first>
+									<name>ShearVectorY</name>
+								</first>
+								<second>
+									<name>ShearVectorY</name>
+									<value object_id="_31">
+										<which>1</which>
+										<value>0.00000000000000000e+00</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>ShearVectorZ</name>
+								</first>
+								<second>
+									<name>ShearVectorZ</name>
+									<value object_id="_32">
+										<which>1</which>
+										<value>0.00000000000000000e+00</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
 									<name>TransformType</name>
 								</first>
 								<second>
 									<name>TransformType</name>
-									<value object_id="_31">
+									<value object_id="_33">
 										<which>0</which>
 										<value>0</value>
 									</value>
@@ -408,31 +448,31 @@
 								</first>
 								<second>
 									<name>TranslateVectorX</name>
-									<value object_id="_32">
-										<which>1</which>
-										<value>0.00000000000000000e+00</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>TranslateVectorY</name>
-								</first>
-								<second>
-									<name>TranslateVectorY</name>
-									<value object_id="_33">
-										<which>1</which>
-										<value>0.00000000000000000e+00</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>TranslateVectorZ</name>
-								</first>
-								<second>
-									<name>TranslateVectorZ</name>
 									<value object_id="_34">
+										<which>1</which>
+										<value>0.00000000000000000e+00</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>TranslateVectorY</name>
+								</first>
+								<second>
+									<name>TranslateVectorY</name>
+									<value object_id="_35">
+										<which>1</which>
+										<value>0.00000000000000000e+00</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>TranslateVectorZ</name>
+								</first>
+								<second>
+									<name>TranslateVectorZ</name>
+									<value object_id="_36">
 										<which>1</which>
 										<value>2.00000000000000000e+01</value>
 									</value>
@@ -444,9 +484,49 @@
 								</first>
 								<second>
 									<name>UniformScale</name>
-									<value object_id="_35">
+									<value object_id="_37">
 										<which>1</which>
 										<value>1.00000000000000000e+00</value>
+									</value>
+								</second>
+							</item>
+						</stateMap>
+					</state>
+				</second>
+			</item>
+			<item>
+				<first>CreateMatrix:0</first>
+				<second>
+					<module>
+						<package_name_>SCIRun</package_name_>
+						<category_name_>Math</category_name_>
+						<module_name_>CreateMatrix</module_name_>
+					</module>
+					<state>
+						<stateMap>
+							<count>2</count>
+							<item_version>0</item_version>
+							<item>
+								<first>
+									<name>ProgrammableInputPortEnabled</name>
+								</first>
+								<second>
+									<name>ProgrammableInputPortEnabled</name>
+									<value object_id="_38">
+										<which>3</which>
+										<value>0</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>TextEntry</name>
+								</first>
+								<second>
+									<name>TextEntry</name>
+									<value object_id="_39">
+										<which>2</which>
+										<value>10</value>
 									</value>
 								</second>
 							</item>
@@ -472,9 +552,9 @@
 								</first>
 								<second>
 									<name>InputString</name>
-									<value object_id="_36">
+									<value object_id="_40">
 										<which>2</which>
-										<value>S5</value>
+										<value>p102</value>
 									</value>
 								</second>
 							</item>
@@ -484,7 +564,7 @@
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_37">
+									<value object_id="_41">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -512,7 +592,7 @@
 								</first>
 								<second>
 									<name>BBoxSize</name>
-									<value object_id="_38">
+									<value object_id="_42">
 										<which>1</which>
 										<value>1.00000000000000000e+01</value>
 									</value>
@@ -524,7 +604,7 @@
 								</first>
 								<second>
 									<name>FieldElem</name>
-									<value object_id="_39">
+									<value object_id="_43">
 										<which>0</which>
 										<value>3020</value>
 									</value>
@@ -536,7 +616,7 @@
 								</first>
 								<second>
 									<name>FieldNode</name>
-									<value object_id="_40">
+									<value object_id="_44">
 										<which>0</which>
 										<value>6150</value>
 									</value>
@@ -548,7 +628,7 @@
 								</first>
 								<second>
 									<name>FieldValue</name>
-									<value object_id="_41">
+									<value object_id="_45">
 										<which>2</which>
 										<value>1</value>
 									</value>
@@ -560,7 +640,7 @@
 								</first>
 								<second>
 									<name>MoveMethod</name>
-									<value object_id="_42">
+									<value object_id="_46">
 										<which>2</which>
 										<value>Center</value>
 									</value>
@@ -572,7 +652,7 @@
 								</first>
 								<second>
 									<name>ProbeColor</name>
-									<value object_id="_43">
+									<value object_id="_47">
 										<which>2</which>
 										<value>Color(1,1,1)</value>
 									</value>
@@ -584,7 +664,7 @@
 								</first>
 								<second>
 									<name>ProbeLabel</name>
-									<value object_id="_44">
+									<value object_id="_48">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -596,7 +676,7 @@
 								</first>
 								<second>
 									<name>ProbeSize</name>
-									<value object_id="_45">
+									<value object_id="_49">
 										<which>1</which>
 										<value>1.00000000000000000e+00</value>
 									</value>
@@ -608,55 +688,55 @@
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_46">
-										<which>3</which>
-										<value>0</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>SnapToElement</name>
-								</first>
-								<second>
-									<name>SnapToElement</name>
-									<value object_id="_47">
-										<which>3</which>
-										<value>0</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>SnapToNode</name>
-								</first>
-								<second>
-									<name>SnapToNode</name>
-									<value object_id="_48">
-										<which>3</which>
-										<value>0</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>UseBBoxSize</name>
-								</first>
-								<second>
-									<name>UseBBoxSize</name>
-									<value object_id="_49">
-										<which>3</which>
-										<value>0</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>XLocation</name>
-								</first>
-								<second>
-									<name>XLocation</name>
 									<value object_id="_50">
+										<which>3</which>
+										<value>0</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>SnapToElement</name>
+								</first>
+								<second>
+									<name>SnapToElement</name>
+									<value object_id="_51">
+										<which>3</which>
+										<value>0</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>SnapToNode</name>
+								</first>
+								<second>
+									<name>SnapToNode</name>
+									<value object_id="_52">
+										<which>3</which>
+										<value>0</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>UseBBoxSize</name>
+								</first>
+								<second>
+									<name>UseBBoxSize</name>
+									<value object_id="_53">
+										<which>3</which>
+										<value>0</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>XLocation</name>
+								</first>
+								<second>
+									<name>XLocation</name>
+									<value object_id="_54">
 										<which>1</which>
 										<value>1.11527252197265625e+00</value>
 									</value>
@@ -668,7 +748,7 @@
 								</first>
 								<second>
 									<name>YLocation</name>
-									<value object_id="_51">
+									<value object_id="_55">
 										<which>1</which>
 										<value>4.88975524902343750e+00</value>
 									</value>
@@ -680,7 +760,7 @@
 								</first>
 								<second>
 									<name>ZLocation</name>
-									<value object_id="_52">
+									<value object_id="_56">
 										<which>1</which>
 										<value>5.52203303575514326e+00</value>
 									</value>
@@ -708,7 +788,7 @@
 								</first>
 								<second>
 									<name>AddOuterBoundary</name>
-									<value object_id="_53">
+									<value object_id="_57">
 										<which>3</which>
 										<value>1</value>
 									</value>
@@ -720,7 +800,7 @@
 								</first>
 								<second>
 									<name>DisconnectBoundaries</name>
-									<value object_id="_54">
+									<value object_id="_58">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -732,7 +812,7 @@
 								</first>
 								<second>
 									<name>Domain</name>
-									<value object_id="_55">
+									<value object_id="_59">
 										<which>0</which>
 										<value>1</value>
 									</value>
@@ -744,7 +824,7 @@
 								</first>
 								<second>
 									<name>InnerBoundaryOnly</name>
-									<value object_id="_56">
+									<value object_id="_60">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -756,7 +836,7 @@
 								</first>
 								<second>
 									<name>MaxRange</name>
-									<value object_id="_57">
+									<value object_id="_61">
 										<which>0</which>
 										<value>255</value>
 									</value>
@@ -768,7 +848,7 @@
 								</first>
 								<second>
 									<name>MinRange</name>
-									<value object_id="_58">
+									<value object_id="_62">
 										<which>0</which>
 										<value>0</value>
 									</value>
@@ -780,7 +860,7 @@
 								</first>
 								<second>
 									<name>NoInnerBoundary</name>
-									<value object_id="_59">
+									<value object_id="_63">
 										<which>3</which>
 										<value>1</value>
 									</value>
@@ -792,7 +872,7 @@
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_60">
+									<value object_id="_64">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -804,7 +884,7 @@
 								</first>
 								<second>
 									<name>UseRange</name>
-									<value object_id="_61">
+									<value object_id="_65">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -832,7 +912,7 @@
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_62">
+									<value object_id="_66">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -844,7 +924,7 @@
 								</first>
 								<second>
 									<name>field1-name</name>
-									<value object_id="_63">
+									<value object_id="_67">
 										<which>2</which>
 										<value>field0</value>
 									</value>
@@ -856,7 +936,7 @@
 								</first>
 								<second>
 									<name>field2-name</name>
-									<value object_id="_64">
+									<value object_id="_68">
 										<which>2</which>
 										<value>field1</value>
 									</value>
@@ -868,7 +948,7 @@
 								</first>
 								<second>
 									<name>field3-name</name>
-									<value object_id="_65">
+									<value object_id="_69">
 										<which>2</which>
 										<value>field2</value>
 									</value>
@@ -880,7 +960,7 @@
 								</first>
 								<second>
 									<name>field4-name</name>
-									<value object_id="_66">
+									<value object_id="_70">
 										<which>2</which>
 										<value>field3</value>
 									</value>
@@ -892,7 +972,7 @@
 								</first>
 								<second>
 									<name>field5-name</name>
-									<value object_id="_67">
+									<value object_id="_71">
 										<which>2</which>
 										<value>field4</value>
 									</value>
@@ -904,7 +984,7 @@
 								</first>
 								<second>
 									<name>field6-name</name>
-									<value object_id="_68">
+									<value object_id="_72">
 										<which>2</which>
 										<value>field5</value>
 									</value>
@@ -932,7 +1012,7 @@
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_69">
+									<value object_id="_73">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -944,7 +1024,7 @@
 								</first>
 								<second>
 									<name>field1-name</name>
-									<value object_id="_70">
+									<value object_id="_74">
 										<which>2</which>
 										<value>field0</value>
 									</value>
@@ -956,7 +1036,7 @@
 								</first>
 								<second>
 									<name>field2-name</name>
-									<value object_id="_71">
+									<value object_id="_75">
 										<which>2</which>
 										<value>field1</value>
 									</value>
@@ -968,7 +1048,7 @@
 								</first>
 								<second>
 									<name>field3-name</name>
-									<value object_id="_72">
+									<value object_id="_76">
 										<which>2</which>
 										<value>field2</value>
 									</value>
@@ -980,7 +1060,7 @@
 								</first>
 								<second>
 									<name>field4-name</name>
-									<value object_id="_73">
+									<value object_id="_77">
 										<which>2</which>
 										<value>field3</value>
 									</value>
@@ -992,7 +1072,7 @@
 								</first>
 								<second>
 									<name>field5-name</name>
-									<value object_id="_74">
+									<value object_id="_78">
 										<which>2</which>
 										<value>field4</value>
 									</value>
@@ -1004,7 +1084,7 @@
 								</first>
 								<second>
 									<name>field6-name</name>
-									<value object_id="_75">
+									<value object_id="_79">
 										<which>2</which>
 										<value>field5</value>
 									</value>
@@ -1032,7 +1112,7 @@
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_76">
+									<value object_id="_80">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -1044,7 +1124,7 @@
 								</first>
 								<second>
 									<name>string1-name</name>
-									<value object_id="_77">
+									<value object_id="_81">
 										<which>2</which>
 										<value>CODEDIR</value>
 									</value>
@@ -1056,7 +1136,7 @@
 								</first>
 								<second>
 									<name>string2-name</name>
-									<value object_id="_78">
+									<value object_id="_82">
 										<which>2</which>
 										<value>DATADIR</value>
 									</value>
@@ -1068,7 +1148,7 @@
 								</first>
 								<second>
 									<name>string3-name</name>
-									<value object_id="_79">
+									<value object_id="_83">
 										<which>2</which>
 										<value>string2</value>
 									</value>
@@ -1080,7 +1160,7 @@
 								</first>
 								<second>
 									<name>string4-name</name>
-									<value object_id="_80">
+									<value object_id="_84">
 										<which>2</which>
 										<value>string3</value>
 									</value>
@@ -1092,7 +1172,7 @@
 								</first>
 								<second>
 									<name>string5-name</name>
-									<value object_id="_81">
+									<value object_id="_85">
 										<which>2</which>
 										<value>string4</value>
 									</value>
@@ -1104,7 +1184,7 @@
 								</first>
 								<second>
 									<name>string6-name</name>
-									<value object_id="_82">
+									<value object_id="_86">
 										<which>2</which>
 										<value>string5</value>
 									</value>
@@ -1132,7 +1212,7 @@
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_83">
+									<value object_id="_87">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -1160,7 +1240,7 @@
 								</first>
 								<second>
 									<name>FieldReplace</name>
-									<value object_id="_84">
+									<value object_id="_88">
 										<which>5</which>
 										<value class_id="12" tracking_level="0" version="0">
 											<count>0</count>
@@ -1175,7 +1255,7 @@
 								</first>
 								<second>
 									<name>InputFields:0</name>
-									<value object_id="_85">
+									<value object_id="_89">
 										<which>2</which>
 										<value>fieldsInput1</value>
 									</value>
@@ -1187,7 +1267,7 @@
 								</first>
 								<second>
 									<name>InputFields:1</name>
-									<value object_id="_86">
+									<value object_id="_90">
 										<which>2</which>
 										<value>fieldsInput2</value>
 									</value>
@@ -1199,7 +1279,7 @@
 								</first>
 								<second>
 									<name>InputFields:2</name>
-									<value object_id="_87">
+									<value object_id="_91">
 										<which>2</which>
 										<value>fieldsInput3</value>
 									</value>
@@ -1211,7 +1291,7 @@
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_88">
+									<value object_id="_92">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -1239,7 +1319,7 @@
 								</first>
 								<second>
 									<name>AssignFlag</name>
-									<value object_id="_89">
+									<value object_id="_93">
 										<which>3</which>
 										<value>1</value>
 									</value>
@@ -1251,7 +1331,7 @@
 								</first>
 								<second>
 									<name>DetectIntersectionsFlag</name>
-									<value object_id="_90">
+									<value object_id="_94">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -1263,7 +1343,7 @@
 								</first>
 								<second>
 									<name>MaxVolConstraint</name>
-									<value object_id="_91">
+									<value object_id="_95">
 										<which>1</which>
 										<value>1.00000000000000006e-01</value>
 									</value>
@@ -1275,7 +1355,7 @@
 								</first>
 								<second>
 									<name>MinRadius</name>
-									<value object_id="_92">
+									<value object_id="_96">
 										<which>1</which>
 										<value>2.00000000000000000e+00</value>
 									</value>
@@ -1287,7 +1367,7 @@
 								</first>
 								<second>
 									<name>MoreSwitches</name>
-									<value object_id="_93">
+									<value object_id="_97">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -1299,54 +1379,6 @@
 								</first>
 								<second>
 									<name>PiecewiseFlag</name>
-									<value object_id="_94">
-										<which>3</which>
-										<value>1</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>ProgrammableInputPortEnabled</name>
-								</first>
-								<second>
-									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_95">
-										<which>3</which>
-										<value>0</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>QualityFlag</name>
-								</first>
-								<second>
-									<name>QualityFlag</name>
-									<value object_id="_96">
-										<which>3</which>
-										<value>1</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>SetMaxVolConstraintFlag</name>
-								</first>
-								<second>
-									<name>SetMaxVolConstraintFlag</name>
-									<value object_id="_97">
-										<which>3</which>
-										<value>0</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>SetNonzeroAttributeFlag</name>
-								</first>
-								<second>
-									<name>SetNonzeroAttributeFlag</name>
 									<value object_id="_98">
 										<which>3</which>
 										<value>1</value>
@@ -1355,10 +1387,10 @@
 							</item>
 							<item>
 								<first>
-									<name>SetRatioFlag</name>
+									<name>ProgrammableInputPortEnabled</name>
 								</first>
 								<second>
-									<name>SetRatioFlag</name>
+									<name>ProgrammableInputPortEnabled</name>
 									<value object_id="_99">
 										<which>3</which>
 										<value>0</value>
@@ -1367,22 +1399,22 @@
 							</item>
 							<item>
 								<first>
-									<name>SetSplitFlag</name>
+									<name>QualityFlag</name>
 								</first>
 								<second>
-									<name>SetSplitFlag</name>
+									<name>QualityFlag</name>
 									<value object_id="_100">
 										<which>3</which>
-										<value>0</value>
+										<value>1</value>
 									</value>
 								</second>
 							</item>
 							<item>
 								<first>
-									<name>SuppressSplitFlag</name>
+									<name>SetMaxVolConstraintFlag</name>
 								</first>
 								<second>
-									<name>SuppressSplitFlag</name>
+									<name>SetMaxVolConstraintFlag</name>
 									<value object_id="_101">
 										<which>3</which>
 										<value>0</value>
@@ -1391,11 +1423,59 @@
 							</item>
 							<item>
 								<first>
+									<name>SetNonzeroAttributeFlag</name>
+								</first>
+								<second>
+									<name>SetNonzeroAttributeFlag</name>
+									<value object_id="_102">
+										<which>3</which>
+										<value>1</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>SetRatioFlag</name>
+								</first>
+								<second>
+									<name>SetRatioFlag</name>
+									<value object_id="_103">
+										<which>3</which>
+										<value>0</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>SetSplitFlag</name>
+								</first>
+								<second>
+									<name>SetSplitFlag</name>
+									<value object_id="_104">
+										<which>3</which>
+										<value>0</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>SuppressSplitFlag</name>
+								</first>
+								<second>
+									<name>SuppressSplitFlag</name>
+									<value object_id="_105">
+										<which>3</which>
+										<value>0</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
 									<name>VolConstraintFlag</name>
 								</first>
 								<second>
 									<name>VolConstraintFlag</name>
-									<value object_id="_102">
+									<value object_id="_106">
 										<which>3</which>
 										<value>1</value>
 									</value>
@@ -1423,54 +1503,6 @@
 								</first>
 								<second>
 									<name>ForcePointCloud</name>
-									<value object_id="_103">
-										<which>3</which>
-										<value>0</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>ProgrammableInputPortEnabled</name>
-								</first>
-								<second>
-									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_104">
-										<which>3</which>
-										<value>0</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>make_no_data</name>
-								</first>
-								<second>
-									<name>make_no_data</name>
-									<value object_id="_105">
-										<which>3</which>
-										<value>0</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>match_node_values</name>
-								</first>
-								<second>
-									<name>match_node_values</name>
-									<value object_id="_106">
-										<which>3</which>
-										<value>0</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>merge_elems</name>
-								</first>
-								<second>
-									<name>merge_elems</name>
 									<value object_id="_107">
 										<which>3</which>
 										<value>0</value>
@@ -1479,11 +1511,59 @@
 							</item>
 							<item>
 								<first>
+									<name>ProgrammableInputPortEnabled</name>
+								</first>
+								<second>
+									<name>ProgrammableInputPortEnabled</name>
+									<value object_id="_108">
+										<which>3</which>
+										<value>0</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>make_no_data</name>
+								</first>
+								<second>
+									<name>make_no_data</name>
+									<value object_id="_109">
+										<which>3</which>
+										<value>0</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>match_node_values</name>
+								</first>
+								<second>
+									<name>match_node_values</name>
+									<value object_id="_110">
+										<which>3</which>
+										<value>0</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>merge_elems</name>
+								</first>
+								<second>
+									<name>merge_elems</name>
+									<value object_id="_111">
+										<which>3</which>
+										<value>0</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
 									<name>merge_nodes</name>
 								</first>
 								<second>
 									<name>merge_nodes</name>
-									<value object_id="_108">
+									<value object_id="_112">
 										<which>3</which>
 										<value>1</value>
 									</value>
@@ -1495,7 +1575,7 @@
 								</first>
 								<second>
 									<name>tolerance</name>
-									<value object_id="_109">
+									<value object_id="_113">
 										<which>1</which>
 										<value>9.99999999999999955e-07</value>
 									</value>
@@ -1523,54 +1603,6 @@
 								</first>
 								<second>
 									<name>ForcePointCloud</name>
-									<value object_id="_110">
-										<which>3</which>
-										<value>0</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>ProgrammableInputPortEnabled</name>
-								</first>
-								<second>
-									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_111">
-										<which>3</which>
-										<value>0</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>make_no_data</name>
-								</first>
-								<second>
-									<name>make_no_data</name>
-									<value object_id="_112">
-										<which>3</which>
-										<value>0</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>match_node_values</name>
-								</first>
-								<second>
-									<name>match_node_values</name>
-									<value object_id="_113">
-										<which>3</which>
-										<value>0</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>merge_elems</name>
-								</first>
-								<second>
-									<name>merge_elems</name>
 									<value object_id="_114">
 										<which>3</which>
 										<value>0</value>
@@ -1579,11 +1611,59 @@
 							</item>
 							<item>
 								<first>
+									<name>ProgrammableInputPortEnabled</name>
+								</first>
+								<second>
+									<name>ProgrammableInputPortEnabled</name>
+									<value object_id="_115">
+										<which>3</which>
+										<value>0</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>make_no_data</name>
+								</first>
+								<second>
+									<name>make_no_data</name>
+									<value object_id="_116">
+										<which>3</which>
+										<value>0</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>match_node_values</name>
+								</first>
+								<second>
+									<name>match_node_values</name>
+									<value object_id="_117">
+										<which>3</which>
+										<value>0</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>merge_elems</name>
+								</first>
+								<second>
+									<name>merge_elems</name>
+									<value object_id="_118">
+										<which>3</which>
+										<value>0</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
 									<name>merge_nodes</name>
 								</first>
 								<second>
 									<name>merge_nodes</name>
-									<value object_id="_115">
+									<value object_id="_119">
 										<which>3</which>
 										<value>1</value>
 									</value>
@@ -1595,7 +1675,7 @@
 								</first>
 								<second>
 									<name>tolerance</name>
-									<value object_id="_116">
+									<value object_id="_120">
 										<which>1</which>
 										<value>9.99999999999999955e-07</value>
 									</value>
@@ -1623,7 +1703,7 @@
 								</first>
 								<second>
 									<name>Method</name>
-									<value object_id="_117">
+									<value object_id="_121">
 										<which>2</which>
 										<value>Interpolation</value>
 									</value>
@@ -1635,7 +1715,247 @@
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_118">
+									<value object_id="_122">
+										<which>3</which>
+										<value>0</value>
+									</value>
+								</second>
+							</item>
+						</stateMap>
+					</state>
+				</second>
+			</item>
+			<item>
+				<first>PrintStringIntoString:0</first>
+				<second>
+					<module>
+						<package_name_>SCIRun</package_name_>
+						<category_name_>String</category_name_>
+						<module_name_>PrintStringIntoString</module_name_>
+					</module>
+					<state>
+						<stateMap>
+							<count>2</count>
+							<item_version>0</item_version>
+							<item>
+								<first>
+									<name>FormatString</name>
+								</first>
+								<second>
+									<name>FormatString</name>
+									<value object_id="_123">
+										<which>2</which>
+										<value>%s/%s/SCIRun_files</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>ProgrammableInputPortEnabled</name>
+								</first>
+								<second>
+									<name>ProgrammableInputPortEnabled</name>
+									<value object_id="_124">
+										<which>3</which>
+										<value>0</value>
+									</value>
+								</second>
+							</item>
+						</stateMap>
+					</state>
+				</second>
+			</item>
+			<item>
+				<first>PrintStringIntoString:1</first>
+				<second>
+					<module>
+						<package_name_>SCIRun</package_name_>
+						<category_name_>String</category_name_>
+						<module_name_>PrintStringIntoString</module_name_>
+					</module>
+					<state>
+						<stateMap>
+							<count>2</count>
+							<item_version>0</item_version>
+							<item>
+								<first>
+									<name>FormatString</name>
+								</first>
+								<second>
+									<name>FormatString</name>
+									<value object_id="_125">
+										<which>2</which>
+										<value>%s/brainmask.nrrd</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>ProgrammableInputPortEnabled</name>
+								</first>
+								<second>
+									<name>ProgrammableInputPortEnabled</name>
+									<value object_id="_126">
+										<which>3</which>
+										<value>0</value>
+									</value>
+								</second>
+							</item>
+						</stateMap>
+					</state>
+				</second>
+			</item>
+			<item>
+				<first>PrintStringIntoString:2</first>
+				<second>
+					<module>
+						<package_name_>SCIRun</package_name_>
+						<category_name_>String</category_name_>
+						<module_name_>PrintStringIntoString</module_name_>
+					</module>
+					<state>
+						<stateMap>
+							<count>2</count>
+							<item_version>0</item_version>
+							<item>
+								<first>
+									<name>FormatString</name>
+								</first>
+								<second>
+									<name>FormatString</name>
+									<value object_id="_127">
+										<which>2</which>
+										<value>%s/Electrode_Left_Rotation.txt</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>ProgrammableInputPortEnabled</name>
+								</first>
+								<second>
+									<name>ProgrammableInputPortEnabled</name>
+									<value object_id="_128">
+										<which>3</which>
+										<value>0</value>
+									</value>
+								</second>
+							</item>
+						</stateMap>
+					</state>
+				</second>
+			</item>
+			<item>
+				<first>PrintStringIntoString:3</first>
+				<second>
+					<module>
+						<package_name_>SCIRun</package_name_>
+						<category_name_>String</category_name_>
+						<module_name_>PrintStringIntoString</module_name_>
+					</module>
+					<state>
+						<stateMap>
+							<count>2</count>
+							<item_version>0</item_version>
+							<item>
+								<first>
+									<name>FormatString</name>
+								</first>
+								<second>
+									<name>FormatString</name>
+									<value object_id="_129">
+										<which>2</which>
+										<value>%s/Electrode_Left_Translation.txt</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>ProgrammableInputPortEnabled</name>
+								</first>
+								<second>
+									<name>ProgrammableInputPortEnabled</name>
+									<value object_id="_130">
+										<which>3</which>
+										<value>0</value>
+									</value>
+								</second>
+							</item>
+						</stateMap>
+					</state>
+				</second>
+			</item>
+			<item>
+				<first>PrintStringIntoString:4</first>
+				<second>
+					<module>
+						<package_name_>SCIRun</package_name_>
+						<category_name_>String</category_name_>
+						<module_name_>PrintStringIntoString</module_name_>
+					</module>
+					<state>
+						<stateMap>
+							<count>2</count>
+							<item_version>0</item_version>
+							<item>
+								<first>
+									<name>FormatString</name>
+								</first>
+								<second>
+									<name>FormatString</name>
+									<value object_id="_131">
+										<which>2</which>
+										<value>%s/Electrode_Right_Rotation.txt</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>ProgrammableInputPortEnabled</name>
+								</first>
+								<second>
+									<name>ProgrammableInputPortEnabled</name>
+									<value object_id="_132">
+										<which>3</which>
+										<value>0</value>
+									</value>
+								</second>
+							</item>
+						</stateMap>
+					</state>
+				</second>
+			</item>
+			<item>
+				<first>PrintStringIntoString:5</first>
+				<second>
+					<module>
+						<package_name_>SCIRun</package_name_>
+						<category_name_>String</category_name_>
+						<module_name_>PrintStringIntoString</module_name_>
+					</module>
+					<state>
+						<stateMap>
+							<count>2</count>
+							<item_version>0</item_version>
+							<item>
+								<first>
+									<name>FormatString</name>
+								</first>
+								<second>
+									<name>FormatString</name>
+									<value object_id="_133">
+										<which>2</which>
+										<value>%s/Electrode_Right_Translation.txt</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>ProgrammableInputPortEnabled</name>
+								</first>
+								<second>
+									<name>ProgrammableInputPortEnabled</name>
+									<value object_id="_134">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -1663,7 +1983,7 @@
 								</first>
 								<second>
 									<name>FileTypeName</name>
-									<value object_id="_119">
+									<value object_id="_135">
 										<which>2</which>
 										<value>SCIRun Bundle File</value>
 									</value>
@@ -1675,7 +1995,7 @@
 								</first>
 								<second>
 									<name>Filename</name>
-									<value object_id="_120">
+									<value object_id="_136">
 										<which>2</which>
 										<value>Y:\Butson_Lab\Connectome/Electrode_Models/Medtronic_B33015_new.bdl</value>
 									</value>
@@ -1687,7 +2007,7 @@
 								</first>
 								<second>
 									<name>GuiFileTypeName</name>
-									<value object_id="_121">
+									<value object_id="_137">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -1699,7 +2019,7 @@
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_122">
+									<value object_id="_138">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -1711,7 +2031,7 @@
 								</first>
 								<second>
 									<name>ScriptEnvironmentVariable</name>
-									<value object_id="_123">
+									<value object_id="_139">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -1739,7 +2059,7 @@
 								</first>
 								<second>
 									<name>FileTypeName</name>
-									<value object_id="_124">
+									<value object_id="_140">
 										<which>2</which>
 										<value>SCIRun Bundle File</value>
 									</value>
@@ -1751,7 +2071,7 @@
 								</first>
 								<second>
 									<name>Filename</name>
-									<value object_id="_125">
+									<value object_id="_141">
 										<which>2</which>
 										<value>Y:\Butson_Lab\Connectome/Electrode_Models/Medtronic_B33015_new.bdl</value>
 									</value>
@@ -1763,7 +2083,7 @@
 								</first>
 								<second>
 									<name>GuiFileTypeName</name>
-									<value object_id="_126">
+									<value object_id="_142">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -1775,7 +2095,7 @@
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_127">
+									<value object_id="_143">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -1787,7 +2107,7 @@
 								</first>
 								<second>
 									<name>ScriptEnvironmentVariable</name>
-									<value object_id="_128">
+									<value object_id="_144">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -1815,7 +2135,7 @@
 								</first>
 								<second>
 									<name>FileTypeName</name>
-									<value object_id="_129">
+									<value object_id="_145">
 										<which>2</which>
 										<value>NrrdFile</value>
 									</value>
@@ -1827,7 +2147,7 @@
 								</first>
 								<second>
 									<name>Filename</name>
-									<value object_id="_130">
+									<value object_id="_146">
 										<which>2</which>
 										<value>Y:\Butson_Lab\Connectome/S5/SCIRun_files/brainmask.nrrd</value>
 									</value>
@@ -1839,7 +2159,7 @@
 								</first>
 								<second>
 									<name>GuiFileTypeName</name>
-									<value object_id="_131">
+									<value object_id="_147">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -1851,7 +2171,7 @@
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_132">
+									<value object_id="_148">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -1863,7 +2183,7 @@
 								</first>
 								<second>
 									<name>ScriptEnvironmentVariable</name>
-									<value object_id="_133">
+									<value object_id="_149">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -1891,7 +2211,7 @@
 								</first>
 								<second>
 									<name>FileTypeName</name>
-									<value object_id="_134">
+									<value object_id="_150">
 										<which>2</which>
 										<value>SCIRun Matrix File (*.mat)</value>
 									</value>
@@ -1903,7 +2223,7 @@
 								</first>
 								<second>
 									<name>Filename</name>
-									<value object_id="_135">
+									<value object_id="_151">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -1915,7 +2235,7 @@
 								</first>
 								<second>
 									<name>GuiFileTypeName</name>
-									<value object_id="_136">
+									<value object_id="_152">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -1927,7 +2247,7 @@
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_137">
+									<value object_id="_153">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -1939,7 +2259,7 @@
 								</first>
 								<second>
 									<name>ScriptEnvironmentVariable</name>
-									<value object_id="_138">
+									<value object_id="_154">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -1967,7 +2287,7 @@
 								</first>
 								<second>
 									<name>FileTypeName</name>
-									<value object_id="_139">
+									<value object_id="_155">
 										<which>2</which>
 										<value>SCIRun Matrix File (*.mat)</value>
 									</value>
@@ -1979,7 +2299,7 @@
 								</first>
 								<second>
 									<name>Filename</name>
-									<value object_id="_140">
+									<value object_id="_156">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -1991,7 +2311,7 @@
 								</first>
 								<second>
 									<name>GuiFileTypeName</name>
-									<value object_id="_141">
+									<value object_id="_157">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -2003,7 +2323,7 @@
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_142">
+									<value object_id="_158">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -2015,7 +2335,7 @@
 								</first>
 								<second>
 									<name>ScriptEnvironmentVariable</name>
-									<value object_id="_143">
+									<value object_id="_159">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -2043,7 +2363,7 @@
 								</first>
 								<second>
 									<name>FileTypeName</name>
-									<value object_id="_144">
+									<value object_id="_160">
 										<which>2</which>
 										<value>SCIRun Matrix File (*.mat)</value>
 									</value>
@@ -2055,7 +2375,7 @@
 								</first>
 								<second>
 									<name>Filename</name>
-									<value object_id="_145">
+									<value object_id="_161">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -2067,7 +2387,7 @@
 								</first>
 								<second>
 									<name>GuiFileTypeName</name>
-									<value object_id="_146">
+									<value object_id="_162">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -2079,7 +2399,7 @@
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_147">
+									<value object_id="_163">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -2091,7 +2411,7 @@
 								</first>
 								<second>
 									<name>ScriptEnvironmentVariable</name>
-									<value object_id="_148">
+									<value object_id="_164">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -2119,7 +2439,7 @@
 								</first>
 								<second>
 									<name>FileTypeName</name>
-									<value object_id="_149">
+									<value object_id="_165">
 										<which>2</which>
 										<value>SCIRun Matrix File (*.mat)</value>
 									</value>
@@ -2131,7 +2451,7 @@
 								</first>
 								<second>
 									<name>Filename</name>
-									<value object_id="_150">
+									<value object_id="_166">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -2143,7 +2463,7 @@
 								</first>
 								<second>
 									<name>GuiFileTypeName</name>
-									<value object_id="_151">
+									<value object_id="_167">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -2155,7 +2475,7 @@
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_152">
+									<value object_id="_168">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -2167,7 +2487,7 @@
 								</first>
 								<second>
 									<name>ScriptEnvironmentVariable</name>
-									<value object_id="_153">
+									<value object_id="_169">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -2195,7 +2515,7 @@
 								</first>
 								<second>
 									<name>FileTypeName</name>
-									<value object_id="_154">
+									<value object_id="_170">
 										<which>2</which>
 										<value>SCIRun Matrix File (*.mat)</value>
 									</value>
@@ -2207,7 +2527,7 @@
 								</first>
 								<second>
 									<name>Filename</name>
-									<value object_id="_155">
+									<value object_id="_171">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -2219,7 +2539,7 @@
 								</first>
 								<second>
 									<name>GuiFileTypeName</name>
-									<value object_id="_156">
+									<value object_id="_172">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -2231,7 +2551,7 @@
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_157">
+									<value object_id="_173">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -2243,7 +2563,7 @@
 								</first>
 								<second>
 									<name>ScriptEnvironmentVariable</name>
-									<value object_id="_158">
+									<value object_id="_174">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -2254,7 +2574,7 @@
 				</second>
 			</item>
 			<item>
-				<first>ReadMatrix:5</first>
+				<first>ReadMatrix:6</first>
 				<second>
 					<module>
 						<package_name_>SCIRun</package_name_>
@@ -2271,7 +2591,7 @@
 								</first>
 								<second>
 									<name>FileTypeName</name>
-									<value object_id="_159">
+									<value object_id="_175">
 										<which>2</which>
 										<value>SCIRun Matrix File (*.mat)</value>
 									</value>
@@ -2283,7 +2603,7 @@
 								</first>
 								<second>
 									<name>Filename</name>
-									<value object_id="_160">
+									<value object_id="_176">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -2295,7 +2615,7 @@
 								</first>
 								<second>
 									<name>GuiFileTypeName</name>
-									<value object_id="_161">
+									<value object_id="_177">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -2307,7 +2627,7 @@
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_162">
+									<value object_id="_178">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -2319,9 +2639,113 @@
 								</first>
 								<second>
 									<name>ScriptEnvironmentVariable</name>
-									<value object_id="_163">
+									<value object_id="_179">
 										<which>2</which>
 										<value></value>
+									</value>
+								</second>
+							</item>
+						</stateMap>
+					</state>
+				</second>
+			</item>
+			<item>
+				<first>ReadMatrix:7</first>
+				<second>
+					<module>
+						<package_name_>SCIRun</package_name_>
+						<category_name_>DataIO</category_name_>
+						<module_name_>ReadMatrix</module_name_>
+					</module>
+					<state>
+						<stateMap>
+							<count>5</count>
+							<item_version>0</item_version>
+							<item>
+								<first>
+									<name>FileTypeName</name>
+								</first>
+								<second>
+									<name>FileTypeName</name>
+									<value object_id="_180">
+										<which>2</which>
+										<value>SCIRun Matrix File (*.mat)</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>Filename</name>
+								</first>
+								<second>
+									<name>Filename</name>
+									<value object_id="_181">
+										<which>2</which>
+										<value></value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>GuiFileTypeName</name>
+								</first>
+								<second>
+									<name>GuiFileTypeName</name>
+									<value object_id="_182">
+										<which>2</which>
+										<value></value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>ProgrammableInputPortEnabled</name>
+								</first>
+								<second>
+									<name>ProgrammableInputPortEnabled</name>
+									<value object_id="_183">
+										<which>3</which>
+										<value>0</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>ScriptEnvironmentVariable</name>
+								</first>
+								<second>
+									<name>ScriptEnvironmentVariable</name>
+									<value object_id="_184">
+										<which>2</which>
+										<value></value>
+									</value>
+								</second>
+							</item>
+						</stateMap>
+					</state>
+				</second>
+			</item>
+			<item>
+				<first>ReportStringInfo:0</first>
+				<second>
+					<module>
+						<package_name_>SCIRun</package_name_>
+						<category_name_>String</category_name_>
+						<module_name_>ReportStringInfo</module_name_>
+					</module>
+					<state>
+						<stateMap>
+							<count>1</count>
+							<item_version>0</item_version>
+							<item>
+								<first>
+									<name>ProgrammableInputPortEnabled</name>
+								</first>
+								<second>
+									<name>ProgrammableInputPortEnabled</name>
+									<value object_id="_185">
+										<which>3</which>
+										<value>0</value>
 									</value>
 								</second>
 							</item>
@@ -2347,7 +2771,7 @@
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_164">
+									<value object_id="_186">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -2359,7 +2783,7 @@
 								</first>
 								<second>
 									<name>ResampleGaussianExtend</name>
-									<value object_id="_165">
+									<value object_id="_187">
 										<which>1</which>
 										<value>1.00000000000000000e+00</value>
 									</value>
@@ -2371,7 +2795,7 @@
 								</first>
 								<second>
 									<name>ResampleGaussianSigma</name>
-									<value object_id="_166">
+									<value object_id="_188">
 										<which>1</which>
 										<value>1.00000000000000000e+00</value>
 									</value>
@@ -2383,7 +2807,7 @@
 								</first>
 								<second>
 									<name>ResampleMethod</name>
-									<value object_id="_167">
+									<value object_id="_189">
 										<which>2</which>
 										<value>Box</value>
 									</value>
@@ -2395,7 +2819,7 @@
 								</first>
 								<second>
 									<name>ResampleXDim</name>
-									<value object_id="_168">
+									<value object_id="_190">
 										<which>1</which>
 										<value>5.00000000000000000e-01</value>
 									</value>
@@ -2407,7 +2831,7 @@
 								</first>
 								<second>
 									<name>ResampleXDimUseScalingFactor</name>
-									<value object_id="_169">
+									<value object_id="_191">
 										<which>3</which>
 										<value>1</value>
 									</value>
@@ -2419,7 +2843,7 @@
 								</first>
 								<second>
 									<name>ResampleYDim</name>
-									<value object_id="_170">
+									<value object_id="_192">
 										<which>1</which>
 										<value>5.00000000000000000e-01</value>
 									</value>
@@ -2431,7 +2855,7 @@
 								</first>
 								<second>
 									<name>ResampleYDimUseScalingFactor</name>
-									<value object_id="_171">
+									<value object_id="_193">
 										<which>3</which>
 										<value>1</value>
 									</value>
@@ -2443,7 +2867,7 @@
 								</first>
 								<second>
 									<name>ResampleZDim</name>
-									<value object_id="_172">
+									<value object_id="_194">
 										<which>1</which>
 										<value>5.00000000000000000e-01</value>
 									</value>
@@ -2455,7 +2879,7 @@
 								</first>
 								<second>
 									<name>ResampleZDimUseScalingFactor</name>
-									<value object_id="_173">
+									<value object_id="_195">
 										<which>3</which>
 										<value>1</value>
 									</value>
@@ -2483,7 +2907,7 @@
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_174">
+									<value object_id="_196">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -2495,7 +2919,7 @@
 								</first>
 								<second>
 									<name>keepTypeCheckBox</name>
-									<value object_id="_175">
+									<value object_id="_197">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -2523,7 +2947,7 @@
 								</first>
 								<second>
 									<name>BasisOrder</name>
-									<value object_id="_176">
+									<value object_id="_198">
 										<which>2</which>
 										<value>same as input</value>
 									</value>
@@ -2535,7 +2959,7 @@
 								</first>
 								<second>
 									<name>DataType</name>
-									<value object_id="_177">
+									<value object_id="_199">
 										<which>2</which>
 										<value>same as input</value>
 									</value>
@@ -2547,7 +2971,7 @@
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_178">
+									<value object_id="_200">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -2559,7 +2983,7 @@
 								</first>
 								<second>
 									<name>Value</name>
-									<value object_id="_179">
+									<value object_id="_201">
 										<which>1</which>
 										<value>0.00000000000000000e+00</value>
 									</value>
@@ -2587,7 +3011,7 @@
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_180">
+									<value object_id="_202">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -2615,7 +3039,7 @@
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_181">
+									<value object_id="_203">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -2643,7 +3067,7 @@
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_182">
+									<value object_id="_204">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -2671,7 +3095,7 @@
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_183">
+									<value object_id="_205">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -2699,7 +3123,7 @@
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_184">
+									<value object_id="_206">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -2727,7 +3151,7 @@
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_185">
+									<value object_id="_207">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -2755,7 +3179,7 @@
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_186">
+									<value object_id="_208">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -2783,7 +3207,7 @@
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_187">
+									<value object_id="_209">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -2811,7 +3235,7 @@
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_188">
+									<value object_id="_210">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -2839,7 +3263,7 @@
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_189">
+									<value object_id="_211">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -2867,7 +3291,7 @@
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_190">
+									<value object_id="_212">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -2895,7 +3319,7 @@
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_191">
+									<value object_id="_213">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -2923,7 +3347,7 @@
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_192">
+									<value object_id="_214">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -2951,7 +3375,7 @@
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_193">
+									<value object_id="_215">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -2979,7 +3403,7 @@
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_194">
+									<value object_id="_216">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -3007,7 +3431,7 @@
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_195">
+									<value object_id="_217">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -3035,7 +3459,7 @@
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_196">
+									<value object_id="_218">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -3063,7 +3487,7 @@
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_197">
+									<value object_id="_219">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -3091,7 +3515,7 @@
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_198">
+									<value object_id="_220">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -3119,7 +3543,7 @@
 								</first>
 								<second>
 									<name>FileTypeName</name>
-									<value object_id="_199">
+									<value object_id="_221">
 										<which>2</which>
 										<value>*.bdl</value>
 									</value>
@@ -3131,7 +3555,7 @@
 								</first>
 								<second>
 									<name>Filename</name>
-									<value object_id="_200">
+									<value object_id="_222">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -3143,7 +3567,7 @@
 								</first>
 								<second>
 									<name>GuiFileTypeName</name>
-									<value object_id="_201">
+									<value object_id="_223">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -3155,7 +3579,7 @@
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_202">
+									<value object_id="_224">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -3167,11 +3591,23 @@
 			</item>
 		</modules>
 		<connections class_id="13" tracking_level="0" version="0">
-			<count>61</count>
+			<count>77</count>
 			<item_version>0</item_version>
 			<item class_id="14" tracking_level="0" version="0">
-				<moduleId1_>CreateGeometricTransform:2</moduleId1_>
+				<moduleId1_>AppendMatrix:0</moduleId1_>
 				<port1_ class_id="15" tracking_level="0" version="0">
+					<name>ResultMatrix</name>
+					<id>0</id>
+				</port1_>
+				<moduleId2_>SetFieldData:0</moduleId2_>
+				<port2_>
+					<name>InputMatrix</name>
+					<id>0</id>
+				</port2_>
+			</item>
+			<item>
+				<moduleId1_>CreateGeometricTransform:2</moduleId1_>
+				<port1_>
 					<name>OutputMatrix</name>
 					<id>0</id>
 				</port1_>
@@ -3179,6 +3615,30 @@
 				<port2_>
 					<name>TransformMatrix</name>
 					<id>0</id>
+				</port2_>
+			</item>
+			<item>
+				<moduleId1_>CreateMatrix:0</moduleId1_>
+				<port1_>
+					<name>EnteredMatrix</name>
+					<id>0</id>
+				</port1_>
+				<moduleId2_>AppendMatrix:0</moduleId2_>
+				<port2_>
+					<name>InputMatrices</name>
+					<id>0</id>
+				</port2_>
+			</item>
+			<item>
+				<moduleId1_>CreateString:2</moduleId1_>
+				<port1_>
+					<name>NewString</name>
+					<id>0</id>
+				</port1_>
+				<moduleId2_>PrintStringIntoString:0</moduleId2_>
+				<port2_>
+					<name>Input</name>
+					<id>2</id>
 				</port2_>
 			</item>
 			<item>
@@ -3302,6 +3762,18 @@
 				</port2_>
 			</item>
 			<item>
+				<moduleId1_>GetStringsFromBundle:0</moduleId1_>
+				<port1_>
+					<name>string2</name>
+					<id>0</id>
+				</port1_>
+				<moduleId2_>PrintStringIntoString:0</moduleId2_>
+				<port2_>
+					<name>Input</name>
+					<id>1</id>
+				</port2_>
+			</item>
+			<item>
 				<moduleId1_>InsertEnvironmentIntoBundle:0</moduleId1_>
 				<port1_>
 					<name>Environment</name>
@@ -3370,6 +3842,138 @@
 				<moduleId2_>ResampleRegularMesh:0</moduleId2_>
 				<port2_>
 					<name>InputField</name>
+					<id>0</id>
+				</port2_>
+			</item>
+			<item>
+				<moduleId1_>PrintStringIntoString:0</moduleId1_>
+				<port1_>
+					<name>Output</name>
+					<id>0</id>
+				</port1_>
+				<moduleId2_>PrintStringIntoString:1</moduleId2_>
+				<port2_>
+					<name>Input</name>
+					<id>0</id>
+				</port2_>
+			</item>
+			<item>
+				<moduleId1_>PrintStringIntoString:0</moduleId1_>
+				<port1_>
+					<name>Output</name>
+					<id>0</id>
+				</port1_>
+				<moduleId2_>PrintStringIntoString:2</moduleId2_>
+				<port2_>
+					<name>Input</name>
+					<id>0</id>
+				</port2_>
+			</item>
+			<item>
+				<moduleId1_>PrintStringIntoString:0</moduleId1_>
+				<port1_>
+					<name>Output</name>
+					<id>0</id>
+				</port1_>
+				<moduleId2_>PrintStringIntoString:3</moduleId2_>
+				<port2_>
+					<name>Input</name>
+					<id>0</id>
+				</port2_>
+			</item>
+			<item>
+				<moduleId1_>PrintStringIntoString:0</moduleId1_>
+				<port1_>
+					<name>Output</name>
+					<id>0</id>
+				</port1_>
+				<moduleId2_>PrintStringIntoString:4</moduleId2_>
+				<port2_>
+					<name>Input</name>
+					<id>0</id>
+				</port2_>
+			</item>
+			<item>
+				<moduleId1_>PrintStringIntoString:0</moduleId1_>
+				<port1_>
+					<name>Output</name>
+					<id>0</id>
+				</port1_>
+				<moduleId2_>PrintStringIntoString:5</moduleId2_>
+				<port2_>
+					<name>Input</name>
+					<id>0</id>
+				</port2_>
+			</item>
+			<item>
+				<moduleId1_>PrintStringIntoString:0</moduleId1_>
+				<port1_>
+					<name>Output</name>
+					<id>0</id>
+				</port1_>
+				<moduleId2_>ReportStringInfo:0</moduleId2_>
+				<port2_>
+					<name>Input</name>
+					<id>0</id>
+				</port2_>
+			</item>
+			<item>
+				<moduleId1_>PrintStringIntoString:1</moduleId1_>
+				<port1_>
+					<name>Output</name>
+					<id>0</id>
+				</port1_>
+				<moduleId2_>ReadField:0</moduleId2_>
+				<port2_>
+					<name>Filename</name>
+					<id>0</id>
+				</port2_>
+			</item>
+			<item>
+				<moduleId1_>PrintStringIntoString:2</moduleId1_>
+				<port1_>
+					<name>Output</name>
+					<id>0</id>
+				</port1_>
+				<moduleId2_>ReadMatrix:1</moduleId2_>
+				<port2_>
+					<name>Filename</name>
+					<id>0</id>
+				</port2_>
+			</item>
+			<item>
+				<moduleId1_>PrintStringIntoString:3</moduleId1_>
+				<port1_>
+					<name>Output</name>
+					<id>0</id>
+				</port1_>
+				<moduleId2_>ReadMatrix:4</moduleId2_>
+				<port2_>
+					<name>Filename</name>
+					<id>0</id>
+				</port2_>
+			</item>
+			<item>
+				<moduleId1_>PrintStringIntoString:4</moduleId1_>
+				<port1_>
+					<name>Output</name>
+					<id>0</id>
+				</port1_>
+				<moduleId2_>ReadMatrix:3</moduleId2_>
+				<port2_>
+					<name>Filename</name>
+					<id>0</id>
+				</port2_>
+			</item>
+			<item>
+				<moduleId1_>PrintStringIntoString:5</moduleId1_>
+				<port1_>
+					<name>Output</name>
+					<id>0</id>
+				</port1_>
+				<moduleId2_>ReadMatrix:2</moduleId2_>
+				<port2_>
+					<name>Filename</name>
 					<id>0</id>
 				</port2_>
 			</item>
@@ -3626,14 +4230,26 @@
 				</port2_>
 			</item>
 			<item>
-				<moduleId1_>ReadMatrix:5</moduleId1_>
+				<moduleId1_>ReadMatrix:6</moduleId1_>
 				<port1_>
 					<name>Matrix</name>
 					<id>0</id>
 				</port1_>
-				<moduleId2_>SetFieldData:0</moduleId2_>
+				<moduleId2_>AppendMatrix:0</moduleId2_>
 				<port2_>
-					<name>InputMatrix</name>
+					<name>FirstMatrix</name>
+					<id>0</id>
+				</port2_>
+			</item>
+			<item>
+				<moduleId1_>ReadMatrix:7</moduleId1_>
+				<port1_>
+					<name>Matrix</name>
+					<id>0</id>
+				</port1_>
+				<moduleId2_>AppendMatrix:0</moduleId2_>
+				<port2_>
+					<name>SecondMatrix</name>
 					<id>0</id>
 				</port2_>
 			</item>
@@ -3904,13 +4520,27 @@
 		</connections>
 	</networkInfo>
 	<modulePositions class_id="16" tracking_level="0" version="0">
-		<count>45</count>
+		<count>55</count>
 		<item_version>0</item_version>
 		<item class_id="17" tracking_level="0" version="0">
-			<first>CreateGeometricTransform:2</first>
+			<first>AppendMatrix:0</first>
 			<second class_id="18" tracking_level="0" version="0">
+				<first>-8.36000000000000000e+02</first>
+				<second>-1.29200000000000000e+03</second>
+			</second>
+		</item>
+		<item>
+			<first>CreateGeometricTransform:2</first>
+			<second>
 				<first>-2.41200000000000000e+03</first>
 				<second>-1.82400000000000000e+03</second>
+			</second>
+		</item>
+		<item>
+			<first>CreateMatrix:0</first>
+			<second>
+				<first>-9.12000000000000000e+02</first>
+				<second>-1.44400000000000000e+03</second>
 			</second>
 		</item>
 		<item>
@@ -3998,6 +4628,48 @@
 			</second>
 		</item>
 		<item>
+			<first>PrintStringIntoString:0</first>
+			<second>
+				<first>-1.29200000000000000e+03</first>
+				<second>-2.35600000000000000e+03</second>
+			</second>
+		</item>
+		<item>
+			<first>PrintStringIntoString:1</first>
+			<second>
+				<first>-2.05200000000000000e+03</first>
+				<second>-2.12800000000000000e+03</second>
+			</second>
+		</item>
+		<item>
+			<first>PrintStringIntoString:2</first>
+			<second>
+				<first>-1.59600000000000000e+03</first>
+				<second>-2.05200000000000000e+03</second>
+			</second>
+		</item>
+		<item>
+			<first>PrintStringIntoString:3</first>
+			<second>
+				<first>-1.36800000000000000e+03</first>
+				<second>-2.05200000000000000e+03</second>
+			</second>
+		</item>
+		<item>
+			<first>PrintStringIntoString:4</first>
+			<second>
+				<first>2.28000000000000000e+02</first>
+				<second>-2.05200000000000000e+03</second>
+			</second>
+		</item>
+		<item>
+			<first>PrintStringIntoString:5</first>
+			<second>
+				<first>4.56000000000000000e+02</first>
+				<second>-2.05200000000000000e+03</second>
+			</second>
+		</item>
+		<item>
 			<first>ReadBundle:0</first>
 			<second>
 				<first>-1.14000000000000000e+03</first>
@@ -4054,10 +4726,24 @@
 			</second>
 		</item>
 		<item>
-			<first>ReadMatrix:5</first>
+			<first>ReadMatrix:6</first>
 			<second>
-				<first>-9.12000000000000000e+02</first>
-				<second>-1.29200000000000000e+03</second>
+				<first>-1.21600000000000000e+03</first>
+				<second>-1.44400000000000000e+03</second>
+			</second>
+		</item>
+		<item>
+			<first>ReadMatrix:7</first>
+			<second>
+				<first>-1.06400000000000000e+03</first>
+				<second>-1.44400000000000000e+03</second>
+			</second>
+		</item>
+		<item>
+			<first>ReportStringInfo:0</first>
+			<second>
+				<first>-1.11100000000000000e+03</first>
+				<second>-2.25800000000000000e+03</second>
 			</second>
 		</item>
 		<item>
@@ -4223,11 +4909,37 @@
 		</item>
 	</modulePositions>
 	<moduleNotes class_id="19" tracking_level="0" version="0">
-		<count>18</count>
+		<count>19</count>
 		<item_version>0</item_version>
 		<item class_id="20" tracking_level="0" version="0">
-			<first>CreateString:2</first>
+			<first>AppendMatrix:0</first>
 			<second class_id="21" tracking_level="0" version="0">
+				<noteHTML>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Mesh Density&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</noteHTML>
+				<noteText>Mesh Density</noteText>
+				<position>0</position>
+				<fontSize>8</fontSize>
+			</second>
+		</item>
+		<item>
+			<first>CreateMatrix:0</first>
+			<second>
+				<noteHTML>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Head Mesh Density&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</noteHTML>
+				<noteText>Head Mesh Density</noteText>
+				<position>0</position>
+				<fontSize>8</fontSize>
+			</second>
+		</item>
+		<item>
+			<first>CreateString:2</first>
+			<second>
 				<noteHTML>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -4356,19 +5068,6 @@ p, li { white-space: pre-wrap; }
 			</second>
 		</item>
 		<item>
-			<first>ReadMatrix:5</first>
-			<second>
-				<noteHTML>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Mesh Densities&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</noteHTML>
-				<noteText>Mesh Densities</noteText>
-				<position>0</position>
-				<fontSize>8</fontSize>
-			</second>
-		</item>
-		<item>
 			<first>SetFieldDataToConstantValue:0</first>
 			<second>
 				<noteHTML>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -4465,10 +5164,18 @@ p, li { white-space: pre-wrap; }
 		<item_version>0</item_version>
 	</connectionNotes>
 	<moduleTags class_id="22" tracking_level="0" version="0">
-		<count>45</count>
+		<count>55</count>
 		<item_version>0</item_version>
 		<item class_id="23" tracking_level="0" version="0">
+			<first>AppendMatrix:0</first>
+			<second>-1</second>
+		</item>
+		<item>
 			<first>CreateGeometricTransform:2</first>
+			<second>-1</second>
+		</item>
+		<item>
+			<first>CreateMatrix:0</first>
 			<second>-1</second>
 		</item>
 		<item>
@@ -4520,6 +5227,30 @@ p, li { white-space: pre-wrap; }
 			<second>-1</second>
 		</item>
 		<item>
+			<first>PrintStringIntoString:0</first>
+			<second>-1</second>
+		</item>
+		<item>
+			<first>PrintStringIntoString:1</first>
+			<second>-1</second>
+		</item>
+		<item>
+			<first>PrintStringIntoString:2</first>
+			<second>-1</second>
+		</item>
+		<item>
+			<first>PrintStringIntoString:3</first>
+			<second>-1</second>
+		</item>
+		<item>
+			<first>PrintStringIntoString:4</first>
+			<second>-1</second>
+		</item>
+		<item>
+			<first>PrintStringIntoString:5</first>
+			<second>-1</second>
+		</item>
+		<item>
 			<first>ReadBundle:0</first>
 			<second>-1</second>
 		</item>
@@ -4552,7 +5283,15 @@ p, li { white-space: pre-wrap; }
 			<second>-1</second>
 		</item>
 		<item>
-			<first>ReadMatrix:5</first>
+			<first>ReadMatrix:6</first>
+			<second>-1</second>
+		</item>
+		<item>
+			<first>ReadMatrix:7</first>
+			<second>-1</second>
+		</item>
+		<item>
+			<first>ReportStringInfo:0</first>
 			<second>-1</second>
 		</item>
 		<item>
@@ -4649,12 +5388,16 @@ p, li { white-space: pre-wrap; }
 		</item>
 	</moduleTags>
 	<disabledModules class_id="24" tracking_level="0" version="0">
-		<count>0</count>
+		<count>2</count>
 		<item_version>0</item_version>
+		<item>InsertFieldsIntoBundle:0</item>
+		<item>WriteBundle:0</item>
 	</disabledModules>
 	<disabledConnections>
-		<count>0</count>
+		<count>2</count>
 		<item_version>0</item_version>
+		<item>WriteBundle:0--InsertFieldsIntoBundle:0</item>
+		<item>InsertFieldsIntoBundle:0--InterfaceWithTetGen:0</item>
 	</disabledConnections>
 	<moduleTagLabels class_id="25" tracking_level="0" version="0">
 		<count>0</count>
