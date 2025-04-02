@@ -4,7 +4,7 @@
 <networkFile class_id="0" tracking_level="0" version="6">
 	<networkInfo class_id="1" tracking_level="0" version="0">
 		<modules class_id="2" tracking_level="0" version="0">
-			<count>44</count>
+			<count>46</count>
 			<item_version>0</item_version>
 			<item class_id="3" tracking_level="0" version="0">
 				<first>ApplyFEMCurrentSource:0</first>
@@ -1519,6 +1519,46 @@
 				</second>
 			</item>
 			<item>
+				<first>PrintStringIntoString:5</first>
+				<second>
+					<module>
+						<package_name_>SCIRun</package_name_>
+						<category_name_>String</category_name_>
+						<module_name_>PrintStringIntoString</module_name_>
+					</module>
+					<state>
+						<stateMap>
+							<count>2</count>
+							<item_version>0</item_version>
+							<item>
+								<first>
+									<name>FormatString</name>
+								</first>
+								<second>
+									<name>FormatString</name>
+									<value object_id="_86">
+										<which>2</which>
+										<value>%s%s_conductivity.txt</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>ProgrammableInputPortEnabled</name>
+								</first>
+								<second>
+									<name>ProgrammableInputPortEnabled</name>
+									<value object_id="_87">
+										<which>3</which>
+										<value>0</value>
+									</value>
+								</second>
+							</item>
+						</stateMap>
+					</state>
+				</second>
+			</item>
+			<item>
 				<first>ReadBundle:0</first>
 				<second>
 					<module>
@@ -1536,7 +1576,7 @@
 								</first>
 								<second>
 									<name>FileTypeName</name>
-									<value object_id="_86">
+									<value object_id="_88">
 										<which>2</which>
 										<value>SCIRun Bundle File (*.bdl)</value>
 									</value>
@@ -1548,31 +1588,31 @@
 								</first>
 								<second>
 									<name>Filename</name>
-									<value object_id="_87">
-										<which>2</which>
-										<value></value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>GuiFileTypeName</name>
-								</first>
-								<second>
-									<name>GuiFileTypeName</name>
-									<value object_id="_88">
-										<which>2</which>
-										<value></value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>ProgrammableInputPortEnabled</name>
-								</first>
-								<second>
-									<name>ProgrammableInputPortEnabled</name>
 									<value object_id="_89">
+										<which>2</which>
+										<value></value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>GuiFileTypeName</name>
+								</first>
+								<second>
+									<name>GuiFileTypeName</name>
+									<value object_id="_90">
+										<which>2</which>
+										<value></value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>ProgrammableInputPortEnabled</name>
+								</first>
+								<second>
+									<name>ProgrammableInputPortEnabled</name>
+									<value object_id="_91">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -1584,7 +1624,7 @@
 								</first>
 								<second>
 									<name>ScriptEnvironmentVariable</name>
-									<value object_id="_90">
+									<value object_id="_92">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -1612,7 +1652,7 @@
 								</first>
 								<second>
 									<name>FileTypeName</name>
-									<value object_id="_91">
+									<value object_id="_93">
 										<which>2</which>
 										<value>SCIRun Field File (*.fld)</value>
 									</value>
@@ -1624,31 +1664,31 @@
 								</first>
 								<second>
 									<name>Filename</name>
-									<value object_id="_92">
-										<which>2</which>
-										<value></value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>GuiFileTypeName</name>
-								</first>
-								<second>
-									<name>GuiFileTypeName</name>
-									<value object_id="_93">
-										<which>2</which>
-										<value></value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>ProgrammableInputPortEnabled</name>
-								</first>
-								<second>
-									<name>ProgrammableInputPortEnabled</name>
 									<value object_id="_94">
+										<which>2</which>
+										<value></value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>GuiFileTypeName</name>
+								</first>
+								<second>
+									<name>GuiFileTypeName</name>
+									<value object_id="_95">
+										<which>2</which>
+										<value></value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>ProgrammableInputPortEnabled</name>
+								</first>
+								<second>
+									<name>ProgrammableInputPortEnabled</name>
+									<value object_id="_96">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -1660,7 +1700,7 @@
 								</first>
 								<second>
 									<name>ScriptEnvironmentVariable</name>
-									<value object_id="_95">
+									<value object_id="_97">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -1688,7 +1728,7 @@
 								</first>
 								<second>
 									<name>FileTypeName</name>
-									<value object_id="_96">
+									<value object_id="_98">
 										<which>2</which>
 										<value>SCIRun Field File (*.fld)</value>
 									</value>
@@ -1700,31 +1740,31 @@
 								</first>
 								<second>
 									<name>Filename</name>
-									<value object_id="_97">
-										<which>2</which>
-										<value></value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>GuiFileTypeName</name>
-								</first>
-								<second>
-									<name>GuiFileTypeName</name>
-									<value object_id="_98">
-										<which>2</which>
-										<value></value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>ProgrammableInputPortEnabled</name>
-								</first>
-								<second>
-									<name>ProgrammableInputPortEnabled</name>
 									<value object_id="_99">
+										<which>2</which>
+										<value></value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>GuiFileTypeName</name>
+								</first>
+								<second>
+									<name>GuiFileTypeName</name>
+									<value object_id="_100">
+										<which>2</which>
+										<value></value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>ProgrammableInputPortEnabled</name>
+								</first>
+								<second>
+									<name>ProgrammableInputPortEnabled</name>
+									<value object_id="_101">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -1736,7 +1776,7 @@
 								</first>
 								<second>
 									<name>ScriptEnvironmentVariable</name>
-									<value object_id="_100">
+									<value object_id="_102">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -1764,7 +1804,7 @@
 								</first>
 								<second>
 									<name>FileTypeName</name>
-									<value object_id="_101">
+									<value object_id="_103">
 										<which>2</which>
 										<value>SCIRun Matrix File (*.mat)</value>
 									</value>
@@ -1776,31 +1816,31 @@
 								</first>
 								<second>
 									<name>Filename</name>
-									<value object_id="_102">
-										<which>2</which>
-										<value></value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>GuiFileTypeName</name>
-								</first>
-								<second>
-									<name>GuiFileTypeName</name>
-									<value object_id="_103">
-										<which>2</which>
-										<value></value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>ProgrammableInputPortEnabled</name>
-								</first>
-								<second>
-									<name>ProgrammableInputPortEnabled</name>
 									<value object_id="_104">
+										<which>2</which>
+										<value></value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>GuiFileTypeName</name>
+								</first>
+								<second>
+									<name>GuiFileTypeName</name>
+									<value object_id="_105">
+										<which>2</which>
+										<value></value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>ProgrammableInputPortEnabled</name>
+								</first>
+								<second>
+									<name>ProgrammableInputPortEnabled</name>
+									<value object_id="_106">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -1812,7 +1852,7 @@
 								</first>
 								<second>
 									<name>ScriptEnvironmentVariable</name>
-									<value object_id="_105">
+									<value object_id="_107">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -1840,7 +1880,7 @@
 								</first>
 								<second>
 									<name>FileTypeName</name>
-									<value object_id="_106">
+									<value object_id="_108">
 										<which>2</which>
 										<value>SCIRun Matrix File (*.mat)</value>
 									</value>
@@ -1852,31 +1892,31 @@
 								</first>
 								<second>
 									<name>Filename</name>
-									<value object_id="_107">
-										<which>2</which>
-										<value></value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>GuiFileTypeName</name>
-								</first>
-								<second>
-									<name>GuiFileTypeName</name>
-									<value object_id="_108">
-										<which>2</which>
-										<value></value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>ProgrammableInputPortEnabled</name>
-								</first>
-								<second>
-									<name>ProgrammableInputPortEnabled</name>
 									<value object_id="_109">
+										<which>2</which>
+										<value></value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>GuiFileTypeName</name>
+								</first>
+								<second>
+									<name>GuiFileTypeName</name>
+									<value object_id="_110">
+										<which>2</which>
+										<value></value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>ProgrammableInputPortEnabled</name>
+								</first>
+								<second>
+									<name>ProgrammableInputPortEnabled</name>
+									<value object_id="_111">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -1888,7 +1928,7 @@
 								</first>
 								<second>
 									<name>ScriptEnvironmentVariable</name>
-									<value object_id="_110">
+									<value object_id="_112">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -1916,7 +1956,7 @@
 								</first>
 								<second>
 									<name>FileTypeName</name>
-									<value object_id="_111">
+									<value object_id="_113">
 										<which>2</which>
 										<value>SCIRun Matrix File (*.mat)</value>
 									</value>
@@ -1928,31 +1968,31 @@
 								</first>
 								<second>
 									<name>Filename</name>
-									<value object_id="_112">
-										<which>2</which>
-										<value></value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>GuiFileTypeName</name>
-								</first>
-								<second>
-									<name>GuiFileTypeName</name>
-									<value object_id="_113">
-										<which>2</which>
-										<value></value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>ProgrammableInputPortEnabled</name>
-								</first>
-								<second>
-									<name>ProgrammableInputPortEnabled</name>
 									<value object_id="_114">
+										<which>2</which>
+										<value></value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>GuiFileTypeName</name>
+								</first>
+								<second>
+									<name>GuiFileTypeName</name>
+									<value object_id="_115">
+										<which>2</which>
+										<value></value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>ProgrammableInputPortEnabled</name>
+								</first>
+								<second>
+									<name>ProgrammableInputPortEnabled</name>
+									<value object_id="_116">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -1964,7 +2004,7 @@
 								</first>
 								<second>
 									<name>ScriptEnvironmentVariable</name>
-									<value object_id="_115">
+									<value object_id="_117">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -1992,7 +2032,7 @@
 								</first>
 								<second>
 									<name>FileTypeName</name>
-									<value object_id="_116">
+									<value object_id="_118">
 										<which>2</which>
 										<value>SCIRun Matrix File (*.mat)</value>
 									</value>
@@ -2004,31 +2044,31 @@
 								</first>
 								<second>
 									<name>Filename</name>
-									<value object_id="_117">
-										<which>2</which>
-										<value></value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>GuiFileTypeName</name>
-								</first>
-								<second>
-									<name>GuiFileTypeName</name>
-									<value object_id="_118">
-										<which>2</which>
-										<value></value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>ProgrammableInputPortEnabled</name>
-								</first>
-								<second>
-									<name>ProgrammableInputPortEnabled</name>
 									<value object_id="_119">
+										<which>2</which>
+										<value></value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>GuiFileTypeName</name>
+								</first>
+								<second>
+									<name>GuiFileTypeName</name>
+									<value object_id="_120">
+										<which>2</which>
+										<value></value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>ProgrammableInputPortEnabled</name>
+								</first>
+								<second>
+									<name>ProgrammableInputPortEnabled</name>
+									<value object_id="_121">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -2040,7 +2080,7 @@
 								</first>
 								<second>
 									<name>ScriptEnvironmentVariable</name>
-									<value object_id="_120">
+									<value object_id="_122">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -2068,7 +2108,7 @@
 								</first>
 								<second>
 									<name>FileTypeName</name>
-									<value object_id="_121">
+									<value object_id="_123">
 										<which>2</which>
 										<value>SCIRun Matrix File (*.mat)</value>
 									</value>
@@ -2080,64 +2120,24 @@
 								</first>
 								<second>
 									<name>Filename</name>
-									<value object_id="_122">
-										<which>2</which>
-										<value></value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>GuiFileTypeName</name>
-								</first>
-								<second>
-									<name>GuiFileTypeName</name>
-									<value object_id="_123">
-										<which>2</which>
-										<value></value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>ProgrammableInputPortEnabled</name>
-								</first>
-								<second>
-									<name>ProgrammableInputPortEnabled</name>
 									<value object_id="_124">
-										<which>3</which>
-										<value>0</value>
+										<which>2</which>
+										<value></value>
 									</value>
 								</second>
 							</item>
 							<item>
 								<first>
-									<name>ScriptEnvironmentVariable</name>
+									<name>GuiFileTypeName</name>
 								</first>
 								<second>
-									<name>ScriptEnvironmentVariable</name>
+									<name>GuiFileTypeName</name>
 									<value object_id="_125">
 										<which>2</which>
 										<value></value>
 									</value>
 								</second>
 							</item>
-						</stateMap>
-					</state>
-				</second>
-			</item>
-			<item>
-				<first>SetFieldData:0</first>
-				<second>
-					<module>
-						<package_name_>SCIRun</package_name_>
-						<category_name_>ChangeFieldData</category_name_>
-						<module_name_>SetFieldData</module_name_>
-					</module>
-					<state>
-						<stateMap>
-							<count>2</count>
-							<item_version>0</item_version>
 							<item>
 								<first>
 									<name>ProgrammableInputPortEnabled</name>
@@ -2152,13 +2152,13 @@
 							</item>
 							<item>
 								<first>
-									<name>keepTypeCheckBox</name>
+									<name>ScriptEnvironmentVariable</name>
 								</first>
 								<second>
-									<name>keepTypeCheckBox</name>
+									<name>ScriptEnvironmentVariable</name>
 									<value object_id="_127">
-										<which>3</which>
-										<value>0</value>
+										<which>2</which>
+										<value></value>
 									</value>
 								</second>
 							</item>
@@ -2167,7 +2167,7 @@
 				</second>
 			</item>
 			<item>
-				<first>SetFieldData:1</first>
+				<first>SetFieldData:0</first>
 				<second>
 					<module>
 						<package_name_>SCIRun</package_name_>
@@ -2207,7 +2207,7 @@
 				</second>
 			</item>
 			<item>
-				<first>SetFieldData:2</first>
+				<first>SetFieldData:1</first>
 				<second>
 					<module>
 						<package_name_>SCIRun</package_name_>
@@ -2247,7 +2247,7 @@
 				</second>
 			</item>
 			<item>
-				<first>SetFieldData:3</first>
+				<first>SetFieldData:2</first>
 				<second>
 					<module>
 						<package_name_>SCIRun</package_name_>
@@ -2287,6 +2287,46 @@
 				</second>
 			</item>
 			<item>
+				<first>SetFieldData:3</first>
+				<second>
+					<module>
+						<package_name_>SCIRun</package_name_>
+						<category_name_>ChangeFieldData</category_name_>
+						<module_name_>SetFieldData</module_name_>
+					</module>
+					<state>
+						<stateMap>
+							<count>2</count>
+							<item_version>0</item_version>
+							<item>
+								<first>
+									<name>ProgrammableInputPortEnabled</name>
+								</first>
+								<second>
+									<name>ProgrammableInputPortEnabled</name>
+									<value object_id="_134">
+										<which>3</which>
+										<value>0</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>keepTypeCheckBox</name>
+								</first>
+								<second>
+									<name>keepTypeCheckBox</name>
+									<value object_id="_135">
+										<which>3</which>
+										<value>0</value>
+									</value>
+								</second>
+							</item>
+						</stateMap>
+					</state>
+				</second>
+			</item>
+			<item>
 				<first>SolveLinearSystem:0</first>
 				<second>
 					<module>
@@ -2304,7 +2344,7 @@
 								</first>
 								<second>
 									<name>MaxIterations</name>
-									<value object_id="_134">
+									<value object_id="_136">
 										<which>0</which>
 										<value>10000</value>
 									</value>
@@ -2316,7 +2356,7 @@
 								</first>
 								<second>
 									<name>Method</name>
-									<value object_id="_135">
+									<value object_id="_137">
 										<which>2</which>
 										<value>cg</value>
 									</value>
@@ -2328,7 +2368,7 @@
 								</first>
 								<second>
 									<name>Preconditioner</name>
-									<value object_id="_136">
+									<value object_id="_138">
 										<which>2</which>
 										<value>Jacobi</value>
 									</value>
@@ -2340,7 +2380,7 @@
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_137">
+									<value object_id="_139">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -2352,9 +2392,37 @@
 								</first>
 								<second>
 									<name>TargetError</name>
-									<value object_id="_138">
+									<value object_id="_140">
 										<which>1</which>
 										<value>1.00000000000000008e-05</value>
+									</value>
+								</second>
+							</item>
+						</stateMap>
+					</state>
+				</second>
+			</item>
+			<item>
+				<first>SplitFileName:0</first>
+				<second>
+					<module>
+						<package_name_>SCIRun</package_name_>
+						<category_name_>String</category_name_>
+						<module_name_>SplitFileName</module_name_>
+					</module>
+					<state>
+						<stateMap>
+							<count>1</count>
+							<item_version>0</item_version>
+							<item>
+								<first>
+									<name>ProgrammableInputPortEnabled</name>
+								</first>
+								<second>
+									<name>ProgrammableInputPortEnabled</name>
+									<value object_id="_141">
+										<which>3</which>
+										<value>0</value>
 									</value>
 								</second>
 							</item>
@@ -2380,7 +2448,7 @@
 								</first>
 								<second>
 									<name>FileTypeName</name>
-									<value object_id="_139">
+									<value object_id="_142">
 										<which>2</which>
 										<value>SCIRun Field File (*.fld)</value>
 									</value>
@@ -2392,7 +2460,7 @@
 								</first>
 								<second>
 									<name>Filename</name>
-									<value object_id="_140">
+									<value object_id="_143">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -2404,7 +2472,7 @@
 								</first>
 								<second>
 									<name>GuiFileTypeName</name>
-									<value object_id="_141">
+									<value object_id="_144">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -2416,7 +2484,7 @@
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_142">
+									<value object_id="_145">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -2428,7 +2496,7 @@
 			</item>
 		</modules>
 		<connections class_id="12" tracking_level="0" version="0">
-			<count>58</count>
+			<count>62</count>
 			<item_version>0</item_version>
 			<item class_id="13" tracking_level="0" version="0">
 				<moduleId1_>ApplyFEMCurrentSource:0</moduleId1_>
@@ -2935,6 +3003,18 @@
 				</port2_>
 			</item>
 			<item>
+				<moduleId1_>PrintStringIntoString:5</moduleId1_>
+				<port1_>
+					<name>Output</name>
+					<id>0</id>
+				</port1_>
+				<moduleId2_>ReadMatrix:0</moduleId2_>
+				<port2_>
+					<name>Filename</name>
+					<id>0</id>
+				</port2_>
+			</item>
+			<item>
 				<moduleId1_>ReadBundle:0</moduleId1_>
 				<port1_>
 					<name>Bundle</name>
@@ -2943,6 +3023,18 @@
 				<moduleId2_>GetFieldsFromBundle:0</moduleId2_>
 				<port2_>
 					<name>InputBundle</name>
+					<id>0</id>
+				</port2_>
+			</item>
+			<item>
+				<moduleId1_>ReadBundle:0</moduleId1_>
+				<port1_>
+					<name>FileLoaded</name>
+					<id>0</id>
+				</port1_>
+				<moduleId2_>SplitFileName:0</moduleId2_>
+				<port2_>
+					<name>Full_Filename</name>
 					<id>0</id>
 				</port2_>
 			</item>
@@ -3126,10 +3218,34 @@
 					<id>0</id>
 				</port2_>
 			</item>
+			<item>
+				<moduleId1_>SplitFileName:0</moduleId1_>
+				<port1_>
+					<name>Base</name>
+					<id>0</id>
+				</port1_>
+				<moduleId2_>PrintStringIntoString:5</moduleId2_>
+				<port2_>
+					<name>Input</name>
+					<id>4</id>
+				</port2_>
+			</item>
+			<item>
+				<moduleId1_>SplitFileName:0</moduleId1_>
+				<port1_>
+					<name>Pathname</name>
+					<id>0</id>
+				</port1_>
+				<moduleId2_>PrintStringIntoString:5</moduleId2_>
+				<port2_>
+					<name>Input</name>
+					<id>3</id>
+				</port2_>
+			</item>
 		</connections>
 	</networkInfo>
 	<modulePositions class_id="15" tracking_level="0" version="0">
-		<count>44</count>
+		<count>46</count>
 		<item_version>0</item_version>
 		<item class_id="16" tracking_level="0" version="0">
 			<first>ApplyFEMCurrentSource:0</first>
@@ -3342,10 +3458,17 @@
 			</second>
 		</item>
 		<item>
+			<first>PrintStringIntoString:5</first>
+			<second>
+				<first>-5.32000000000000000e+02</first>
+				<second>-5.32000000000000000e+02</second>
+			</second>
+		</item>
+		<item>
 			<first>ReadBundle:0</first>
 			<second>
-				<first>-7.82000000000000000e+02</first>
-				<second>-6.60000000000000000e+02</second>
+				<first>-7.60000000000000000e+02</first>
+				<second>-6.84000000000000000e+02</second>
 			</second>
 		</item>
 		<item>
@@ -3433,6 +3556,13 @@
 			</second>
 		</item>
 		<item>
+			<first>SplitFileName:0</first>
+			<second>
+				<first>-5.32000000000000000e+02</first>
+				<second>-6.08000000000000000e+02</second>
+			</second>
+		</item>
+		<item>
 			<first>WriteField:0</first>
 			<second>
 				<first>-5.32000000000000000e+02</first>
@@ -3449,11 +3579,11 @@
 				<noteHTML>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:9.6pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Remove End Effects&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</noteHTML>
 				<noteText>Remove End Effects</noteText>
 				<position>0</position>
-				<fontSize>8</fontSize>
+				<fontSize>9</fontSize>
 			</second>
 		</item>
 		<item>
@@ -3462,13 +3592,13 @@ p, li { white-space: pre-wrap; }
 				<noteHTML>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:9.6pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Activating Function&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;(Second Spatial Derivative)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</noteHTML>
 				<noteText>Activating Function
 (Second Spatial Derivative)</noteText>
 				<position>0</position>
-				<fontSize>8</fontSize>
+				<fontSize>9</fontSize>
 			</second>
 		</item>
 		<item>
@@ -3477,11 +3607,11 @@ p, li { white-space: pre-wrap; }
 				<noteHTML>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:9.6pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Patient ID&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</noteHTML>
 				<noteText>Patient ID</noteText>
 				<position>0</position>
-				<fontSize>8</fontSize>
+				<fontSize>9</fontSize>
 			</second>
 		</item>
 		<item>
@@ -3490,11 +3620,11 @@ p, li { white-space: pre-wrap; }
 				<noteHTML>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:9.6pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Sink Condition&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</noteHTML>
 				<noteText>Sink Condition</noteText>
 				<position>0</position>
-				<fontSize>8</fontSize>
+				<fontSize>9</fontSize>
 			</second>
 		</item>
 		<item>
@@ -3503,11 +3633,11 @@ p, li { white-space: pre-wrap; }
 				<noteHTML>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:9.6pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Voxel Mapping&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</noteHTML>
 				<noteText>Voxel Mapping</noteText>
 				<position>0</position>
-				<fontSize>8</fontSize>
+				<fontSize>9</fontSize>
 			</second>
 		</item>
 		<item>
@@ -3516,11 +3646,11 @@ p, li { white-space: pre-wrap; }
 				<noteHTML>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:9.6pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Whole Brain Fibers&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</noteHTML>
 				<noteText>Whole Brain Fibers</noteText>
 				<position>0</position>
-				<fontSize>8</fontSize>
+				<fontSize>9</fontSize>
 			</second>
 		</item>
 		<item>
@@ -3529,11 +3659,11 @@ p, li { white-space: pre-wrap; }
 				<noteHTML>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:9.6pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;T1 Base Image&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</noteHTML>
 				<noteText>T1 Base Image</noteText>
 				<position>0</position>
-				<fontSize>8</fontSize>
+				<fontSize>9</fontSize>
 			</second>
 		</item>
 		<item>
@@ -3542,11 +3672,11 @@ p, li { white-space: pre-wrap; }
 				<noteHTML>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:9.6pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Conductivities&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</noteHTML>
 				<noteText>Conductivities</noteText>
 				<position>0</position>
-				<fontSize>8</fontSize>
+				<fontSize>9</fontSize>
 			</second>
 		</item>
 		<item>
@@ -3555,13 +3685,13 @@ p, li { white-space: pre-wrap; }
 				<noteHTML>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:9.6pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Electrode Settings (A)&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Express mA as A&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</noteHTML>
 				<noteText>Electrode Settings (A)
 Express mA as A</noteText>
 				<position>0</position>
-				<fontSize>8</fontSize>
+				<fontSize>9</fontSize>
 			</second>
 		</item>
 		<item>
@@ -3570,11 +3700,11 @@ Express mA as A</noteText>
 				<noteHTML>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:9.6pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Activation Threshold&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</noteHTML>
 				<noteText>Activation Threshold</noteText>
 				<position>0</position>
-				<fontSize>8</fontSize>
+				<fontSize>9</fontSize>
 			</second>
 		</item>
 		<item>
@@ -3583,11 +3713,11 @@ p, li { white-space: pre-wrap; }
 				<noteHTML>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:9.6pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Solution&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</noteHTML>
 				<noteText>Solution</noteText>
 				<position>0</position>
-				<fontSize>8</fontSize>
+				<fontSize>9</fontSize>
 			</second>
 		</item>
 		<item>
@@ -3596,11 +3726,11 @@ p, li { white-space: pre-wrap; }
 				<noteHTML>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:9.6pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Tangents&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</noteHTML>
 				<noteText>Tangents</noteText>
 				<position>0</position>
-				<fontSize>8</fontSize>
+				<fontSize>9</fontSize>
 			</second>
 		</item>
 		<item>
@@ -3609,11 +3739,11 @@ p, li { white-space: pre-wrap; }
 				<noteHTML>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:9.6pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;End Nodes&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</noteHTML>
 				<noteText>End Nodes</noteText>
 				<position>0</position>
-				<fontSize>8</fontSize>
+				<fontSize>9</fontSize>
 			</second>
 		</item>
 		<item>
@@ -3622,13 +3752,13 @@ p, li { white-space: pre-wrap; }
 				<noteHTML>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:9.6pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Stimulation Volume&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;NRRD&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</noteHTML>
 				<noteText>Stimulation Volume
 NRRD</noteText>
 				<position>0</position>
-				<fontSize>8</fontSize>
+				<fontSize>9</fontSize>
 			</second>
 		</item>
 	</moduleNotes>
@@ -3637,7 +3767,7 @@ NRRD</noteText>
 		<item_version>0</item_version>
 	</connectionNotes>
 	<moduleTags class_id="21" tracking_level="0" version="0">
-		<count>44</count>
+		<count>46</count>
 		<item_version>0</item_version>
 		<item class_id="22" tracking_level="0" version="0">
 			<first>ApplyFEMCurrentSource:0</first>
@@ -3760,6 +3890,10 @@ NRRD</noteText>
 			<second>-1</second>
 		</item>
 		<item>
+			<first>PrintStringIntoString:5</first>
+			<second>-1</second>
+		</item>
+		<item>
 			<first>ReadBundle:0</first>
 			<second>-1</second>
 		</item>
@@ -3809,6 +3943,10 @@ NRRD</noteText>
 		</item>
 		<item>
 			<first>SolveLinearSystem:0</first>
+			<second>-1</second>
+		</item>
+		<item>
+			<first>SplitFileName:0</first>
 			<second>-1</second>
 		</item>
 		<item>
