@@ -13,6 +13,10 @@ def grid_mesh(subject_dir, scirun_net_dir, sci_run_bin, rad, centroid):
     os.environ["RING_ELEC"] = os.path.join(scirun_net_dir, 'strip_ring.fld')
     # os.environ["CENTROIDS_PROJ"] = os.path.join(subject_dir, 'centroids.txt')
     os.environ["CENTROIDS_PROJ"] = os.path.join(subject_dir, centroid)
+    if "L" in centroid.split('_')[0]:
+        os.environ["STRIP_ORIENT"] = os.path.join(subject_dir, 'contact_orient_left.txt')
+    else:
+        os.environ["STRIP_ORIENT"] = os.path.join(subject_dir, 'contact_orient_right.txt')
 
     # call scirun to place projected electrodes
     cmd = (sci_run_bin + " -E " + os.path.join(scirun_net_dir, 'place_electrodes.srn5'))
