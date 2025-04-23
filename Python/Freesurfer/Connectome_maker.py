@@ -148,6 +148,7 @@ def table_2_atlas_stim(st_lookup_file, profile, output_files, **kwargs ):
   
 #  check_lookup_files(anat_lookup_file, st_lookup_file)
 
+# add stim from last entry of the anatomical lookup table
   stim_lookup = pd.read_csv(st_lookup_file,index_col=False)
   anat_lookup = pd.read_csv(profile["lookup_table"],index_col=False)
   
