@@ -9,6 +9,8 @@ import re
 import scipy.io
 import subprocess
 
+from scirunlib import profileToEnv, 
+
 def_net = os.path.join(os.environ["CODEDIR"], "SRNetworks", "Whole_brain_sim_script.srn5")
 
 def build_parser():
@@ -34,7 +36,9 @@ def main():
   
   with open(args.profile, 'r') as js_file:
     profile = json.load(js_file)
-    
+  
+  profileToEnv(args.profile)
+  
   p_dir = profile["stim_param_dir"]
   wh_sr = subprocess.run(["which", "scirun"], capture_output=True)
   print(wh_sr)
