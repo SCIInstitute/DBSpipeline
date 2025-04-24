@@ -9,9 +9,18 @@ import re
 import scipy.io
 import subprocess
 
-from scirunlib import profileToEnv, 
+from setupEnv import profileToEnv
 
 def_net = os.path.join(os.environ["CODEDIR"], "SRNetworks", "Whole_brain_sim_script.srn5")
+
+sr_net_dir = os.path.join(os.environ["CODEDIR"], "SRNetworks")
+geom_nets = {
+              "twoLead_simple" : "tetmesh_simple_2_electrode.srn5",
+              "fourLead_simple" : "tetmesh_simple_4_electrode.srn5",
+              "oneIPG_twoLead" : "tetmesh_whole_head_2_electrode.srn5",
+              "twoIPG_fourLead" : "tetmesh_whole_head_4_electrode.srn5",
+              "twoIPG_twoLead_twoStrip" : ""
+}
 
 def build_parser():
   parser = argparse.ArgumentParser(
@@ -28,22 +37,8 @@ def build_parser():
                       help="enable debug mode", action = "store_true", dest="debug_mode" )
   return parser
   
-  
-def main():
+def edgeDataCorrector(profile):
 
-  parser = build_parser()
-  args = parser.parse_args()
-  
-  with open(args.profile, 'r') as js_file:
-    profile = json.load(js_file)
-  
-  profileToEnv(args.profile)
-  
-  p_dir = profile["stim_param_dir"]
-  wh_sr = subprocess.run(["which", "scirun"], capture_output=True)
-  print(wh_sr)
-
-  
   # this is a fix for ImportMatricesFromMatlab scripting bug
   # The network is already modified for these files
   sr_dir = profile["SRFilesPath"]
@@ -59,6 +54,24 @@ def main():
     edgedata = scipy.io.loadmat(edgedata_fn)
     scipy.io.savemat(end_fn, {"Ends" : edgedata["Ends"]})
     
+  return tan_fn, end_fn
+  
+def inputsToEnv(**kwargs):
+  for key, value in kwargs.items():
+    if isinstance(value, str):
+      os.environ[key] = value
+    else:
+      raise ValueError("cannot assign ", type(value), " to ", key, " environment variable" )
+  return
+
+
+def runNetwork_legacy(profile):
+  p_dir = profile["stim_param_dir"]
+  wh_sr = subprocess.run(["which", "scirun"], capture_output=True)
+  print(wh_sr)
+
+  
+  tan_fn, end_fn = edgeDataCorrector(profile)
   
   #SCIRun_call is an environment variable set to the the SCIRun executable path
   SCIRun_call = os.environ["SCIRun_call"]
@@ -80,6 +93,123 @@ def main():
     print(" ".join(sr_call))
     
     subprocess.run(sr_call)
+    
+    return
+    
+def getImplantFiles(profile):
+  
+  files = {}
+  implant = profile["implantation"]
+  config = implant["configuration"]
+
+  geom_dir = implant["geom_dir"]
+  
+  if config["IPG"]:
+    for name, fname in zip(implant["IPG"]["name"], implant["IPG"]["filename"]):
+      files[name.replace(" ", "_").upper() +"_IPG_FILENAME"] =  os.path.join(profile["rootpath"], geom_dir, fname)
+  if config["depthLead"]:
+#"twoleads_simple"
+#"inputs" : ("LEFT_LEAD_BUNDLE", "RIGHT_LEAD_BUNDLE")
+    for name, dname in zip(implant["depthLead"]["name"], implant["depthLead"]["device"]):
+      files[name.replace(" ", "_").upper() +"_LEAD_BUNDLE"] =  os.path.join(os.environ["DATADIR"], "Electrode_Models", dname+"_electrode_model.bdl" )
+  if config["stripElectrodes"]:
+    st_elect = implant["stripElectrodes"]
+    for name, fname, ofname in zip(st_elect["name"], st_elect["filename"], st_elect["orientation_file"]):
+      files[name.replace(" ", "_").upper() +"_STRIP_GEOM_FILE"] =  os.path.join(profile["rootpath"], geom_dir, fname)
+      files[name.replace(" ", "_").upper() +"_STRIP_ORIENT_FILE"] =  os.path.join(profile["rootpath"], geom_dir, ofname)
+      
+  return files
+
+def getConfigString(profile):
+
+  implant = profile["implantation"]
+  config = implant["configuration"]
+  
+  confstr = ""
+  
+  c_IPG = config["IPG"]
+  c_strip = config["stripElectrodes"]
+  c_depth = config["depthLead"]
+  if c_IPG:
+    if c_depth:
+      if c_strip:
+        confstr = "_".join((c_IPG, c_depth, c_strip))
+      else:
+        confstr = "_".join((c_IPG, c_depth))
+  else:
+    if c_depth and not c_strip:
+      confstr = c_depth+"_simple"
+
+  return confstr
+    
+  
+
+def runPipeline(profile, args):
+
+  p_dir = profile["stim_param_dir"]
+  wh_sr = subprocess.run(["which", "scirun"], capture_output=True)
+  print(wh_sr)
+  
+  SCIRun_call = os.environ["SCIRun_call"]
+  
+  tan_fn, end_fn = edgeDataCorrector(profile)
+  
+  geom_input_files = getImplantFiles(profile)
+    
+  profileToEnv(profile)
+  inputsToEnv(**geom_input_files)
+  
+#  print(os.environ)
+
+
+  confstr = getConfigString(profile)
+  
+  print(confstr)
+  
+  geom_sr_net = ""
+  if confstr:
+    geom_sr_net = os.path.join(sr_net_dir, geom_nets[confstr])
+  else:
+    raise ValueError(" not able to inferr correct network from profile")
+  
+  sr_call = [SCIRun_call, "-x", "-0", "-E", geom_sr_net]
+  
+  sr_call = [SCIRun_call, "-e", geom_sr_net]
+  
+  if args.debug_mode:
+    sr_call.append("--verbose")
+    
+  print(" ".join(sr_call))
+  subprocess.run(sr_call)
+  
+  ####
+  # compute network
+  
+  # hard coded for current stim for now
+#  Stim_solve_volt_control.srn5
+#  comp_sr_net = os.path.join(sr_net_dir, "Stim_solve_amp_control.srn5")
+  
+  
+  
+  
+  
+  
+  return
+  
+def main():
+
+  parser = build_parser()
+  args = parser.parse_args()
+  
+  with open(args.profile, 'r') as js_file:
+    profile = json.load(js_file)
+  
+  
+  
+  if "implantation" in profile.keys():
+    runPipeline(profile, args)
+  else:
+    runNetwork_legacy(profile)
     
 if __name__ == "__main__":
    main()
