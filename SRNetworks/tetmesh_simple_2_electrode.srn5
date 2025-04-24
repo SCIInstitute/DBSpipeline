@@ -2797,7 +2797,7 @@
 									<name>ScriptEnvironmentVariable</name>
 									<value object_id="_188">
 										<which>2</which>
-										<value>RIGHT_LEAD_MESH_DENSITY</value>
+										<value></value>
 									</value>
 								</second>
 							</item>
@@ -5022,8 +5022,8 @@
 		<item>
 			<first>ReadMatrix:6</first>
 			<second>
-				<first>-1.21600000000000000e+03</first>
-				<second>-1.36800000000000000e+03</second>
+				<first>-1.26200000000000000e+03</first>
+				<second>-1.37900000000000000e+03</second>
 			</second>
 		</item>
 		<item>
@@ -5071,8 +5071,8 @@
 		<item>
 			<first>SplitFileName:3</first>
 			<second>
-				<first>-1.32500000000000000e+03</first>
-				<second>-1.53900000000000000e+03</second>
+				<first>-1.30800000000000000e+03</first>
+				<second>-1.54400000000000000e+03</second>
 			</second>
 		</item>
 		<item>
@@ -5701,8 +5701,8 @@ p, li { white-space: pre-wrap; }
 	<disabledModules class_id="24" tracking_level="0" version="0">
 		<count>2</count>
 		<item_version>0</item_version>
-		<item>WriteBundle:0</item>
 		<item>InsertFieldsIntoBundle:0</item>
+		<item>WriteBundle:0</item>
 	</disabledModules>
 	<disabledConnections>
 		<count>2</count>
