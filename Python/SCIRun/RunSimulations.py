@@ -35,6 +35,8 @@ def build_parser():
                       help="scirun network", dest="SR_net", type=str,  default = def_net)
   parser.add_argument("-d", "--debug", required=False,
                       help="enable debug mode", action = "store_true", dest="debug_mode" )
+  parser.add_argument("-i", "--interactive", required=False,
+                      help="enable interactive mode.  network will stay up after executing", action = "store_true", dest="interact_mode" )
   return parser
   
 def edgeDataCorrector(profile):
@@ -172,9 +174,14 @@ def runPipeline(profile, args):
   else:
     raise ValueError(" not able to inferr correct network from profile")
   
-  sr_call = [SCIRun_call, "-x", "-0", "-E", geom_sr_net]
+  if args.interact_mode:
+    flags = ["-e"]
+  else:
+    flags = [ "-x", "-0", "-E" ]
   
-  sr_call = [SCIRun_call, "-e", geom_sr_net]
+  sr_call = [SCIRun_call] + flags + [ geom_sr_net]
+  
+  
   
   if args.debug_mode:
     sr_call.append("--verbose")
