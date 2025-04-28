@@ -31,6 +31,8 @@ def findStimFiles(param_dir, profile):
   tab_filename = os.path.join(param_dir, tab_fn)
   df = pd.read_csv(tab_filename)
   
+  profile["stim_table"] = tab_filename
+  
   filenames = []
   for col in list(df):
     filenames += list(df[col])
@@ -84,10 +86,10 @@ def main():
   profile["stim_param_dir"] = param_dir
 
 
-  print(profile)
+#  print(profile)
   
-#  with open(args.profile, 'w') as fp:
-#    json.dump(profile, fp, sort_keys=True, indent=2)
+  with open(args.profile, 'w') as fp:
+    json.dump(profile, fp, sort_keys=True, indent=2)
 
 
 if __name__ == "__main__":
