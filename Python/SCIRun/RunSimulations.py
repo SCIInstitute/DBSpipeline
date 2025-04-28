@@ -158,7 +158,7 @@ def runPipeline(profile, args):
   
   geom_input_files = getImplantFiles(profile)
     
-  profileToEnv(profile)
+  profileToEnv(profile, "stimsegpath", "stimoutpath")
   inputsToEnv(**geom_input_files)
   
 #  print(os.environ)
@@ -189,17 +189,37 @@ def runPipeline(profile, args):
   print(" ".join(sr_call))
   subprocess.run(sr_call)
   
+  head_file = "HeadMesh.bdl"
+  
+  profile
+  
   ####
   # compute network
   
   # hard coded for current stim for now
 #  Stim_solve_volt_control.srn5
-#  comp_sr_net = os.path.join(sr_net_dir, "Stim_solve_amp_control.srn5")
+  comp_sr_net = os.path.join(sr_net_dir, "Stim_solve_amp_control.srn5")
+  
+  for p_fname in profile["stim_param_files"]:
+    f_fname = os.path.join(p_dir, p_fname)
+    print(f_fname)
+    os.environ["PARAM_MATRIX"] = f_fname
+    
+#    print(os.environ["PARAM_MATRIX"])
+
+    sr_call = [SCIRun_call] + flags + [comp_sr_net]
+    
+    if args.debug_mode:
+      sr_call.append("--verbose")
+      
+    print(" ".join(sr_call))
+    
+    subprocess.run(sr_call)
+    
   
   
-  
-  
-  
+  with open(args.profile, 'w') as fp:
+    json.dump(profile, fp, sort_keys=True, indent=2)
   
   return
   
