@@ -16,7 +16,7 @@ implantation["subject"] = "example"
 geom_dir = "SCIRun_files/ImplantGeoms"
 
 implantation["configuration"] = {"IPG": "twoIPG",
-                                  "depthLead" : "twoLead",
+                                  "depthLead" : "fourLead",
                                   "stripElectrodes": "twoStrips"}
 implantation["geom_dir"] = geom_dir
 

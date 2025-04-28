@@ -172,7 +172,7 @@ def runPipeline(profile, args):
   if confstr:
     geom_sr_net = os.path.join(sr_net_dir, geom_nets[confstr])
   else:
-    raise ValueError(" not able to inferr correct network from profile")
+    raise ValueError(" not able to infer correct network from profile")
   
   if args.interact_mode:
     flags = ["-e"]
