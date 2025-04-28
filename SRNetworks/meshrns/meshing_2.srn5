@@ -1204,7 +1204,7 @@
 									<name>FieldElem</name>
 									<value object_id="_75">
 										<which>0</which>
-										<value>944</value>
+										<value>779</value>
 									</value>
 								</second>
 							</item>
@@ -1216,7 +1216,7 @@
 									<name>FieldNode</name>
 									<value object_id="_76">
 										<which>0</which>
-										<value>944</value>
+										<value>779</value>
 									</value>
 								</second>
 							</item>
@@ -1400,7 +1400,7 @@
 									<name>FieldElem</name>
 									<value object_id="_90">
 										<which>0</which>
-										<value>1054</value>
+										<value>664</value>
 									</value>
 								</second>
 							</item>
@@ -1412,7 +1412,7 @@
 									<name>FieldNode</name>
 									<value object_id="_91">
 										<which>0</which>
-										<value>596</value>
+										<value>375</value>
 									</value>
 								</second>
 							</item>
@@ -1596,7 +1596,7 @@
 									<name>FieldElem</name>
 									<value object_id="_105">
 										<which>0</which>
-										<value>111</value>
+										<value>365</value>
 									</value>
 								</second>
 							</item>
@@ -1728,7 +1728,7 @@
 									<name>XLocation</name>
 									<value object_id="_116">
 										<which>1</which>
-										<value>-3.72693048499999975e+01</value>
+										<value>-4.85042801499999996e+01</value>
 									</value>
 								</second>
 							</item>
@@ -1740,7 +1740,7 @@
 									<name>YLocation</name>
 									<value object_id="_117">
 										<which>1</which>
-										<value>-1.54401210999999989e+01</value>
+										<value>-2.21497665500000025e+01</value>
 									</value>
 								</second>
 							</item>
@@ -1752,7 +1752,7 @@
 									<name>ZLocation</name>
 									<value object_id="_118">
 										<which>1</which>
-										<value>4.75677328999999958e+01</value>
+										<value>4.40529274999999956e+01</value>
 									</value>
 								</second>
 							</item>
@@ -1792,7 +1792,7 @@
 									<name>FieldElem</name>
 									<value object_id="_120">
 										<which>0</which>
-										<value>271</value>
+										<value>162</value>
 									</value>
 								</second>
 							</item>
@@ -1804,7 +1804,7 @@
 									<name>FieldNode</name>
 									<value object_id="_121">
 										<which>0</which>
-										<value>312</value>
+										<value>26</value>
 									</value>
 								</second>
 							</item>
@@ -1924,7 +1924,7 @@
 									<name>XLocation</name>
 									<value object_id="_131">
 										<which>1</which>
-										<value>-4.37921357000000029e+01</value>
+										<value>-2.96591303499999981e+01</value>
 									</value>
 								</second>
 							</item>
@@ -1936,7 +1936,7 @@
 									<name>YLocation</name>
 									<value object_id="_132">
 										<which>1</which>
-										<value>-1.87810649500000011e+01</value>
+										<value>-1.35919939000000003e+01</value>
 									</value>
 								</second>
 							</item>
@@ -1948,7 +1948,7 @@
 									<name>ZLocation</name>
 									<value object_id="_133">
 										<which>1</which>
-										<value>3.88667781500000018e+01</value>
+										<value>5.66012611499999991e+01</value>
 									</value>
 								</second>
 							</item>
@@ -2120,7 +2120,7 @@
 									<name>XLocation</name>
 									<value object_id="_146">
 										<which>1</which>
-										<value>-5.00323100499999995e+01</value>
+										<value>0.00000000000000000e+00</value>
 									</value>
 								</second>
 							</item>
@@ -2132,7 +2132,7 @@
 									<name>YLocation</name>
 									<value object_id="_147">
 										<which>1</which>
-										<value>-2.42769827500000019e+01</value>
+										<value>0.00000000000000000e+00</value>
 									</value>
 								</second>
 							</item>
@@ -2144,7 +2144,7 @@
 									<name>ZLocation</name>
 									<value object_id="_148">
 										<which>1</which>
-										<value>1.99936009999999982e+01</value>
+										<value>0.00000000000000000e+00</value>
 									</value>
 								</second>
 							</item>
@@ -2208,7 +2208,7 @@
 									<name>FieldValue</name>
 									<value object_id="_152">
 										<which>2</which>
-										<value>4.7656e-06</value>
+										<value>3.04535e-08</value>
 									</value>
 								</second>
 							</item>
@@ -2316,7 +2316,7 @@
 									<name>XLocation</name>
 									<value object_id="_161">
 										<which>1</which>
-										<value>-4.87619552844197699e+01</value>
+										<value>-4.05904963677276243e+01</value>
 									</value>
 								</second>
 							</item>
@@ -2328,7 +2328,7 @@
 									<name>YLocation</name>
 									<value object_id="_162">
 										<which>1</which>
-										<value>-2.07311378183925612e+01</value>
+										<value>-2.14045325231616701e+01</value>
 									</value>
 								</second>
 							</item>
@@ -2340,7 +2340,7 @@
 									<name>ZLocation</name>
 									<value object_id="_163">
 										<which>1</which>
-										<value>2.87346637748207065e+01</value>
+										<value>4.99809638444321251e+01</value>
 									</value>
 								</second>
 							</item>
@@ -2380,7 +2380,7 @@
 									<name>FieldElem</name>
 									<value object_id="_165">
 										<which>0</which>
-										<value>209</value>
+										<value>511</value>
 									</value>
 								</second>
 							</item>
@@ -2512,7 +2512,7 @@
 									<name>XLocation</name>
 									<value object_id="_176">
 										<which>1</which>
-										<value>-4.81842703499999985e+01</value>
+										<value>-3.92578900500000003e+01</value>
 									</value>
 								</second>
 							</item>
@@ -2524,7 +2524,7 @@
 									<name>YLocation</name>
 									<value object_id="_177">
 										<which>1</which>
-										<value>-2.10367127499999995e+01</value>
+										<value>-2.18569820000000021e+01</value>
 									</value>
 								</second>
 							</item>
@@ -2536,7 +2536,7 @@
 									<name>ZLocation</name>
 									<value object_id="_178">
 										<which>1</which>
-										<value>3.01978808000000001e+01</value>
+										<value>5.07474817499999986e+01</value>
 									</value>
 								</second>
 							</item>
@@ -14381,7 +14381,7 @@ with tetgen</value>
 									<name>CameraDistance</name>
 									<value object_id="_1101">
 										<which>1</which>
-										<value>3.11967678070068359e+01</value>
+										<value>9.69688796997070312e+01</value>
 									</value>
 								</second>
 							</item>
@@ -14412,21 +14412,21 @@ with tetgen</value>
 												<name>listElement</name>
 												<value object_id="_1104">
 													<which>1</which>
-													<value>-2.79114532470703125e+01</value>
+													<value>-3.68960876464843750e+01</value>
 												</value>
 											</item>
 											<item>
 												<name>listElement</name>
 												<value object_id="_1105">
 													<which>1</which>
-													<value>-7.95328521728515625e+00</value>
+													<value>-2.42820701599121094e+01</value>
 												</value>
 											</item>
 											<item>
 												<name>listElement</name>
 												<value object_id="_1106">
 													<which>1</which>
-													<value>6.97958450317382812e+01</value>
+													<value>5.17617721557617188e+01</value>
 												</value>
 											</item>
 										</value>
@@ -14448,28 +14448,28 @@ with tetgen</value>
 												<name>listElement</name>
 												<value object_id="_1108">
 													<which>1</which>
-													<value>-3.04567635059356689e-01</value>
+													<value>4.16117668151855469e-01</value>
 												</value>
 											</item>
 											<item>
 												<name>listElement</name>
 												<value object_id="_1109">
 													<which>1</which>
-													<value>5.06472527980804443e-01</value>
+													<value>3.87876242399215698e-01</value>
 												</value>
 											</item>
 											<item>
 												<name>listElement</name>
 												<value object_id="_1110">
 													<which>1</which>
-													<value>-6.89701199531555176e-01</value>
+													<value>-7.04429566860198975e-01</value>
 												</value>
 											</item>
 											<item>
 												<name>listElement</name>
 												<value object_id="_1111">
 													<which>1</which>
-													<value>-4.18373405933380127e-01</value>
+													<value>-4.24472868442535400e-01</value>
 												</value>
 											</item>
 										</value>
@@ -15463,7 +15463,7 @@ with tetgen</value>
 									<value object_id="_1207">
 										<which>5</which>
 										<value>
-											<count>12</count>
+											<count>11</count>
 											<item_version>0</item_version>
 											<item>
 												<name>graphicsItem</name>
@@ -15552,21 +15552,21 @@ with tetgen</value>
 															<name>Control Points (from ShowField:574)</name>
 															<value object_id="_1219">
 																<which>3</which>
-																<value>1</value>
+																<value>0</value>
 															</value>
 														</item>
 														<item>
 															<name>Edges</name>
 															<value object_id="_1220">
 																<which>3</which>
-																<value>1</value>
+																<value>0</value>
 															</value>
 														</item>
 														<item>
 															<name>Faces</name>
 															<value object_id="_1221">
 																<which>3</which>
-																<value>1</value>
+																<value>0</value>
 															</value>
 														</item>
 														<item>
@@ -15605,14 +15605,14 @@ no tetgen (from ShowField:571)</name>
 															<name>Faces</name>
 															<value object_id="_1226">
 																<which>3</which>
-																<value>0</value>
+																<value>1</value>
 															</value>
 														</item>
 														<item>
 															<name>Nodes</name>
 															<value object_id="_1227">
 																<which>3</which>
-																<value>0</value>
+																<value>1</value>
 															</value>
 														</item>
 													</value>
@@ -15626,8 +15626,7 @@ no tetgen (from ShowField:571)</name>
 														<count>4</count>
 														<item_version>0</item_version>
 														<item>
-															<name>Final Grid With Volume electrodes
-with tetgen (from ShowField:572)</name>
+															<name>final with flat electrodes colored from python (from ShowField:466)</name>
 															<value object_id="_1229">
 																<which>3</which>
 																<value>0</value>
@@ -15637,7 +15636,7 @@ with tetgen (from ShowField:572)</name>
 															<name>Edges</name>
 															<value object_id="_1230">
 																<which>3</which>
-																<value>1</value>
+																<value>0</value>
 															</value>
 														</item>
 														<item>
@@ -15651,7 +15650,7 @@ with tetgen (from ShowField:572)</name>
 															<name>Nodes</name>
 															<value object_id="_1232">
 																<which>3</which>
-																<value>1</value>
+																<value>0</value>
 															</value>
 														</item>
 													</value>
@@ -15662,65 +15661,65 @@ with tetgen (from ShowField:572)</name>
 												<value object_id="_1233">
 													<which>5</which>
 													<value>
-														<count>4</count>
+														<count>1</count>
 														<item_version>0</item_version>
 														<item>
-															<name>final with flat electrodes colored from python (from ShowField:466)</name>
+															<name>GenerateSinglePointProbeFromField:8</name>
 															<value object_id="_1234">
 																<which>3</which>
 																<value>0</value>
 															</value>
 														</item>
-														<item>
-															<name>Edges</name>
-															<value object_id="_1235">
-																<which>3</which>
-																<value>0</value>
-															</value>
-														</item>
-														<item>
-															<name>Faces</name>
-															<value object_id="_1236">
-																<which>3</which>
-																<value>0</value>
-															</value>
-														</item>
-														<item>
-															<name>Nodes</name>
-															<value object_id="_1237">
-																<which>3</which>
-																<value>0</value>
-															</value>
-														</item>
 													</value>
 												</value>
 											</item>
 											<item>
 												<name>graphicsItem</name>
-												<value object_id="_1238">
-													<which>5</which>
-													<value>
-														<count>1</count>
-														<item_version>0</item_version>
-														<item>
-															<name>GenerateSinglePointProbeFromField:8</name>
-															<value object_id="_1239">
-																<which>3</which>
-																<value>0</value>
-															</value>
-														</item>
-													</value>
-												</value>
-											</item>
-											<item>
-												<name>graphicsItem</name>
-												<value object_id="_1240">
+												<value object_id="_1235">
 													<which>5</which>
 													<value>
 														<count>1</count>
 														<item_version>0</item_version>
 														<item>
 															<name>GenerateSinglePointProbeFromField:9</name>
+															<value object_id="_1236">
+																<which>3</which>
+																<value>0</value>
+															</value>
+														</item>
+													</value>
+												</value>
+											</item>
+											<item>
+												<name>graphicsItem</name>
+												<value object_id="_1237">
+													<which>5</which>
+													<value>
+														<count>4</count>
+														<item_version>0</item_version>
+														<item>
+															<name>Grid before moving elec nodes (from ShowField:386)</name>
+															<value object_id="_1238">
+																<which>3</which>
+																<value>0</value>
+															</value>
+														</item>
+														<item>
+															<name>Edges</name>
+															<value object_id="_1239">
+																<which>3</which>
+																<value>0</value>
+															</value>
+														</item>
+														<item>
+															<name>Faces</name>
+															<value object_id="_1240">
+																<which>3</which>
+																<value>0</value>
+															</value>
+														</item>
+														<item>
+															<name>Nodes</name>
 															<value object_id="_1241">
 																<which>3</which>
 																<value>0</value>
@@ -15737,7 +15736,7 @@ with tetgen (from ShowField:572)</name>
 														<count>4</count>
 														<item_version>0</item_version>
 														<item>
-															<name>Grid before moving elec nodes (from ShowField:386)</name>
+															<name>mapped nodes (from ShowField:463)</name>
 															<value object_id="_1243">
 																<which>3</which>
 																<value>0</value>
@@ -15775,7 +15774,7 @@ with tetgen (from ShowField:572)</name>
 														<count>4</count>
 														<item_version>0</item_version>
 														<item>
-															<name>mapped nodes (from ShowField:463)</name>
+															<name>matlab_output_grid_triang (from ShowField:460)</name>
 															<value object_id="_1248">
 																<which>3</which>
 																<value>0</value>
@@ -15792,7 +15791,7 @@ with tetgen (from ShowField:572)</name>
 															<name>Faces</name>
 															<value object_id="_1250">
 																<which>3</which>
-																<value>0</value>
+																<value>1</value>
 															</value>
 														</item>
 														<item>
@@ -15813,7 +15812,7 @@ with tetgen (from ShowField:572)</name>
 														<count>4</count>
 														<item_version>0</item_version>
 														<item>
-															<name>matlab_output_grid_triang (from ShowField:460)</name>
+															<name>moved elecs (from ShowField:459)</name>
 															<value object_id="_1253">
 																<which>3</which>
 																<value>0</value>
@@ -15823,7 +15822,7 @@ with tetgen (from ShowField:572)</name>
 															<name>Edges</name>
 															<value object_id="_1254">
 																<which>3</which>
-																<value>0</value>
+																<value>1</value>
 															</value>
 														</item>
 														<item>
@@ -15836,44 +15835,6 @@ with tetgen (from ShowField:572)</name>
 														<item>
 															<name>Nodes</name>
 															<value object_id="_1256">
-																<which>3</which>
-																<value>0</value>
-															</value>
-														</item>
-													</value>
-												</value>
-											</item>
-											<item>
-												<name>graphicsItem</name>
-												<value object_id="_1257">
-													<which>5</which>
-													<value>
-														<count>4</count>
-														<item_version>0</item_version>
-														<item>
-															<name>moved elecs (from ShowField:459)</name>
-															<value object_id="_1258">
-																<which>3</which>
-																<value>0</value>
-															</value>
-														</item>
-														<item>
-															<name>Edges</name>
-															<value object_id="_1259">
-																<which>3</which>
-																<value>1</value>
-															</value>
-														</item>
-														<item>
-															<name>Faces</name>
-															<value object_id="_1260">
-																<which>3</which>
-																<value>1</value>
-															</value>
-														</item>
-														<item>
-															<name>Nodes</name>
-															<value object_id="_1261">
 																<which>3</which>
 																<value>1</value>
 															</value>
@@ -15891,9 +15852,9 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>WindowPositionX</name>
-									<value object_id="_1262">
+									<value object_id="_1257">
 										<which>0</which>
-										<value>-30</value>
+										<value>-17</value>
 									</value>
 								</second>
 							</item>
@@ -15903,9 +15864,9 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>WindowPositionY</name>
-									<value object_id="_1263">
+									<value object_id="_1258">
 										<which>0</which>
-										<value>1892</value>
+										<value>46</value>
 									</value>
 								</second>
 							</item>
@@ -15915,7 +15876,7 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>WindowSizeX</name>
-									<value object_id="_1264">
+									<value object_id="_1259">
 										<which>0</which>
 										<value>3841</value>
 									</value>
@@ -15927,7 +15888,7 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>WindowSizeY</name>
-									<value object_id="_1265">
+									<value object_id="_1260">
 										<which>0</which>
 										<value>2043</value>
 									</value>
@@ -15955,7 +15916,7 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>Ambient</name>
-									<value object_id="_1266">
+									<value object_id="_1261">
 										<which>1</which>
 										<value>2.00000000000000011e-01</value>
 									</value>
@@ -15967,7 +15928,7 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>AxesSize</name>
-									<value object_id="_1267">
+									<value object_id="_1262">
 										<which>0</which>
 										<value>10</value>
 									</value>
@@ -15979,7 +15940,7 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>AxesVisible</name>
-									<value object_id="_1268">
+									<value object_id="_1263">
 										<which>3</which>
 										<value>1</value>
 									</value>
@@ -15991,7 +15952,7 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>AxesX</name>
-									<value object_id="_1269">
+									<value object_id="_1264">
 										<which>0</which>
 										<value>100</value>
 									</value>
@@ -16003,7 +15964,7 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>AxesY</name>
-									<value object_id="_1270">
+									<value object_id="_1265">
 										<which>0</which>
 										<value>100</value>
 									</value>
@@ -16015,7 +15976,7 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>BackgroundColor</name>
-									<value object_id="_1271">
+									<value object_id="_1266">
 										<which>2</which>
 										<value>Color(0,0,0)</value>
 									</value>
@@ -16027,9 +15988,9 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>CameraDistance</name>
-									<value object_id="_1272">
+									<value object_id="_1267">
 										<which>1</which>
-										<value>3.72359733581542969e+01</value>
+										<value>1.10949981689453125e+02</value>
 									</value>
 								</second>
 							</item>
@@ -16039,7 +16000,7 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>CameraDistanceMinimum</name>
-									<value object_id="_1273">
+									<value object_id="_1268">
 										<which>1</which>
 										<value>1.00000000000000004e-10</value>
 									</value>
@@ -16051,30 +16012,30 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>CameraLookAt</name>
-									<value object_id="_1274">
+									<value object_id="_1269">
 										<which>5</which>
 										<value>
 											<count>3</count>
 											<item_version>0</item_version>
 											<item>
 												<name>listElement</name>
-												<value object_id="_1275">
+												<value object_id="_1270">
 													<which>1</which>
-													<value>-3.96005973815917969e+01</value>
+													<value>-3.78369636535644531e+01</value>
 												</value>
 											</item>
 											<item>
 												<name>listElement</name>
-												<value object_id="_1276">
+												<value object_id="_1271">
 													<which>1</which>
-													<value>-1.47376708984375000e+01</value>
+													<value>-7.45426368713378906e+00</value>
 												</value>
 											</item>
 											<item>
 												<name>listElement</name>
-												<value object_id="_1277">
+												<value object_id="_1272">
 													<which>1</which>
-													<value>6.17314338684082031e+01</value>
+													<value>4.68640136718750000e+01</value>
 												</value>
 											</item>
 										</value>
@@ -16087,37 +16048,37 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>CameraRotation</name>
-									<value object_id="_1278">
+									<value object_id="_1273">
 										<which>5</which>
 										<value>
 											<count>4</count>
 											<item_version>0</item_version>
 											<item>
 												<name>listElement</name>
-												<value object_id="_1279">
+												<value object_id="_1274">
 													<which>1</which>
-													<value>-1.52155965566635132e-01</value>
+													<value>-1.08867056667804718e-01</value>
 												</value>
 											</item>
 											<item>
 												<name>listElement</name>
-												<value object_id="_1280">
+												<value object_id="_1275">
 													<which>1</which>
-													<value>-3.50737512111663818e-01</value>
+													<value>-1.91661477088928223e-01</value>
 												</value>
 											</item>
 											<item>
 												<name>listElement</name>
-												<value object_id="_1281">
+												<value object_id="_1276">
 													<which>1</which>
-													<value>8.10440659523010254e-01</value>
+													<value>1.70483946800231934e-01</value>
 												</value>
 											</item>
 											<item>
 												<name>listElement</name>
-												<value object_id="_1282">
+												<value object_id="_1277">
 													<which>1</which>
-													<value>4.43866819143295288e-01</value>
+													<value>9.60390090942382812e-01</value>
 												</value>
 											</item>
 										</value>
@@ -16130,11 +16091,46 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>ClippingPlaneD</name>
-									<value object_id="_1283">
+									<value object_id="_1278">
 										<which>5</which>
 										<value>
 											<count>6</count>
 											<item_version>0</item_version>
+											<item>
+												<name></name>
+												<value object_id="_1279">
+													<which>1</which>
+													<value>0.00000000000000000e+00</value>
+												</value>
+											</item>
+											<item>
+												<name></name>
+												<value object_id="_1280">
+													<which>1</which>
+													<value>0.00000000000000000e+00</value>
+												</value>
+											</item>
+											<item>
+												<name></name>
+												<value object_id="_1281">
+													<which>1</which>
+													<value>0.00000000000000000e+00</value>
+												</value>
+											</item>
+											<item>
+												<name></name>
+												<value object_id="_1282">
+													<which>1</which>
+													<value>0.00000000000000000e+00</value>
+												</value>
+											</item>
+											<item>
+												<name></name>
+												<value object_id="_1283">
+													<which>1</which>
+													<value>0.00000000000000000e+00</value>
+												</value>
+											</item>
 											<item>
 												<name></name>
 												<value object_id="_1284">
@@ -16142,41 +16138,6 @@ with tetgen (from ShowField:572)</name>
 													<value>0.00000000000000000e+00</value>
 												</value>
 											</item>
-											<item>
-												<name></name>
-												<value object_id="_1285">
-													<which>1</which>
-													<value>0.00000000000000000e+00</value>
-												</value>
-											</item>
-											<item>
-												<name></name>
-												<value object_id="_1286">
-													<which>1</which>
-													<value>0.00000000000000000e+00</value>
-												</value>
-											</item>
-											<item>
-												<name></name>
-												<value object_id="_1287">
-													<which>1</which>
-													<value>0.00000000000000000e+00</value>
-												</value>
-											</item>
-											<item>
-												<name></name>
-												<value object_id="_1288">
-													<which>1</which>
-													<value>0.00000000000000000e+00</value>
-												</value>
-											</item>
-											<item>
-												<name></name>
-												<value object_id="_1289">
-													<which>1</which>
-													<value>0.00000000000000000e+00</value>
-												</value>
-											</item>
 										</value>
 									</value>
 								</second>
@@ -16187,11 +16148,46 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>ClippingPlaneEnabled</name>
-									<value object_id="_1290">
+									<value object_id="_1285">
 										<which>5</which>
 										<value>
 											<count>6</count>
 											<item_version>0</item_version>
+											<item>
+												<name></name>
+												<value object_id="_1286">
+													<which>3</which>
+													<value>0</value>
+												</value>
+											</item>
+											<item>
+												<name></name>
+												<value object_id="_1287">
+													<which>3</which>
+													<value>0</value>
+												</value>
+											</item>
+											<item>
+												<name></name>
+												<value object_id="_1288">
+													<which>3</which>
+													<value>0</value>
+												</value>
+											</item>
+											<item>
+												<name></name>
+												<value object_id="_1289">
+													<which>3</which>
+													<value>0</value>
+												</value>
+											</item>
+											<item>
+												<name></name>
+												<value object_id="_1290">
+													<which>3</which>
+													<value>0</value>
+												</value>
+											</item>
 											<item>
 												<name></name>
 												<value object_id="_1291">
@@ -16199,13 +16195,21 @@ with tetgen (from ShowField:572)</name>
 													<value>0</value>
 												</value>
 											</item>
-											<item>
-												<name></name>
-												<value object_id="_1292">
-													<which>3</which>
-													<value>0</value>
-												</value>
-											</item>
+										</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>ClippingPlaneNormalReversed</name>
+								</first>
+								<second>
+									<name>ClippingPlaneNormalReversed</name>
+									<value object_id="_1292">
+										<which>5</which>
+										<value>
+											<count>6</count>
+											<item_version>0</item_version>
 											<item>
 												<name></name>
 												<value object_id="_1293">
@@ -16234,21 +16238,13 @@ with tetgen (from ShowField:572)</name>
 													<value>0</value>
 												</value>
 											</item>
-										</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>ClippingPlaneNormalReversed</name>
-								</first>
-								<second>
-									<name>ClippingPlaneNormalReversed</name>
-									<value object_id="_1297">
-										<which>5</which>
-										<value>
-											<count>6</count>
-											<item_version>0</item_version>
+											<item>
+												<name></name>
+												<value object_id="_1297">
+													<which>3</which>
+													<value>0</value>
+												</value>
+											</item>
 											<item>
 												<name></name>
 												<value object_id="_1298">
@@ -16256,41 +16252,6 @@ with tetgen (from ShowField:572)</name>
 													<value>0</value>
 												</value>
 											</item>
-											<item>
-												<name></name>
-												<value object_id="_1299">
-													<which>3</which>
-													<value>0</value>
-												</value>
-											</item>
-											<item>
-												<name></name>
-												<value object_id="_1300">
-													<which>3</which>
-													<value>0</value>
-												</value>
-											</item>
-											<item>
-												<name></name>
-												<value object_id="_1301">
-													<which>3</which>
-													<value>0</value>
-												</value>
-											</item>
-											<item>
-												<name></name>
-												<value object_id="_1302">
-													<which>3</which>
-													<value>0</value>
-												</value>
-											</item>
-											<item>
-												<name></name>
-												<value object_id="_1303">
-													<which>3</which>
-													<value>0</value>
-												</value>
-											</item>
 										</value>
 									</value>
 								</second>
@@ -16301,11 +16262,46 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>ClippingPlaneX</name>
-									<value object_id="_1304">
+									<value object_id="_1299">
 										<which>5</which>
 										<value>
 											<count>6</count>
 											<item_version>0</item_version>
+											<item>
+												<name></name>
+												<value object_id="_1300">
+													<which>1</which>
+													<value>0.00000000000000000e+00</value>
+												</value>
+											</item>
+											<item>
+												<name></name>
+												<value object_id="_1301">
+													<which>1</which>
+													<value>0.00000000000000000e+00</value>
+												</value>
+											</item>
+											<item>
+												<name></name>
+												<value object_id="_1302">
+													<which>1</which>
+													<value>0.00000000000000000e+00</value>
+												</value>
+											</item>
+											<item>
+												<name></name>
+												<value object_id="_1303">
+													<which>1</which>
+													<value>0.00000000000000000e+00</value>
+												</value>
+											</item>
+											<item>
+												<name></name>
+												<value object_id="_1304">
+													<which>1</which>
+													<value>0.00000000000000000e+00</value>
+												</value>
+											</item>
 											<item>
 												<name></name>
 												<value object_id="_1305">
@@ -16313,13 +16309,21 @@ with tetgen (from ShowField:572)</name>
 													<value>0.00000000000000000e+00</value>
 												</value>
 											</item>
-											<item>
-												<name></name>
-												<value object_id="_1306">
-													<which>1</which>
-													<value>0.00000000000000000e+00</value>
-												</value>
-											</item>
+										</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>ClippingPlaneY</name>
+								</first>
+								<second>
+									<name>ClippingPlaneY</name>
+									<value object_id="_1306">
+										<which>5</which>
+										<value>
+											<count>6</count>
+											<item_version>0</item_version>
 											<item>
 												<name></name>
 												<value object_id="_1307">
@@ -16348,21 +16352,13 @@ with tetgen (from ShowField:572)</name>
 													<value>0.00000000000000000e+00</value>
 												</value>
 											</item>
-										</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>ClippingPlaneY</name>
-								</first>
-								<second>
-									<name>ClippingPlaneY</name>
-									<value object_id="_1311">
-										<which>5</which>
-										<value>
-											<count>6</count>
-											<item_version>0</item_version>
+											<item>
+												<name></name>
+												<value object_id="_1311">
+													<which>1</which>
+													<value>0.00000000000000000e+00</value>
+												</value>
+											</item>
 											<item>
 												<name></name>
 												<value object_id="_1312">
@@ -16370,13 +16366,21 @@ with tetgen (from ShowField:572)</name>
 													<value>0.00000000000000000e+00</value>
 												</value>
 											</item>
-											<item>
-												<name></name>
-												<value object_id="_1313">
-													<which>1</which>
-													<value>0.00000000000000000e+00</value>
-												</value>
-											</item>
+										</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>ClippingPlaneZ</name>
+								</first>
+								<second>
+									<name>ClippingPlaneZ</name>
+									<value object_id="_1313">
+										<which>5</which>
+										<value>
+											<count>6</count>
+											<item_version>0</item_version>
 											<item>
 												<name></name>
 												<value object_id="_1314">
@@ -16405,21 +16409,13 @@ with tetgen (from ShowField:572)</name>
 													<value>0.00000000000000000e+00</value>
 												</value>
 											</item>
-										</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>ClippingPlaneZ</name>
-								</first>
-								<second>
-									<name>ClippingPlaneZ</name>
-									<value object_id="_1318">
-										<which>5</which>
-										<value>
-											<count>6</count>
-											<item_version>0</item_version>
+											<item>
+												<name></name>
+												<value object_id="_1318">
+													<which>1</which>
+													<value>0.00000000000000000e+00</value>
+												</value>
+											</item>
 											<item>
 												<name></name>
 												<value object_id="_1319">
@@ -16427,41 +16423,6 @@ with tetgen (from ShowField:572)</name>
 													<value>0.00000000000000000e+00</value>
 												</value>
 											</item>
-											<item>
-												<name></name>
-												<value object_id="_1320">
-													<which>1</which>
-													<value>0.00000000000000000e+00</value>
-												</value>
-											</item>
-											<item>
-												<name></name>
-												<value object_id="_1321">
-													<which>1</which>
-													<value>0.00000000000000000e+00</value>
-												</value>
-											</item>
-											<item>
-												<name></name>
-												<value object_id="_1322">
-													<which>1</which>
-													<value>0.00000000000000000e+00</value>
-												</value>
-											</item>
-											<item>
-												<name></name>
-												<value object_id="_1323">
-													<which>1</which>
-													<value>0.00000000000000000e+00</value>
-												</value>
-											</item>
-											<item>
-												<name></name>
-												<value object_id="_1324">
-													<which>1</which>
-													<value>0.00000000000000000e+00</value>
-												</value>
-											</item>
 										</value>
 									</value>
 								</second>
@@ -16472,7 +16433,7 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>Diffuse</name>
-									<value object_id="_1325">
+									<value object_id="_1320">
 										<which>1</which>
 										<value>1.00000000000000000e+00</value>
 									</value>
@@ -16484,7 +16445,7 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>Emission</name>
-									<value object_id="_1326">
+									<value object_id="_1321">
 										<which>1</which>
 										<value>0.00000000000000000e+00</value>
 									</value>
@@ -16496,7 +16457,7 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>FogColor</name>
-									<value object_id="_1327">
+									<value object_id="_1322">
 										<which>2</which>
 										<value>Color(0,0,255)</value>
 									</value>
@@ -16508,7 +16469,7 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>FogEnd</name>
-									<value object_id="_1328">
+									<value object_id="_1323">
 										<which>1</which>
 										<value>7.09999999999999964e-01</value>
 									</value>
@@ -16520,7 +16481,7 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>FogOn</name>
-									<value object_id="_1329">
+									<value object_id="_1324">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -16532,7 +16493,7 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>FogStart</name>
-									<value object_id="_1330">
+									<value object_id="_1325">
 										<which>1</which>
 										<value>0.00000000000000000e+00</value>
 									</value>
@@ -16544,7 +16505,7 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>HasNewGeometry</name>
-									<value object_id="_1331">
+									<value object_id="_1326">
 										<which>3</which>
 										<value>1</value>
 									</value>
@@ -16556,7 +16517,7 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>HeadLightAzimuth</name>
-									<value object_id="_1332">
+									<value object_id="_1327">
 										<which>0</which>
 										<value>180</value>
 									</value>
@@ -16568,7 +16529,7 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>HeadLightColor</name>
-									<value object_id="_1333">
+									<value object_id="_1328">
 										<which>2</which>
 										<value>Color(1,1,1)</value>
 									</value>
@@ -16580,7 +16541,7 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>HeadLightInclination</name>
-									<value object_id="_1334">
+									<value object_id="_1329">
 										<which>0</which>
 										<value>90</value>
 									</value>
@@ -16592,7 +16553,7 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>HeadLightOn</name>
-									<value object_id="_1335">
+									<value object_id="_1330">
 										<which>3</which>
 										<value>1</value>
 									</value>
@@ -16604,6 +16565,66 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>IsExecuting</name>
+									<value object_id="_1331">
+										<which>3</which>
+										<value>0</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>IsFloating</name>
+								</first>
+								<second>
+									<name>IsFloating</name>
+									<value object_id="_1332">
+										<which>3</which>
+										<value>1</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>Light1Azimuth</name>
+								</first>
+								<second>
+									<name>Light1Azimuth</name>
+									<value object_id="_1333">
+										<which>0</which>
+										<value>180</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>Light1Color</name>
+								</first>
+								<second>
+									<name>Light1Color</name>
+									<value object_id="_1334">
+										<which>2</which>
+										<value>Color(1,1,1)</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>Light1Inclination</name>
+								</first>
+								<second>
+									<name>Light1Inclination</name>
+									<value object_id="_1335">
+										<which>0</which>
+										<value>90</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>Light1On</name>
+								</first>
+								<second>
+									<name>Light1On</name>
 									<value object_id="_1336">
 										<which>3</which>
 										<value>0</value>
@@ -16612,23 +16633,11 @@ with tetgen (from ShowField:572)</name>
 							</item>
 							<item>
 								<first>
-									<name>IsFloating</name>
+									<name>Light2Azimuth</name>
 								</first>
 								<second>
-									<name>IsFloating</name>
+									<name>Light2Azimuth</name>
 									<value object_id="_1337">
-										<which>3</which>
-										<value>1</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>Light1Azimuth</name>
-								</first>
-								<second>
-									<name>Light1Azimuth</name>
-									<value object_id="_1338">
 										<which>0</which>
 										<value>180</value>
 									</value>
@@ -16636,11 +16645,11 @@ with tetgen (from ShowField:572)</name>
 							</item>
 							<item>
 								<first>
-									<name>Light1Color</name>
+									<name>Light2Color</name>
 								</first>
 								<second>
-									<name>Light1Color</name>
-									<value object_id="_1339">
+									<name>Light2Color</name>
+									<value object_id="_1338">
 										<which>2</which>
 										<value>Color(1,1,1)</value>
 									</value>
@@ -16648,11 +16657,11 @@ with tetgen (from ShowField:572)</name>
 							</item>
 							<item>
 								<first>
-									<name>Light1Inclination</name>
+									<name>Light2Inclination</name>
 								</first>
 								<second>
-									<name>Light1Inclination</name>
-									<value object_id="_1340">
+									<name>Light2Inclination</name>
+									<value object_id="_1339">
 										<which>0</which>
 										<value>90</value>
 									</value>
@@ -16660,11 +16669,11 @@ with tetgen (from ShowField:572)</name>
 							</item>
 							<item>
 								<first>
-									<name>Light1On</name>
+									<name>Light2On</name>
 								</first>
 								<second>
-									<name>Light1On</name>
-									<value object_id="_1341">
+									<name>Light2On</name>
+									<value object_id="_1340">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -16672,11 +16681,11 @@ with tetgen (from ShowField:572)</name>
 							</item>
 							<item>
 								<first>
-									<name>Light2Azimuth</name>
+									<name>Light3Azimuth</name>
 								</first>
 								<second>
-									<name>Light2Azimuth</name>
-									<value object_id="_1342">
+									<name>Light3Azimuth</name>
+									<value object_id="_1341">
 										<which>0</which>
 										<value>180</value>
 									</value>
@@ -16684,11 +16693,11 @@ with tetgen (from ShowField:572)</name>
 							</item>
 							<item>
 								<first>
-									<name>Light2Color</name>
+									<name>Light3Color</name>
 								</first>
 								<second>
-									<name>Light2Color</name>
-									<value object_id="_1343">
+									<name>Light3Color</name>
+									<value object_id="_1342">
 										<which>2</which>
 										<value>Color(1,1,1)</value>
 									</value>
@@ -16696,11 +16705,11 @@ with tetgen (from ShowField:572)</name>
 							</item>
 							<item>
 								<first>
-									<name>Light2Inclination</name>
+									<name>Light3Inclination</name>
 								</first>
 								<second>
-									<name>Light2Inclination</name>
-									<value object_id="_1344">
+									<name>Light3Inclination</name>
+									<value object_id="_1343">
 										<which>0</which>
 										<value>90</value>
 									</value>
@@ -16708,72 +16717,24 @@ with tetgen (from ShowField:572)</name>
 							</item>
 							<item>
 								<first>
-									<name>Light2On</name>
+									<name>Light3On</name>
 								</first>
 								<second>
-									<name>Light2On</name>
+									<name>Light3On</name>
+									<value object_id="_1344">
+										<which>3</which>
+										<value>0</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>ObjectsOnly</name>
+								</first>
+								<second>
+									<name>ObjectsOnly</name>
 									<value object_id="_1345">
 										<which>3</which>
-										<value>0</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>Light3Azimuth</name>
-								</first>
-								<second>
-									<name>Light3Azimuth</name>
-									<value object_id="_1346">
-										<which>0</which>
-										<value>180</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>Light3Color</name>
-								</first>
-								<second>
-									<name>Light3Color</name>
-									<value object_id="_1347">
-										<which>2</which>
-										<value>Color(1,1,1)</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>Light3Inclination</name>
-								</first>
-								<second>
-									<name>Light3Inclination</name>
-									<value object_id="_1348">
-										<which>0</which>
-										<value>90</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>Light3On</name>
-								</first>
-								<second>
-									<name>Light3On</name>
-									<value object_id="_1349">
-										<which>3</which>
-										<value>0</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>ObjectsOnly</name>
-								</first>
-								<second>
-									<name>ObjectsOnly</name>
-									<value object_id="_1350">
-										<which>3</which>
 										<value>1</value>
 									</value>
 								</second>
@@ -16784,7 +16745,7 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_1351">
+									<value object_id="_1346">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -16796,7 +16757,7 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>ScaleBarFontSize</name>
-									<value object_id="_1352">
+									<value object_id="_1347">
 										<which>0</which>
 										<value>8</value>
 									</value>
@@ -16808,67 +16769,67 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>ScaleBarHeight</name>
+									<value object_id="_1348">
+										<which>1</which>
+										<value>1.00000000000000000e+00</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>ScaleBarLength</name>
+								</first>
+								<second>
+									<name>ScaleBarLength</name>
+									<value object_id="_1349">
+										<which>1</which>
+										<value>1.00000000000000000e+00</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>ScaleBarLineColor</name>
+								</first>
+								<second>
+									<name>ScaleBarLineColor</name>
+									<value object_id="_1350">
+										<which>1</which>
+										<value>1.00000000000000000e+00</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>ScaleBarLineWidth</name>
+								</first>
+								<second>
+									<name>ScaleBarLineWidth</name>
+									<value object_id="_1351">
+										<which>1</which>
+										<value>1.00000000000000000e+00</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>ScaleBarMultiplier</name>
+								</first>
+								<second>
+									<name>ScaleBarMultiplier</name>
+									<value object_id="_1352">
+										<which>1</which>
+										<value>1.00000000000000000e+00</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>ScaleBarNumTicks</name>
+								</first>
+								<second>
+									<name>ScaleBarNumTicks</name>
 									<value object_id="_1353">
-										<which>1</which>
-										<value>1.00000000000000000e+00</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>ScaleBarLength</name>
-								</first>
-								<second>
-									<name>ScaleBarLength</name>
-									<value object_id="_1354">
-										<which>1</which>
-										<value>1.00000000000000000e+00</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>ScaleBarLineColor</name>
-								</first>
-								<second>
-									<name>ScaleBarLineColor</name>
-									<value object_id="_1355">
-										<which>1</which>
-										<value>1.00000000000000000e+00</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>ScaleBarLineWidth</name>
-								</first>
-								<second>
-									<name>ScaleBarLineWidth</name>
-									<value object_id="_1356">
-										<which>1</which>
-										<value>1.00000000000000000e+00</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>ScaleBarMultiplier</name>
-								</first>
-								<second>
-									<name>ScaleBarMultiplier</name>
-									<value object_id="_1357">
-										<which>1</which>
-										<value>1.00000000000000000e+00</value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>ScaleBarNumTicks</name>
-								</first>
-								<second>
-									<name>ScaleBarNumTicks</name>
-									<value object_id="_1358">
 										<which>0</which>
 										<value>11</value>
 									</value>
@@ -16880,7 +16841,7 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>ScaleBarUnitValue</name>
-									<value object_id="_1359">
+									<value object_id="_1354">
 										<which>2</which>
 										<value>mm</value>
 									</value>
@@ -16892,7 +16853,7 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>ScreenshotDirectory</name>
-									<value object_id="_1360">
+									<value object_id="_1355">
 										<which>2</which>
 										<value>Z:/UFL Dropbox/Butson_Lab/Projects/NeuroPaceUH3/NeuroPaceLGS_Data_Analysis/Cohort_all/CM_projections</value>
 									</value>
@@ -16904,7 +16865,7 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>Shine</name>
-									<value object_id="_1361">
+									<value object_id="_1356">
 										<which>1</which>
 										<value>5.00000000000000000e-01</value>
 									</value>
@@ -16916,7 +16877,7 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>ShowScaleBar</name>
-									<value object_id="_1362">
+									<value object_id="_1357">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -16928,7 +16889,7 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>ShowViewer</name>
-									<value object_id="_1363">
+									<value object_id="_1358">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -16940,7 +16901,7 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>Specular</name>
-									<value object_id="_1364">
+									<value object_id="_1359">
 										<which>1</which>
 										<value>2.99999999999999989e-01</value>
 									</value>
@@ -16952,7 +16913,7 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>ToolBarAdvancedPosition</name>
-									<value object_id="_1365">
+									<value object_id="_1360">
 										<which>0</which>
 										<value>2</value>
 									</value>
@@ -16964,7 +16925,7 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>ToolBarMainPosition</name>
-									<value object_id="_1366">
+									<value object_id="_1361">
 										<which>0</which>
 										<value>4</value>
 									</value>
@@ -16976,7 +16937,7 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>ToolBarRenderPosition</name>
-									<value object_id="_1367">
+									<value object_id="_1362">
 										<which>0</which>
 										<value>1</value>
 									</value>
@@ -16988,7 +16949,7 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>UseBGColor</name>
-									<value object_id="_1368">
+									<value object_id="_1363">
 										<which>3</which>
 										<value>1</value>
 									</value>
@@ -17000,11 +16961,49 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>VisibleItemListState</name>
-									<value object_id="_1369">
+									<value object_id="_1364">
 										<which>5</which>
 										<value>
 											<count>3</count>
 											<item_version>0</item_version>
+											<item>
+												<name>graphicsItem</name>
+												<value object_id="_1365">
+													<which>5</which>
+													<value>
+														<count>4</count>
+														<item_version>0</item_version>
+														<item>
+															<name>ShowField:578</name>
+															<value object_id="_1366">
+																<which>3</which>
+																<value>0</value>
+															</value>
+														</item>
+														<item>
+															<name>Edges</name>
+															<value object_id="_1367">
+																<which>3</which>
+																<value>0</value>
+															</value>
+														</item>
+														<item>
+															<name>Faces</name>
+															<value object_id="_1368">
+																<which>3</which>
+																<value>1</value>
+															</value>
+														</item>
+														<item>
+															<name>Nodes</name>
+															<value object_id="_1369">
+																<which>3</which>
+																<value>0</value>
+															</value>
+														</item>
+													</value>
+												</value>
+											</item>
 											<item>
 												<name>graphicsItem</name>
 												<value object_id="_1370">
@@ -17013,10 +17012,10 @@ with tetgen (from ShowField:572)</name>
 														<count>4</count>
 														<item_version>0</item_version>
 														<item>
-															<name>ShowField:578</name>
+															<name>ShowField:579</name>
 															<value object_id="_1371">
 																<which>3</which>
-																<value>1</value>
+																<value>0</value>
 															</value>
 														</item>
 														<item>
@@ -17030,7 +17029,7 @@ with tetgen (from ShowField:572)</name>
 															<name>Faces</name>
 															<value object_id="_1373">
 																<which>3</which>
-																<value>1</value>
+																<value>0</value>
 															</value>
 														</item>
 														<item>
@@ -17051,10 +17050,10 @@ with tetgen (from ShowField:572)</name>
 														<count>4</count>
 														<item_version>0</item_version>
 														<item>
-															<name>ShowField:579</name>
+															<name>ShowField:580</name>
 															<value object_id="_1376">
 																<which>3</which>
-																<value>1</value>
+																<value>0</value>
 															</value>
 														</item>
 														<item>
@@ -17075,44 +17074,6 @@ with tetgen (from ShowField:572)</name>
 															<name>Nodes</name>
 															<value object_id="_1379">
 																<which>3</which>
-																<value>1</value>
-															</value>
-														</item>
-													</value>
-												</value>
-											</item>
-											<item>
-												<name>graphicsItem</name>
-												<value object_id="_1380">
-													<which>5</which>
-													<value>
-														<count>4</count>
-														<item_version>0</item_version>
-														<item>
-															<name>ShowField:580</name>
-															<value object_id="_1381">
-																<which>3</which>
-																<value>0</value>
-															</value>
-														</item>
-														<item>
-															<name>Edges</name>
-															<value object_id="_1382">
-																<which>3</which>
-																<value>1</value>
-															</value>
-														</item>
-														<item>
-															<name>Faces</name>
-															<value object_id="_1383">
-																<which>3</which>
-																<value>1</value>
-															</value>
-														</item>
-														<item>
-															<name>Nodes</name>
-															<value object_id="_1384">
-																<which>3</which>
 																<value>0</value>
 															</value>
 														</item>
@@ -17129,9 +17090,9 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>WindowPositionX</name>
-									<value object_id="_1385">
+									<value object_id="_1380">
 										<which>0</which>
-										<value>-888</value>
+										<value>842</value>
 									</value>
 								</second>
 							</item>
@@ -17141,9 +17102,9 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>WindowPositionY</name>
-									<value object_id="_1386">
+									<value object_id="_1381">
 										<which>0</which>
-										<value>400</value>
+										<value>829</value>
 									</value>
 								</second>
 							</item>
@@ -17153,7 +17114,7 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>WindowSizeX</name>
-									<value object_id="_1387">
+									<value object_id="_1382">
 										<which>0</which>
 										<value>3841</value>
 									</value>
@@ -17165,7 +17126,7 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>WindowSizeY</name>
-									<value object_id="_1388">
+									<value object_id="_1383">
 										<which>0</which>
 										<value>2043</value>
 									</value>
@@ -17193,7 +17154,7 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>FileTypeName</name>
-									<value object_id="_1389">
+									<value object_id="_1384">
 										<which>2</which>
 										<value>All Files</value>
 									</value>
@@ -17205,9 +17166,9 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>Filename</name>
-									<value object_id="_1390">
+									<value object_id="_1385">
 										<which>2</which>
-										<value>Z:\meshrns_integrated\S303-001\/FINAL_GRID.bdl</value>
+										<value>Z:\meshrns\Subjects\S303-004\/FINAL_GRID.bdl</value>
 									</value>
 								</second>
 							</item>
@@ -17217,7 +17178,7 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>GuiFileTypeName</name>
-									<value object_id="_1391">
+									<value object_id="_1386">
 										<which>2</which>
 										<value>All Files (*)</value>
 									</value>
@@ -17229,7 +17190,7 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_1392">
+									<value object_id="_1387">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -17257,7 +17218,7 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>FileTypeList</name>
-									<value object_id="_1393">
+									<value object_id="_1388">
 										<which>2</which>
 										<value>SCIRun Field Binary (*.fld);;SCIRun Field ASCII (*.fld);;CARPFiber (*.lon);;CARPMesh (*.elem *.pts *.lon);;CVRTI_FacPtsFileToTriSurf (*.fac *.tri *.pts *.pos);;CurveField (*.pts *.pos *.edge);;Matlab Field (*.mat);;NrrdFile (*.nhdr *.nrrd);;ObjToField (*.obj);;PointCloudField (*.pts *.pos *.txt);;TetVolField (*.elem *.tet *.pts *.pos);;TetVolFieldToVtk (*.vtk);;TetVolField[BaseIndex 1] (*.tet *.pts);;TriSurfField (*.fac *.tri *.pts *.pos);;TriSurfFieldSTL[ASCII] (*.stl);;TriSurfFieldSTL[Binary] (*.stl);;TriSurfFieldToExotxt (*.ex2);;TriSurfFieldToExotxt[BaseIndex 1] (*.ex2);;TriSurfFieldToM (*.m);;TriSurfFieldToVtk (*.vtk);;TriSurfField[BaseIndex 1] (*.fac *.pts)</value>
 									</value>
@@ -17269,7 +17230,7 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>FileTypeName</name>
-									<value object_id="_1394">
+									<value object_id="_1389">
 										<which>2</which>
 										<value>SCIRun Field Binary</value>
 									</value>
@@ -17281,9 +17242,9 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>Filename</name>
-									<value object_id="_1395">
+									<value object_id="_1390">
 										<which>2</which>
-										<value>Z:\meshrns_integrated\S303-001\/FINAL_GRID.fld</value>
+										<value>Z:\meshrns\Subjects\S303-004\/FINAL_GRID.fld</value>
 									</value>
 								</second>
 							</item>
@@ -17293,7 +17254,7 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>GuiFileTypeName</name>
-									<value object_id="_1396">
+									<value object_id="_1391">
 										<which>2</which>
 										<value></value>
 									</value>
@@ -17305,7 +17266,7 @@ with tetgen (from ShowField:572)</name>
 								</first>
 								<second>
 									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_1397">
+									<value object_id="_1392">
 										<which>3</which>
 										<value>0</value>
 									</value>
