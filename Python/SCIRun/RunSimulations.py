@@ -37,6 +37,8 @@ def build_parser():
                       help="enable debug mode", action = "store_true", dest="debug_mode" )
   parser.add_argument("-i", "--interactive", required=False,
                       help="enable interactive mode.  network will stay up after executing", action = "store_true", dest="interact_mode" )
+  parser.add_argument("-l", "--legacy", required=False,
+                      help="force legacy mode.  this will run the pipeline in a single network", action = "store_true", dest="legacy_mode" )
   return parser
   
 def edgeDataCorrector(profile):
@@ -233,7 +235,7 @@ def main():
   
   
   
-  if "implantation" in profile.keys():
+  if "implantation" in profile.keys() and not arg.legacy_mode:
     runPipeline(profile, args)
   else:
     runNetwork_legacy(profile)
