@@ -39,6 +39,8 @@ def build_parser():
                       help="enable interactive mode.  network will stay up after executing", action = "store_true", dest="interact_mode" )
   parser.add_argument("-l", "--legacy", required=False,
                       help="force legacy mode.  this will run the pipeline in a single network", action = "store_true", dest="legacy_mode" )
+  parser.add_argument("-t", "--dry-run", required=False,
+                      help="dry run mode.  Run the script without running SR", action = "store_true", dest = "dry_run" )
   return parser
   
 def edgeDataCorrector(profile):
@@ -69,7 +71,7 @@ def inputsToEnv(**kwargs):
   return
 
 
-def runNetwork_legacy(profile):
+def runNetwork_legacy(profile, args):
   p_dir = profile["stim_param_dir"]
   wh_sr = subprocess.run(["which", "scirun"], capture_output=True)
   print(wh_sr)
@@ -82,6 +84,11 @@ def runNetwork_legacy(profile):
   
   os.environ["PATIENTID"] = profile["subject"]
   
+  if args.interact_mode:
+    flags = ["-e"]
+  else:
+    flags = [ "-x", "-0", "-E" ]
+  
   for p_fname in profile["stim_param_files"]:
     f_fname = os.path.join(p_dir, p_fname)
     print(f_fname)
@@ -89,14 +96,15 @@ def runNetwork_legacy(profile):
     
 #    print(os.environ["PARAM_MATRIX"])
 
-    sr_call = [SCIRun_call, "-x", "-0", "-E", args.SR_net]
+    sr_call = [SCIRun_call] + flags +  [args.SR_net]
 #    sr_call = [SCIRun_call, "-e", args.SR_net]
     if args.debug_mode:
       sr_call.append("--verbose")
       
     print(" ".join(sr_call))
     
-    subprocess.run(sr_call)
+    if not args.dry_run:
+      subprocess.run(sr_call)
     
     return
     
@@ -145,6 +153,19 @@ def getConfigString(profile):
       confstr = c_depth+"_simple"
 
   return confstr
+  
+  
+def check_threshold(profile):
+  
+  def_actThreshold = 0.015 # units?
+  
+  if "stim" in profile.keys():
+    if not "actThreshold" in profile["stim"].keys():
+      profile["stim"]["actThreshold"] = def_actThreshold
+  else:
+    profile["stim"] = {"actThreshold" : def_actThreshold }
+    
+  return profile
     
   
 
@@ -159,41 +180,51 @@ def runPipeline(profile, args):
   tan_fn, end_fn = edgeDataCorrector(profile)
   
   geom_input_files = getImplantFiles(profile)
+  
+  head_file = ""
+  
+  if "HeadModel" in profile.keys():
+    head_file = profile["HeadModel"]
+  else:
+    head_file = os.path.join(profile["rootpath"], profile["implantation"]["geom_dir"], "HeadModel.bdl" )
+    profile["HeadModel"] = head_file
     
-  profileToEnv(profile, "stimsegpath", "stimoutpath")
+  profileToEnv(profile, "stimsegpath", "stimoutpath", "HeadModel")
   inputsToEnv(**geom_input_files)
   
 #  print(os.environ)
 
-
   confstr = getConfigString(profile)
   
   print(confstr)
-  
-  geom_sr_net = ""
-  if confstr:
-    geom_sr_net = os.path.join(sr_net_dir, geom_nets[confstr])
-  else:
-    raise ValueError(" not able to infer correct network from profile")
+    
+  print(head_file)
   
   if args.interact_mode:
     flags = ["-e"]
   else:
     flags = [ "-x", "-0", "-E" ]
   
-  sr_call = [SCIRun_call] + flags + [ geom_sr_net]
-  
-  
-  
-  if args.debug_mode:
-    sr_call.append("--verbose")
+  if not os.path.exists(head_file):
+#  if True:
+    print("builing headmodel file for simulation")
+    geom_sr_net = ""
+    if confstr:
+      geom_sr_net = os.path.join(sr_net_dir, geom_nets[confstr])
+    else:
+      raise ValueError(" not able to infer correct network from profile")
     
-  print(" ".join(sr_call))
-  subprocess.run(sr_call)
-  
-  head_file = "HeadMesh.bdl"
-  
-  profile
+    sr_call = [SCIRun_call] + flags + [ geom_sr_net]
+
+    if args.debug_mode:
+      sr_call.append("--verbose")
+      
+    print(" ".join(sr_call))
+    
+    if not args.dry_run:
+      subprocess.run(sr_call)
+  else:
+    print("head model file exists.  Skipping that step")
   
   ####
   # compute network
@@ -202,6 +233,15 @@ def runPipeline(profile, args):
 #  Stim_solve_volt_control.srn5
   comp_sr_net = os.path.join(sr_net_dir, "Stim_solve_amp_control.srn5")
   
+  profile = check_threshold(profile)
+  
+  AT_file = os.path.join(profile["SRFilesPath"], "activationThreshold.txt")
+  
+  np.savetxt(AT_file, [profile["stim"]["actThreshold"]] )
+  
+  os.environ["ActThresh"] = AT_file
+  
+  stim_vol_fnames = []
   for p_fname in profile["stim_param_files"]:
     f_fname = os.path.join(p_dir, p_fname)
     print(f_fname)
@@ -216,8 +256,11 @@ def runPipeline(profile, args):
       
     print(" ".join(sr_call))
     
-    subprocess.run(sr_call)
-    
+    if not args.dry_run:
+      subprocess.run(sr_call)
+      
+      
+# /Users/jess/UF_brainstim/HiperGator_Connectome/S0301/Segmentations/Stim/Stimulation_Left_-E2-E3_9.0mA.nrrd
   
   
   with open(args.profile, 'w') as fp:
@@ -235,14 +278,10 @@ def main():
   
   
   
-  if "implantation" in profile.keys() and not arg.legacy_mode:
+  if "implantation" in profile.keys() and not args.legacy_mode:
     runPipeline(profile, args)
   else:
-    runNetwork_legacy(profile)
+    runNetwork_legacy(profile, args)
     
 if __name__ == "__main__":
    main()
-    
-    
-    
-  

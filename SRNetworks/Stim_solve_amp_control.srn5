@@ -4,7 +4,7 @@
 <networkFile class_id="0" tracking_level="0" version="6">
 	<networkInfo class_id="1" tracking_level="0" version="0">
 		<modules class_id="2" tracking_level="0" version="0">
-			<count>48</count>
+			<count>47</count>
 			<item_version>0</item_version>
 			<item class_id="3" tracking_level="0" version="0">
 				<first>ApplyFEMCurrentSource:0</first>
@@ -526,7 +526,7 @@
 									<name>InputFieldName</name>
 									<value object_id="_27">
 										<which>2</which>
-										<value></value>
+										<value>--- no name ---</value>
 									</value>
 								</second>
 							</item>
@@ -538,7 +538,7 @@
 									<name>InputType</name>
 									<value object_id="_28">
 										<which>2</which>
-										<value></value>
+										<value>LinearData</value>
 									</value>
 								</second>
 							</item>
@@ -590,7 +590,7 @@
 									<name>InputFieldName</name>
 									<value object_id="_31">
 										<which>2</which>
-										<value></value>
+										<value>--- no name ---</value>
 									</value>
 								</second>
 							</item>
@@ -602,7 +602,7 @@
 									<name>InputType</name>
 									<value object_id="_32">
 										<which>2</which>
-										<value></value>
+										<value>ConstantData</value>
 									</value>
 								</second>
 							</item>
@@ -810,7 +810,7 @@
 									<name>field1-name</name>
 									<value object_id="_44">
 										<which>2</which>
-										<value>field0</value>
+										<value>HeadModel</value>
 									</value>
 								</second>
 							</item>
@@ -834,7 +834,7 @@
 									<name>field3-name</name>
 									<value object_id="_46">
 										<which>2</which>
-										<value>field2</value>
+										<value>BoundaryMesh</value>
 									</value>
 								</second>
 							</item>
@@ -858,7 +858,7 @@
 									<name>field5-name</name>
 									<value object_id="_48">
 										<which>2</which>
-										<value>field4</value>
+										<value>ContactLocations</value>
 									</value>
 								</second>
 							</item>
@@ -946,7 +946,7 @@
 									<name>string4-name</name>
 									<value object_id="_54">
 										<which>2</which>
-										<value>string3</value>
+										<value>HeadModel</value>
 									</value>
 								</second>
 							</item>
@@ -1070,7 +1070,7 @@
 									<name>string6-name</name>
 									<value object_id="_63">
 										<which>2</which>
-										<value>string5</value>
+										<value>ActThresh</value>
 									</value>
 								</second>
 							</item>
@@ -1598,7 +1598,7 @@
 									<name>FormatString</name>
 									<value object_id="_91">
 										<which>2</which>
-										<value>%s%s_conductivity.txt</value>
+										<value>%s.txt</value>
 									</value>
 								</second>
 							</item>
@@ -1638,7 +1638,7 @@
 									<name>FormatString</name>
 									<value object_id="_93">
 										<which>2</which>
-										<value>%sStimulation_%s.nrrd</value>
+										<value>%s/Stimulation_%s.nrrd</value>
 									</value>
 								</second>
 							</item>
@@ -1690,7 +1690,7 @@
 									<name>Filename</name>
 									<value object_id="_96">
 										<which>2</which>
-										<value></value>
+										<value>/Users/jess/UF_brainstim/HiperGator_Connectome/S0301/SCIRun_files/ImplantGeoms/HeadModel.bdl</value>
 									</value>
 								</second>
 							</item>
@@ -1754,7 +1754,7 @@
 									<name>FileTypeName</name>
 									<value object_id="_100">
 										<which>2</which>
-										<value>SCIRun Field File (*.fld)</value>
+										<value>Matlab Field</value>
 									</value>
 								</second>
 							</item>
@@ -1830,7 +1830,7 @@
 									<name>FileTypeName</name>
 									<value object_id="_105">
 										<which>2</which>
-										<value>SCIRun Field File (*.fld)</value>
+										<value>NrrdFile</value>
 									</value>
 								</second>
 							</item>
@@ -1906,7 +1906,7 @@
 									<name>FileTypeName</name>
 									<value object_id="_110">
 										<which>2</which>
-										<value>SCIRun Matrix File (*.mat)</value>
+										<value>SimpleTextFile</value>
 									</value>
 								</second>
 							</item>
@@ -1918,7 +1918,7 @@
 									<name>Filename</name>
 									<value object_id="_111">
 										<which>2</which>
-										<value></value>
+										<value>/Users/jess/UF_brainstim/HiperGator_Connectome/S0301/SCIRun_files/ImplantGeoms/HeadModel.bdl.txt</value>
 									</value>
 								</second>
 							</item>
@@ -1982,7 +1982,7 @@
 									<name>FileTypeName</name>
 									<value object_id="_115">
 										<which>2</which>
-										<value>SimpleTextFile</value>
+										<value>Matlab Matrix</value>
 									</value>
 								</second>
 							</item>
@@ -2058,7 +2058,7 @@
 									<name>FileTypeName</name>
 									<value object_id="_120">
 										<which>2</which>
-										<value>SCIRun Matrix File (*.mat)</value>
+										<value>SimpleTextFile</value>
 									</value>
 								</second>
 							</item>
@@ -2070,7 +2070,7 @@
 									<name>Filename</name>
 									<value object_id="_121">
 										<which>2</which>
-										<value></value>
+										<value>/Users/jess/UF_brainstim/HiperGator_Connectome/S0301/SCIRun_files/activationThreshold.txt</value>
 									</value>
 								</second>
 							</item>
@@ -2134,7 +2134,7 @@
 									<name>FileTypeName</name>
 									<value object_id="_125">
 										<which>2</which>
-										<value>SCIRun Matrix File (*.mat)</value>
+										<value>Matlab Matrix</value>
 									</value>
 								</second>
 							</item>
@@ -2210,7 +2210,7 @@
 									<name>FileTypeName</name>
 									<value object_id="_130">
 										<which>2</which>
-										<value>SCIRun Matrix File (*.mat)</value>
+										<value>Matlab Matrix</value>
 									</value>
 								</second>
 							</item>
@@ -2503,7 +2503,7 @@
 				</second>
 			</item>
 			<item>
-				<first>SplitFileName:0</first>
+				<first>SplitFileName:1</first>
 				<second>
 					<module>
 						<package_name_>SCIRun</package_name_>
@@ -2531,34 +2531,6 @@
 				</second>
 			</item>
 			<item>
-				<first>SplitFileName:1</first>
-				<second>
-					<module>
-						<package_name_>SCIRun</package_name_>
-						<category_name_>String</category_name_>
-						<module_name_>SplitFileName</module_name_>
-					</module>
-					<state>
-						<stateMap>
-							<count>1</count>
-							<item_version>0</item_version>
-							<item>
-								<first>
-									<name>ProgrammableInputPortEnabled</name>
-								</first>
-								<second>
-									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_149">
-										<which>3</which>
-										<value>0</value>
-									</value>
-								</second>
-							</item>
-						</stateMap>
-					</state>
-				</second>
-			</item>
-			<item>
 				<first>WriteField:0</first>
 				<second>
 					<module>
@@ -2576,43 +2548,43 @@
 								</first>
 								<second>
 									<name>FileTypeName</name>
+									<value object_id="_149">
+										<which>2</which>
+										<value>NrrdFile</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>Filename</name>
+								</first>
+								<second>
+									<name>Filename</name>
 									<value object_id="_150">
 										<which>2</which>
-										<value>SCIRun Field File (*.fld)</value>
+										<value>/Users/jess/UF_brainstim/HiperGator_Connectome/S0301/Segmentations/Stim/Stimulation_Left_-E2-E3_9.0mA.nrrd</value>
 									</value>
 								</second>
 							</item>
 							<item>
 								<first>
-									<name>Filename</name>
+									<name>GuiFileTypeName</name>
 								</first>
 								<second>
-									<name>Filename</name>
+									<name>GuiFileTypeName</name>
 									<value object_id="_151">
 										<which>2</which>
-										<value>/Users/jess/UF_brainstim/HiperGator_Connectome/S0301/Segmentations/StimStimulation_Left_-E2-E3_9.0mA.nrrd</value>
+										<value>NrrdFile (*.nhdr *.nrrd)</value>
 									</value>
 								</second>
 							</item>
 							<item>
 								<first>
-									<name>GuiFileTypeName</name>
+									<name>ProgrammableInputPortEnabled</name>
 								</first>
 								<second>
-									<name>GuiFileTypeName</name>
+									<name>ProgrammableInputPortEnabled</name>
 									<value object_id="_152">
-										<which>2</which>
-										<value></value>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>
-									<name>ProgrammableInputPortEnabled</name>
-								</first>
-								<second>
-									<name>ProgrammableInputPortEnabled</name>
-									<value object_id="_153">
 										<which>3</which>
 										<value>0</value>
 									</value>
@@ -2624,7 +2596,7 @@
 			</item>
 		</modules>
 		<connections class_id="12" tracking_level="0" version="0">
-			<count>69</count>
+			<count>68</count>
 			<item_version>0</item_version>
 			<item class_id="13" tracking_level="0" version="0">
 				<moduleId1_>ApplyFEMCurrentSource:0</moduleId1_>
@@ -2999,6 +2971,18 @@
 				</port2_>
 			</item>
 			<item>
+				<moduleId1_>GetStringsFromBundle:1</moduleId1_>
+				<port1_>
+					<name>string6</name>
+					<id>0</id>
+				</port1_>
+				<moduleId2_>ReadMatrix:2</moduleId2_>
+				<port2_>
+					<name>Filename</name>
+					<id>0</id>
+				</port2_>
+			</item>
+			<item>
 				<moduleId1_>InsertEnvironmentIntoBundle:0</moduleId1_>
 				<port1_>
 					<name>Environment</name>
@@ -3220,10 +3204,10 @@
 					<name>FileLoaded</name>
 					<id>0</id>
 				</port1_>
-				<moduleId2_>SplitFileName:0</moduleId2_>
+				<moduleId2_>PrintStringIntoString:5</moduleId2_>
 				<port2_>
-					<name>Full_Filename</name>
-					<id>0</id>
+					<name>Input</name>
+					<id>5</id>
 				</port2_>
 			</item>
 			<item>
@@ -3419,30 +3403,6 @@
 				</port2_>
 			</item>
 			<item>
-				<moduleId1_>SplitFileName:0</moduleId1_>
-				<port1_>
-					<name>Base</name>
-					<id>0</id>
-				</port1_>
-				<moduleId2_>PrintStringIntoString:5</moduleId2_>
-				<port2_>
-					<name>Input</name>
-					<id>4</id>
-				</port2_>
-			</item>
-			<item>
-				<moduleId1_>SplitFileName:0</moduleId1_>
-				<port1_>
-					<name>Pathname</name>
-					<id>0</id>
-				</port1_>
-				<moduleId2_>PrintStringIntoString:5</moduleId2_>
-				<port2_>
-					<name>Input</name>
-					<id>3</id>
-				</port2_>
-			</item>
-			<item>
 				<moduleId1_>SplitFileName:1</moduleId1_>
 				<port1_>
 					<name>Base</name>
@@ -3457,7 +3417,7 @@
 		</connections>
 	</networkInfo>
 	<modulePositions class_id="15" tracking_level="0" version="0">
-		<count>48</count>
+		<count>47</count>
 		<item_version>0</item_version>
 		<item class_id="16" tracking_level="0" version="0">
 			<first>ApplyFEMCurrentSource:0</first>
@@ -3546,8 +3506,8 @@
 		<item>
 			<first>ConvertFieldBasis:1</first>
 			<second>
-				<first>-3.80000000000000000e+02</first>
-				<second>-3.04000000000000000e+02</second>
+				<first>-4.65000000000000000e+02</first>
+				<second>-2.98000000000000000e+02</second>
 			</second>
 		</item>
 		<item>
@@ -3568,7 +3528,7 @@
 			<first>CreateFieldData:0</first>
 			<second>
 				<first>-3.04000000000000000e+02</first>
-				<second>1.06400000000000000e+03</second>
+				<second>1.08000000000000000e+03</second>
 			</second>
 		</item>
 		<item>
@@ -3581,8 +3541,8 @@
 		<item>
 			<first>GetStringsFromBundle:0</first>
 			<second>
-				<first>-1.29200000000000000e+03</first>
-				<second>-7.61000000000000000e+02</second>
+				<first>-1.31500000000000000e+03</first>
+				<second>-8.79000000000000000e+02</second>
 			</second>
 		</item>
 		<item>
@@ -3595,8 +3555,8 @@
 		<item>
 			<first>InsertEnvironmentIntoBundle:0</first>
 			<second>
-				<first>-1.34100000000000000e+03</first>
-				<second>-8.33000000000000000e+02</second>
+				<first>-1.29900000000000000e+03</first>
+				<second>-9.59000000000000000e+02</second>
 			</second>
 		</item>
 		<item>
@@ -3623,8 +3583,8 @@
 		<item>
 			<first>MapFieldDataFromSourceToDestination:0</first>
 			<second>
-				<first>-5.32000000000000000e+02</first>
-				<second>1.14000000000000000e+03</second>
+				<first>-5.35000000000000000e+02</first>
+				<second>1.20000000000000000e+03</second>
 			</second>
 		</item>
 		<item>
@@ -3651,15 +3611,15 @@
 		<item>
 			<first>PrintStringIntoString:2</first>
 			<second>
-				<first>-8.37000000000000000e+02</first>
-				<second>-3.35000000000000000e+02</second>
+				<first>-4.92000000000000000e+02</first>
+				<second>-2.22000000000000000e+02</second>
 			</second>
 		</item>
 		<item>
 			<first>PrintStringIntoString:3</first>
 			<second>
 				<first>-1.52000000000000000e+02</first>
-				<second>0.00000000000000000e+00</second>
+				<second>-4.40000000000000000e+01</second>
 			</second>
 		</item>
 		<item>
@@ -3672,8 +3632,8 @@
 		<item>
 			<first>PrintStringIntoString:5</first>
 			<second>
-				<first>-5.32000000000000000e+02</first>
-				<second>-5.32000000000000000e+02</second>
+				<first>-5.46000000000000000e+02</first>
+				<second>-5.34000000000000000e+02</second>
 			</second>
 		</item>
 		<item>
@@ -3693,8 +3653,8 @@
 		<item>
 			<first>ReadField:0</first>
 			<second>
-				<first>-3.04000000000000000e+02</first>
-				<second>-7.60000000000000000e+01</second>
+				<first>-4.12000000000000000e+02</first>
+				<second>-8.80000000000000000e+01</second>
 			</second>
 		</item>
 		<item>
@@ -3707,22 +3667,22 @@
 		<item>
 			<first>ReadMatrix:0</first>
 			<second>
-				<first>-6.08000000000000000e+02</first>
-				<second>-4.56000000000000000e+02</second>
+				<first>-5.37000000000000000e+02</first>
+				<second>-4.45000000000000000e+02</second>
 			</second>
 		</item>
 		<item>
 			<first>ReadMatrix:1</first>
 			<second>
-				<first>-3.14000000000000000e+02</first>
-				<second>-6.15000000000000000e+02</second>
+				<first>-2.74000000000000000e+02</first>
+				<second>-7.30000000000000000e+02</second>
 			</second>
 		</item>
 		<item>
 			<first>ReadMatrix:2</first>
 			<second>
-				<first>0.00000000000000000e+00</first>
-				<second>9.12000000000000000e+02</second>
+				<first>-1.47000000000000000e+02</first>
+				<second>5.99000000000000000e+02</second>
 			</second>
 		</item>
 		<item>
@@ -3742,7 +3702,7 @@
 		<item>
 			<first>SetFieldData:0</first>
 			<second>
-				<first>-2.28000000000000000e+02</first>
+				<first>-2.29000000000000000e+02</first>
 				<second>-4.56000000000000000e+02</second>
 			</second>
 		</item>
@@ -3772,13 +3732,6 @@
 			<second>
 				<first>-6.84000000000000000e+02</first>
 				<second>7.60000000000000000e+01</second>
-			</second>
-		</item>
-		<item>
-			<first>SplitFileName:0</first>
-			<second>
-				<first>-5.32000000000000000e+02</first>
-				<second>-6.08000000000000000e+02</second>
 			</second>
 		</item>
 		<item>
@@ -3980,7 +3933,7 @@ NRRD</noteText>
 		<item_version>0</item_version>
 	</connectionNotes>
 	<moduleTags class_id="21" tracking_level="0" version="0">
-		<count>48</count>
+		<count>47</count>
 		<item_version>0</item_version>
 		<item class_id="22" tracking_level="0" version="0">
 			<first>ApplyFEMCurrentSource:0</first>
@@ -4160,10 +4113,6 @@ NRRD</noteText>
 		</item>
 		<item>
 			<first>SolveLinearSystem:0</first>
-			<second>-1</second>
-		</item>
-		<item>
-			<first>SplitFileName:0</first>
 			<second>-1</second>
 		</item>
 		<item>

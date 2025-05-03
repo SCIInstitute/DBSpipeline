@@ -129,6 +129,8 @@ def main():
   if args.stim:
     if not "stim" in profile.keys():
       raise valueError("--stim flag (-s) used, but previous outputs are missing.  Please run Connectome_maker.py")
+    elif not "Connectome_maker" in profile["stim"].keys():
+      raise valueError("--stim flag (-s) used, but previous outputs are missing.  Please run Connectome_maker.py")
       
     stim_tags = profile["stim"]["Connectome_maker"]["stim_tags"]
     
