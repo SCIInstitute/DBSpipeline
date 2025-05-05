@@ -36,19 +36,22 @@ def findStimFiles(param_dir, profile):
   filenames = []
   for col in list(df):
     filenames += list(df[col])
+#    print(filenames)
   
   nrrd_fn = list(set(filenames))
-  
+#  print(nrrd_fn)
   file_str = []
   stim_param_flist = []
   file_exists = []
   for fn in nrrd_fn:
+    print(fn)
   #based on : "Stimulation_"+file_str[k]+".nrrd"
-    fstr = nrrd_fn[0][12:-5]
+    fstr = fn[12:-5]
     file_str.append(fstr)
     fname = fstr+".mat"
     stim_param_flist.append(fname)
     full_fn = os.path.join(param_dir, fname)
+    print(full_fn)
     file_exists.append(os.path.exists(full_fn))
     
   if not np.array(file_exists).all():
@@ -61,6 +64,8 @@ def findStimFiles(param_dir, profile):
   
     
   profile["stim_param_files"] = stim_param_flist
+  
+  print(stim_param_flist)
   
   return profile
 

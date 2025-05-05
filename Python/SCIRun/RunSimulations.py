@@ -41,6 +41,9 @@ def build_parser():
                       help="force legacy mode.  this will run the pipeline in a single network", action = "store_true", dest="legacy_mode" )
   parser.add_argument("-t", "--dry-run", required=False,
                       help="dry run mode.  Run the script without running SR", action = "store_true", dest = "dry_run" )
+  parser.add_argument("-f", "--force", required=False,
+                      help="force rerun/rewrite of the pipeline",
+                      action = "store_true", dest="rerun")
   return parser
   
 def edgeDataCorrector(profile):
@@ -205,7 +208,7 @@ def runPipeline(profile, args):
   else:
     flags = [ "-x", "-0", "-E" ]
   
-  if not os.path.exists(head_file):
+  if args.rerun or not os.path.exists(head_file):
 #  if True:
     print("builing headmodel file for simulation")
     geom_sr_net = ""
@@ -224,7 +227,7 @@ def runPipeline(profile, args):
     if not args.dry_run:
       subprocess.run(sr_call)
   else:
-    print("head model file exists.  Skipping that step")
+    print("head model file exists.  Skipping that step (use -f/--force to rerun).")
   
   ####
   # compute network
@@ -243,8 +246,18 @@ def runPipeline(profile, args):
   
   stim_vol_fnames = []
   for p_fname in profile["stim_param_files"]:
+    print(p_fname)
     f_fname = os.path.join(p_dir, p_fname)
     print(f_fname)
+    
+    output_fname = os.path.join(profile["stimsegpath"], "Stimulation_" + p_fname[:-4] +".nrrd")
+    print(output_fname)
+    
+    if os.path.exists(output_fname) and not args.rerun:
+      print(output_fname, "exists, skipping. (use -f/--force to rerun)")
+      continue
+      
+    
     os.environ["PARAM_MATRIX"] = f_fname
     
 #    print(os.environ["PARAM_MATRIX"])
@@ -259,8 +272,15 @@ def runPipeline(profile, args):
     if not args.dry_run:
       subprocess.run(sr_call)
       
-      
-# /Users/jess/UF_brainstim/HiperGator_Connectome/S0301/Segmentations/Stim/Stimulation_Left_-E2-E3_9.0mA.nrrd
+    
+    
+    if os.path.exists(output_fname):
+      print("file exists")
+      stim_vol_fnames.append(output_fname)
+    
+    
+  
+  profile["stim"]["CurrentSimulation"] = {"OutputFiles" :  stim_vol_fnames }
   
   
   with open(args.profile, 'w') as fp:
