@@ -168,7 +168,7 @@ def extractSettings(df_row, device_list, contact_list, **kwargs ):
   #
   return (l_fstring, r_fstring), [l_amp_mat, r_amp_mat]
     
-      
+  # TODO: move to another script that would generate parameters from the input. The inputs will vary by study, so we'd want to find a general enough format to help make that work.
     
 
 def main():
