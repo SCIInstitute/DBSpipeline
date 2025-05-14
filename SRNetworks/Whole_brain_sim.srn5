@@ -3427,7 +3427,7 @@ nan</value>
 									<name>SliceIndex</name>
 									<value object_id="_221">
 										<which>0</which>
-										<value>0</value>
+										<value>7</value>
 									</value>
 								</second>
 							</item>
@@ -4834,7 +4834,7 @@ stringOutput1 = fname[:-4]</value>
 									<name>FormatString</name>
 									<value object_id="_316">
 										<which>2</which>
-										<value>%sRotation_Right_Pal.txt</value>
+										<value>%sElectrode_Right_GPi_Rotation.txt</value>
 									</value>
 								</second>
 							</item>
@@ -4874,7 +4874,7 @@ stringOutput1 = fname[:-4]</value>
 									<name>FormatString</name>
 									<value object_id="_318">
 										<which>2</which>
-										<value>%sTranslation_Right_Pal.txt</value>
+										<value>%sElectrode_Right_GPi_Translation.txt</value>
 									</value>
 								</second>
 							</item>
@@ -4914,7 +4914,7 @@ stringOutput1 = fname[:-4]</value>
 									<name>FormatString</name>
 									<value object_id="_320">
 										<which>2</which>
-										<value>%sAx_Rotation_Right_Thal.txt</value>
+										<value>%sElectrode_Right_CM_Ax_Rotation.txt</value>
 									</value>
 								</second>
 							</item>
@@ -4954,7 +4954,7 @@ stringOutput1 = fname[:-4]</value>
 									<name>FormatString</name>
 									<value object_id="_322">
 										<which>2</which>
-										<value>%sRotation_Right_Thal.txt</value>
+										<value>%sElectrode_Right_CM_Rotation.txt</value>
 									</value>
 								</second>
 							</item>
@@ -4994,7 +4994,7 @@ stringOutput1 = fname[:-4]</value>
 									<name>FormatString</name>
 									<value object_id="_324">
 										<which>2</which>
-										<value>%sTranslation_Right_Thal.txt</value>
+										<value>%sElectrode_Right_CM_Translation.txt</value>
 									</value>
 								</second>
 							</item>
@@ -5114,7 +5114,7 @@ stringOutput1 = fname[:-4]</value>
 									<name>FormatString</name>
 									<value object_id="_330">
 										<which>2</which>
-										<value>%sT1_pre_ACPCspace.nrrd</value>
+										<value>%sbrain.nrrd</value>
 									</value>
 								</second>
 							</item>
@@ -5194,7 +5194,7 @@ stringOutput1 = fname[:-4]</value>
 									<name>FormatString</name>
 									<value object_id="_334">
 										<which>2</which>
-										<value>%s/Electrode_Models/Medtronic_B33015_new.bdl</value>
+										<value>%s/Electrode_Models/medtronic_B33015_electrode_model.bdl</value>
 									</value>
 								</second>
 							</item>
@@ -5274,7 +5274,7 @@ stringOutput1 = fname[:-4]</value>
 									<name>FormatString</name>
 									<value object_id="_338">
 										<which>2</which>
-										<value>%sTranslation_Left_Thal.txt</value>
+										<value>%sElectrode_Left_CM_Translation.txt</value>
 									</value>
 								</second>
 							</item>
@@ -5354,7 +5354,7 @@ stringOutput1 = fname[:-4]</value>
 									<name>FormatString</name>
 									<value object_id="_342">
 										<which>2</which>
-										<value>%sRotation_Left_Thal.txt</value>
+										<value>%sElectrode_Left_CM_Rotation.txt</value>
 									</value>
 								</second>
 							</item>
@@ -5394,7 +5394,7 @@ stringOutput1 = fname[:-4]</value>
 									<name>FormatString</name>
 									<value object_id="_344">
 										<which>2</which>
-										<value>%sAx_Rotation_Left_Thal.txt</value>
+										<value>%sElectrode_Left_CM_Ax_Rotation.txt</value>
 									</value>
 								</second>
 							</item>
@@ -5434,7 +5434,7 @@ stringOutput1 = fname[:-4]</value>
 									<name>FormatString</name>
 									<value object_id="_346">
 										<which>2</which>
-										<value>%sAx_Rotation_Left_Pal.txt</value>
+										<value>%sElectrode_Left_GPi_Ax_Rotation.txt</value>
 									</value>
 								</second>
 							</item>
@@ -5474,7 +5474,7 @@ stringOutput1 = fname[:-4]</value>
 									<name>FormatString</name>
 									<value object_id="_348">
 										<which>2</which>
-										<value>%sRotation_Left_Pal.txt</value>
+										<value>%sElectrode_Left_GPi_Rotation.txt</value>
 									</value>
 								</second>
 							</item>
@@ -5514,7 +5514,7 @@ stringOutput1 = fname[:-4]</value>
 									<name>FormatString</name>
 									<value object_id="_350">
 										<which>2</which>
-										<value>%sTranslation_Left_Pal.txt</value>
+										<value>%sElectrode_Left_GPi_Translation.txt</value>
 									</value>
 								</second>
 							</item>
@@ -5554,7 +5554,7 @@ stringOutput1 = fname[:-4]</value>
 									<name>FormatString</name>
 									<value object_id="_352">
 										<which>2</which>
-										<value>%sAx_Rotation_Right_Pal.txt</value>
+										<value>%sElectrode_Right_GPi_Ax_Rotation.txt</value>
 									</value>
 								</second>
 							</item>
@@ -5606,7 +5606,7 @@ stringOutput1 = fname[:-4]</value>
 									<name>Filename</name>
 									<value object_id="_355">
 										<which>2</which>
-										<value>Y:\Butson_Lab\Connectome/Electrode_Models/Medtronic_B33015_new.bdl</value>
+										<value>Y:\Butson_Lab\Connectome/Electrode_Models/medtronic_B33015_electrode_model.bdl</value>
 									</value>
 								</second>
 							</item>
@@ -5834,7 +5834,7 @@ stringOutput1 = fname[:-4]</value>
 									<name>Filename</name>
 									<value object_id="_370">
 										<which>2</which>
-										<value>Y:\Butson_Lab\Connectome/S6/SCIRun_files/T1_pre_ACPCspace.nrrd</value>
+										<value>Y:\Butson_Lab\Connectome/S6/SCIRun_files/brain.nrrd</value>
 									</value>
 								</second>
 							</item>
@@ -5910,7 +5910,7 @@ stringOutput1 = fname[:-4]</value>
 									<name>Filename</name>
 									<value object_id="_375">
 										<which>2</which>
-										<value>Y:\Butson_Lab\Connectome/S6/SCIRun_files/Rotation_Left_Pal.txt</value>
+										<value>Y:\Butson_Lab\Connectome/S6/SCIRun_files/Electrode_Left_GPi_Rotation.txt</value>
 									</value>
 								</second>
 							</item>
@@ -5986,7 +5986,7 @@ stringOutput1 = fname[:-4]</value>
 									<name>Filename</name>
 									<value object_id="_380">
 										<which>2</which>
-										<value>Y:\Butson_Lab\Connectome/S6/SCIRun_files/Translation_Left_Pal.txt</value>
+										<value>Y:\Butson_Lab\Connectome/S6/SCIRun_files/Electrode_Left_GPi_Translation.txt</value>
 									</value>
 								</second>
 							</item>
@@ -6062,7 +6062,7 @@ stringOutput1 = fname[:-4]</value>
 									<name>Filename</name>
 									<value object_id="_385">
 										<which>2</which>
-										<value>Y:\Butson_Lab\Connectome/S6/SCIRun_files/Ax_Rotation_Right_Pal.txt</value>
+										<value>Y:\Butson_Lab\Connectome/S6/SCIRun_files/Electrode_Right_GPi_Ax_Rotation.txt</value>
 									</value>
 								</second>
 							</item>
@@ -6138,7 +6138,7 @@ stringOutput1 = fname[:-4]</value>
 									<name>Filename</name>
 									<value object_id="_390">
 										<which>2</which>
-										<value>Y:\Butson_Lab\Connectome/S6/SCIRun_files/Ax_Rotation_Right_Thal.txt</value>
+										<value>Y:\Butson_Lab\Connectome/S6/SCIRun_files/Electrode_Right_CM_Ax_Rotation.txt</value>
 									</value>
 								</second>
 							</item>
@@ -6214,7 +6214,7 @@ stringOutput1 = fname[:-4]</value>
 									<name>Filename</name>
 									<value object_id="_395">
 										<which>2</which>
-										<value>Y:\Butson_Lab\Connectome/S6/SCIRun_files/Rotation_Left_Thal.txt</value>
+										<value>Y:\Butson_Lab\Connectome/S6/SCIRun_files/Electrode_Left_CM_Rotation.txt</value>
 									</value>
 								</second>
 							</item>
@@ -6366,7 +6366,7 @@ stringOutput1 = fname[:-4]</value>
 									<name>Filename</name>
 									<value object_id="_405">
 										<which>2</which>
-										<value>Y:\Butson_Lab\Connectome/S6/SCIRun_files/Translation_Left_Thal.txt</value>
+										<value>Y:\Butson_Lab\Connectome/S6/SCIRun_files/Electrode_Left_CM_Translation.txt</value>
 									</value>
 								</second>
 							</item>
@@ -6442,7 +6442,7 @@ stringOutput1 = fname[:-4]</value>
 									<name>Filename</name>
 									<value object_id="_410">
 										<which>2</which>
-										<value>Y:\Butson_Lab\Connectome/S6/SCIRun_files/Ax_Rotation_Left_Pal.txt</value>
+										<value>Y:\Butson_Lab\Connectome/S6/SCIRun_files/Electrode_Left_GPi_Ax_Rotation.txt</value>
 									</value>
 								</second>
 							</item>
@@ -6518,7 +6518,7 @@ stringOutput1 = fname[:-4]</value>
 									<name>Filename</name>
 									<value object_id="_415">
 										<which>2</which>
-										<value>Y:\Butson_Lab\Connectome/S6/SCIRun_files/Ax_Rotation_Left_Thal.txt</value>
+										<value>Y:\Butson_Lab\Connectome/S6/SCIRun_files/Electrode_Left_CM_Ax_Rotation.txt</value>
 									</value>
 								</second>
 							</item>
@@ -6594,7 +6594,7 @@ stringOutput1 = fname[:-4]</value>
 									<name>Filename</name>
 									<value object_id="_420">
 										<which>2</which>
-										<value>Y:\Butson_Lab\Connectome/S6/SCIRun_files/Rotation_Right_Pal.txt</value>
+										<value>Y:\Butson_Lab\Connectome/S6/SCIRun_files/Electrode_Right_GPi_Rotation.txt</value>
 									</value>
 								</second>
 							</item>
@@ -6670,7 +6670,7 @@ stringOutput1 = fname[:-4]</value>
 									<name>Filename</name>
 									<value object_id="_425">
 										<which>2</which>
-										<value>Y:\Butson_Lab\Connectome/S6/SCIRun_files/Translation_Right_Pal.txt</value>
+										<value>Y:\Butson_Lab\Connectome/S6/SCIRun_files/Electrode_Right_GPi_Translation.txt</value>
 									</value>
 								</second>
 							</item>
@@ -6746,7 +6746,7 @@ stringOutput1 = fname[:-4]</value>
 									<name>Filename</name>
 									<value object_id="_430">
 										<which>2</which>
-										<value>Y:\Butson_Lab\Connectome/S6/SCIRun_files/Rotation_Right_Thal.txt</value>
+										<value>Y:\Butson_Lab\Connectome/S6/SCIRun_files/Electrode_Right_CM_Rotation.txt</value>
 									</value>
 								</second>
 							</item>
@@ -6822,7 +6822,7 @@ stringOutput1 = fname[:-4]</value>
 									<name>Filename</name>
 									<value object_id="_435">
 										<which>2</which>
-										<value>Y:\Butson_Lab\Connectome/S6/SCIRun_files/Translation_Right_Thal.txt</value>
+										<value>Y:\Butson_Lab\Connectome/S6/SCIRun_files/Electrode_Right_CM_Translation.txt</value>
 									</value>
 								</second>
 							</item>
@@ -15830,7 +15830,7 @@ stringOutput1 = fname[:-4]</value>
 									<name>CameraDistance</name>
 									<value object_id="_1091">
 										<which>1</which>
-										<value>9.30268402099609375e+01</value>
+										<value>1.36432189941406250e+02</value>
 									</value>
 								</second>
 							</item>
@@ -15897,28 +15897,28 @@ stringOutput1 = fname[:-4]</value>
 												<name>listElement</name>
 												<value object_id="_1098">
 													<which>1</which>
-													<value>1.57196540385484695e-02</value>
+													<value>5.47158598899841309e-01</value>
 												</value>
 											</item>
 											<item>
 												<name>listElement</name>
 												<value object_id="_1099">
 													<which>1</which>
-													<value>-3.81595268845558167e-02</value>
+													<value>-7.70599961280822754e-01</value>
 												</value>
 											</item>
 											<item>
 												<name>listElement</name>
 												<value object_id="_1100">
 													<which>1</which>
-													<value>2.01339319348335266e-01</value>
+													<value>6.94031119346618652e-02</value>
 												</value>
 											</item>
 											<item>
 												<name>listElement</name>
 												<value object_id="_1101">
 													<which>1</which>
-													<value>9.78651821613311768e-01</value>
+													<value>3.19337129592895508e-01</value>
 												</value>
 											</item>
 										</value>
@@ -16814,14 +16814,14 @@ stringOutput1 = fname[:-4]</value>
 														<count>4</count>
 														<item_version>0</item_version>
 														<item>
-															<name>Brain (from ShowField:0)</name>
+															<name>Thal Electrode (from ShowField:1)</name>
 															<value object_id="_1190">
 																<which>3</which>
 																<value>0</value>
 															</value>
 														</item>
 														<item>
-															<name>Edges</name>
+															<name>Nodes</name>
 															<value object_id="_1191">
 																<which>3</which>
 																<value>1</value>
@@ -16835,7 +16835,7 @@ stringOutput1 = fname[:-4]</value>
 															</value>
 														</item>
 														<item>
-															<name>Nodes</name>
+															<name>Edges</name>
 															<value object_id="_1193">
 																<which>3</which>
 																<value>0</value>
@@ -16852,17 +16852,17 @@ stringOutput1 = fname[:-4]</value>
 														<count>4</count>
 														<item_version>0</item_version>
 														<item>
-															<name>Clip (from ShowField:90)</name>
+															<name>tet (from ShowField:21)</name>
 															<value object_id="_1195">
 																<which>3</which>
 																<value>0</value>
 															</value>
 														</item>
 														<item>
-															<name>Edges</name>
+															<name>Nodes</name>
 															<value object_id="_1196">
 																<which>3</which>
-																<value>0</value>
+																<value>1</value>
 															</value>
 														</item>
 														<item>
@@ -16873,7 +16873,7 @@ stringOutput1 = fname[:-4]</value>
 															</value>
 														</item>
 														<item>
-															<name>Nodes</name>
+															<name>Edges</name>
 															<value object_id="_1198">
 																<which>3</which>
 																<value>0</value>
@@ -16890,14 +16890,14 @@ stringOutput1 = fname[:-4]</value>
 														<count>4</count>
 														<item_version>0</item_version>
 														<item>
-															<name>Data (from ShowField:84)</name>
+															<name>T1 (from ShowField:24)</name>
 															<value object_id="_1200">
 																<which>3</which>
-																<value>1</value>
+																<value>0</value>
 															</value>
 														</item>
 														<item>
-															<name>Edges</name>
+															<name>Nodes</name>
 															<value object_id="_1201">
 																<which>3</which>
 																<value>1</value>
@@ -16907,14 +16907,14 @@ stringOutput1 = fname[:-4]</value>
 															<name>Faces</name>
 															<value object_id="_1202">
 																<which>3</which>
-																<value>1</value>
+																<value>0</value>
 															</value>
 														</item>
 														<item>
-															<name>Nodes</name>
+															<name>Edges</name>
 															<value object_id="_1203">
 																<which>3</which>
-																<value>1</value>
+																<value>0</value>
 															</value>
 														</item>
 													</value>
@@ -16925,24 +16925,27 @@ stringOutput1 = fname[:-4]</value>
 												<value object_id="_1204">
 													<which>5</which>
 													<value>
+														<count>1</count>
+														<item_version>0</item_version>
+														<item>
+															<name>ShowString:0</name>
+															<value object_id="_1205">
+																<which>3</which>
+																<value>1</value>
+															</value>
+														</item>
+													</value>
+												</value>
+											</item>
+											<item>
+												<name>graphicsItem</name>
+												<value object_id="_1206">
+													<which>5</which>
+													<value>
 														<count>4</count>
 														<item_version>0</item_version>
 														<item>
-															<name>End Mask (from ShowField:91)</name>
-															<value object_id="_1205">
-																<which>3</which>
-																<value>0</value>
-															</value>
-														</item>
-														<item>
-															<name>Edges</name>
-															<value object_id="_1206">
-																<which>3</which>
-																<value>0</value>
-															</value>
-														</item>
-														<item>
-															<name>Faces</name>
+															<name>Pal Points (from ShowField:20)</name>
 															<value object_id="_1207">
 																<which>3</which>
 																<value>0</value>
@@ -16955,32 +16958,32 @@ stringOutput1 = fname[:-4]</value>
 																<value>1</value>
 															</value>
 														</item>
-													</value>
-												</value>
-											</item>
-											<item>
-												<name>graphicsItem</name>
-												<value object_id="_1209">
-													<which>5</which>
-													<value>
-														<count>4</count>
-														<item_version>0</item_version>
 														<item>
-															<name>Fibers (from ShowField:12)</name>
-															<value object_id="_1210">
+															<name>Faces</name>
+															<value object_id="_1209">
 																<which>3</which>
 																<value>0</value>
 															</value>
 														</item>
 														<item>
 															<name>Edges</name>
-															<value object_id="_1211">
+															<value object_id="_1210">
 																<which>3</which>
-																<value>1</value>
+																<value>0</value>
 															</value>
 														</item>
+													</value>
+												</value>
+											</item>
+											<item>
+												<name>graphicsItem</name>
+												<value object_id="_1211">
+													<which>5</which>
+													<value>
+														<count>4</count>
+														<item_version>0</item_version>
 														<item>
-															<name>Faces</name>
+															<name>Pal Electrode (from ShowField:19)</name>
 															<value object_id="_1212">
 																<which>3</which>
 																<value>0</value>
@@ -16990,43 +16993,19 @@ stringOutput1 = fname[:-4]</value>
 															<name>Nodes</name>
 															<value object_id="_1213">
 																<which>3</which>
-																<value>0</value>
-															</value>
-														</item>
-													</value>
-												</value>
-											</item>
-											<item>
-												<name>graphicsItem</name>
-												<value object_id="_1214">
-													<which>5</which>
-													<value>
-														<count>4</count>
-														<item_version>0</item_version>
-														<item>
-															<name>iso (from ShowField:2)</name>
-															<value object_id="_1215">
-																<which>3</which>
-																<value>1</value>
-															</value>
-														</item>
-														<item>
-															<name>Edges</name>
-															<value object_id="_1216">
-																<which>3</which>
 																<value>1</value>
 															</value>
 														</item>
 														<item>
 															<name>Faces</name>
-															<value object_id="_1217">
+															<value object_id="_1214">
 																<which>3</which>
 																<value>0</value>
 															</value>
 														</item>
 														<item>
-															<name>Nodes</name>
-															<value object_id="_1218">
+															<name>Edges</name>
+															<value object_id="_1215">
 																<which>3</which>
 																<value>0</value>
 															</value>
@@ -17036,35 +17015,35 @@ stringOutput1 = fname[:-4]</value>
 											</item>
 											<item>
 												<name>graphicsItem</name>
-												<value object_id="_1219">
+												<value object_id="_1216">
 													<which>5</which>
 													<value>
 														<count>4</count>
 														<item_version>0</item_version>
 														<item>
 															<name>Mapped (from ShowField:11)</name>
-															<value object_id="_1220">
+															<value object_id="_1217">
 																<which>3</which>
 																<value>1</value>
 															</value>
 														</item>
 														<item>
-															<name>Edges</name>
-															<value object_id="_1221">
+															<name>Nodes</name>
+															<value object_id="_1218">
 																<which>3</which>
 																<value>1</value>
 															</value>
 														</item>
 														<item>
 															<name>Faces</name>
-															<value object_id="_1222">
+															<value object_id="_1219">
 																<which>3</which>
 																<value>0</value>
 															</value>
 														</item>
 														<item>
-															<name>Nodes</name>
-															<value object_id="_1223">
+															<name>Edges</name>
+															<value object_id="_1220">
 																<which>3</which>
 																<value>0</value>
 															</value>
@@ -17074,27 +17053,51 @@ stringOutput1 = fname[:-4]</value>
 											</item>
 											<item>
 												<name>graphicsItem</name>
-												<value object_id="_1224">
+												<value object_id="_1221">
 													<which>5</which>
 													<value>
 														<count>4</count>
 														<item_version>0</item_version>
 														<item>
-															<name>Pal Electrode (from ShowField:19)</name>
-															<value object_id="_1225">
+															<name>iso (from ShowField:2)</name>
+															<value object_id="_1222">
 																<which>3</which>
-																<value>0</value>
+																<value>1</value>
 															</value>
 														</item>
 														<item>
-															<name>Edges</name>
-															<value object_id="_1226">
+															<name>Nodes</name>
+															<value object_id="_1223">
 																<which>3</which>
 																<value>1</value>
 															</value>
 														</item>
 														<item>
 															<name>Faces</name>
+															<value object_id="_1224">
+																<which>3</which>
+																<value>0</value>
+															</value>
+														</item>
+														<item>
+															<name>Edges</name>
+															<value object_id="_1225">
+																<which>3</which>
+																<value>0</value>
+															</value>
+														</item>
+													</value>
+												</value>
+											</item>
+											<item>
+												<name>graphicsItem</name>
+												<value object_id="_1226">
+													<which>5</which>
+													<value>
+														<count>4</count>
+														<item_version>0</item_version>
+														<item>
+															<name>Fibers (from ShowField:12)</name>
 															<value object_id="_1227">
 																<which>3</which>
 																<value>0</value>
@@ -17104,6 +17107,20 @@ stringOutput1 = fname[:-4]</value>
 															<name>Nodes</name>
 															<value object_id="_1228">
 																<which>3</which>
+																<value>1</value>
+															</value>
+														</item>
+														<item>
+															<name>Faces</name>
+															<value object_id="_1229">
+																<which>3</which>
+																<value>0</value>
+															</value>
+														</item>
+														<item>
+															<name>Edges</name>
+															<value object_id="_1230">
+																<which>3</which>
 																<value>0</value>
 															</value>
 														</item>
@@ -17112,27 +17129,13 @@ stringOutput1 = fname[:-4]</value>
 											</item>
 											<item>
 												<name>graphicsItem</name>
-												<value object_id="_1229">
+												<value object_id="_1231">
 													<which>5</which>
 													<value>
 														<count>4</count>
 														<item_version>0</item_version>
 														<item>
-															<name>Pal Points (from ShowField:20)</name>
-															<value object_id="_1230">
-																<which>3</which>
-																<value>0</value>
-															</value>
-														</item>
-														<item>
-															<name>Edges</name>
-															<value object_id="_1231">
-																<which>3</which>
-																<value>1</value>
-															</value>
-														</item>
-														<item>
-															<name>Faces</name>
+															<name>End Mask (from ShowField:91)</name>
 															<value object_id="_1232">
 																<which>3</which>
 																<value>0</value>
@@ -17145,18 +17148,15 @@ stringOutput1 = fname[:-4]</value>
 																<value>0</value>
 															</value>
 														</item>
-													</value>
-												</value>
-											</item>
-											<item>
-												<name>graphicsItem</name>
-												<value object_id="_1234">
-													<which>5</which>
-													<value>
-														<count>1</count>
-														<item_version>0</item_version>
 														<item>
-															<name>ShowString:0</name>
+															<name>Faces</name>
+															<value object_id="_1234">
+																<which>3</which>
+																<value>0</value>
+															</value>
+														</item>
+														<item>
+															<name>Edges</name>
 															<value object_id="_1235">
 																<which>3</which>
 																<value>1</value>
@@ -17173,14 +17173,14 @@ stringOutput1 = fname[:-4]</value>
 														<count>4</count>
 														<item_version>0</item_version>
 														<item>
-															<name>T1 (from ShowField:24)</name>
+															<name>Data (from ShowField:84)</name>
 															<value object_id="_1237">
 																<which>3</which>
-																<value>0</value>
+																<value>1</value>
 															</value>
 														</item>
 														<item>
-															<name>Edges</name>
+															<name>Nodes</name>
 															<value object_id="_1238">
 																<which>3</which>
 																<value>1</value>
@@ -17190,14 +17190,14 @@ stringOutput1 = fname[:-4]</value>
 															<name>Faces</name>
 															<value object_id="_1239">
 																<which>3</which>
-																<value>0</value>
+																<value>1</value>
 															</value>
 														</item>
 														<item>
-															<name>Nodes</name>
+															<name>Edges</name>
 															<value object_id="_1240">
 																<which>3</which>
-																<value>0</value>
+																<value>1</value>
 															</value>
 														</item>
 													</value>
@@ -17211,17 +17211,17 @@ stringOutput1 = fname[:-4]</value>
 														<count>4</count>
 														<item_version>0</item_version>
 														<item>
-															<name>tet (from ShowField:21)</name>
+															<name>Clip (from ShowField:90)</name>
 															<value object_id="_1242">
 																<which>3</which>
 																<value>0</value>
 															</value>
 														</item>
 														<item>
-															<name>Edges</name>
+															<name>Nodes</name>
 															<value object_id="_1243">
 																<which>3</which>
-																<value>1</value>
+																<value>0</value>
 															</value>
 														</item>
 														<item>
@@ -17232,7 +17232,7 @@ stringOutput1 = fname[:-4]</value>
 															</value>
 														</item>
 														<item>
-															<name>Nodes</name>
+															<name>Edges</name>
 															<value object_id="_1245">
 																<which>3</which>
 																<value>0</value>
@@ -17249,14 +17249,14 @@ stringOutput1 = fname[:-4]</value>
 														<count>4</count>
 														<item_version>0</item_version>
 														<item>
-															<name>Thal Electrode (from ShowField:1)</name>
+															<name>Brain (from ShowField:0)</name>
 															<value object_id="_1247">
 																<which>3</which>
 																<value>0</value>
 															</value>
 														</item>
 														<item>
-															<name>Edges</name>
+															<name>Nodes</name>
 															<value object_id="_1248">
 																<which>3</which>
 																<value>1</value>
@@ -17270,7 +17270,7 @@ stringOutput1 = fname[:-4]</value>
 															</value>
 														</item>
 														<item>
-															<name>Nodes</name>
+															<name>Edges</name>
 															<value object_id="_1250">
 																<which>3</which>
 																<value>0</value>
@@ -17291,7 +17291,7 @@ stringOutput1 = fname[:-4]</value>
 									<name>WindowPositionX</name>
 									<value object_id="_1251">
 										<which>0</which>
-										<value>3836</value>
+										<value>701</value>
 									</value>
 								</second>
 							</item>
@@ -17303,7 +17303,7 @@ stringOutput1 = fname[:-4]</value>
 									<name>WindowPositionY</name>
 									<value object_id="_1252">
 										<which>0</which>
-										<value>45</value>
+										<value>445</value>
 									</value>
 								</second>
 							</item>
@@ -21006,7 +21006,7 @@ stringOutput1 = fname[:-4]</value>
 		<item>
 			<first>ReadMatrix:5</first>
 			<second>
-				<first>-1.21447912500000007e+03</first>
+				<first>-1.21600000000000000e+03</first>
 				<second>-1.82400000000000000e+03</second>
 			</second>
 		</item>
