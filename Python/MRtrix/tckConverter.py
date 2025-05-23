@@ -36,7 +36,8 @@ def convertPtsEdges(filename, tract_datafile=None):
         edges[currentEdges:currentEdges+trackNodes.shape[0]-1,1] = np.arange(currentPts+1,currentPts+trackNodes.shape[0], dtype=int)
 
         if tract_datafile:
-            tract_data[currentPts:currentPts+trackNodes.shape[0]] = original_data[counter]
+#            tract_data[currentPts:currentPts+trackNodes.shape[0]] = original_data[counter]
+            tract_data[currentPts:currentPts+trackNodes.shape[0]] = counter
             counter += 1
         
         currentPts += trackNodes.shape[0]
