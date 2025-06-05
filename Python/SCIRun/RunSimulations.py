@@ -9,7 +9,18 @@ import re
 import scipy.io
 import subprocess
 
+from setupEnv import profileToEnv
+
 def_net = os.path.join(os.environ["CODEDIR"], "SRNetworks", "Whole_brain_sim_script.srn5")
+
+sr_net_dir = os.path.join(os.environ["CODEDIR"], "SRNetworks")
+geom_nets = {
+              "twoLead_simple" : "tetmesh_simple_2_electrode.srn5",
+              "fourLead_simple" : "tetmesh_simple_4_electrode.srn5",
+              "oneIPG_twoLead" : "tetmesh_whole_head_2_electrode.srn5",
+              "twoIPG_fourLead" : "tetmesh_whole_head_4_electrode.srn5",
+              "twoIPG_twoLead_twoStrip" : ""
+}
 
 def build_parser():
   parser = argparse.ArgumentParser(
@@ -24,22 +35,19 @@ def build_parser():
                       help="scirun network", dest="SR_net", type=str,  default = def_net)
   parser.add_argument("-d", "--debug", required=False,
                       help="enable debug mode", action = "store_true", dest="debug_mode" )
+  parser.add_argument("-i", "--interactive", required=False,
+                      help="enable interactive mode.  network will stay up after executing", action = "store_true", dest="interact_mode" )
+  parser.add_argument("-l", "--legacy", required=False,
+                      help="force legacy mode.  this will run the pipeline in a single network", action = "store_true", dest="legacy_mode" )
+  parser.add_argument("-t", "--dry-run", required=False,
+                      help="dry run mode.  Run the script without running SR", action = "store_true", dest = "dry_run" )
+  parser.add_argument("-f", "--force", required=False,
+                      help="force rerun/rewrite of the pipeline",
+                      action = "store_true", dest="rerun")
   return parser
   
-  
-def main():
+def edgeDataCorrector(profile):
 
-  parser = build_parser()
-  args = parser.parse_args()
-  
-  with open(args.profile, 'r') as js_file:
-    profile = json.load(js_file)
-    
-  p_dir = profile["stim_param_dir"]
-  wh_sr = subprocess.run(["which", "scirun"], capture_output=True)
-  print(wh_sr)
-
-  
   # this is a fix for ImportMatricesFromMatlab scripting bug
   # The network is already modified for these files
   sr_dir = profile["SRFilesPath"]
@@ -55,11 +63,34 @@ def main():
     edgedata = scipy.io.loadmat(edgedata_fn)
     scipy.io.savemat(end_fn, {"Ends" : edgedata["Ends"]})
     
+  return tan_fn, end_fn
+  
+def inputsToEnv(**kwargs):
+  for key, value in kwargs.items():
+    if isinstance(value, str):
+      os.environ[key] = value
+    else:
+      raise ValueError("cannot assign ", type(value), " to ", key, " environment variable" )
+  return
+
+
+def runNetwork_legacy(profile, args):
+  p_dir = profile["stim_param_dir"]
+  wh_sr = subprocess.run(["which", "scirun"], capture_output=True)
+  print(wh_sr)
+
+  
+  tan_fn, end_fn = edgeDataCorrector(profile)
   
   #SCIRun_call is an environment variable set to the the SCIRun executable path
   SCIRun_call = os.environ["SCIRun_call"]
   
   os.environ["PATIENTID"] = profile["subject"]
+  
+  if args.interact_mode:
+    flags = ["-e"]
+  else:
+    flags = [ "-x", "-0", "-E" ]
   
   for p_fname in profile["stim_param_files"]:
     f_fname = os.path.join(p_dir, p_fname)
@@ -68,18 +99,209 @@ def main():
     
 #    print(os.environ["PARAM_MATRIX"])
 
-    sr_call = [SCIRun_call, "-x", "-0", "-E", args.SR_net]
+    sr_call = [SCIRun_call] + flags +  [args.SR_net]
 #    sr_call = [SCIRun_call, "-e", args.SR_net]
     if args.debug_mode:
       sr_call.append("--verbose")
       
     print(" ".join(sr_call))
     
-    subprocess.run(sr_call)
+    if not args.dry_run:
+      subprocess.run(sr_call)
     
-if __name__ == "__main__":
-   main()
+    return
     
+def getImplantFiles(profile):
+  
+  files = {}
+  implant = profile["implantation"]
+  config = implant["configuration"]
+
+  geom_dir = implant["geom_dir"]
+  
+  if config["IPG"]:
+    for name, fname in zip(implant["IPG"]["name"], implant["IPG"]["filename"]):
+      files[name.replace(" ", "_").upper() +"_IPG_FILENAME"] =  os.path.join(profile["rootpath"], geom_dir, fname)
+  if config["depthLead"]:
+#"twoleads_simple"
+#"inputs" : ("LEFT_LEAD_BUNDLE", "RIGHT_LEAD_BUNDLE")
+    for name, dname in zip(implant["depthLead"]["name"], implant["depthLead"]["device"]):
+      files[name.replace(" ", "_").upper() +"_LEAD_BUNDLE"] =  os.path.join(os.environ["DATADIR"], "Electrode_Models", dname+"_electrode_model.bdl" )
+  if config["stripElectrodes"]:
+    st_elect = implant["stripElectrodes"]
+    for name, fname, ofname in zip(st_elect["name"], st_elect["filename"], st_elect["orientation_file"]):
+      files[name.replace(" ", "_").upper() +"_STRIP_GEOM_FILE"] =  os.path.join(profile["rootpath"], geom_dir, fname)
+      files[name.replace(" ", "_").upper() +"_STRIP_ORIENT_FILE"] =  os.path.join(profile["rootpath"], geom_dir, ofname)
+      
+  return files
+
+def getConfigString(profile):
+
+  implant = profile["implantation"]
+  config = implant["configuration"]
+  
+  confstr = ""
+  
+  c_IPG = config["IPG"]
+  c_strip = config["stripElectrodes"]
+  c_depth = config["depthLead"]
+  if c_IPG:
+    if c_depth:
+      if c_strip:
+        confstr = "_".join((c_IPG, c_depth, c_strip))
+      else:
+        confstr = "_".join((c_IPG, c_depth))
+  else:
+    if c_depth and not c_strip:
+      confstr = c_depth+"_simple"
+
+  return confstr
+  
+  
+def check_threshold(profile):
+  
+  def_actThreshold = 0.015 # units?
+  
+  if "stim" in profile.keys():
+    if not "actThreshold" in profile["stim"].keys():
+      profile["stim"]["actThreshold"] = def_actThreshold
+  else:
+    profile["stim"] = {"actThreshold" : def_actThreshold }
+    
+  return profile
+    
+  
+
+def runPipeline(profile, args):
+
+  p_dir = profile["stim_param_dir"]
+  wh_sr = subprocess.run(["which", "scirun"], capture_output=True)
+  print(wh_sr)
+  
+  SCIRun_call = os.environ["SCIRun_call"]
+  
+  tan_fn, end_fn = edgeDataCorrector(profile)
+  
+  geom_input_files = getImplantFiles(profile)
+  
+  head_file = ""
+  
+  if "HeadModel" in profile.keys():
+    head_file = profile["HeadModel"]
+  else:
+    head_file = os.path.join(profile["rootpath"], profile["implantation"]["geom_dir"], "HeadModel.bdl" )
+    profile["HeadModel"] = head_file
+    
+  profileToEnv(profile, "stimsegpath", "stimoutpath", "HeadModel")
+  inputsToEnv(**geom_input_files)
+  
+#  print(os.environ)
+
+  confstr = getConfigString(profile)
+  
+  print(confstr)
+    
+  print(head_file)
+  
+  if args.interact_mode:
+    flags = ["-e"]
+  else:
+    flags = [ "-x", "-0", "-E" ]
+  
+  if args.rerun or not os.path.exists(head_file):
+#  if True:
+    print("builing headmodel file for simulation")
+    geom_sr_net = ""
+    if confstr:
+      geom_sr_net = os.path.join(sr_net_dir, geom_nets[confstr])
+    else:
+      raise ValueError(" not able to infer correct network from profile")
+    
+    sr_call = [SCIRun_call] + flags + [ geom_sr_net]
+
+    if args.debug_mode:
+      sr_call.append("--verbose")
+      
+    print(" ".join(sr_call))
+    
+    if not args.dry_run:
+      subprocess.run(sr_call)
+  else:
+    print("head model file exists.  Skipping that step (use -f/--force to rerun).")
+  
+  ####
+  # compute network
+  
+  # hard coded for current stim for now
+#  Stim_solve_volt_control.srn5
+  comp_sr_net = os.path.join(sr_net_dir, "Stim_solve_amp_control.srn5")
+  
+  profile = check_threshold(profile)
+  
+  AT_file = os.path.join(profile["SRFilesPath"], "activationThreshold.txt")
+  
+  np.savetxt(AT_file, [profile["stim"]["actThreshold"]] )
+  
+  os.environ["ActThresh"] = AT_file
+  
+  stim_vol_fnames = []
+  for p_fname in profile["stim_param_files"]:
+    print(p_fname)
+    f_fname = os.path.join(p_dir, p_fname)
+    print(f_fname)
+    
+    output_fname = os.path.join(profile["stimsegpath"], "Stimulation_" + p_fname[:-4] +".nrrd")
+    print(output_fname)
+    
+    if os.path.exists(output_fname) and not args.rerun:
+      print(output_fname, "exists, skipping. (use -f/--force to rerun)")
+      continue
+      
+    
+    os.environ["PARAM_MATRIX"] = f_fname
+    
+#    print(os.environ["PARAM_MATRIX"])
+
+    sr_call = [SCIRun_call] + flags + [comp_sr_net]
+    
+    if args.debug_mode:
+      sr_call.append("--verbose")
+      
+    print(" ".join(sr_call))
+    
+    if not args.dry_run:
+      subprocess.run(sr_call)
+      
+    
+    
+    if os.path.exists(output_fname):
+      print("file exists")
+      stim_vol_fnames.append(output_fname)
     
     
   
+  profile["stim"]["CurrentSimulation"] = {"OutputFiles" :  stim_vol_fnames }
+  
+  
+  with open(args.profile, 'w') as fp:
+    json.dump(profile, fp, sort_keys=True, indent=2)
+  
+  return
+  
+def main():
+
+  parser = build_parser()
+  args = parser.parse_args()
+  
+  with open(args.profile, 'r') as js_file:
+    profile = json.load(js_file)
+  
+  
+  
+  if "implantation" in profile.keys() and not args.legacy_mode:
+    runPipeline(profile, args)
+  else:
+    runNetwork_legacy(profile, args)
+    
+if __name__ == "__main__":
+   main()
