@@ -59,7 +59,7 @@ Help()
 # Get the options
 while getopts ":h:r:s:p:n:" option; do
    case $option in
-      r) region=$OPTARG;;
+      r) regions=$OPTARG;;
       s) subject=$OPTARG;;
       p) profile=$OPTARG;;
       n) name=$OPTARG;;
@@ -70,6 +70,7 @@ done
 if [ $SYSNAME == "hipergator" ]
 then
 	module load mrtrix
+  module load jq
 fi
 
 sub_dir="${DATADIR}/${subject}"
@@ -87,14 +88,19 @@ do
     label_name=$({ read; while IFS=, read -r Index Label File_index Filename Path; do if (( $Index == ${lookup} )); then echo ${Label}; fi; done; } < ${lookup_name}) #ROI name
     roi_name=${label_name##*_} #extract ROI name only, leave out side designation
     echo -e "\n${roi_name} ${side} to ${name}\n"
-    if [ -z $region ]
+    if [ -z $regions ]
     then
       nodes=${roi}
       echo -e "\nNo regions Specified, generating all connections\n"
       name=All
       connectome2tck ${sub_dir}/Tractography/Cleaned/Fibers/whole_brain_fibers.tck ${sub_dir}/Tractography/Cleaned/${assignment} ${output_dir}/tmp_${side}/${name}_${nodes} -nodes $nodes -force -files single -tck_weights_in ${sub_dir}/Tractography/Cleaned/Fibers/sift2_weights.txt -prefix_tck_weights_out ${output_dir}/tmp_${side}/${name}_${nodes}
     else
-      nodes=${region},${roi}
+      nodes=''
+      for region in ${regions//,/ } #convert lookup index to MRtrix index
+      do
+        nodes=${nodes},$({ read; while IFS=, read -r col1 lookup_index MRtrix_index; do if (( $lookup_index == ${region} )); then echo ${MRtrix_index}; fi; done; } < ${sub_dir}/Connectome/${index_key})
+      done
+      nodes=${nodes#*,},${roi}
       echo -e "\nGenerating region-specific connections\n"
       connectome2tck ${sub_dir}/Tractography/Cleaned/Fibers/whole_brain_fibers.tck ${sub_dir}/Tractography/Cleaned/${assignment} ${output_dir}/tmp_${side}/${name}_ -nodes $nodes -exclusive -force -files per_node -tck_weights_in ${sub_dir}/Tractography/Cleaned/Fibers/sift2_weights.txt -prefix_tck_weights_out ${output_dir}/tmp_${side}/${name}_
     fi

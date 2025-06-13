@@ -133,6 +133,7 @@ then
 	module load fsl
 	module load mrtrix
 	module load freesurfer/7.2.0
+	module load cuda/12.4.1
 fi
 
 #SUBJECTS_DIR=/home/mphook/blue_butsonc/mphook/freesurfer/SimNIBS/FS_Subjects
