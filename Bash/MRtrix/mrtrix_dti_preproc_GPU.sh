@@ -259,6 +259,7 @@ then
   mkdir - p $sub_dir
 fi
   
+mrconvert dwi_cleaned_resamp.mif dwi_cleaned.nii.gz -force
 
 clean_dir=$sub_dir/Tractography/Cleaned
 echo -e "\nCreating Output Directory: $clean_dir\n"
@@ -268,24 +269,45 @@ if [ $SYSNAME == "hipergator" ]
 then
 	#Tensor Reconstruction
 	echo -e "\nTensor Reconstrunction\n"
-	dwi2tensor dwi_cleaned_resamp.mif -mask brain_mask.mif dti.mif -force
+	if [ -z "$FSID" ]
+	then
+		echo -e "\nNo Freesurfer, using DWI brainmask. WARNING: This mask might be really bad\n"
+		dwi2tensor dwi_cleaned_resamp.mif -mask brain_mask.mif dti.mif -force
+		mrconvert brain_mask.mif brain_mask.nii.gz -force
+	else
+		echo -e "\nUsing Freesurfer Brainmask\n"
+		cp ${SUBJECTS_DIR}/${FSID}/mri/brainmask.mgz .
+		mrtransform brainmask.mgz -linear ACPC_to_b0_mrtrix.txt brain_FS.mif
+		mrfilter brain_FS.mif smooth -stdev 2 brain_FS_smooth.mif -force #Blur the image to remove small holes in the mask
+		mrthreshold brain_FS_smooth.mif -abs 0 -comparison gt brainmask_FS.mif -force
+		dwi2tensor dwi_cleaned_resamp.mif -mask brainmask_FS.mif dti.mif -force
+		mrconvert brainmask_FS.mif brain_mask.nii.gz -force
+	fi
 	mrconvert dti.mif dti.nii.gz -force
-	tensor2metric dti.mif -fa fa.nii.gz -force
-	#module load python/3.8
-	#python ${CODEDIR}/Python/MRtrix/dtiConverter.py
-	#cp tensor.nrrd $clean_dir/tensor.nrrd
-	#cp fa.nrrd $clean_dir/fa.nrrd
+	for count in 1 2 3
+	do
+		tensor2metric dti.mif -value eigval${count}.nii.gz -num $count -force
+		tensor2metric dti.mif -vector eigvec${count}.nii.gz -num $count -force
+	done
+	module load python/3.10 #version that has nibabel and pynrrd
+	python ${CODEDIR}/Python/SCIRun/nifti2nrrd.py --img brain_mask.nii.gz --datatype scalar
+	for count in 1 2 3
+	do
+		python ${CODEDIR}/Python/SCIRun/nifti2nrrd.py --img eigval${count}.nii.gz --datatype scalar
+		cp eigval${count}.nrrd $clean_dir/eigval${count}.nrrd
+		python ${CODEDIR}/Python/SCIRun/nifti2nrrd.py --img eigvec${count}.nii.gz --datatype vector
+		cp eigvec${count}.nrrd $clean_dir/eigvec${count}.nrrd
+	done
 	cp dti.nii.gz $clean_dir/dti.nii.gz
-	cp fa.nii.gz $clean_dir/fa.nii.gz
 else
 	echo -e "\nNo Tensor Reconstruction\n"
 fi
 
 
 echo -e "\nCopying Files\n"
-mrconvert brain_mask.mif brain_mask.nii.gz -force
-mrconvert dwi_cleaned_resamp.mif dwi_cleaned.nii.gz -force
+cp brain_mask.mif $clean_dir/brain_mask.mif
 cp brain_mask.nii.gz $clean_dir/brain_mask.nii.gz
+cp brain_mask.nrrd $clean_dir/brain_mask.nrrd
 cp b0_hifi.nii.gz $clean_dir/b0_hifi.nii.gz
 cp dwi_cleaned.nii.gz $clean_dir/dwi_cleaned.nii.gz
 cp dwi_cleaned_resamp.mif $clean_dir/dwi_cleaned.mif
