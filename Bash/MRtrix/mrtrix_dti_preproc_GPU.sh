@@ -275,15 +275,19 @@ then
 		dwi2tensor dwi_cleaned_resamp.mif -mask brain_mask.mif dti.mif -force
 		mrconvert brain_mask.mif brain_mask.nii.gz -force
 	else
-		echo -e "\nUsing Freesurfer Brainmask\n"
-		cp ${SUBJECTS_DIR}/${FSID}/mri/brainmask.mgz .
-		mrtransform brainmask.mgz -linear ACPC_to_b0_mrtrix.txt brain_FS.mif
-		mrfilter brain_FS.mif smooth -stdev 2 brain_FS_smooth.mif -force #Blur the image to remove small holes in the mask
-		mrthreshold brain_FS_smooth.mif -abs 0 -comparison gt brainmask_FS.mif -force
-		dwi2tensor dwi_cleaned_resamp.mif -mask brainmask_FS.mif dti.mif -force
-		mrconvert brainmask_FS.mif brain_mask.nii.gz -force
+		echo -e "\nCreating mask from Freesurfer"
+    	SUBJECTS_DIR="${FREESURFERDIR}"/FS_Subjects
+    	cp ${SUBJECTS_DIR}/${FSID}/mri/brainmask.mgz .
+    	mrtransform brainmask.mgz -linear ACPC_to_b0_mrtrix.txt brain_FS.mif -force
+    	mrthreshold brain_FS.mif -abs 0 -comparison gt brainmask_FS.mif -force
+    	maskfilter brainmask_FS.mif dilate brainmask_dilate.mif -npass 10 -force
+    	maskfilter brainmask_dilate.mif erode brainmask_dilate_erode.mif -npass 10 -force
+    	mrgrid brainmask_dilate_erode.mif regrid -template dwi_tensor_prep.mif brainmask_regrid.mif -force
+    	dwi2tensor dwi_cleaned_resamp.mif -mask brainmask_regrid.mif dti.mif -force
+    	mrconvert brainmask_regrid.mif brain_mask.nii.gz -force
 	fi
 	mrconvert dti.mif dti.nii.gz -force
+	tensor2metric dti.mif -fa fa.nii.gz -force
 	for count in 1 2 3
 	do
 		tensor2metric dti.mif -value eigval${count}.nii.gz -num $count -force
@@ -291,6 +295,7 @@ then
 	done
 	module load python/3.10 #version that has nibabel and pynrrd
 	python ${CODEDIR}/Python/SCIRun/nifti2nrrd.py --img brain_mask.nii.gz --datatype scalar
+	python ${CODEDIR}/Python/SCIRun/nifti2nrrd.py --img fa.nii.gz --datatype scalar
 	for count in 1 2 3
 	do
 		python ${CODEDIR}/Python/SCIRun/nifti2nrrd.py --img eigval${count}.nii.gz --datatype scalar
@@ -299,6 +304,8 @@ then
 		cp eigvec${count}.nrrd $clean_dir/eigvec${count}.nrrd
 	done
 	cp dti.nii.gz $clean_dir/dti.nii.gz
+	cp fa.nii.gz $clean_dir/fa.nii.gz
+	cp fa.nrrd $clean_dir/fa.nrrd
 else
 	echo -e "\nNo Tensor Reconstruction\n"
 fi

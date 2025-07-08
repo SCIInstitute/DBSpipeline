@@ -61,31 +61,31 @@ fi
 if [ -z $dwi_bval ]
 then
     echo -e "\nNo bval file given, assuming dwi has data"
-    mrconvert $DWI dwi_tensor_prep.mif
+    mrconvert $DWI dwi_tensor_prep.mif -force
 else
     echo -e "\nAdding diffusion data to file"
-    mrconvert $DWI -fslgrad dwi_bvec dwi_bval dwi_tensor_prep.mif
+    mrconvert $DWI -fslgrad dwi_bvec dwi_bval dwi_tensor_prep.mif -force
 fi
 
 if [ -n "$mask" ]
 then
     echo -e "\nUsing provided mask and assuming it is coregistered\n"
     mrconvert $mask brainmask.mif -force
-elif [ -n $SID ] && [-n $FSID]
+elif [ -n $SID ] && [ -n $FSID ]
 then
     echo -e "\nGetting Transform from subject folder\n"
     cp ${DATADIR}/${SID}/Tractography/Cleaned/ACPC_to_b0.txt ${PWD}/transform.txt
-elif [-n $transform ] && [-n $FSID]
+elif [ -n $transform ] && [ -n $FSID ]
 then
     echo -e "\nUsing given transform\n"
     cp $transform ${PWD}/transform.txt
-elif [-n $FSID] && [-z $transform ] && [ -z $SID ]
+elif [ -n $FSID ] && [ -z $transform ] && [ -z $SID ]
 then
     echo -e "\nCreating transform using Freesurfer\n"
     5ttgen -nocrop hsvs ${SUBJECTS_DIR}/${FSID} T1_5tt_FS.mif -force #known to fail sometimes, maybe check mrstats for all zeros, if so, use fsl
-	mrconvert T1_5tt_FS.mif T1_5tt.nii.gz -force
-	bbregister --s ${FSID} --mov b0_hifi.nii.gz --reg b0_to_T1.lta --dti --o b0_ACPCspace.nii.gz
-	mri_vol2vol --mov b0_hifi.nii.gz --targ T1_5tt.nii.gz --lta b0_to_T1.lta --o T1_5tt_b0space.nii.gz --inv
+    mrconvert T1_5tt_FS.mif T1_5tt.nii.gz -force
+    bbregister --s ${FSID} --mov b0_hifi.nii.gz --reg b0_to_T1.lta --dti --o b0_ACPCspace.nii.gz
+    mri_vol2vol --mov b0_hifi.nii.gz --targ T1_5tt.nii.gz --lta b0_to_T1.lta --o T1_5tt_b0space.nii.gz --inv
     lta_convert --inlta b0_to_T1.lta --outitk ACPC_to_b0.txt --invert
     lta_convert --inlta b0_to_T1.lta --outitk b0_to_ACPC.txt
     transformconvert ACPC_to_b0.txt itk_import ACPC_to_b0_mrtrix.txt -force
@@ -105,13 +105,15 @@ else
     echo -e "\nCreating mask from Freesurfer"
     SUBJECTS_DIR="${FREESURFERDIR}"/FS_Subjects
     cp ${SUBJECTS_DIR}/${FSID}/mri/brainmask.mgz .
-    mrtransform brainmask.mgz -linear transform.txt brain_FS.mif
-    mrfilter brain_FS.mif smooth -stdev 2 brain_FS_smooth.mif -force #Blur the image to remove small holes in the mask
-    mrthreshold brain_FS_smooth.mif -abs 0 -comparison gt brainmask_FS.mif -force
-    dwi2tensor dwi_tensor_prep.mif -mask brainmask_FS.mif dti.mif -force
-    mrconvert brainmask_FS.mif brain_mask.nii.gz -force
+    mrtransform brainmask.mgz -linear transform.txt brain_FS.mif -force
+    mrthreshold brain_FS.mif -abs 0 -comparison gt brainmask_FS.mif -force
+    maskfilter brainmask_FS.mif dilate brainmask_dilate.mif -npass 10 -force
+    maskfilter brainmask_dilate.mif erode brainmask_dilate_erode.mif -npass 10 -force
+    mrgrid brainmask_dilate_erode.mif regrid -template dwi_tensor_prep.mif brainmask_regrid.mif -force
+    dwi2tensor dwi_tensor_prep.mif -mask brainmask_regrid.mif dti.mif -force
+    mrconvert brainmask_regrid.mif brain_mask.nii.gz -force
 fi
-
+tensor2metric dti.mif -fa fa.nii.gz -force
 for count in 1 2 3
 do
     tensor2metric dti.mif -value eigval${count}.nii.gz -num $count -force
@@ -120,6 +122,7 @@ done
 
 module load python/3.10 #version that has nibabel and pynrrd
 python ${CODEDIR}/Python/SCIRun/nifti2nrrd.py --img brain_mask.nii.gz --datatype scalar
+python ${CODEDIR}/Python/SCIRun/nifti2nrrd.py --img fa.nii.gz --datatype scalar
 for count in 1 2 3
 do
     python ${CODEDIR}/Python/SCIRun/nifti2nrrd.py --img eigval${count}.nii.gz --datatype scalar
