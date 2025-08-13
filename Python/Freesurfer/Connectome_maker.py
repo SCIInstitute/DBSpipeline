@@ -22,6 +22,7 @@ import argparse
 import os
 import sys
 import nrrd
+import subprocess
 #print(os.path.join(os.path.dirname(__file__), "..", "MRtrix" ))
 #sys.path.append(os.path.join(os.path.dirname(__file__), "..", "MRtrix" ))
 print(os.path.join(os.environ["CODEDIR"], "Python/MRtrix" ))
@@ -162,14 +163,20 @@ def table_2_atlas_stim(st_lookup_file, profile, output_files, **kwargs ):
   
   seg_files = stim_lookup['Filename'][l_anat_idx+1:].unique()
   
-  return add_files_2_atlas(All_data, HCP, stim_lookup, seg_files, profile, output_files)
+  return add_files_2_atlas(All_data, HCP, stim_lookup, seg_files, profile, output_files, HCP_fname = HCP_fname)
   
     
   
 
 def add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, **kwargs):
 
-  
+  if "HCP_fname" in kwargs:
+    HCP_fname = kwargs["HCP_fname"]
+    use_Ants = True
+  else:
+    print("cannot use Ants without the HCP_fname input")
+    use_Ants = False
+    
 
   for file in seg_files:
     seg_dirs = lookup['Path'][lookup['Filename'] == file].unique()[0]
@@ -178,28 +185,38 @@ def add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, *
     #
     fullfile = os.path.join(profile["segPath"], seg_dirs, file)
     #
-  #    # saving resampled images to save time
-  #    froot, ext = os.path.splitext(file)
-  #    if ext == ".gz":
-  #      froot_, ext_ = os.path.splitext(froot)
-  #      if ext_ == ".nii":
-  #        froot = froot_
-  #        ext = ext_ + ext
-  #
-  #    resamp_file = froot + "_resample" + ".nii.gz"
-  #    resamp_fullfile = os.path.join(profile["segPath"], seg_dirs, resamp_file)
+    # saving resampled images to save time
+    
   #
   #    if kwargs["rerun"] or not os.path.exists(resamp_fullfile):
   #
-    if os.path.splitext(file)[1] == ".nrrd":
-      img = readNRRD(fullfile)
+    if use_Ants:
+    
+      froot, ext = os.path.splitext(file)
+      if ext == ".gz":
+        froot_, ext_ = os.path.splitext(froot)
+        if ext_ == ".nii":
+          froot = froot_
+          ext = ext_ + ext
+
+      resamp_file = froot + "_resample" + ".nii.gz"
+      resamp_fullfile = os.path.join(profile["segPath"], seg_dirs, resamp_file)
+      
+      subprocess.run([antsApplyTransforms, "-d", 3, "-i", fullfile, "-r", HCP_fname, "-n", "NearestNeighbor", "-o", resamp_fullfile])
+#          antsApplyTransforms -d 3 -i input.nii.gz -r template.nii.gz -n NearestNeighbor -o input_resamp.nii.gz
+      img_resamp = nibabel.load(resamp_fullfile)
     else:
-      img = nibabel.load(fullfile)
-    #
-    img_resamp = nibabel.processing.resample_from_to(img, HCP,order=0)
+      if os.path.splitext(file)[1] == ".nrrd":
+        img = readNRRD(fullfile)
+      else:
+        img = nibabel.load(fullfile)
+      #
+      img_resamp = nibabel.processing.resample_from_to(img, HCP,order=0)
 #    print(img_resamp)
+  
     img_data = img_resamp.get_fdata()
     data_add = img_data.copy()
+      
     for j in range(0,len(local_index)):
       data_add[img_data == local_index[j]] = int(main_index[j])
     #
@@ -247,9 +264,10 @@ def table_2_atlas(lookup_file, profile, output_files, **kwargs ):
 
   #Load HCP first always. This will be the reference
 #  print(seg_files)
-  HCP = nibabel.load(os.path.join(profile["segPath"], seg_dirs, seg_files[0]))
-  
+  HCP_fname = os.path.join(profile["segPath"], seg_dirs, seg_files[0])
+  HCP = nibabel.load(HCP_fname)
   HCP_data = HCP.get_fdata()
+  
   main_index = np.array(lookup['Index'][lookup['Filename'] == seg_files[0]])
   local_index = np.array(lookup['File Index'][lookup['Filename'] == seg_files[0]])
 
