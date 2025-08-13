@@ -153,7 +153,8 @@ def table_2_atlas_stim(st_lookup_file, profile, output_files, **kwargs ):
   stim_lookup = pd.read_csv(st_lookup_file,index_col=False)
   anat_lookup = pd.read_csv(profile["lookup_table"],index_col=False)
   
-  HCP = nibabel.load(anat_output_files["nifti_lookup_outputfile"])
+  HCP_fname = anat_output_files["nifti_lookup_outputfile"]
+  HCP = nibabel.load(HCP_fname)
   All_data = HCP.get_fdata()
   
   st_index = np.array(stim_lookup['Index'])
@@ -276,7 +277,7 @@ def table_2_atlas(lookup_file, profile, output_files, **kwargs ):
     All_data[HCP_data == local_index[i]] = int(main_index[i])
 
 
-  return add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files)
+  return add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, HCP_fname = HCP_fname )
   
   
 
