@@ -193,7 +193,7 @@ def add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, *
   #    if kwargs["rerun"] or not os.path.exists(resamp_fullfile):
   #
     if use_Ants:
-      print("attempting ants")
+      print("running with ants")
       
       use_cli = True
     
@@ -211,21 +211,26 @@ def add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, *
       
       if use_cli:
         
-        ants_call = ["antsApplyTransforms", "-d", 3, "-i", fullfile, "-r", HCP_fname, "-n", "NearestNeighbor", "-o", resamp_fullfile]
+        ants_call = ["antsApplyTransforms", "-d", str(3), "-i", fullfile, "-r", HCP_fname, "-n", "NearestNeighbor", "-o", resamp_fullfile]
         print(" ".join(ants_call))
         subprocess.run(ants_call)
 #          antsApplyTransforms -d 3 -i input.nii.gz -r template.nii.gz -n NearestNeighbor -o input_resamp.nii.gz
       else:
         from ants import apply_transforms, image_read, image_write
+        
         img = image_read(fullfile, pixeltype="unsigned int")
         f_img = image_read(HCP_fname, pixeltype="unsigned int")
         
         print("dimensions", img.dimension, f_img.dimension)
+        # this call doesn't work the same as cli.  it needs the -t flag for some reason
         res_img_ants = apply_transforms(f_img, img, interpolator="NearestNeighbor")
         
         image_write(res_img_ants, resamp_fullfile)
+        
       img_resamp = nibabel.load(resamp_fullfile)
+      
     else:
+      print("running with nibabel")
       if os.path.splitext(file)[1] == ".nrrd":
         img = readNRRD(fullfile)
       else:
