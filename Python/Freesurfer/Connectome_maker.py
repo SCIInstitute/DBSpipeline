@@ -23,7 +23,7 @@ import os
 import sys
 import nrrd
 import subprocess
-from ants import apply_transforms, image_read, image_write
+
 #print(os.path.join(os.path.dirname(__file__), "..", "MRtrix" ))
 #sys.path.append(os.path.join(os.path.dirname(__file__), "..", "MRtrix" ))
 print(os.path.join(os.environ["CODEDIR"], "Python/MRtrix" ))
@@ -211,11 +211,12 @@ def add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, *
       
       if use_cli:
         
-        ants_call = [antsApplyTransforms, "-d", 3, "-i", fullfile, "-r", HCP_fname, "-n", "NearestNeighbor", "-o", resamp_fullfile]
-        print(" ".joint(ants_call))
+        ants_call = ["antsApplyTransforms", "-d", 3, "-i", fullfile, "-r", HCP_fname, "-n", "NearestNeighbor", "-o", resamp_fullfile]
+        print(" ".join(ants_call))
         subprocess.run(ants_call)
 #          antsApplyTransforms -d 3 -i input.nii.gz -r template.nii.gz -n NearestNeighbor -o input_resamp.nii.gz
       else:
+        from ants import apply_transforms, image_read, image_write
         img = image_read(fullfile, pixeltype="unsigned int")
         f_img = image_read(HCP_fname, pixeltype="unsigned int")
         
