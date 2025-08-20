@@ -23,6 +23,7 @@ import os
 import sys
 import nrrd
 import subprocess
+from ants import apply_transforms, image_read, image_write
 #print(os.path.join(os.path.dirname(__file__), "..", "MRtrix" ))
 #sys.path.append(os.path.join(os.path.dirname(__file__), "..", "MRtrix" ))
 print(os.path.join(os.environ["CODEDIR"], "Python/MRtrix" ))
@@ -192,6 +193,9 @@ def add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, *
   #    if kwargs["rerun"] or not os.path.exists(resamp_fullfile):
   #
     if use_Ants:
+      print("attempting ants")
+      
+      use_cli = True
     
       froot, ext = os.path.splitext(file)
       if ext == ".gz":
@@ -203,8 +207,22 @@ def add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, *
       resamp_file = froot + "_resample" + ".nii.gz"
       resamp_fullfile = os.path.join(profile["segPath"], seg_dirs, resamp_file)
       
-      subprocess.run([antsApplyTransforms, "-d", 3, "-i", fullfile, "-r", HCP_fname, "-n", "NearestNeighbor", "-o", resamp_fullfile])
+      
+      
+      if use_cli:
+        
+        ants_call = [antsApplyTransforms, "-d", 3, "-i", fullfile, "-r", HCP_fname, "-n", "NearestNeighbor", "-o", resamp_fullfile]
+        print(" ".joint(ants_call))
+        subprocess.run(ants_call)
 #          antsApplyTransforms -d 3 -i input.nii.gz -r template.nii.gz -n NearestNeighbor -o input_resamp.nii.gz
+      else:
+        img = image_read(fullfile, pixeltype="unsigned int")
+        f_img = image_read(HCP_fname, pixeltype="unsigned int")
+        
+        print("dimensions", img.dimension, f_img.dimension)
+        res_img_ants = apply_transforms(f_img, img, interpolator="NearestNeighbor")
+        
+        image_write(res_img_ants, resamp_fullfile)
       img_resamp = nibabel.load(resamp_fullfile)
     else:
       if os.path.splitext(file)[1] == ".nrrd":

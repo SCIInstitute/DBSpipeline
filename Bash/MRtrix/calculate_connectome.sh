@@ -26,7 +26,7 @@ then
   rel_path3="Tractography"
   rel_path4="Segmentations"
   module load jq
-  module load ants
+#  module load ants
 else
 #  rel_path1="MRtrix/Connectome"
 #  rel_path2="MRtrix/Tractography/Cleaned"
