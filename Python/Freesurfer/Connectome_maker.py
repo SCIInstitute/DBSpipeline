@@ -66,6 +66,7 @@ def append_lookup_file(profile, **kwargs):
   experiment = profile["experiment"]
   stim_table = pd.read_csv(profile["stim_table"],index_col=False)
   stim_out = profile["stimoutpath"]
+  print("stim_out", stim_out)
   
   lookup = pd.read_csv(profile["lookup_table"],index_col=False)
   
@@ -192,6 +193,7 @@ def add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, *
   #
   #    if kwargs["rerun"] or not os.path.exists(resamp_fullfile):
   #
+    use_Ants=False
     if use_Ants:
       print("running with ants")
       
