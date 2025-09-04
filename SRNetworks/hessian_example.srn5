@@ -1,0 +1,1221 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE boost_serialization>
+<boost_serialization signature="serialization::archive" version="18">
+<networkFile class_id="0" tracking_level="0" version="6">
+	<networkInfo class_id="1" tracking_level="0" version="0">
+		<modules class_id="2" tracking_level="0" version="0">
+			<count>11</count>
+			<item_version>0</item_version>
+			<item class_id="3" tracking_level="0" version="0">
+				<first>BuildDerivedNrrdWithGage:0</first>
+				<second class_id="4" tracking_level="0" version="0">
+					<module class_id="5" tracking_level="0" version="0">
+						<package_name_>Teem</package_name_>
+						<category_name_>Misc</category_name_>
+						<module_name_>BuildDerivedNrrdWithGage</module_name_>
+					</module>
+					<state class_id="6" tracking_level="0" version="0">
+						<stateMap class_id="7" tracking_level="0" version="0">
+							<count>16</count>
+							<item_version>0</item_version>
+							<item class_id="8" tracking_level="0" version="0">
+								<first class_id="9" tracking_level="0" version="0">
+									<name>DDNumParm1</name>
+								</first>
+								<second class_id="10" tracking_level="0" version="0">
+									<name>DDNumParm1</name>
+									<value class_id="11" tracking_level="1" version="0" object_id="_0">
+										<which>2</which>
+										<value>1.0</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>DDNumParm2</name>
+								</first>
+								<second>
+									<name>DDNumParm2</name>
+									<value object_id="_1">
+										<which>2</which>
+										<value>0.0</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>DDNumParm3</name>
+								</first>
+								<second>
+									<name>DDNumParm3</name>
+									<value object_id="_2">
+										<which>2</which>
+										<value></value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>DDType</name>
+								</first>
+								<second>
+									<name>DDType</name>
+									<value object_id="_3">
+										<which>2</which>
+										<value>cubicdd</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>DNumParm1</name>
+								</first>
+								<second>
+									<name>DNumParm1</name>
+									<value object_id="_4">
+										<which>2</which>
+										<value>1.0</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>DNumParm2</name>
+								</first>
+								<second>
+									<name>DNumParm2</name>
+									<value object_id="_5">
+										<which>2</which>
+										<value>0.0</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>DNumParm3</name>
+								</first>
+								<second>
+									<name>DNumParm3</name>
+									<value object_id="_6">
+										<which>2</which>
+										<value></value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>DType</name>
+								</first>
+								<second>
+									<name>DType</name>
+									<value object_id="_7">
+										<which>2</which>
+										<value>cubicd</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>FieldKind</name>
+								</first>
+								<second>
+									<name>FieldKind</name>
+									<value object_id="_8">
+										<which>2</which>
+										<value>Scalar</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>OType</name>
+								</first>
+								<second>
+									<name>OType</name>
+									<value object_id="_9">
+										<which>2</which>
+										<value>double</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>ProgrammableInputPortEnabled</name>
+								</first>
+								<second>
+									<name>ProgrammableInputPortEnabled</name>
+									<value object_id="_10">
+										<which>3</which>
+										<value>0</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>Quantity</name>
+								</first>
+								<second>
+									<name>Quantity</name>
+									<value object_id="_11">
+										<which>2</which>
+										<value>Hessian</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>ValuesNumParm1</name>
+								</first>
+								<second>
+									<name>ValuesNumParm1</name>
+									<value object_id="_12">
+										<which>2</which>
+										<value>1.0</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>ValuesNumParm2</name>
+								</first>
+								<second>
+									<name>ValuesNumParm2</name>
+									<value object_id="_13">
+										<which>2</which>
+										<value>0.0</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>ValuesNumParm3</name>
+								</first>
+								<second>
+									<name>ValuesNumParm3</name>
+									<value object_id="_14">
+										<which>2</which>
+										<value></value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>ValuesType</name>
+								</first>
+								<second>
+									<name>ValuesType</name>
+									<value object_id="_15">
+										<which>2</which>
+										<value>cubic</value>
+									</value>
+								</second>
+							</item>
+						</stateMap>
+					</state>
+				</second>
+			</item>
+			<item>
+				<first>BuildDerivedNrrdWithGage:1</first>
+				<second>
+					<module>
+						<package_name_>Teem</package_name_>
+						<category_name_>Misc</category_name_>
+						<module_name_>BuildDerivedNrrdWithGage</module_name_>
+					</module>
+					<state>
+						<stateMap>
+							<count>16</count>
+							<item_version>0</item_version>
+							<item>
+								<first>
+									<name>DDNumParm1</name>
+								</first>
+								<second>
+									<name>DDNumParm1</name>
+									<value object_id="_16">
+										<which>2</which>
+										<value>1.0</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>DDNumParm2</name>
+								</first>
+								<second>
+									<name>DDNumParm2</name>
+									<value object_id="_17">
+										<which>2</which>
+										<value>0.0</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>DDNumParm3</name>
+								</first>
+								<second>
+									<name>DDNumParm3</name>
+									<value object_id="_18">
+										<which>2</which>
+										<value></value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>DDType</name>
+								</first>
+								<second>
+									<name>DDType</name>
+									<value object_id="_19">
+										<which>2</which>
+										<value>cubicdd</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>DNumParm1</name>
+								</first>
+								<second>
+									<name>DNumParm1</name>
+									<value object_id="_20">
+										<which>2</which>
+										<value>1.0</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>DNumParm2</name>
+								</first>
+								<second>
+									<name>DNumParm2</name>
+									<value object_id="_21">
+										<which>2</which>
+										<value>0.0</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>DNumParm3</name>
+								</first>
+								<second>
+									<name>DNumParm3</name>
+									<value object_id="_22">
+										<which>2</which>
+										<value></value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>DType</name>
+								</first>
+								<second>
+									<name>DType</name>
+									<value object_id="_23">
+										<which>2</which>
+										<value>cubicd</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>FieldKind</name>
+								</first>
+								<second>
+									<name>FieldKind</name>
+									<value object_id="_24">
+										<which>2</which>
+										<value>Scalar</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>OType</name>
+								</first>
+								<second>
+									<name>OType</name>
+									<value object_id="_25">
+										<which>2</which>
+										<value>double</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>ProgrammableInputPortEnabled</name>
+								</first>
+								<second>
+									<name>ProgrammableInputPortEnabled</name>
+									<value object_id="_26">
+										<which>3</which>
+										<value>0</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>Quantity</name>
+								</first>
+								<second>
+									<name>Quantity</name>
+									<value object_id="_27">
+										<which>2</which>
+										<value>Hessian eigenvalues</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>ValuesNumParm1</name>
+								</first>
+								<second>
+									<name>ValuesNumParm1</name>
+									<value object_id="_28">
+										<which>2</which>
+										<value>1.0</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>ValuesNumParm2</name>
+								</first>
+								<second>
+									<name>ValuesNumParm2</name>
+									<value object_id="_29">
+										<which>2</which>
+										<value>0.0</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>ValuesNumParm3</name>
+								</first>
+								<second>
+									<name>ValuesNumParm3</name>
+									<value object_id="_30">
+										<which>2</which>
+										<value></value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>ValuesType</name>
+								</first>
+								<second>
+									<name>ValuesType</name>
+									<value object_id="_31">
+										<which>2</which>
+										<value>cubic</value>
+									</value>
+								</second>
+							</item>
+						</stateMap>
+					</state>
+				</second>
+			</item>
+			<item>
+				<first>CalculateFieldData:0</first>
+				<second>
+					<module>
+						<package_name_>SCIRun</package_name_>
+						<category_name_>ChangeFieldData</category_name_>
+						<module_name_>CalculateFieldData</module_name_>
+					</module>
+					<state>
+						<stateMap>
+							<count>3</count>
+							<item_version>0</item_version>
+							<item>
+								<first>
+									<name>FormatString</name>
+								</first>
+								<second>
+									<name>FormatString</name>
+									<value object_id="_32">
+										<which>2</which>
+										<value>Scalar</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>FunctionString</name>
+								</first>
+								<second>
+									<name>FunctionString</name>
+									<value object_id="_33">
+										<which>2</which>
+										<value>RESULT = eigval1(DATA1);</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>ProgrammableInputPortEnabled</name>
+								</first>
+								<second>
+									<name>ProgrammableInputPortEnabled</name>
+									<value object_id="_34">
+										<which>3</which>
+										<value>0</value>
+									</value>
+								</second>
+							</item>
+						</stateMap>
+					</state>
+				</second>
+			</item>
+			<item>
+				<first>CalculateFieldData:1</first>
+				<second>
+					<module>
+						<package_name_>SCIRun</package_name_>
+						<category_name_>ChangeFieldData</category_name_>
+						<module_name_>CalculateFieldData</module_name_>
+					</module>
+					<state>
+						<stateMap>
+							<count>3</count>
+							<item_version>0</item_version>
+							<item>
+								<first>
+									<name>FormatString</name>
+								</first>
+								<second>
+									<name>FormatString</name>
+									<value object_id="_35">
+										<which>2</which>
+										<value>Scalar</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>FunctionString</name>
+								</first>
+								<second>
+									<name>FunctionString</name>
+									<value object_id="_36">
+										<which>2</which>
+										<value>RESULT = x(DATA1);</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>ProgrammableInputPortEnabled</name>
+								</first>
+								<second>
+									<name>ProgrammableInputPortEnabled</name>
+									<value object_id="_37">
+										<which>3</which>
+										<value>0</value>
+									</value>
+								</second>
+							</item>
+						</stateMap>
+					</state>
+				</second>
+			</item>
+			<item>
+				<first>ConvertNrrdToField:0</first>
+				<second>
+					<module>
+						<package_name_>Teem</package_name_>
+						<category_name_>Converters</category_name_>
+						<module_name_>ConvertNrrdToField</module_name_>
+					</module>
+					<state>
+						<stateMap>
+							<count>4</count>
+							<item_version>0</item_version>
+							<item>
+								<first>
+									<name>ConvertParity</name>
+								</first>
+								<second>
+									<name>ConvertParity</name>
+									<value object_id="_38">
+										<which>2</which>
+										<value>Do Not Correct</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>DataLocation</name>
+								</first>
+								<second>
+									<name>DataLocation</name>
+									<value object_id="_39">
+										<which>2</which>
+										<value>Node</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>FieldType</name>
+								</first>
+								<second>
+									<name>FieldType</name>
+									<value object_id="_40">
+										<which>2</which>
+										<value>Auto</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>ProgrammableInputPortEnabled</name>
+								</first>
+								<second>
+									<name>ProgrammableInputPortEnabled</name>
+									<value object_id="_41">
+										<which>3</which>
+										<value>0</value>
+									</value>
+								</second>
+							</item>
+						</stateMap>
+					</state>
+				</second>
+			</item>
+			<item>
+				<first>ConvertNrrdToField:1</first>
+				<second>
+					<module>
+						<package_name_>Teem</package_name_>
+						<category_name_>Converters</category_name_>
+						<module_name_>ConvertNrrdToField</module_name_>
+					</module>
+					<state>
+						<stateMap>
+							<count>4</count>
+							<item_version>0</item_version>
+							<item>
+								<first>
+									<name>ConvertParity</name>
+								</first>
+								<second>
+									<name>ConvertParity</name>
+									<value object_id="_42">
+										<which>2</which>
+										<value>Do Not Correct</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>DataLocation</name>
+								</first>
+								<second>
+									<name>DataLocation</name>
+									<value object_id="_43">
+										<which>2</which>
+										<value>Node</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>FieldType</name>
+								</first>
+								<second>
+									<name>FieldType</name>
+									<value object_id="_44">
+										<which>2</which>
+										<value>Auto</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>ProgrammableInputPortEnabled</name>
+								</first>
+								<second>
+									<name>ProgrammableInputPortEnabled</name>
+									<value object_id="_45">
+										<which>3</which>
+										<value>0</value>
+									</value>
+								</second>
+							</item>
+						</stateMap>
+					</state>
+				</second>
+			</item>
+			<item>
+				<first>ReadField:0</first>
+				<second>
+					<module>
+						<package_name_>SCIRun</package_name_>
+						<category_name_>DataIO</category_name_>
+						<module_name_>ReadField</module_name_>
+					</module>
+					<state>
+						<stateMap>
+							<count>5</count>
+							<item_version>0</item_version>
+							<item>
+								<first>
+									<name>FileTypeName</name>
+								</first>
+								<second>
+									<name>FileTypeName</name>
+									<value object_id="_46">
+										<which>2</which>
+										<value>NrrdFile</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>Filename</name>
+								</first>
+								<second>
+									<name>Filename</name>
+									<value object_id="_47">
+										<which>2</which>
+										<value>/Users/jess/UF_brainstim/HiperGator_Connectome/S1/SCIRun_files/potfield.nrrd</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>GuiFileTypeName</name>
+								</first>
+								<second>
+									<name>GuiFileTypeName</name>
+									<value object_id="_48">
+										<which>2</which>
+										<value></value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>ProgrammableInputPortEnabled</name>
+								</first>
+								<second>
+									<name>ProgrammableInputPortEnabled</name>
+									<value object_id="_49">
+										<which>3</which>
+										<value>0</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>ScriptEnvironmentVariable</name>
+								</first>
+								<second>
+									<name>ScriptEnvironmentVariable</name>
+									<value object_id="_50">
+										<which>2</which>
+										<value></value>
+									</value>
+								</second>
+							</item>
+						</stateMap>
+					</state>
+				</second>
+			</item>
+			<item>
+				<first>ReportNrrdInfo:0</first>
+				<second>
+					<module>
+						<package_name_>Teem</package_name_>
+						<category_name_>Misc</category_name_>
+						<module_name_>ReportNrrdInfo</module_name_>
+					</module>
+					<state>
+						<stateMap>
+							<count>1</count>
+							<item_version>0</item_version>
+							<item>
+								<first>
+									<name>ProgrammableInputPortEnabled</name>
+								</first>
+								<second>
+									<name>ProgrammableInputPortEnabled</name>
+									<value object_id="_51">
+										<which>3</which>
+										<value>0</value>
+									</value>
+								</second>
+							</item>
+						</stateMap>
+					</state>
+				</second>
+			</item>
+			<item>
+				<first>ReportNrrdInfo:1</first>
+				<second>
+					<module>
+						<package_name_>Teem</package_name_>
+						<category_name_>Misc</category_name_>
+						<module_name_>ReportNrrdInfo</module_name_>
+					</module>
+					<state>
+						<stateMap>
+							<count>1</count>
+							<item_version>0</item_version>
+							<item>
+								<first>
+									<name>ProgrammableInputPortEnabled</name>
+								</first>
+								<second>
+									<name>ProgrammableInputPortEnabled</name>
+									<value object_id="_52">
+										<which>3</which>
+										<value>0</value>
+									</value>
+								</second>
+							</item>
+						</stateMap>
+					</state>
+				</second>
+			</item>
+			<item>
+				<first>ReportNrrdInfo:2</first>
+				<second>
+					<module>
+						<package_name_>Teem</package_name_>
+						<category_name_>Misc</category_name_>
+						<module_name_>ReportNrrdInfo</module_name_>
+					</module>
+					<state>
+						<stateMap>
+							<count>1</count>
+							<item_version>0</item_version>
+							<item>
+								<first>
+									<name>ProgrammableInputPortEnabled</name>
+								</first>
+								<second>
+									<name>ProgrammableInputPortEnabled</name>
+									<value object_id="_53">
+										<which>3</which>
+										<value>0</value>
+									</value>
+								</second>
+							</item>
+						</stateMap>
+					</state>
+				</second>
+			</item>
+			<item>
+				<first>SplitFieldIntoNrrdData:0</first>
+				<second>
+					<module>
+						<package_name_>Teem</package_name_>
+						<category_name_>Converters</category_name_>
+						<module_name_>SplitFieldIntoNrrdData</module_name_>
+					</module>
+					<state>
+						<stateMap>
+							<count>2</count>
+							<item_version>0</item_version>
+							<item>
+								<first>
+									<name>DataLabel</name>
+								</first>
+								<second>
+									<name>DataLabel</name>
+									<value object_id="_54">
+										<which>2</which>
+										<value>unknown</value>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>
+									<name>ProgrammableInputPortEnabled</name>
+								</first>
+								<second>
+									<name>ProgrammableInputPortEnabled</name>
+									<value object_id="_55">
+										<which>3</which>
+										<value>0</value>
+									</value>
+								</second>
+							</item>
+						</stateMap>
+					</state>
+				</second>
+			</item>
+		</modules>
+		<connections class_id="12" tracking_level="0" version="0">
+			<count>10</count>
+			<item_version>0</item_version>
+			<item class_id="13" tracking_level="0" version="0">
+				<moduleId1_>BuildDerivedNrrdWithGage:0</moduleId1_>
+				<port1_ class_id="14" tracking_level="0" version="0">
+					<name>OutputNrrd</name>
+					<id>0</id>
+				</port1_>
+				<moduleId2_>ConvertNrrdToField:0</moduleId2_>
+				<port2_>
+					<name>InputNrrd</name>
+					<id>0</id>
+				</port2_>
+			</item>
+			<item>
+				<moduleId1_>BuildDerivedNrrdWithGage:0</moduleId1_>
+				<port1_>
+					<name>OutputNrrd</name>
+					<id>0</id>
+				</port1_>
+				<moduleId2_>ReportNrrdInfo:1</moduleId2_>
+				<port2_>
+					<name>Query_Nrrd</name>
+					<id>0</id>
+				</port2_>
+			</item>
+			<item>
+				<moduleId1_>BuildDerivedNrrdWithGage:1</moduleId1_>
+				<port1_>
+					<name>OutputNrrd</name>
+					<id>0</id>
+				</port1_>
+				<moduleId2_>ConvertNrrdToField:1</moduleId2_>
+				<port2_>
+					<name>InputNrrd</name>
+					<id>0</id>
+				</port2_>
+			</item>
+			<item>
+				<moduleId1_>BuildDerivedNrrdWithGage:1</moduleId1_>
+				<port1_>
+					<name>OutputNrrd</name>
+					<id>0</id>
+				</port1_>
+				<moduleId2_>ReportNrrdInfo:2</moduleId2_>
+				<port2_>
+					<name>Query_Nrrd</name>
+					<id>0</id>
+				</port2_>
+			</item>
+			<item>
+				<moduleId1_>ConvertNrrdToField:0</moduleId1_>
+				<port1_>
+					<name>OutputField</name>
+					<id>0</id>
+				</port1_>
+				<moduleId2_>CalculateFieldData:0</moduleId2_>
+				<port2_>
+					<name>InputFields</name>
+					<id>0</id>
+				</port2_>
+			</item>
+			<item>
+				<moduleId1_>ConvertNrrdToField:1</moduleId1_>
+				<port1_>
+					<name>OutputField</name>
+					<id>0</id>
+				</port1_>
+				<moduleId2_>CalculateFieldData:1</moduleId2_>
+				<port2_>
+					<name>InputFields</name>
+					<id>0</id>
+				</port2_>
+			</item>
+			<item>
+				<moduleId1_>ReadField:0</moduleId1_>
+				<port1_>
+					<name>Field</name>
+					<id>0</id>
+				</port1_>
+				<moduleId2_>SplitFieldIntoNrrdData:0</moduleId2_>
+				<port2_>
+					<name>InputField</name>
+					<id>0</id>
+				</port2_>
+			</item>
+			<item>
+				<moduleId1_>SplitFieldIntoNrrdData:0</moduleId1_>
+				<port1_>
+					<name>Data</name>
+					<id>0</id>
+				</port1_>
+				<moduleId2_>BuildDerivedNrrdWithGage:0</moduleId2_>
+				<port2_>
+					<name>InputNrrd</name>
+					<id>0</id>
+				</port2_>
+			</item>
+			<item>
+				<moduleId1_>SplitFieldIntoNrrdData:0</moduleId1_>
+				<port1_>
+					<name>Data</name>
+					<id>0</id>
+				</port1_>
+				<moduleId2_>BuildDerivedNrrdWithGage:1</moduleId2_>
+				<port2_>
+					<name>InputNrrd</name>
+					<id>0</id>
+				</port2_>
+			</item>
+			<item>
+				<moduleId1_>SplitFieldIntoNrrdData:0</moduleId1_>
+				<port1_>
+					<name>Data</name>
+					<id>0</id>
+				</port1_>
+				<moduleId2_>ReportNrrdInfo:0</moduleId2_>
+				<port2_>
+					<name>Query_Nrrd</name>
+					<id>0</id>
+				</port2_>
+			</item>
+		</connections>
+	</networkInfo>
+	<modulePositions class_id="15" tracking_level="0" version="0">
+		<count>11</count>
+		<item_version>0</item_version>
+		<item class_id="16" tracking_level="0" version="0">
+			<first>BuildDerivedNrrdWithGage:0</first>
+			<second class_id="17" tracking_level="0" version="0">
+				<first>-4.21000000000000000e+02</first>
+				<second>-6.20000000000000000e+01</second>
+			</second>
+		</item>
+		<item>
+			<first>BuildDerivedNrrdWithGage:1</first>
+			<second>
+				<first>-1.36000000000000000e+02</first>
+				<second>-8.00000000000000000e+01</second>
+			</second>
+		</item>
+		<item>
+			<first>CalculateFieldData:0</first>
+			<second>
+				<first>-5.75000000000000000e+02</first>
+				<second>3.10000000000000000e+02</second>
+			</second>
+		</item>
+		<item>
+			<first>CalculateFieldData:1</first>
+			<second>
+				<first>-1.44000000000000000e+02</first>
+				<second>3.15000000000000000e+02</second>
+			</second>
+		</item>
+		<item>
+			<first>ConvertNrrdToField:0</first>
+			<second>
+				<first>-5.75000000000000000e+02</first>
+				<second>1.76000000000000000e+02</second>
+			</second>
+		</item>
+		<item>
+			<first>ConvertNrrdToField:1</first>
+			<second>
+				<first>-1.48000000000000000e+02</first>
+				<second>1.98000000000000000e+02</second>
+			</second>
+		</item>
+		<item>
+			<first>ReadField:0</first>
+			<second>
+				<first>-4.60000000000000000e+02</first>
+				<second>-3.45000000000000000e+02</second>
+			</second>
+		</item>
+		<item>
+			<first>ReportNrrdInfo:0</first>
+			<second>
+				<first>-5.87000000000000000e+02</first>
+				<second>5.20000000000000000e+01</second>
+			</second>
+		</item>
+		<item>
+			<first>ReportNrrdInfo:1</first>
+			<second>
+				<first>-3.11000000000000000e+02</first>
+				<second>9.50000000000000000e+01</second>
+			</second>
+		</item>
+		<item>
+			<first>ReportNrrdInfo:2</first>
+			<second>
+				<first>-2.60000000000000000e+01</first>
+				<second>9.60000000000000000e+01</second>
+			</second>
+		</item>
+		<item>
+			<first>SplitFieldIntoNrrdData:0</first>
+			<second>
+				<first>-4.59000000000000000e+02</first>
+				<second>-2.26000000000000000e+02</second>
+			</second>
+		</item>
+	</modulePositions>
+	<moduleNotes class_id="18" tracking_level="0" version="0">
+		<count>6</count>
+		<item_version>0</item_version>
+		<item class_id="19" tracking_level="0" version="0">
+			<first>BuildDerivedNrrdWithGage:0</first>
+			<second class_id="20" tracking_level="0" version="0">
+				<noteHTML>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;.AppleSystemUIFont&apos;; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Hessian&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</noteHTML>
+				<noteText>Hessian</noteText>
+				<position>3</position>
+				<fontSize>13</fontSize>
+			</second>
+		</item>
+		<item>
+			<first>BuildDerivedNrrdWithGage:1</first>
+			<second>
+				<noteHTML>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;.AppleSystemUIFont&apos;; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Hessian eigenvalues&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</noteHTML>
+				<noteText>Hessian eigenvalues</noteText>
+				<position>3</position>
+				<fontSize>13</fontSize>
+			</second>
+		</item>
+		<item>
+			<first>CalculateFieldData:0</first>
+			<second>
+				<noteHTML>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;.AppleSystemUIFont&apos;; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Primary&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;EigenValue&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</noteHTML>
+				<noteText>Primary
+EigenValue</noteText>
+				<position>0</position>
+				<fontSize>13</fontSize>
+			</second>
+		</item>
+		<item>
+			<first>CalculateFieldData:1</first>
+			<second>
+				<noteHTML>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;.AppleSystemUIFont&apos;; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Primary&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;EigenValue&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</noteHTML>
+				<noteText>Primary
+EigenValue</noteText>
+				<position>0</position>
+				<fontSize>13</fontSize>
+			</second>
+		</item>
+		<item>
+			<first>ConvertNrrdToField:0</first>
+			<second>
+				<noteHTML>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;.AppleSystemUIFont&apos;; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Hessian as a tensor&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</noteHTML>
+				<noteText>Hessian as a tensor</noteText>
+				<position>0</position>
+				<fontSize>13</fontSize>
+			</second>
+		</item>
+		<item>
+			<first>ConvertNrrdToField:1</first>
+			<second>
+				<noteHTML>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;.AppleSystemUIFont&apos;; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;All EigVals as a vector&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</noteHTML>
+				<noteText>All EigVals as a vector</noteText>
+				<position>0</position>
+				<fontSize>13</fontSize>
+			</second>
+		</item>
+	</moduleNotes>
+	<connectionNotes>
+		<count>0</count>
+		<item_version>0</item_version>
+	</connectionNotes>
+	<moduleTags class_id="21" tracking_level="0" version="0">
+		<count>11</count>
+		<item_version>0</item_version>
+		<item class_id="22" tracking_level="0" version="0">
+			<first>BuildDerivedNrrdWithGage:0</first>
+			<second>-1</second>
+		</item>
+		<item>
+			<first>BuildDerivedNrrdWithGage:1</first>
+			<second>-1</second>
+		</item>
+		<item>
+			<first>CalculateFieldData:0</first>
+			<second>-1</second>
+		</item>
+		<item>
+			<first>CalculateFieldData:1</first>
+			<second>-1</second>
+		</item>
+		<item>
+			<first>ConvertNrrdToField:0</first>
+			<second>-1</second>
+		</item>
+		<item>
+			<first>ConvertNrrdToField:1</first>
+			<second>-1</second>
+		</item>
+		<item>
+			<first>ReadField:0</first>
+			<second>-1</second>
+		</item>
+		<item>
+			<first>ReportNrrdInfo:0</first>
+			<second>-1</second>
+		</item>
+		<item>
+			<first>ReportNrrdInfo:1</first>
+			<second>-1</second>
+		</item>
+		<item>
+			<first>ReportNrrdInfo:2</first>
+			<second>-1</second>
+		</item>
+		<item>
+			<first>SplitFieldIntoNrrdData:0</first>
+			<second>-1</second>
+		</item>
+	</moduleTags>
+	<disabledModules class_id="23" tracking_level="0" version="0">
+		<count>0</count>
+		<item_version>0</item_version>
+	</disabledModules>
+	<disabledConnections>
+		<count>0</count>
+		<item_version>0</item_version>
+	</disabledConnections>
+	<moduleTagLabels class_id="24" tracking_level="0" version="0">
+		<count>0</count>
+		<item_version>0</item_version>
+	</moduleTagLabels>
+	<loadTagGroups>0</loadTagGroups>
+	<subnetworks class_id="25" tracking_level="0" version="0">
+		<count>0</count>
+		<item_version>0</item_version>
+	</subnetworks>
+</networkFile>
+</boost_serialization>
+
