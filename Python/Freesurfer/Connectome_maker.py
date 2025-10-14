@@ -48,6 +48,10 @@ def build_parser():
   parser.add_argument("-f", "--force", required=False,
                       help="force a rewrite of files",
                       action = "store_true", dest="rerun")
+  parser.add_argument("-m", "--mapping", required=False,
+                      help="force a rewrite of files",
+                      default = "ANTs",  dest="mapping",
+                      choices=["ANTs", "nibabel"])
   return parser
 
 
@@ -66,6 +70,7 @@ def append_lookup_file(profile, **kwargs):
   experiment = profile["experiment"]
   stim_table = pd.read_csv(profile["stim_table"],index_col=False)
   stim_out = profile["stimoutpath"]
+  print("stim_out", stim_out)
   
   lookup = pd.read_csv(profile["lookup_table"],index_col=False)
   
@@ -165,19 +170,21 @@ def table_2_atlas_stim(st_lookup_file, profile, output_files, **kwargs ):
   
   seg_files = stim_lookup['Filename'][l_anat_idx+1:].unique()
   
-  return add_files_2_atlas(All_data, HCP, stim_lookup, seg_files, profile, output_files, HCP_fname = HCP_fname)
+  return add_files_2_atlas(All_data, HCP, stim_lookup, seg_files, profile, output_files, HCP_fname = HCP_fname, **kwargs)
   
     
   
 
 def add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, **kwargs):
 
-  if "HCP_fname" in kwargs:
-    HCP_fname = kwargs["HCP_fname"]
-    use_Ants = True
-  else:
-    print("cannot use Ants without the HCP_fname input")
-    use_Ants = False
+  default_kwargs = {"mapping" : "ANTs", "HCP_fname" : "" }
+  kwargs = { **default_kwargs, **kwargs}
+  
+  HCP_fname = kwargs["HCP_fname"]
+  mapping = kwargs["mapping"]
+  if not HCP_fname:
+    print("cannot use Ants without the HCP_fname input.  using nibable instead")
+    mapping = "nibabel"
     
 
   for file in seg_files:
@@ -192,9 +199,9 @@ def add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, *
   #
   #    if kwargs["rerun"] or not os.path.exists(resamp_fullfile):
   #
-    use_Ants=False
-    if use_Ants:
-      print("running with ants")
+    # TODO: should probably use a switcher here
+    if mapping == "ANTs":
+      print("running with ANTs")
       
       use_cli = True
     
@@ -302,7 +309,7 @@ def table_2_atlas(lookup_file, profile, output_files, **kwargs ):
     All_data[HCP_data == local_index[i]] = int(main_index[i])
 
 
-  return add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, HCP_fname = HCP_fname )
+  return add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, HCP_fname = HCP_fname, **kwargs )
   
   
 
@@ -350,7 +357,7 @@ def main():
     print(args.rerun)
     if args.rerun:
       print("overwriting output files")
-      table_2_atlas(lookup_file, profile, output_files, rerun = args.rerun  )
+      table_2_atlas(lookup_file, profile, output_files, rerun = args.rerun, mapping = args.mapping )
       profile["Connectome_maker"] = { "Output_files": output_files}
       
       with open(args.profile, 'w') as fp:
@@ -360,7 +367,7 @@ def main():
   else:
     # make sure to run the anatomy data
     # TODO: restructure to avoid all the repeat calls and profiles saves
-    table_2_atlas(lookup_file, profile, output_files, rerun = args.rerun  )
+    table_2_atlas(lookup_file, profile, output_files, rerun = args.rerun, mapping = args.mapping  )
     profile["Connectome_maker"] = { "Output_files": output_files}
     
     with open(args.profile, 'w') as fp:
@@ -406,7 +413,7 @@ def main():
 #      print("should make these files :")
 #      print(st_output_fs)
       
-      table_2_atlas_stim(st_lookup_file, profile, st_output_fs, rerun = args.rerun )
+      table_2_atlas_stim(st_lookup_file, profile, st_output_fs, rerun = args.rerun, mapping = args.mapping )
     
     ROIs = stim_output_files["ROIs"]
     stim_tags = stim_output_files["stim_tags"]
