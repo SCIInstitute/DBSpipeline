@@ -2,12 +2,12 @@
 
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=4
-#SBATCH --mem=8gb
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=32gb
 #SBATCH --time=6:00:00
 #SBATCH --job-name=Connectome
 #SBATCH --mail-type=ALL
-#SBATCH --output=Connectome_%j.out
+#SBATCH --output=Connectome_L_%j.out
 
 # example call
 # sbatch --mail-user="user"@ufl.edu calculate_connectome.sh -l  /blue/butsonc/Butson_Lab/Connectome/Testing/SubjectsShort.txt
@@ -26,7 +26,7 @@ then
   rel_path3="Tractography"
   rel_path4="Segmentations"
   module load jq
-#  module load ants
+  module load ants
 else
 #  rel_path1="MRtrix/Connectome"
 #  rel_path2="MRtrix/Tractography/Cleaned"

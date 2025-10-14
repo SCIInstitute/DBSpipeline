@@ -192,6 +192,7 @@ def add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, *
   #
   #    if kwargs["rerun"] or not os.path.exists(resamp_fullfile):
   #
+    use_Ants=False
     if use_Ants:
       print("running with ants")
       
