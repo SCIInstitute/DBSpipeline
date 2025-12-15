@@ -6,7 +6,7 @@ import nrrd
 import numpy as np
 import nibabel as nib
 
-from axisCheckerDefaults import axisObjectTemplate, nrrdSpaceCodes, chiralityTable
+from AxisCheckerDefaults import axisObjectTemplate, nrrdSpaceCodes, chiralityTable
 
 
 def build_parser():
@@ -18,7 +18,7 @@ def build_parser():
 
   # This will be implemented as rollout broadens
   parser.add_argument('filenames', nargs='+',
-            help = "list of image filenames to check axes (nrrd or nifti file types).  Minimum one filename. With more than 2 filenames, each file will be checked against the first" )
+            help = "list of image filenames to check axes (nrrd or nifti file types).  Minimum one filename. With multiple filenames, subsequent files will be checked against the first" )
   
   return parser
   
@@ -261,8 +261,64 @@ def compareAxes(axes1, axes2, **kwargs):
   
   return space_check and rot_check and origin_check
   
+
+def getAxes(filename, **kwargs):
+  dkwargs = {"verbose" : False }
+  kwargs = {**dkwargs, **kwargs}
   
+  o_fname = os.path.realpath(filename)
+
+  (data_path, name) = os.path.split(o_fname)
+
+  #  outputpath = os.path.join(data_path, "transformed")
+  #  outname =name[:-7]+"_transformed"
+  #  out_fname = os.path.join(outputpath, outname+".nrrd")
+
+  froot, ext = os.path.splitext(o_fname)
+  if ext == ".gz":
+    froot_, ext_ = os.path.splitext(froot)
+    if ext_ == ".nii":
+      froot = froot_
+      ext = ext_ + ext
+  if ext == ".nii.gz":
+    axes = getNiftiAxes(o_fname, **kwargs)
+  elif ext == ".nrrd":
+    axes = getNrrdAxes(o_fname, **kwargs)
+  else:
+    raise ValueError("file type not regonized : "+o_fname)
   
+  return axes
+
+def compareAllAxes(filenames, **kwargs):
+
+  first_axes = {}
+  all_axes = []
+  matching = []
+  
+  print(filenames)
+  
+  for fname in filenames:
+    print(fname)
+    axes = getAxes(fname, **kwargs)
+    
+    all_axes.append(axes.copy())
+    if not first_axes:
+      first_axes = axes.copy()
+      first_filename = fname
+      matching.append(True)
+      continue
+      
+    axes_compare = compareAxes(first_axes, axes)
+    matching.append(axes_compare)
+    
+    if not axes_compare:
+      print(fname, " axes do not match ", first_filename)
+  
+  print(matching)
+  if np.all(matching):
+    print("all readable files appear to match axes")
+      
+  return matching
   
 
 
@@ -270,51 +326,14 @@ def main():
   parser = build_parser()
   args = parser.parse_args()
 
-  
-  
-  
-  first_axes = {}
-  all_axes = []
-  
-  for fname in args.filenames:
-  
-    o_fname = os.path.realpath(fname)
-  
-    (data_path, name) = os.path.split(o_fname)
-  
-#  outputpath = os.path.join(data_path, "transformed")
-#  outname =name[:-7]+"_transformed"
-#  out_fname = os.path.join(outputpath, outname+".nrrd")
-
-    froot, ext = os.path.splitext(o_fname)
-    if ext == ".gz":
-      froot_, ext_ = os.path.splitext(froot)
-      if ext_ == ".nii":
-        froot = froot_
-        ext = ext_ + ext
-        
-    if ext == ".nii.gz":
-      axes = getNiftiAxes(o_fname, verbose = False)
-    elif ext == ".nrrd":
-      axes = getNrrdAxes(o_fname, verbose = False)
-    else:
-      print("file type not regonized : ", o_fname)
-      continue
+  if len(args.filenames)==1:
+    axes = getAxes(args.filenames[0], verbose = True)
+    return axes
+  else:
+    checkall = compareAllAxes(args.filenames)
+    return checkall
     
-    all_axes.append(axes.copy())
-    if not first_axes:
-      first_axes = axes.copy()
-      first_filename = o_fname
-      continue
-      
-    axes_compare = compareAxes(first_axes, axes)
-    
-    if not axes_compare:
-      print(o_fname, " axes do not match ", first_filename)
-      return False
-      
-  print("all readable files appear to match axes")
-  return True
+  return
 
   
 

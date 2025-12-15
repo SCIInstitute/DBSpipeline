@@ -25,6 +25,6 @@ nrrdSpaceCodes = {
 # do I need to make these exhaustive?
 chiralityTable = {
     "right" : ["RH", "LPS", "RAS", "XYZ" ],
-    "left"  : [ "LH", "LAS", "LIA"]
+    "left"  : [ "LH", "LAS", "RPS", "LIA"]
 }
 
