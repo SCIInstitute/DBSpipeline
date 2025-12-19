@@ -1,6 +1,7 @@
 import os
 import sys
 import argparse
+import copy
 
 import nrrd
 import numpy as np
@@ -21,6 +22,18 @@ def build_parser():
             help = "list of image filenames to check axes (nrrd or nifti file types).  Minimum one filename. With multiple filenames, subsequent files will be checked against the first" )
   
   return parser
+  
+def checkAxesInput(passed_args):
+
+  if not passed_args["axisObject"]:
+    axisObject = copy.deepcopy(axisObjectTemplate)
+  elif type(passed_args["axisObject"]) is dict:
+    axisObject = passed_args["axisObject"] # reference
+  else:
+    print("keyword arg 'axisObject' is expected to be a dict")
+    axisObject = copy.deepcopy(axisObjectTemplate)
+    
+  return axisObject
   
   
 def nrrdDimCheck(header):
@@ -57,19 +70,11 @@ def getNrrdAxes(filename, **kwargs):
   TODO: handling for vector, tensor data
   """
   
-  dkwargs = {"verbose" : False, "axisObject" : {} }
+  dkwargs = {"verbose" : False, "axisObject" : None }
   kwargs  = {**dkwargs, **kwargs}
   
-
-  if type(kwargs["axisObject"]) is dict:
-    axisObject = kwargs["axisObject"]
-  else:
-    print("keyword arg 'axisObject' is expected to be a dict")
-    axisObject = {}
-  
-  if not axisObject:
-    axisObject = axisObjectTemplate.copy()
-  
+  axisObject = checkAxesInput(kwargs)
+    
   imgdata, header = nrrd.read(filename)
   
   dim = nrrdDimCheck(header)
@@ -85,8 +90,8 @@ def getNrrdAxes(filename, **kwargs):
 #  print(axis_space)
 
   axisObject["axis_space"] = axis_space
-  axisObject["affine"][0:3,0:3] = header["space directions"]
-  axisObject["affine"][0:3,3] = header["space origin"]
+  axisObject["affine"][:3,:3] = header["space directions"].T
+  axisObject["affine"][:3,3] = header["space origin"]
   
   axisObject["source"] = "nrrd"
   
@@ -122,18 +127,10 @@ def getNiftiAxes(filename, **kwargs):
   # nibabel nifti header docs: https://nipy.org/nibabel/nifti_images.html
   """
   
-  dkwargs = {"verbose" : False, "axisObject" : {} }
+  dkwargs = {"verbose" : False, "axisObject" : None }
   kwargs  = {**dkwargs, **kwargs}
   
-
-  if type(kwargs["axisObject"]) is dict:
-    axisObject = kwargs["axisObject"]
-  else:
-    print("keyword arg 'axisObject' is expected to be a dict")
-    axisObject = {}
-  
-  if not axisObject:
-    axisObject = axisObjectTemplate.copy()
+  axisObject = checkAxesInput(kwargs)
   
   img = nib.load(filename)
   
@@ -300,14 +297,19 @@ def compareAllAxes(filenames, **kwargs):
   for fname in filenames:
     print(fname)
     axes = getAxes(fname, **kwargs)
+#    print("axes : ", axes)
     
     all_axes.append(axes.copy())
     if not first_axes:
       first_axes = axes.copy()
       first_filename = fname
       matching.append(True)
+#      print("first file")
       continue
-      
+    
+#    print("Reference axes : ", first_axes)
+#    print("axes : ", axes)
+    
     axes_compare = compareAxes(first_axes, axes)
     matching.append(axes_compare)
     
@@ -326,10 +328,13 @@ def main():
   parser = build_parser()
   args = parser.parse_args()
 
+  print("number of files : ", len(args.filenames))
   if len(args.filenames)==1:
+    print("running one")
     axes = getAxes(args.filenames[0], verbose = True)
     return axes
   else:
+    print("running compareall")
     checkall = compareAllAxes(args.filenames)
     return checkall
     
