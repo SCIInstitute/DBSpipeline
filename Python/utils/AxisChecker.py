@@ -301,6 +301,11 @@ def checkRotations(axes1, axes2, **kwargs):
   ax_mat2 = np.array([ codeAxes[ax] for ax in axes2["axis_space"]]).T
 #  print(ax_mat2)
 
+
+# This checks if the Axis label is not RAS and if it matches the axes as if RAS were the basis.  This will check some of the ways that SCIRun may interpret the differently from other software.  Specifically, it checks to see if the axis code is the basis of the transform or a descriptor of the transform.  We check for differences with an RAS basis and can make suggestions if there is misalignment.
+
+# There are other interpretations happening, and may need to be addressed.  
+
   if chir1 == mat_chir1 or chir1 == "RAS":
     rot1_ = rot1
   else:
@@ -325,8 +330,44 @@ def checkRotations(axes1, axes2, **kwargs):
     
     print("perm mat 1 = ")
     print(rot1_)
+    mat_code1_ = matrix2Code(rot1_)
+    print("estimated axes : ", mat_code1_)
+
     print("perm mat 2 = ")
     print(rot2_)
+    mat_code2_ = matrix2Code(rot2_)
+    print("estimated axes : ", mat_code2_)
+    
+    if not mat_code1_ == mat_code2_:
+      print("trying another correction")
+      ax_mat1_ = np.array([ codeAxes[ax] for ax in mat_code1]).T
+      perm_mat1 = np.dot(ax_mat1, ax_mat1_.T)
+      rot1_ = np.dot(perm_mat1, rot1)
+      
+      print(ax_mat1_)
+      print(perm_mat1)
+      print("perm mat 1 = ")
+      print(rot1_)
+      mat_code1_ = matrix2Code(rot1_)
+      print("estimated axes : ", mat_code1_)
+    
+      ax_mat2_ = np.array([ codeAxes[ax] for ax in mat_code2]).T
+      perm_mat2 = np.dot(ax_mat2, ax_mat2_.T)
+      rot2_ = np.dot(perm_mat2, rot2)
+      
+      
+      print(ax_mat2_)
+      print(perm_mat2)
+      print("perm mat 2 = ")
+      print(rot2_)
+      mat_code2_ = matrix2Code(rot2_)
+      print("estimated axes : ", mat_code2_)
+      
+      
+      
+      
+      
+      
     
     theta_, diff_mat_ = checkRotationAngle(rot1_, rot2_)
     print("different mat perm : ", diff_mat_)
