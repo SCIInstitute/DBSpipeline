@@ -468,18 +468,18 @@ def compareAllAxes(filenames, **kwargs):
   for fname in filenames:
     print(fname)
     axes = getAxes(fname, **kwargs)
-#    print("axes : ", axes)
+    print("axes : ", axes)
     
-    all_axes.append(axes.copy())
+    all_axes.append(copy.deepcopy(axes))
     if not first_axes:
-      first_axes = axes.copy()
+      first_axes = copy.deepcopy(axes)
       first_filename = fname
       matching.append(True)
-#      print("first file")
+      print("first file")
       continue
     
-#    print("Reference axes : ", first_axes)
-#    print("axes : ", axes)
+    print("Reference axes : ", first_axes)
+    print("axes : ", axes)
     
     axes_compare = compareAxes(first_axes, axes)
     matching.append(axes_compare)
