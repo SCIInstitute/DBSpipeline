@@ -28,8 +28,11 @@ import subprocess
 #sys.path.append(os.path.join(os.path.dirname(__file__), "..", "MRtrix" ))
 print(os.path.join(os.environ["CODEDIR"], "Python/MRtrix" ))
 sys.path.append(os.path.join(os.environ["CODEDIR"], "Python/MRtrix" ))
+sys.path.append(os.path.join(os.environ["CODEDIR"], "Python/utils" ))
  
 from NRRDConverter import readNRRD
+from AxisChecker import getAxes, compareAxes
+
 
 def build_parser():
   parser = argparse.ArgumentParser(
@@ -185,7 +188,8 @@ def add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, *
   if not HCP_fname:
     print("cannot use Ants without the HCP_fname input.  using nibable instead")
     mapping = "nibabel"
-    
+  
+  hcp_axes = getAxes(HCP_fname)
 
   for file in seg_files:
     seg_dirs = lookup['Path'][lookup['Filename'] == file].unique()[0]
@@ -195,6 +199,14 @@ def add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, *
     fullfile = os.path.join(profile["segPath"], seg_dirs, file)
     #
     # saving resampled images to save time
+    
+    # check for axis continuity
+    seg_axes = getAxes(fullfile)
+    
+    if not compareAxes(hcp_axes, seg_axes):
+      print("WARNING: Axes of input files are inconsistently encoded. Please check to make sure the files are properly registered.")
+      
+    
     
   #
   #    if kwargs["rerun"] or not os.path.exists(resamp_fullfile):
@@ -405,7 +417,8 @@ def main():
       
       st_lookup_file = stim_output_files["lookup_tables"][idx]
 #      st_lookup = pd.read_csv(stim_output_files["lookup_tables"][idx], index_col=False)
-      st_output_fs = {"nifti_outputfile": stim_output_files["nifti_outputfiles"][idx],
+      st_output_fs = {
+          "nifti_outputfile": stim_output_files["nifti_outputfiles"][idx],
           "nifti_lookup_outputfile" : stim_output_files["nifti_lookup_outputfiles"][idx],
           "matkey_outputname" : stim_output_files["matkey_outputnames"][idx]
       }
