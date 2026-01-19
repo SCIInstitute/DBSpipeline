@@ -134,13 +134,13 @@ def getNiftiAxes(filename, **kwargs):
   
   img = nib.load(filename)
 #  
-#  axisObject["affine"] = img.affine
-#  axis_space = "".join(nib.aff2axcodes(img.affine))
-##  print(axis_space)
-#  axisObject["axis_space"] = axis_space
-#  axisObject["source"] = "nifti"
-#  
-#  axisObject["header"] = img.header
+  axisObject["affine"] = img.affine
+  axis_space = "".join(nib.aff2axcodes(img.affine))
+#  print(axis_space)
+  axisObject["axis_space"] = axis_space
+  axisObject["source"] = "nifti"
+  
+  axisObject["header"] = img.header
 #  
 
   if kwargs["verbose"]:
