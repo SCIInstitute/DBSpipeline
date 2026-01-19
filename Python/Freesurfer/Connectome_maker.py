@@ -23,6 +23,7 @@ import os
 import sys
 import nrrd
 import subprocess
+import time
 
 #print(os.path.join(os.path.dirname(__file__), "..", "MRtrix" ))
 #sys.path.append(os.path.join(os.path.dirname(__file__), "..", "MRtrix" ))
@@ -140,12 +141,14 @@ def check_lookup_files(anat_lookup_file, lookup_file):
   
   
 def table_2_atlas_stim(st_lookup_file, profile, output_files, **kwargs ):
+  start=time.time()
   default_kwargs = {"rerun" : False}
   kwargs = { **default_kwargs, **kwargs}
 
   print("==========")
   print("Appending Atlas file from for stim lookup table: ")
   print(st_lookup_file)
+  print(time.time() - start)
   
   anat_output_files =  profile["Connectome_maker"]["Output_files"]
 
@@ -173,12 +176,14 @@ def table_2_atlas_stim(st_lookup_file, profile, output_files, **kwargs ):
   
   seg_files = stim_lookup['Filename'][l_anat_idx+1:].unique()
   
+  print("running add_files_2_atlas :", time.time() - start)
   return add_files_2_atlas(All_data, HCP, stim_lookup, seg_files, profile, output_files, HCP_fname = HCP_fname, **kwargs)
   
     
   
 
 def add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, **kwargs):
+  start=time.time()
 
   default_kwargs = {"mapping" : "ANTs", "HCP_fname" : "" }
   kwargs = { **default_kwargs, **kwargs}
@@ -190,7 +195,7 @@ def add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, *
     mapping = "nibabel"
   
   hcp_axes = getAxes(HCP_fname)
-
+  print("looping through seg files: ", time.time() - start)
   for file in seg_files:
     seg_dirs = lookup['Path'][lookup['Filename'] == file].unique()[0]
     main_index = np.array(lookup['Index'][lookup['Filename'] == file])
@@ -212,8 +217,10 @@ def add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, *
   #    if kwargs["rerun"] or not os.path.exists(resamp_fullfile):
   #
     # TODO: should probably use a switcher here
+    print("pre-mapping : ", time.time() - start)
     if mapping == "ANTs":
       print("running with ANTs")
+      print( time.time() - start)
       
       use_cli = True
     
@@ -248,61 +255,82 @@ def add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, *
         image_write(res_img_ants, resamp_fullfile)
         
       img_resamp = nibabel.load(resamp_fullfile)
-      
+      print("ants done :", time.time() - start)
     else:
       print("running with nibabel")
+      print( time.time() - start)
       if os.path.splitext(file)[1] == ".nrrd":
         img = readNRRD(fullfile)
       else:
         img = nibabel.load(fullfile)
       #
       img_resamp = nibabel.processing.resample_from_to(img, HCP,order=0)
+      print("nibabel done :", time.time() - start)
 #    print(img_resamp)
+    print("post-mapping :", time.time() - start)
   
     img_data = img_resamp.get_fdata()
     data_add = img_data.copy()
-      
+    
+    print("data copy :", time.time() - start)
+    # TODO: this loop is slow on the first run (without stim) ~40s on laptop. It runs several times (number of seg files in the table), but isn't as slow on the other files.  This probably depends on the number of labels copied over.  On the stimulation files, it is much quicker (.10 s)
     for j in range(0,len(local_index)):
       data_add[img_data == local_index[j]] = int(main_index[j])
     #
+    print("data indexed ", len(local_index), " layers : ",  time.time() - start)
     All_data[data_add != 0] = data_add[data_add != 0]
+    print("data reassigned :", time.time() - start)
+    
+    print("end loop : ", time.time() - start)
+  print("end all loops:", time.time() - start)
     
   All_data = All_data.astype(int)
   All_to_nii = nibabel.Nifti1Image(All_data, HCP.affine, HCP.header)
   
   nibabel.save(All_to_nii, output_files["nifti_lookup_outputfile"])
 
+  print("saved nifti file:", time.time() - start)
+  
   #Create Key for MRtrix image
   mrtrix_key = {  'Lookup Index' : np.unique(All_data)[1:].tolist(),
                   'MRtrix Index' : list(range(1,len(np.unique(All_data)[1:].tolist())+1))
   }
   
+  # TODO: This loop is slow with stimulation data (~40 s), not with atlas data (0.1 s)
+  print("copying data again:", time.time() - start)
   mrtrix_data = All_data.copy()
+  print("copying :", time.time() - start)
   for i in range(0,len(mrtrix_key['Lookup Index'])):
       mrtrix_data[All_data == mrtrix_key['Lookup Index'][i]] = mrtrix_key['MRtrix Index'][i]
-      
+  print("copied ", len(mrtrix_key['Lookup Index']), " layers : ", time.time() - start)
+  
   mrtrix_to_nii = nibabel.Nifti1Image(mrtrix_data, HCP.affine, HCP.header)
   nibabel.save(mrtrix_to_nii, output_files["nifti_outputfile"] )
+  print("saved nifti lookup:", time.time() - start)
   mrtrix_save = pd.DataFrame(data=mrtrix_key)
   
   mrtrix_save.to_csv(output_files["matkey_outputname"])
+  print("saved csv lookup:", time.time() - start)
   
   print("files generated:")
   print(output_files)
+  print("end add_files_2_atlas", time.time() - start)
   
   return mrtrix_save
   
   
   
 def table_2_atlas(lookup_file, profile, output_files, **kwargs ):
+  start = time.time()
   default_kwargs = {"rerun" : False}
   kwargs = { **default_kwargs, **kwargs}
 
   print("==========")
   print("Making Atlas file from lookup table: ")
   print(lookup_file)
-  
+  print(time.time() - start)
   lookup = pd.read_csv(lookup_file,index_col=False)
+  print("read csv file : ", time.time() - start)
   seg_files = lookup['Filename'].unique()
   #seg_dirs = lookup['Path'].unique()
   seg_dirs = lookup['Path'][lookup['Filename'] == seg_files[0]].unique()[0]
@@ -310,22 +338,32 @@ def table_2_atlas(lookup_file, profile, output_files, **kwargs ):
   #Load HCP first always. This will be the reference
 #  print(seg_files)
   HCP_fname = os.path.join(profile["segPath"], seg_dirs, seg_files[0])
+  print("reading hcp file : ", time.time() - start)
   HCP = nibabel.load(HCP_fname)
   HCP_data = HCP.get_fdata()
-  
+  print("read hcp file : ", time.time() - start)
   main_index = np.array(lookup['Index'][lookup['Filename'] == seg_files[0]])
   local_index = np.array(lookup['File Index'][lookup['Filename'] == seg_files[0]])
-
+  
+  print("copying data : ", time.time() - start)
   All_data = HCP_data.copy()
+  print("copied : ", time.time() - start)
+  
+  # TODO: this loop is pretty slow (35 s on laptop)
   for i in range(0,len(local_index)):
     All_data[HCP_data == local_index[i]] = int(main_index[i])
+  print("reindexed ", len(local_index), " layers ",  time.time() - start)
 
-
+  print("running add_files_2_atlas : ", time.time() - start)
   return add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, HCP_fname = HCP_fname, **kwargs )
   
   
 
 def main():
+  start = time.time()
+  print("starting main()")
+
+
 
   parser = build_parser()
   args = parser.parse_args()
@@ -363,13 +401,15 @@ def main():
   out_check = [os.path.exists(f_name ) for f_var, f_name in output_files.items() ]
   
 #  print(out_check)
-  
+  print("output check point time: ", time.time() - start)
   if all(out_check):
     print("files all exist")
     print(args.rerun)
     if args.rerun:
       print("overwriting output files")
+      print("pre-table_2_atlas: ", time.time() - start)
       table_2_atlas(lookup_file, profile, output_files, rerun = args.rerun, mapping = args.mapping )
+      print("post-table_2_atlas: ", time.time() - start)
       profile["Connectome_maker"] = { "Output_files": output_files}
       
       with open(args.profile, 'w') as fp:
@@ -379,7 +419,9 @@ def main():
   else:
     # make sure to run the anatomy data
     # TODO: restructure to avoid all the repeat calls and profiles saves
+    print("pre-table_2_atlas: ", time.time() - start)
     table_2_atlas(lookup_file, profile, output_files, rerun = args.rerun, mapping = args.mapping  )
+    print("post-table_2_atlas: ", time.time() - start)
     profile["Connectome_maker"] = { "Output_files": output_files}
     
     with open(args.profile, 'w') as fp:
@@ -389,6 +431,7 @@ def main():
   
   if args.stim:
     print("running stimulation data")
+    print(time.time() - start)
     if "stim_table" in profile.keys():
       if not os.path.exists(profile["stim_table"]):
         raise ValueError("cannot find stimulation table: "+profile["stim_table"])
@@ -403,7 +446,7 @@ def main():
     
 #    print(stim_out_check)
 #    print(np.all(stim_out_check))
-    
+    print("stim output check point time: ", time.time() - start)
     if np.all(stim_out_check):
       print("stim files all exist")
       print(args.rerun)
@@ -413,6 +456,7 @@ def main():
         print("stim output files exist.  Use '-f' to force overwrite")
         return
     
+    print("starting loop through stim files: ", time.time() - start)
     for idx in range(len(stim_output_files["lookup_tables"])):
       
       st_lookup_file = stim_output_files["lookup_tables"][idx]
@@ -425,8 +469,10 @@ def main():
       
 #      print("should make these files :")
 #      print(st_output_fs)
-      
+      print("pre-table_2_atlas_stim: ", time.time() - start)
       table_2_atlas_stim(st_lookup_file, profile, st_output_fs, rerun = args.rerun, mapping = args.mapping )
+      print("post-table_2_atlas_stim: ", time.time() - start)
+      print("end loop ", idx, " : ", time.time() - start)
     
     ROIs = stim_output_files["ROIs"]
     stim_tags = stim_output_files["stim_tags"]
@@ -450,6 +496,8 @@ def main():
         
     with open(args.profile, 'w') as fp:
       json.dump(profile, fp, sort_keys=True, indent=2)
+    
+  print("end main() : ", time.time() - start)
     
 
 if __name__ == "__main__":

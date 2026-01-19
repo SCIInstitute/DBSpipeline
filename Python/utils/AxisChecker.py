@@ -133,15 +133,15 @@ def getNiftiAxes(filename, **kwargs):
   axisObject = checkAxesInput(kwargs)
   
   img = nib.load(filename)
-  
-  axisObject["affine"] = img.affine
-  axis_space = "".join(nib.aff2axcodes(img.affine))
-#  print(axis_space)
-  axisObject["axis_space"] = axis_space
-  axisObject["source"] = "nifti"
-  
-  axisObject["header"] = img.header
-  
+#  
+#  axisObject["affine"] = img.affine
+#  axis_space = "".join(nib.aff2axcodes(img.affine))
+##  print(axis_space)
+#  axisObject["axis_space"] = axis_space
+#  axisObject["source"] = "nifti"
+#  
+#  axisObject["header"] = img.header
+#  
 
   if kwargs["verbose"]:
     print("Affine = ",  img.affine)
@@ -258,19 +258,19 @@ def checkRotations(axes1, axes2, **kwargs):
   
   rot1 = normalizeRotation(axes1["affine"][:3,:3])
   
-  print("check axis 1")
-  print(axes1["affine"][:3,:3])
-  print(rot1)
+#  print("check axis 1")
+#  print(axes1["affine"][:3,:3])
+#  print(rot1)
   mat_code1 = matrix2Code(rot1)
-  print("estimated axes : ", mat_code1)
+#  print("estimated axes : ", mat_code1)
 
   rot2 = normalizeRotation(axes2["affine"][:3,:3])
 
-  print("check axis 2")
-  print(axes2["affine"][:3,:3])
-  print(rot2)
+#  print("check axis 2")
+#  print(axes2["affine"][:3,:3])
+#  print(rot2)
   mat_code2 = matrix2Code(rot2)
-  print("estimated axes : ", mat_code2)
+#  print("estimated axes : ", mat_code2)
 
   mat_chir1 = checkChiral(rot1)
   mat_chir2 = checkChiral(rot2)
@@ -282,8 +282,8 @@ def checkRotations(axes1, axes2, **kwargs):
   
   theta, diff_mat = checkRotationAngle(rot1, rot2)
   
-  print("different mat : ", diff_mat)
-  print("theta = ", theta)
+#  print("different mat : ", diff_mat)
+#  print("theta = ", theta)
   
 #  rot2_check = np.dot(diff_mat, rot2)
 #  
