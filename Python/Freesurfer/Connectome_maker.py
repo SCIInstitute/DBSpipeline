@@ -24,6 +24,7 @@ import sys
 import nrrd
 import subprocess
 import time
+import copy
 
 #print(os.path.join(os.path.dirname(__file__), "..", "MRtrix" ))
 #sys.path.append(os.path.join(os.path.dirname(__file__), "..", "MRtrix" ))
@@ -304,10 +305,15 @@ def add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, *
   
   # TODO: This loop is slow with stimulation data (~40 s), not with atlas data (0.1 s)
   print("copying data again:", time.time() - start)
+  print(type(All_data), All_data.shape, type(All_data[0,0,0]))
   mrtrix_data = All_data.copy()
   print("copying :", time.time() - start)
+  print(type(mrtrix_data), mrtrix_data.shape, type(mrtrix_data[0,0,0]))
+  
+  # TODO: this is really slow with the stim data, but not the atlas data
   for i in range(0,len(mrtrix_key['Lookup Index'])):
       mrtrix_data[All_data == mrtrix_key['Lookup Index'][i]] = mrtrix_key['MRtrix Index'][i]
+      print("loop ", i, " iteration : ", time.time() - start)
   print("copied ", len(mrtrix_key['Lookup Index']), " layers : ", time.time() - start)
   
   mrtrix_to_nii = nibabel.Nifti1Image(mrtrix_data, HCP.affine, HCP.header)
@@ -352,14 +358,18 @@ def table_2_atlas(lookup_file, profile, output_files, **kwargs ):
   local_index = np.array(lookup['File Index'][lookup['Filename'] == seg_files[0]])
   
   print("copying data : ", time.time() - start)
-  All_data = HCP_data.copy()
+#  All_data = HCP_data.copy()
+  All_data = copy.deepcopy(HCP_data)
   print("copied : ", time.time() - start)
+  print(type(All_data), All_data.shape, type(All_data[0,0,0]))
   
   # TODO: this loop is pretty slow (35 s on laptop)
   for i in range(0,len(local_index)):
     All_data[HCP_data == local_index[i]] = int(main_index[i])
+    print("loop index ", i , " : ",  time.time() - start)
   print("reindexed ", len(local_index), " layers ",  time.time() - start)
-
+  print("check copy : ", np.all(All_data==HCP_data))
+  print(type(All_data), All_data.shape, type(All_data[0,0,0]))
   print("running add_files_2_atlas : ", time.time() - start)
   return add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, HCP_fname = HCP_fname, **kwargs )
   
