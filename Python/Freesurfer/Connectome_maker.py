@@ -277,15 +277,29 @@ def add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, *
     print("post-mapping :", time.time() - start)
   
     img_data = img_resamp.get_fdata()
-    data_add = img_data.copy()
     
+    print("data copy short : ", time.time() - start)
+    lut = np.zeros(max(local_index)+1)
+    print(local_index)
+    print(main_index)
+    lut[local_index] = main_index
+    data_add_short = lut[img_data.astype(int)]
+    print("copied short : ", time.time() - start)
+    
+    All_data_short = All_data.copy()
+    
+    data_add = img_data.copy()
     print("data copy :", time.time() - start)
     # TODO: this loop is slow on the first run (without stim) ~40s on laptop. It runs several times (number of seg files in the table), but isn't as slow on the other files.  This probably depends on the number of labels copied over.  On the stimulation files, it is much quicker (.10 s)
     for j in range(0,len(local_index)):
       data_add[img_data == local_index[j]] = int(main_index[j])
     #
     print("data indexed ", len(local_index), " layers : ",  time.time() - start)
+    
+    print("compare short : ", np.all( data_add == data_add_short) )
+    
     All_data[data_add != 0] = data_add[data_add != 0]
+    All_data_short[data_add_short != 0] = data_add_short[data_add_short != 0]
     print("data reassigned :", time.time() - start)
     
     print("end loop : ", time.time() - start)
@@ -295,6 +309,9 @@ def add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, *
   All_to_nii = nibabel.Nifti1Image(All_data, HCP.affine, HCP.header)
   
   nibabel.save(All_to_nii, output_files["nifti_lookup_outputfile"])
+  
+  All_short_to_nii = nibabel.Nifti1Image(All_data_short.astype(int), HCP.affine, HCP.header)
+  nibabel.save(All_short_to_nii, output_files["nifti_lookup_outputfile"][:-7] + "_testoutput" + output_files["nifti_lookup_outputfile"][-7:])
 
   print("saved nifti file:", time.time() - start)
   
@@ -303,22 +320,34 @@ def add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, *
                   'MRtrix Index' : list(range(1,len(np.unique(All_data)[1:].tolist())+1))
   }
   
-  # TODO: This loop is slow with stimulation data (~40 s), not with atlas data (0.1 s)
+  print("copying data short:", time.time() - start)
+  lookup_table = np.zeros(max(mrtrix_key['Lookup Index'])+1)
+  lookup_table[mrtrix_key['Lookup Index']] = mrtrix_key['MRtrix Index']
+  mrtrix_data_short = lookup_table[All_data]
+  print("short copied ", len(mrtrix_key['Lookup Index']), " layers : ", time.time() - start)
+  
+  mrtrix_short_to_nii = nibabel.Nifti1Image(mrtrix_data_short, HCP.affine, HCP.header)
+  nibabel.save(mrtrix_short_to_nii, output_files["nifti_outputfile"][:-7] + "_testoutput" + output_files["nifti_outputfile"][-7:])
+  
+
   print("copying data again:", time.time() - start)
   print(type(All_data), All_data.shape, type(All_data[0,0,0]))
   mrtrix_data = All_data.copy()
   print("copying :", time.time() - start)
   print(type(mrtrix_data), mrtrix_data.shape, type(mrtrix_data[0,0,0]))
   
-  # TODO: this is really slow with the stim data, but not the atlas data
+  # TODO: this is really slow with the stim data, not always with the atlas data
   for i in range(0,len(mrtrix_key['Lookup Index'])):
       mrtrix_data[All_data == mrtrix_key['Lookup Index'][i]] = mrtrix_key['MRtrix Index'][i]
-      print("loop ", i, " iteration : ", time.time() - start)
+#      print("loop ", i, " iteration : ", time.time() - start)
   print("copied ", len(mrtrix_key['Lookup Index']), " layers : ", time.time() - start)
+  
+  print("compare to short : ", np.all(mrtrix_data == mrtrix_data_short ))
   
   mrtrix_to_nii = nibabel.Nifti1Image(mrtrix_data, HCP.affine, HCP.header)
   nibabel.save(mrtrix_to_nii, output_files["nifti_outputfile"] )
   print("saved nifti lookup:", time.time() - start)
+  
   mrtrix_save = pd.DataFrame(data=mrtrix_key)
   
   mrtrix_save.to_csv(output_files["matkey_outputname"])
@@ -357,6 +386,13 @@ def table_2_atlas(lookup_file, profile, output_files, **kwargs ):
   main_index = np.array(lookup['Index'][lookup['Filename'] == seg_files[0]])
   local_index = np.array(lookup['File Index'][lookup['Filename'] == seg_files[0]])
   
+  print("data copy short : ", time.time() - start)
+  lut = np.zeros(max(local_index)+1)
+  lut[local_index] = main_index
+  All_data_short = lut[HCP_data.astype(int)]
+  print("data copied shortly : ", time.time() - start)
+  
+  
   print("copying data : ", time.time() - start)
 #  All_data = HCP_data.copy()
   All_data = copy.deepcopy(HCP_data)
@@ -366,10 +402,13 @@ def table_2_atlas(lookup_file, profile, output_files, **kwargs ):
   # TODO: this loop is pretty slow (35 s on laptop)
   for i in range(0,len(local_index)):
     All_data[HCP_data == local_index[i]] = int(main_index[i])
-    print("loop index ", i , " : ",  time.time() - start)
+#    print("loop index ", i , " : ",  time.time() - start)
   print("reindexed ", len(local_index), " layers ",  time.time() - start)
   print("check copy : ", np.all(All_data==HCP_data))
   print(type(All_data), All_data.shape, type(All_data[0,0,0]))
+  
+  print("check_short : ", np.all(All_data_short == All_data))
+  
   print("running add_files_2_atlas : ", time.time() - start)
   return add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, HCP_fname = HCP_fname, **kwargs )
   
