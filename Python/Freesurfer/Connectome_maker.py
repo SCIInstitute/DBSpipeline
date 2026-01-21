@@ -196,7 +196,7 @@ def add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, *
     mapping = "nibabel"
   
 #  print(HCP_fname)
-  hcp_axes = getAxes(HCP_fname)
+  hcp_axes = getNiftiObjAxes(HCP)
 #  print("hcp_axes ", hcp_axes)
 
   All_data_short = copy.deepcopy(All_data).astype(int)
@@ -280,7 +280,12 @@ def add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, *
 #    print(img_resamp)
     print("post-mapping :", time.time() - start)
     
-    seg_axes = getAxes(fullfile)
+    seg_resamp_axes = getNiftiObjAxes(img_resamp)
+    
+    if not compareAxes(hcp_axes, seg_resamp_axes):
+      print("WARNING: Axes of resampled segmentation do not match reference image")
+    else:
+      print("Axes of resampled segmentation and reference image match")
   
     img_data = img_resamp.get_fdata()
     
