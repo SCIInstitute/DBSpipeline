@@ -61,10 +61,7 @@ def nrrdDimCheck(header):
   return reported_dim
   
   
-  
-  
-  
-def getNrrdAxes(filename, **kwargs):
+def getNrrdObjAxes(imgdata, header, **kwargs):
   """
   Designed for NRRD005 and 3D data (space dim = 3, no time serieses)
   TODO: handling for vector, tensor data
@@ -74,8 +71,6 @@ def getNrrdAxes(filename, **kwargs):
   kwargs  = {**dkwargs, **kwargs}
   
   axisObject = checkAxesInput(kwargs)
-    
-  imgdata, header = nrrd.read(filename)
   
   dim = nrrdDimCheck(header)
   
@@ -101,9 +96,17 @@ def getNrrdAxes(filename, **kwargs):
     print("axisObject = ", axisObject)
 #    print("nrrd header = ", header)
     
-  
-  
   return axisObject
+  
+  
+def getNrrdAxes(filename, **kwargs):
+  """
+  Wrapper for getNrrdObjAxes
+  """
+    
+  imgdata, header = nrrd.read(filename)
+  
+  return getNrrdObjAxes(imgdata, header, **kwargs)
   
 
 def checkNrrdAxes(filename, **kwargs):
@@ -117,8 +120,7 @@ def checkNrrdAxes(filename, **kwargs):
   
   return getNrrdAxes(filename, **kwargs)
 
-
-def getNiftiAxes(filename, **kwargs):
+def getNiftiObjAxes(img, **kwargs):
   """
   assumes nifti1
   
@@ -131,9 +133,7 @@ def getNiftiAxes(filename, **kwargs):
   kwargs  = {**dkwargs, **kwargs}
   
   axisObject = checkAxesInput(kwargs)
-  
-  img = nib.load(filename)
-#  
+#
   axisObject["affine"] = img.affine
   axis_space = "".join(nib.aff2axcodes(img.affine))
 #  print(axis_space)
@@ -141,7 +141,7 @@ def getNiftiAxes(filename, **kwargs):
   axisObject["source"] = "nifti"
   
   axisObject["header"] = img.header
-#  
+#
 
   if kwargs["verbose"]:
     print("Affine = ",  img.affine)
@@ -152,10 +152,19 @@ def getNiftiAxes(filename, **kwargs):
     print("base ax codes = ", nib.aff2axcodes(img.header.get_base_affine()))
   #  print("header = ", img.header)
     print("axisObject = ", axisObject)
-    
-  
 
   return axisObject
+  
+
+def getNiftiAxes(filename, **kwargs):
+  """
+  wrapper for getNiftiObjAxes
+  """
+
+  img = nib.load(filename)
+
+  return getNiftiObjAxes(img, **kwargs)
+  
 
 def checkNiftiAxes(filename, **kwargs):
   
