@@ -291,8 +291,8 @@ def add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, *
     
     print("data copy short : ", time.time() - start)
     lut = np.zeros(max(local_index)+1)
-#    print(local_index)
-#    print(main_index)
+    #    print(local_index)
+    #    print(main_index)
     lut[local_index] = main_index
     data_add_short = lut[img_data.astype(int)]
     print("copied short : ", time.time() - start)
@@ -319,11 +319,13 @@ def add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, *
   print("end all loops:", time.time() - start)
     
   All_data = All_data.astype(int)
-  All_to_nii = nibabel.Nifti1Image(All_data, HCP.affine, HCP.header)
+  All_to_nii = nibabel.Nifti1Image(All_data.astype(np.uint32), HCP.affine, HCP.header)
   
   nibabel.save(All_to_nii, output_files["nifti_lookup_outputfile"])
   
-  All_short_to_nii = nibabel.Nifti1Image(All_data_short.astype(int), HCP.affine, HCP.header)
+  # is this step crucial?
+  All_data_short = All_data_short.astype(int)
+  All_short_to_nii = nibabel.Nifti1Image(All_data_short.astype(np.uint32), HCP.affine, HCP.header)
   nibabel.save(All_short_to_nii, output_files["nifti_lookup_outputfile"][:-7] + "_testoutput" + output_files["nifti_lookup_outputfile"][-7:])
 
   print("saved nifti file:", time.time() - start)
@@ -336,10 +338,13 @@ def add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, *
   print("copying data short:", time.time() - start)
   lookup_table = np.zeros(max(mrtrix_key['Lookup Index'])+1)
   lookup_table[mrtrix_key['Lookup Index']] = mrtrix_key['MRtrix Index']
+  print("lookup table matrix")
+  print(lookup_table)
+  
   mrtrix_data_short = lookup_table[All_data_short]
   print("short copied ", len(mrtrix_key['Lookup Index']), " layers : ", time.time() - start)
   
-  mrtrix_short_to_nii = nibabel.Nifti1Image(mrtrix_data_short, HCP.affine, HCP.header)
+  mrtrix_short_to_nii = nibabel.Nifti1Image(mrtrix_data_short.astype(np.uint32), HCP.affine, HCP.header)
   nibabel.save(mrtrix_short_to_nii, output_files["nifti_outputfile"][:-7] + "_testoutput" + output_files["nifti_outputfile"][-7:])
   
   mrtrix_data_short_2 = lookup_table[All_data]
@@ -366,7 +371,7 @@ def add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, *
   
   print("compare to short (mrtrix_data) : ", np.all(mrtrix_data == mrtrix_data_short ))
   
-  mrtrix_to_nii = nibabel.Nifti1Image(mrtrix_data, HCP.affine, HCP.header)
+  mrtrix_to_nii = nibabel.Nifti1Image(mrtrix_data.astype(np.uint32), HCP.affine, HCP.header)
   nibabel.save(mrtrix_to_nii, output_files["nifti_outputfile"] )
   print("saved nifti lookup:", time.time() - start)
   
@@ -407,7 +412,7 @@ def table_2_atlas(lookup_file, profile, output_files, **kwargs ):
   print("read hcp file : ", time.time() - start)
   main_index = np.array(lookup['Index'][lookup['Filename'] == seg_files[0]])
   local_index = np.array(lookup['File Index'][lookup['Filename'] == seg_files[0]])
-  
+
   print("data copy short : ", time.time() - start)
   lut = np.zeros(max(local_index)+1)
   lut[local_index] = main_index
