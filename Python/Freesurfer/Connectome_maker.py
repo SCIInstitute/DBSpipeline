@@ -339,6 +339,18 @@ def add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, *
   mrtrix_data_short = lookup_table[All_data_short]
   print("short copied ", len(mrtrix_key['Lookup Index']), " layers : ", time.time() - start)
   
+  mrtrix_short_to_nii = nibabel.Nifti1Image(mrtrix_data_short, HCP.affine, HCP.header)
+  nibabel.save(mrtrix_short_to_nii, output_files["nifti_outputfile"][:-7] + "_testoutput" + output_files["nifti_outputfile"][-7:])
+  
+  mrtrix_data_short_2 = lookup_table[All_data]
+  print("short copied 2 ", len(mrtrix_key['Lookup Index']), " layers : ", time.time() - start)
+  
+  
+  mrtrix_short_to_nii_2 = nibabel.Nifti1Image(mrtrix_data_short_2, HCP.affine, HCP.header)
+  nibabel.save(mrtrix_short_to_nii_2, output_files["nifti_outputfile"][:-7] + "_testoutput_2" + output_files["nifti_outputfile"][-7:])
+  
+  print("compare short datas together (mrtrix_data) : ", np.all(mrtrix_data_short_2 == mrtrix_data_short ))
+  
 
   print("copying data again:", time.time() - start)
   print(type(All_data), All_data.shape, type(All_data[0,0,0]))
@@ -353,9 +365,6 @@ def add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, *
   print("copied ", len(mrtrix_key['Lookup Index']), " layers : ", time.time() - start)
   
   print("compare to short (mrtrix_data) : ", np.all(mrtrix_data == mrtrix_data_short ))
-  
-  mrtrix_short_to_nii = nibabel.Nifti1Image(mrtrix_data_short, HCP.affine, HCP.header)
-  nibabel.save(mrtrix_short_to_nii, output_files["nifti_outputfile"][:-7] + "_testoutput" + output_files["nifti_outputfile"][-7:])
   
   mrtrix_to_nii = nibabel.Nifti1Image(mrtrix_data, HCP.affine, HCP.header)
   nibabel.save(mrtrix_to_nii, output_files["nifti_outputfile"] )
