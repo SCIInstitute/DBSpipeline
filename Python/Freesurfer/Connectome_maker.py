@@ -198,6 +198,9 @@ def add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, *
 #  print(HCP_fname)
   hcp_axes = getAxes(HCP_fname)
 #  print("hcp_axes ", hcp_axes)
+
+  All_data_short = copy.deepcopy(All_data).astype(int)
+  print("check copy (All_data): ", np.all( All_data== All_data_short ))
   
   print("looping through seg files: ", time.time() - start)
   for file in seg_files:
@@ -217,9 +220,10 @@ def add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, *
     
     if not compareAxes(hcp_axes, seg_axes):
       print("WARNING: Axes of input files are inconsistently encoded. Please check to make sure the files are properly registered.")
-      
     
     
+    
+    print("check copy (All_data) file iterations : ", np.all( All_data== All_data_short ))
   #
   #    if kwargs["rerun"] or not os.path.exists(resamp_fullfile):
   #
@@ -275,6 +279,8 @@ def add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, *
       print("nibabel done :", time.time() - start)
 #    print(img_resamp)
     print("post-mapping :", time.time() - start)
+    
+    seg_axes = getAxes(fullfile)
   
     img_data = img_resamp.get_fdata()
     
@@ -286,7 +292,7 @@ def add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, *
     data_add_short = lut[img_data.astype(int)]
     print("copied short : ", time.time() - start)
     
-    All_data_short = All_data.copy()
+    
     
     data_add = img_data.copy()
     print("data copy :", time.time() - start)
@@ -299,8 +305,10 @@ def add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, *
     print("compare short : ", np.all( data_add == data_add_short) )
     
     All_data[data_add != 0] = data_add[data_add != 0]
+    print("check copy (All_data) loop: ", np.all( All_data== All_data_short ))
     All_data_short[data_add_short != 0] = data_add_short[data_add_short != 0]
     print("data reassigned :", time.time() - start)
+    print("check copy after (All_data) loop: ", np.all( All_data== All_data_short ))
     
     print("end loop : ", time.time() - start)
   print("end all loops:", time.time() - start)
@@ -323,7 +331,7 @@ def add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, *
   print("copying data short:", time.time() - start)
   lookup_table = np.zeros(max(mrtrix_key['Lookup Index'])+1)
   lookup_table[mrtrix_key['Lookup Index']] = mrtrix_key['MRtrix Index']
-  mrtrix_data_short = lookup_table[All_data]
+  mrtrix_data_short = lookup_table[All_data_short]
   print("short copied ", len(mrtrix_key['Lookup Index']), " layers : ", time.time() - start)
   
   mrtrix_short_to_nii = nibabel.Nifti1Image(mrtrix_data_short, HCP.affine, HCP.header)
