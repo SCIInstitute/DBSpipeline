@@ -33,7 +33,7 @@ sys.path.append(os.path.join(os.environ["CODEDIR"], "Python/MRtrix" ))
 sys.path.append(os.path.join(os.environ["CODEDIR"], "Python/utils" ))
  
 from NRRDConverter import readNRRD
-from AxisChecker import getAxes, compareAxes
+from AxisChecker import getAxes, compareAxes, getNiftiObjAxes
 
 
 def build_parser():
@@ -339,9 +339,6 @@ def add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, *
   mrtrix_data_short = lookup_table[All_data_short]
   print("short copied ", len(mrtrix_key['Lookup Index']), " layers : ", time.time() - start)
   
-  mrtrix_short_to_nii = nibabel.Nifti1Image(mrtrix_data_short, HCP.affine, HCP.header)
-  nibabel.save(mrtrix_short_to_nii, output_files["nifti_outputfile"][:-7] + "_testoutput" + output_files["nifti_outputfile"][-7:])
-  
 
   print("copying data again:", time.time() - start)
   print(type(All_data), All_data.shape, type(All_data[0,0,0]))
@@ -355,7 +352,10 @@ def add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, *
 #      print("loop ", i, " iteration : ", time.time() - start)
   print("copied ", len(mrtrix_key['Lookup Index']), " layers : ", time.time() - start)
   
-  print("compare to short : ", np.all(mrtrix_data == mrtrix_data_short ))
+  print("compare to short (mrtrix_data) : ", np.all(mrtrix_data == mrtrix_data_short ))
+  
+  mrtrix_short_to_nii = nibabel.Nifti1Image(mrtrix_data_short, HCP.affine, HCP.header)
+  nibabel.save(mrtrix_short_to_nii, output_files["nifti_outputfile"][:-7] + "_testoutput" + output_files["nifti_outputfile"][-7:])
   
   mrtrix_to_nii = nibabel.Nifti1Image(mrtrix_data, HCP.affine, HCP.header)
   nibabel.save(mrtrix_to_nii, output_files["nifti_outputfile"] )
@@ -405,6 +405,10 @@ def table_2_atlas(lookup_file, profile, output_files, **kwargs ):
   All_data_short = lut[HCP_data.astype(int)]
   print("data copied shortly : ", time.time() - start)
   
+  HCP_short_nii = nibabel.Nifti1Image(All_data_short, HCP.affine, HCP.header)
+  nibabel.save(HCP_short_nii, HCP_fname[:-7] + "_testshortcopy" + HCP_fname[-7:] )
+  print("saved nifti lookup:", time.time() - start)
+  
   
   print("copying data : ", time.time() - start)
 #  All_data = HCP_data.copy()
@@ -421,6 +425,10 @@ def table_2_atlas(lookup_file, profile, output_files, **kwargs ):
   print(type(All_data), All_data.shape, type(All_data[0,0,0]))
   
   print("check_short : ", np.all(All_data_short == All_data))
+  
+  HCP_long_nii = nibabel.Nifti1Image(All_data, HCP.affine, HCP.header)
+  nibabel.save(HCP_long_nii, HCP_fname[:-7] + "_testlongcopy" + HCP_fname[-7:] )
+
   
   print("running add_files_2_atlas : ", time.time() - start)
   return add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, HCP_fname = HCP_fname, **kwargs )
