@@ -280,8 +280,8 @@ def add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, *
     
     print("data copy short : ", time.time() - start)
     lut = np.zeros(max(local_index)+1)
-    print(local_index)
-    print(main_index)
+#    print(local_index)
+#    print(main_index)
     lut[local_index] = main_index
     data_add_short = lut[img_data.astype(int)]
     print("copied short : ", time.time() - start)
