@@ -104,20 +104,20 @@ run_loop() {
 
     echo "rerun: $rerun testrun: $testrun radius: $radius mdist: $mdist stim: $stim"
     
-    if [ $SYSNAME == "hipergator" ]
+    if [ "$SYSNAME" == "hipergator" ]
     then
       module load python/3.10
     fi
 
     python_call="python ${CODEDIR}/Python/Freesurfer/Connectome_maker.py -p ${file}"
-    if [ $rerun = true ] ; then
+    if [ "$rerun" = true ] ; then
       python_call=$python_call" -f"
     fi
-    if [ $stim = true ] ; then
+    if [ "$stim" = true ] ; then
       python_call=$python_call" -s"
     fi
     
-    if [ $testrun = true ]; then
+    if [ "$testrun" = true ]; then
       echo "this is the call that would run: "
       echo $python_call
     else
@@ -128,13 +128,13 @@ run_loop() {
         
     # heres where to add connectome maker
     python_call="python ${CODEDIR}/Python/MRtrix/makeConnectomeMatrix.py -p ${file} -a ${assignment} -r ${radius} -d ${mdist}"
-    if [ $rerun = true ] ; then
+    if [ "$rerun" = true ] ; then
       python_call=$python_call" -f"
     fi
-    if [ $stim = true ] ; then
+    if [ "$stim" = true ] ; then
       python_call=$python_call" -s"
     fi
-    if [ $testrun = true ]; then
+    if [ "$testrun" = true ]; then
       echo "this is the call that would run: "
       echo $python_call
     else
@@ -149,14 +149,14 @@ run_loop() {
     
     python_call="python ${CODEDIR}/Python/MRtrix/calculate_connectome.py -p ${file}"
     
-    if [ $rerun = true ] ; then
+    if [ "$rerun" = true ] ; then
       python_call=$python_call" -f"
     fi
-    if [ $stim = true ] ; then
+    if [ "$stim" = true ] ; then
       python_call=$python_call" -s"
     fi
     
-    if [ $testrun = true ]; then
+    if [ "$testrun" = true ]; then
       echo "this is the call that would run: "
       echo $python_call
     else
@@ -266,7 +266,7 @@ else
     do
       echo "$subject"
       
-      run_loop "$subject" "$assignment" $rerun $testrun $radius $mdist $experiment $stim
+      run_loop "$subject" "$assignment" "$rerun" "$testrun" "$radius" "$mdist" "$experiment" "$stim"
 
     done < "$subjects"
   fi
