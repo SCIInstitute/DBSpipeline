@@ -49,6 +49,7 @@ Help()
    echo "-l    Path to Subjects List"
    echo "-d  path to subjects directory (will run all subjects)"
    echo "-f  force rerun connectome maker"
+   echo "-u  force upgrade of connectome maker data"
    echo "-r  radius of assignment method [3]"
    echo "-t  test run"
    echo "-e  experiment tag to run"
@@ -81,6 +82,7 @@ run_loop() {
   local mdist=$6
   local experiment=$7
   local stim=$8
+  local upgrade=$9
   
 #  files=($(ls -1 "${DATADIR}/${subject}/${rel_path1}/Stim/HCP_parc_all_"*".nii.gz"))
   
@@ -102,7 +104,7 @@ run_loop() {
 #      continue
 #    fi
 
-    echo "rerun: $rerun testrun: $testrun radius: $radius mdist: $mdist stim: $stim"
+    echo "rerun: $rerun testrun: $testrun radius: $radius mdist: $mdist stim: $stim upgrade: $upgrade"
     
     if [ "$SYSNAME" == "hipergator" ]
     then
@@ -110,6 +112,10 @@ run_loop() {
     fi
 
     python_call="python ${CODEDIR}/Python/Freesurfer/Connectome_maker.py -p ${file}"
+    if [ "$upgrade" = true ] ; then
+      python_call=$python_call" -u"
+      rerun=true
+    fi
     if [ "$rerun" = true ] ; then
       python_call=$python_call" -f"
     fi
@@ -128,6 +134,7 @@ run_loop() {
         
     # heres where to add connectome maker
     python_call="python ${CODEDIR}/Python/MRtrix/makeConnectomeMatrix.py -p ${file} -a ${assignment} -r ${radius} -d ${mdist}"
+    # upgrade not implemented in these other scripts
     if [ "$rerun" = true ] ; then
       python_call=$python_call" -f"
     fi
@@ -148,7 +155,7 @@ run_loop() {
 #    echo "${file}"
     
     python_call="python ${CODEDIR}/Python/MRtrix/calculate_connectome.py -p ${file}"
-    
+    # upgrade not yet implemented
     if [ "$rerun" = true ] ; then
       python_call=$python_call" -f"
     fi
@@ -174,6 +181,7 @@ run_loop() {
 
 testrun=false
 rerun=false
+upgrade=false
 
 while getopts "hd:l:a:r:tfm:e:s" option; do
    case $option in
@@ -183,6 +191,7 @@ while getopts "hd:l:a:r:tfm:e:s" option; do
       r) radius=$OPTARG;;
       t) testrun=true;;
       f) rerun=true;;
+      u) upgrade=true;;
       m) mdist=$OPTARG;;
       e) experiment=$OPTARG;;
       s) stim=true;;
@@ -266,7 +275,7 @@ else
     do
       echo "$subject"
       
-      run_loop "$subject" "$assignment" "$rerun" "$testrun" "$radius" "$mdist" "$experiment" "$stim"
+      run_loop "$subject" "$assignment" "$rerun" "$testrun" "$radius" "$mdist" "$experiment" "$stim" "$upgrade"
 
     done < "$subjects"
   fi
