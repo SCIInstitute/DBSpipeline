@@ -13,7 +13,7 @@
 
 # Pull mesocircuit tracts from connectomes. **Currently only to be used on CL_only profile**
 
-# sbatch --mail-user=mphook@ufl.edu $CODEDIR/Bash/MRtrix/mesocircuit_pull.sh p102
+# sbatch --mail-user="user"@ufl.edu $CODEDIR/Bash/MRtrix/mesocircuit_pull.sh p102
 
 #########
 

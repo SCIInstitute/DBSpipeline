@@ -7,7 +7,6 @@
 #SBATCH --time=05:00:00
 #SBATCH --job-name=THOMAS
 #SBATCH --mail-type=ALL
-#SBATCH --mail-user=mphook@ufl.edu
 #SBATCH --output=thomas_run_%j.out
 
 if [[ -z "$SYSNAME" ]]; then

@@ -2,8 +2,10 @@
 convert gmsh files to matlab for scirun
 
 """
-
-from ../utils/meshfiles import gmsh2Mat
+import sys
+sys.path.append(r'/blue/butsonc/Github/DBSpipeline/Python/utils')
+# print(sys.path)
+from meshfiles import gmsh2Mat
 
 pathname = "./"
 

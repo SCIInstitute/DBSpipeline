@@ -7,7 +7,6 @@
 #SBATCH --time=12:00:00
 #SBATCH --job-name=MRtrix
 #SBATCH --mail-type=ALL
-#SBATCH --mail-user=mphook@ufl.edu
 #SBATCH --output=MRtrix_%j.out
 
 

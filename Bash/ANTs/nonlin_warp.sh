@@ -6,7 +6,6 @@
 #SBATCH --time=12:00:00
 #SBATCH --job-name=nonlin_warp
 #SBATCH --mail-type=ALL
-#SBATCH --mail-user=mphook@ufl.edu
 #SBATCH --output=ANTs_nonlin_warp_%j.out
 date;hostname;pwd
 

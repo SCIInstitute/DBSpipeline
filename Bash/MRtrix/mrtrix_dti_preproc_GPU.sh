@@ -9,7 +9,6 @@
 #SBATCH --partition=gpu
 #SBATCH --gpus=geforce:1
 #SBATCH --mail-type=ALL
-#SBATCH --mail-user=mphook@ufl.edu
 #SBATCH --output=Preproc_%j.out
 
 
@@ -134,6 +133,7 @@ then
 	module load fsl
 	module load mrtrix
 	module load freesurfer/7.2.0
+	module load cuda/12.4.1
 fi
 
 #SUBJECTS_DIR=/home/mphook/blue_butsonc/mphook/freesurfer/SimNIBS/FS_Subjects
@@ -195,7 +195,7 @@ uniq_num=${#uniq[@]}
 #Fiber Orientation
 echo -e "\nFiber Orientation\n"
 dwi2response dhollander dwi_cleaned_resamp.mif wm.txt gm.txt csf.txt -voxels voxels.mif -force
-if (( $uniq_num > 3))
+if (( $uniq_num > 2))
 then
 	echo -e "\nRunning Multi-shell\n"
 	dwi2fod msmt_csd dwi_cleaned_resamp.mif -mask brain_mask.mif wm.txt wmfod.mif gm.txt gmfod.mif csf.txt csffod.mif -force
@@ -259,6 +259,7 @@ then
   mkdir - p $sub_dir
 fi
   
+mrconvert dwi_cleaned_resamp.mif dwi_cleaned.nii.gz -force
 
 clean_dir=$sub_dir/Tractography/Cleaned
 echo -e "\nCreating Output Directory: $clean_dir\n"
@@ -268,24 +269,52 @@ if [ $SYSNAME == "hipergator" ]
 then
 	#Tensor Reconstruction
 	echo -e "\nTensor Reconstrunction\n"
-	dwi2tensor dwi_cleaned_resamp.mif -mask brain_mask.mif dti.mif -force
+	if [ -z "$FSID" ]
+	then
+		echo -e "\nNo Freesurfer, using DWI brainmask. WARNING: This mask might be really bad\n"
+		dwi2tensor dwi_cleaned_resamp.mif -mask brain_mask.mif dti.mif -force
+		mrconvert brain_mask.mif brain_mask.nii.gz -force
+	else
+		echo -e "\nCreating mask from Freesurfer"
+    	SUBJECTS_DIR="${FREESURFERDIR}"/FS_Subjects
+    	cp ${SUBJECTS_DIR}/${FSID}/mri/brainmask.mgz .
+    	mrtransform brainmask.mgz -linear ACPC_to_b0_mrtrix.txt brain_FS.mif -force
+    	mrthreshold brain_FS.mif -abs 0 -comparison gt brainmask_FS.mif -force
+    	maskfilter brainmask_FS.mif dilate brainmask_dilate.mif -npass 10 -force
+    	maskfilter brainmask_dilate.mif erode brainmask_dilate_erode.mif -npass 10 -force
+    	mrgrid brainmask_dilate_erode.mif regrid -template dwi_tensor_prep.mif brainmask_regrid.mif -force
+    	dwi2tensor dwi_cleaned_resamp.mif -mask brainmask_regrid.mif dti.mif -force
+    	mrconvert brainmask_regrid.mif brain_mask.nii.gz -force
+	fi
 	mrconvert dti.mif dti.nii.gz -force
 	tensor2metric dti.mif -fa fa.nii.gz -force
-	#module load python/3.8
-	#python ${CODEDIR}/Python/MRtrix/dtiConverter.py
-	#cp tensor.nrrd $clean_dir/tensor.nrrd
-	#cp fa.nrrd $clean_dir/fa.nrrd
+	for count in 1 2 3
+	do
+		tensor2metric dti.mif -value eigval${count}.nii.gz -num $count -force
+		tensor2metric dti.mif -vector eigvec${count}.nii.gz -num $count -force
+	done
+	module load python/3.10 #version that has nibabel and pynrrd
+	python ${CODEDIR}/Python/SCIRun/nifti2nrrd.py --img brain_mask.nii.gz --datatype scalar
+	python ${CODEDIR}/Python/SCIRun/nifti2nrrd.py --img fa.nii.gz --datatype scalar
+	for count in 1 2 3
+	do
+		python ${CODEDIR}/Python/SCIRun/nifti2nrrd.py --img eigval${count}.nii.gz --datatype scalar
+		cp eigval${count}.nrrd $clean_dir/eigval${count}.nrrd
+		python ${CODEDIR}/Python/SCIRun/nifti2nrrd.py --img eigvec${count}.nii.gz --datatype vector
+		cp eigvec${count}.nrrd $clean_dir/eigvec${count}.nrrd
+	done
 	cp dti.nii.gz $clean_dir/dti.nii.gz
 	cp fa.nii.gz $clean_dir/fa.nii.gz
+	cp fa.nrrd $clean_dir/fa.nrrd
 else
 	echo -e "\nNo Tensor Reconstruction\n"
 fi
 
 
 echo -e "\nCopying Files\n"
-mrconvert brain_mask.mif brain_mask.nii.gz -force
-mrconvert dwi_cleaned_resamp.mif dwi_cleaned.nii.gz -force
+cp brain_mask.mif $clean_dir/brain_mask.mif
 cp brain_mask.nii.gz $clean_dir/brain_mask.nii.gz
+cp brain_mask.nrrd $clean_dir/brain_mask.nrrd
 cp b0_hifi.nii.gz $clean_dir/b0_hifi.nii.gz
 cp dwi_cleaned.nii.gz $clean_dir/dwi_cleaned.nii.gz
 cp dwi_cleaned_resamp.mif $clean_dir/dwi_cleaned.mif

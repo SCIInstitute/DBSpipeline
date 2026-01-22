@@ -10,9 +10,10 @@
 #SBATCH --output=freesurfer_%j.out
 
 # example call
-# sbatch --mail-user=jess.tate@ufl.edu $CODEDIR/Bash/Freesurfer/fs_heatmap fs_pDummy T1_pre_scirun.nii.gz pDummy
+# sbatch --mail-user=user@ufl.edu $CODEDIR/Bash/Freesurfer/fs_heatmap fs_pDummy T1_pre_scirun.nii.gz pDummy
 # OR
-# sbatch --mail-user=jess.tate@ufl.edu $CODEDIR/Bash/Freesurfer/fs_heatmap fs_pDummy T1_pre_scirun.nii.gz pDummy FLAIR_ACPC.nii.gz
+# sbatch --mail-user=user@ufl.edu $CODEDIR/Bash/Freesurfer/fs_heatmap fs_pDummy T1_pre_scirun.nii.gz pDummy -FLAIR FLAIR_ACPC.nii.gz -FLAIRpial
+# -FLAIR/FLAIRpial or -T2/T2pial
 ###
 # TODO: figure out spaces in paths problem
 # TODO: FS ID lookup table
@@ -37,7 +38,7 @@ rel_path1="SCIRun"
 rel_path2="Connectome"
 rel_path3="Segmentations/HCP"
 rel_path4="Segmentations/Hotspot"
-
+rel_path5="Segmentations/White_matter"
 
 
 set -e
@@ -47,11 +48,10 @@ then
 echo recon-all -s "${1}" -i "${2}" -all -parallel -openmp 8
 recon-all -s "${1}" -i "${2}" -all -parallel -openmp 8
 else
-echo recon-all -s "${1}" -i "${2}" -all -parallel -openmp 8 -FLAIR "${4}" -FLAIRpial
-recon-all -s "${1}" -i "${2}" -all -parallel -openmp 8 -FLAIR "${4}" -FLAIRpial
+echo recon-all -s "${1}" -i "${2}" -all -parallel -openmp 8 "${4}" "${5}" "${6}"
+recon-all -s "${1}" -i "${2}" -all -parallel -openmp 8 "${4}" "${5}" "${6}"
 fi
-# comment out this line to make faster
-# recon-all -s "${1}" -i "${2}" -all -parallel -openmp 8 -FLAIR "${4}" -FLAIRpial
+
 
 m2m_id="$1"
 subject=${m2m_id}
@@ -85,8 +85,8 @@ cd ${SUBJECTS_DIR}/${subject}/surf
 
 for hemi in lh rh
 do
-  mris_convert -c ${hemi}.thresh.mgh ${hemi}.pial ${hemi}.thresh.vtk
-  mris_convert -c ${hemi}.heatmap.mgh ${hemi}.pial ${hemi}.heatmap.vtk
+  mris_convert --to-scanner -c ${hemi}.thresh.mgh ${hemi}.pial ${hemi}.thresh.vtk
+  mris_convert --to-scanner -c ${hemi}.heatmap.mgh ${hemi}.pial ${hemi}.heatmap.vtk
 done
 
 #Convert thresh map to volume
@@ -124,7 +124,11 @@ fi
 
 mrconvert -datatype uint32 ${subject}_HCP.mgz ${subject}_HCP.mif -force
 mkdir -p ${DATADIR}/${subject_LO}/$rel_path3
-labelconvert ${subject}_HCP.mif ${CODEDIR}/Bash/Freesurfer/hcpmmp1_original.txt ${CODEDIR}/Bash/Freesurfer/hcpmmp1_subcortex.txt ${DATADIR}/${subject_LO}/${rel_path3}/HCP_FS.nii.gz
+labelconvert ${subject}_HCP.mif ${CODEDIR}/Bash/Freesurfer/hcpmmp1_original.txt ${CODEDIR}/Bash/Freesurfer/hcpmmp1_subcortex.txt ${DATADIR}/${subject_LO}/${rel_path3}/HCP_FS.nii.gz -force
+
+mkdir -p ${DATADIR}/${subject_LO}/$rel_path5
+mrcalc ${subject}_HCP.mif 2 -eq ${DATADIR}/${subject_LO}/$rel_path5/WM_left.nii.gz -force
+mrcalc ${subject}_HCP.mif 41 -eq ${DATADIR}/${subject_LO}/$rel_path5/WM_right.nii.gz -force
 
 echo $'\n\n******************Done!****************\n\n'
 

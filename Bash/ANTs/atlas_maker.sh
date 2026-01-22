@@ -8,7 +8,6 @@
 #SBATCH --time=80:00:00
 #SBATCH --job-name=ANTs_atlas
 #SBATCH --mail-type=ALL
-#SBATCH --mail-user=mphook@ufl.edu
 #SBATCH --output=ANTs_atlas_%j.out
 
 
@@ -24,4 +23,4 @@ do
 done
 
 
-antsMultivariateTemplateConstruction2.sh -d 3 -o Atlas_ -i 4 -g 0.2 -c 2 -j 8 -k 1 -w 1 -f 6x4x2x1 -s 3x2x1x0 -q 100x100x75x20 -n 0 -r 1 -l 1 -m CC[2] -t BSplineSyN[0.1,26,0] *_wmn_bfc.nii.gz
+antsMultivariateTemplateConstruction2.sh -d 3 -o Atlas_ -i 4 -g 0.2 -c 2 -j 8 -k 1 -w 1 -b 1 -f 6x4x2x1 -s 3x2x1x0 -q 100x100x75x20 -n 0 -r 1 -l 1 -m CC[2] -t BSplineSyN[0.1,26,0] *_wmn_bfc.nii.gz

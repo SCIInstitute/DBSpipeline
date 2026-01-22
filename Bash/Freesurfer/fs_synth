@@ -7,7 +7,6 @@
 #SBATCH --time=1:00:00
 #SBATCH --job-name=fs_synth
 #SBATCH --mail-type=ALL
-#SBATCH --mail-user=mphook@ufl.edu
 #SBATCH --output=fs_synth_%j.out
 
 module load freesurfer/7.4.1

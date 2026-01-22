@@ -7,8 +7,7 @@ parser.add_argument('--tract_data', help='The data to be written for each point.
 
 args = parser.parse_args()
 
-# vtk_in = r"D:/UFL Dropbox/UFL Dropbox/Butson_Lab/Projects/Track weight addition/Helper code/Add weights to vtk/Caudate_test.vtk"
-# data_in = r"D:/UFL Dropbox/UFL Dropbox/Butson_Lab/Projects/Track weight addition/Helper code/Add weights to vtk/Caudate_left_.tckdata"
+
 vtk_in = args.input_vtk
 data_in = args.tract_data
 output_vtk = args.output_vtk

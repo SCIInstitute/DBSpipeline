@@ -6,11 +6,10 @@
 #SBATCH --time=20:00:00
 #SBATCH --job-name=tckgen
 #SBATCH --mail-type=ALL
-#SBATCH --mail-user=mphook@ufl.edu
 #SBATCH --output=tckgen_%j.out
 
 # example call
-# sbatch --mail-user=jess.tate@ufl.edu Whole_brain_tract.sh S1
+# sbatch --mail-user="user"@ufl.edu Whole_brain_tract.sh S1
 
 
 if [[ -z "$SYSNAME" ]]; then
@@ -24,6 +23,7 @@ if [[ -z $1 ]]; then
 fi
 
 dryrun=false
+#dryrun=true
 
 subject=$1
 sub_dir="${DATADIR}/${subject}"
@@ -168,8 +168,8 @@ if [ "$dryrun" = false ]; then
   eval "$py_call"
   eval "$SCIRun_call"
 else
-  check=($(ls -1 ${out_tck_100k_ACPC} ${sr_out_tck_100K}.edge ${sr_out_tck_100K}.pts ))
-  echo "$check[@]"
+#  check=($(ls -1 ${out_tck_100k_ACPC} ${sr_out_tck_100K}.edge ${sr_out_tck_100K}.pts ))
+#  echo "$check[@]"
   echo "$py_call"
   echo "$SCIRun_call"
 fi

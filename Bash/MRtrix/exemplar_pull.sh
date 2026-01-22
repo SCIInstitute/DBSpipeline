@@ -14,7 +14,7 @@
 
 # Pull exemplars from connectomes, currently runs without exclusive
 
-# sbatch --mail-user=mphook@ufl.edu $CODEDIR/Bash/MRtrix/exemplar_pull.sh -s p102 -e Brainstem -r 371,386 -n CL_bilat
+# sbatch --mail-user="user"@ufl.edu $CODEDIR/Bash/MRtrix/exemplar_pull.sh -s p102 -e Brainstem -r 371,386 -n CL_bilat
 
 #########
 
