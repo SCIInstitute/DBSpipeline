@@ -182,6 +182,7 @@ run_loop() {
 testrun=false
 rerun=false
 upgrade=false
+stim=false
 
 while getopts "hd:l:a:r:tfum:e:s" option; do
    case $option in
