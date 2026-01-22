@@ -183,7 +183,7 @@ testrun=false
 rerun=false
 upgrade=false
 
-while getopts "hd:l:a:r:tfm:e:s" option; do
+while getopts "hd:l:a:r:tfum:e:s" option; do
    case $option in
       d) d_dir=$OPTARG;;
       l) subjects=$OPTARG;;
