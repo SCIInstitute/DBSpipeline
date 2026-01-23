@@ -203,8 +203,8 @@ def add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, *
     mapping = "nibabel"
   
   print(HCP_fname)
-#  hcp_axes = getNiftiObjAxes(HCP)
-  print("hcp_axes ", hcp_axes)
+  hcp_axes = getNiftiObjAxes(HCP)
+#  print("hcp_axes ", hcp_axes)
   
 #  print("looping through seg files: ", time.time() - start)
   for file in seg_files:
@@ -216,8 +216,8 @@ def add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, *
     
     # check for axis continuity
     print(fullfile)
-#    seg_axes = getAxes(fullfile)
-    print("seg_axes ", seg_axes)
+    seg_axes = getAxes(fullfile)
+#    print("seg_axes ", seg_axes)
     
     if not compareAxes(hcp_axes, seg_axes):
       print("WARNING: Axes of input files are inconsistently encoded. Please check to make sure the files are properly registered.")
