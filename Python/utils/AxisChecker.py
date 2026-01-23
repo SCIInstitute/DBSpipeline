@@ -262,10 +262,22 @@ def checkRotations(axes1, axes2, **kwargs):
 #  print("chirality table ", chiralityTable.items())
 #  print(axes1["axis_space"])
   
-  chir1 = next(key for key, v_list in chiralityTable.items() if  axes1["axis_space"] in v_list )
-  chir2 = next(key for key, v_list in chiralityTable.items() if  axes2["axis_space"] in v_list )
+#  chir1 = next(key for key, v_list in chiralityTable.items() if  axes1["axis_space"] in v_list )
+#  chir2 = next(key for key, v_list in chiralityTable.items() if  axes2["axis_space"] in v_list )
   
-#  print(chir1, chir2)
+  chir1 = "notfound"
+  for key, v_list in chiralityTable.items():
+    if axes1["axis_space"] in v_list:
+      chir1 = key
+      break
+  chir2 = "notfound"
+  for key, v_list in chiralityTable.items():
+    if axes2["axis_space"] in v_list:
+      chir2 = key
+      break
+  
+  
+  print(chir1, chir2)
 
   
   rot1 = normalizeRotation(axes1["affine"][:3,:3])

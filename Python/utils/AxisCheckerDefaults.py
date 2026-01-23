@@ -59,7 +59,7 @@ axisLookupTable = [["R", "A", "S"], ["L", "P", "I"]]
 
 # do I need to make these exhaustive?
 chiralityTable = {
-    "right" : ["RH", "LPS", "RAS", "XYZ" ],
+    "right" : ["RH", "LPS", "RAS", "XYZ", "PIR" ],
     "left"  : [ "LH", "LAS", "RPS", "LIA"]
 }
 
