@@ -428,7 +428,7 @@ def checkOrigin(axes1, axes2, **kwargs):
   
 def compareAxes(axes1, axes2, **kwargs):
   
-#  print(axes1["axis_space"], axes2["axis_space"])
+  print(axes1["axis_space"], axes2["axis_space"])
 
   space_check = axes1["axis_space"] == axes2["axis_space"]
   
