@@ -202,7 +202,7 @@ def add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, *
     print("cannot use Ants without the HCP_fname input.  using nibable instead")
     mapping = "nibabel"
   
-#  print(HCP_fname)
+  print(HCP_fname)
   hcp_axes = getNiftiObjAxes(HCP)
   print("hcp_axes ", hcp_axes)
   
