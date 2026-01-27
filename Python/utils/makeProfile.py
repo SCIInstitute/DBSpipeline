@@ -27,6 +27,9 @@ https://github.com/apache/beam
 https://github.com/apache/airflow
 https://github.com/dask/dask
 
+
+Current design is based on an "experiment" with a set of parameters and subjects that would be relatively consistent. This could still be a useful concept yet I think I would like to rethink the interface a little bit. 
+
 """
 
 def build_parser():

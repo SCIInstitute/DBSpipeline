@@ -11,6 +11,13 @@ import subprocess
 
 from setupEnv import profileToEnv
 
+"""
+TODO: update description for documenationation
+pipeline etc
+
+TODO: implement dynamic activation threshold that Matt made
+"""
+
 def_net = os.path.join(os.environ["CODEDIR"], "SRNetworks", "Whole_brain_sim_script.srn5")
 
 sr_net_dir = os.path.join(os.environ["CODEDIR"], "SRNetworks")
