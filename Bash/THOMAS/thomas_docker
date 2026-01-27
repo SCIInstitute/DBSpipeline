@@ -61,7 +61,7 @@ echo "Left Side"
 cd left
 mkdir Resample
 
-for file in *-*.nii.gz
+for file in [0-9]*-*.nii.gz
 do
 	antsApplyTransforms -d 3 -i $file -r ../$1 -o Resample/${file%.*.*}_resamp.nii.gz -n GenericLabel
 done
@@ -71,7 +71,7 @@ cd ../right
 echo "Right Side"
 mkdir Resample
 
-for file in *-*.nii.gz
+for file in [0-9]*-*.nii.gz
 do
 	antsApplyTransforms -d 3 -i $file -r ../$1 -o Resample/${file%.*.*}_resamp.nii.gz -n GenericLabel
 done

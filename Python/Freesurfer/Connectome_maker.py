@@ -22,12 +22,22 @@ import argparse
 import os
 import sys
 import nrrd
+import subprocess
+import time
+import copy
+from packaging.version import parse as parse_version
+
 #print(os.path.join(os.path.dirname(__file__), "..", "MRtrix" ))
 #sys.path.append(os.path.join(os.path.dirname(__file__), "..", "MRtrix" ))
 print(os.path.join(os.environ["CODEDIR"], "Python/MRtrix" ))
 sys.path.append(os.path.join(os.environ["CODEDIR"], "Python/MRtrix" ))
+sys.path.append(os.path.join(os.environ["CODEDIR"], "Python/utils" ))
  
 from NRRDConverter import readNRRD
+from AxisChecker import getAxes, compareAxes, getNiftiObjAxes
+
+# version tracking for the script.
+current_ver = "0.1"
 
 def build_parser():
   parser = argparse.ArgumentParser(
@@ -46,6 +56,14 @@ def build_parser():
   parser.add_argument("-f", "--force", required=False,
                       help="force a rewrite of files",
                       action = "store_true", dest="rerun")
+  parser.add_argument("-m", "--mapping", required=False,
+                      help="force a rewrite of files",
+                      default = "ANTs",  dest="mapping",
+                      choices=["ANTs", "nibabel"])
+  parser.add_argument("-u", "--upgrade", required=False,
+                      help="force a rerun of the pipeline with the most recent script version",
+                      action = "store_true",  dest="upgrade"
+                      )
   return parser
 
 
@@ -64,6 +82,7 @@ def append_lookup_file(profile, **kwargs):
   experiment = profile["experiment"]
   stim_table = pd.read_csv(profile["stim_table"],index_col=False)
   stim_out = profile["stimoutpath"]
+  print("stim_out", stim_out)
   
   lookup = pd.read_csv(profile["lookup_table"],index_col=False)
   
@@ -122,7 +141,7 @@ def append_lookup_file(profile, **kwargs):
   return stim_output_files
   
 def check_lookup_files(anat_lookup_file, lookup_file):
-# TODO: not sure if needed, but will need to be implemented
+# TODO: not sure if needed.  will need to be implemented if so
   anat_lookup = pd.read_csv(anat_lookup_file,index_col=False)
   stim_lookup = pd.read_csv(lookup_file,index_col=False)
   
@@ -130,12 +149,14 @@ def check_lookup_files(anat_lookup_file, lookup_file):
   
   
 def table_2_atlas_stim(st_lookup_file, profile, output_files, **kwargs ):
+#  start=time.time()
   default_kwargs = {"rerun" : False}
   kwargs = { **default_kwargs, **kwargs}
 
   print("==========")
   print("Appending Atlas file from for stim lookup table: ")
   print(st_lookup_file)
+#  print(time.time() - start)
   
   anat_output_files =  profile["Connectome_maker"]["Output_files"]
 
@@ -152,7 +173,8 @@ def table_2_atlas_stim(st_lookup_file, profile, output_files, **kwargs ):
   stim_lookup = pd.read_csv(st_lookup_file,index_col=False)
   anat_lookup = pd.read_csv(profile["lookup_table"],index_col=False)
   
-  HCP = nibabel.load(anat_output_files["nifti_lookup_outputfile"])
+  HCP_fname = anat_output_files["nifti_lookup_outputfile"]
+  HCP = nibabel.load(HCP_fname)
   All_data = HCP.get_fdata()
   
   st_index = np.array(stim_lookup['Index'])
@@ -162,107 +184,233 @@ def table_2_atlas_stim(st_lookup_file, profile, output_files, **kwargs ):
   
   seg_files = stim_lookup['Filename'][l_anat_idx+1:].unique()
   
-  return add_files_2_atlas(All_data, HCP, stim_lookup, seg_files, profile, output_files)
+#  print("running add_files_2_atlas :", time.time() - start)
+  return add_files_2_atlas(All_data, HCP, stim_lookup, seg_files, profile, output_files, HCP_fname = HCP_fname, **kwargs)
   
     
   
 
 def add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, **kwargs):
+#  start=time.time()
 
+  default_kwargs = {"mapping" : "ANTs", "HCP_fname" : "" }
+  kwargs = { **default_kwargs, **kwargs}
   
-
+  HCP_fname = kwargs["HCP_fname"]
+  mapping = kwargs["mapping"]
+  if not HCP_fname:
+    print("cannot use Ants without the HCP_fname input.  using nibable instead")
+    mapping = "nibabel"
+  
+  print(HCP_fname)
+  hcp_axes = getNiftiObjAxes(HCP)
+#  print("hcp_axes ", hcp_axes)
+  
+#  print("looping through seg files: ", time.time() - start)
   for file in seg_files:
     seg_dirs = lookup['Path'][lookup['Filename'] == file].unique()[0]
     main_index = np.array(lookup['Index'][lookup['Filename'] == file])
     local_index = np.array(lookup['File Index'][lookup['Filename'] == file])
     #
     fullfile = os.path.join(profile["segPath"], seg_dirs, file)
-    #
-  #    # saving resampled images to save time
-  #    froot, ext = os.path.splitext(file)
-  #    if ext == ".gz":
-  #      froot_, ext_ = os.path.splitext(froot)
-  #      if ext_ == ".nii":
-  #        froot = froot_
-  #        ext = ext_ + ext
-  #
-  #    resamp_file = froot + "_resample" + ".nii.gz"
-  #    resamp_fullfile = os.path.join(profile["segPath"], seg_dirs, resamp_file)
+    
+    # check for axis continuity
+    print(fullfile)
+    seg_axes = getAxes(fullfile)
+#    print("seg_axes ", seg_axes)
+    
+    if not compareAxes(hcp_axes, seg_axes):
+      print("WARNING: Axes of input files are inconsistently encoded. Please check to make sure the files are properly registered.")
   #
   #    if kwargs["rerun"] or not os.path.exists(resamp_fullfile):
   #
-    if os.path.splitext(file)[1] == ".nrrd":
-      img = readNRRD(fullfile)
+    # TODO: should probably use a switcher here
+#    print("pre-mapping : ", time.time() - start)
+    if mapping == "ANTs":
+      print("running with ANTs")
+#      print( time.time() - start)
+      
+      use_cli = True
+    
+      froot, ext = os.path.splitext(file)
+      if ext == ".gz":
+        froot_, ext_ = os.path.splitext(froot)
+        if ext_ == ".nii":
+          froot = froot_
+          ext = ext_ + ext
+
+      resamp_file = froot + "_resample" + ".nii.gz"
+      resamp_fullfile = os.path.join(profile["segPath"], seg_dirs, resamp_file)
+      
+      
+      
+      if use_cli:
+        
+        ants_call = ["antsApplyTransforms", "-d", str(3), "-i", fullfile, "-r", HCP_fname, "-n", "NearestNeighbor", "-o", resamp_fullfile]
+        print(" ".join(ants_call))
+        subprocess.run(ants_call)
+#          antsApplyTransforms -d 3 -i input.nii.gz -r template.nii.gz -n NearestNeighbor -o input_resamp.nii.gz
+      else:
+        from ants import apply_transforms, image_read, image_write
+        
+        img = image_read(fullfile, pixeltype="unsigned int")
+        f_img = image_read(HCP_fname, pixeltype="unsigned int")
+        
+        print("dimensions", img.dimension, f_img.dimension)
+        # this call doesn't work the same as cli.  it needs the -t flag for some reason
+        res_img_ants = apply_transforms(f_img, img, interpolator="NearestNeighbor")
+        
+        image_write(res_img_ants, resamp_fullfile)
+        
+      img_resamp = nibabel.load(resamp_fullfile)
+#      print("ants done :", time.time() - start)
     else:
-      img = nibabel.load(fullfile)
-    #
-    img_resamp = nibabel.processing.resample_from_to(img, HCP,order=0)
+      print("running with nibabel")
+#      print( time.time() - start)
+      if os.path.splitext(file)[1] == ".nrrd":
+        img = readNRRD(fullfile)
+      else:
+        img = nibabel.load(fullfile)
+      #
+      img_resamp = nibabel.processing.resample_from_to(img, HCP,order=0)
+#      print("nibabel done :", time.time() - start)
 #    print(img_resamp)
+#    print("post-mapping :", time.time() - start)
+    
+    seg_resamp_axes = getNiftiObjAxes(img_resamp)
+    
+    if not compareAxes(hcp_axes, seg_resamp_axes):
+      print("WARNING: Axes of resampled segmentation do not match reference image")
+    else:
+      print("Axes of resampled segmentation and reference image match")
+  
     img_data = img_resamp.get_fdata()
-    data_add = img_data.copy()
-    for j in range(0,len(local_index)):
-      data_add[img_data == local_index[j]] = int(main_index[j])
-    #
+    
+    lut = np.zeros(max(local_index)+1)
+    #    print(local_index)
+    #    print(main_index)
+    lut[local_index] = main_index
+    data_add = lut[img_data.astype(int)]
+    
+    
     All_data[data_add != 0] = data_add[data_add != 0]
     
+#    print("end loop : ", time.time() - start)
+#  print("end all loops:", time.time() - start)
+    
   All_data = All_data.astype(int)
-  All_to_nii = nibabel.Nifti1Image(All_data, HCP.affine, HCP.header)
+  All_to_nii = nibabel.Nifti1Image(All_data.astype(np.uint32), HCP.affine, HCP.header)
   
   nibabel.save(All_to_nii, output_files["nifti_lookup_outputfile"])
 
+#  print("saved nifti file:", time.time() - start)
+  
   #Create Key for MRtrix image
   mrtrix_key = {  'Lookup Index' : np.unique(All_data)[1:].tolist(),
                   'MRtrix Index' : list(range(1,len(np.unique(All_data)[1:].tolist())+1))
   }
   
-  mrtrix_data = All_data.copy()
-  for i in range(0,len(mrtrix_key['Lookup Index'])):
-      mrtrix_data[All_data == mrtrix_key['Lookup Index'][i]] = mrtrix_key['MRtrix Index'][i]
-      
-  mrtrix_to_nii = nibabel.Nifti1Image(mrtrix_data, HCP.affine, HCP.header)
+  lookup_table = np.zeros(max(mrtrix_key['Lookup Index'])+1)
+  lookup_table[mrtrix_key['Lookup Index']] = mrtrix_key['MRtrix Index']
+#  print("lookup table matrix")
+#  print(lookup_table)
+  
+  mrtrix_data = lookup_table[All_data]
+  
+  mrtrix_to_nii = nibabel.Nifti1Image(mrtrix_data.astype(np.uint32), HCP.affine, HCP.header)
   nibabel.save(mrtrix_to_nii, output_files["nifti_outputfile"] )
+#  print("saved nifti lookup:", time.time() - start)
+  
   mrtrix_save = pd.DataFrame(data=mrtrix_key)
   
   mrtrix_save.to_csv(output_files["matkey_outputname"])
+#  print("saved csv lookup:", time.time() - start)
   
   print("files generated:")
   print(output_files)
+#  print("end add_files_2_atlas", time.time() - start)
   
   return mrtrix_save
   
   
   
 def table_2_atlas(lookup_file, profile, output_files, **kwargs ):
+#  start = time.time()
   default_kwargs = {"rerun" : False}
   kwargs = { **default_kwargs, **kwargs}
 
   print("==========")
   print("Making Atlas file from lookup table: ")
   print(lookup_file)
-  
+#  print(time.time() - start)
   lookup = pd.read_csv(lookup_file,index_col=False)
+#  print("read csv file : ", time.time() - start)
   seg_files = lookup['Filename'].unique()
   #seg_dirs = lookup['Path'].unique()
   seg_dirs = lookup['Path'][lookup['Filename'] == seg_files[0]].unique()[0]
 
   #Load HCP first always. This will be the reference
 #  print(seg_files)
-  HCP = nibabel.load(os.path.join(profile["segPath"], seg_dirs, seg_files[0]))
-  
+  HCP_fname = os.path.join(profile["segPath"], seg_dirs, seg_files[0])
+#  print("reading hcp file : ", time.time() - start)
+  HCP = nibabel.load(HCP_fname)
   HCP_data = HCP.get_fdata()
+#  print("read hcp file : ", time.time() - start)
   main_index = np.array(lookup['Index'][lookup['Filename'] == seg_files[0]])
   local_index = np.array(lookup['File Index'][lookup['Filename'] == seg_files[0]])
 
-  All_data = HCP_data.copy()
-  for i in range(0,len(local_index)):
-    All_data[HCP_data == local_index[i]] = int(main_index[i])
-
-
-  return add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files)
+  lut = np.zeros(max(local_index)+1)
+  lut[local_index] = main_index
+  All_data = lut[HCP_data.astype(int)]
   
+#  print("running add_files_2_atlas : ", time.time() - start)
+  return add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, HCP_fname = HCP_fname, **kwargs )
   
+def check_version(profile):
+  cm_version = ""
+  cm_stim_version = ""
+  s_version = ""
+  
+  if "Connectome_maker" in profile.keys():
+    if "version" in profile["Connectome_maker"].keys():
+      cm_version = profile["Connectome_maker"]["version"]
+    else:
+      cm_version = "0.0"
+      
+  if "Stim" in profile.keys():
+    if "Connectome_maker" in profile["Stim"].keys():
+      if "version" in profile["Stim"]["Connectome_maker"].keys():
+        cm_stim_version = profile["Stim"]["Connectome_maker"]["version"]
+      else:
+        cm_stim_version = "0.0"
+        
+  if not cm_version and not cm_stim_version:
+    s_version = current_ver
+  elif not cm_version:
+    s_version = cm_stim_version
+  elif not cm_stim_version:
+    s_version = cm_version
+  else:
+    if parse_version(cm_version) == parse_version(cm_stim_version):
+      s_version = cm_version
+    else:
+      print("Warning:  Two script versions found in profile.  Using latest one")
+      if parse_version(cm_version) > parse_version(cm_stim_version):
+        s_version = cm_version
+        
+      elif parse_version(cm_version) < parse_version(cm_stim_version):
+        s_version = cm_stim_version
+      else:
+        raise ValueError("unable to retrieve script version")
+  
+  return s_version
+ 
 
 def main():
+#  start = time.time()
+#  print("starting main()")
+
+
 
   parser = build_parser()
   args = parser.parse_args()
@@ -270,7 +418,18 @@ def main():
   
   with open(args.profile, 'r') as js_file:
     profile = json.load(js_file)
-    
+   
+  # changed label mapping in v0.1, so check for older ones
+  s_ver = check_version(profile)
+  if parse_version(s_ver) < parse_version(current_ver):
+    if args.upgrade:
+      print("Upgrading data outputs, and overwriting previous data")
+      args.rerun = True
+    else:
+      print("This profile was previously run with a previous version of the script, and running it again will overwrite the previous data.  To allow overwriting with current script version, use the --upgrade (-u) flag")
+      return
+      
+
   subject= profile["subject"]
   experiment = profile["experiment"]
   lookup_file = profile["lookup_table"]
@@ -300,14 +459,16 @@ def main():
   out_check = [os.path.exists(f_name ) for f_var, f_name in output_files.items() ]
   
 #  print(out_check)
-  
+#  print("output check point time: ", time.time() - start)
   if all(out_check):
     print("files all exist")
     print(args.rerun)
     if args.rerun:
       print("overwriting output files")
-      table_2_atlas(lookup_file, profile, output_files, rerun = args.rerun  )
-      profile["Connectome_maker"] = { "Output_files": output_files}
+#      print("pre-table_2_atlas: ", time.time() - start)
+      table_2_atlas(lookup_file, profile, output_files, rerun = args.rerun, mapping = args.mapping )
+#      print("post-table_2_atlas: ", time.time() - start)
+      profile["Connectome_maker"] = { "version": current_ver,  "Output_files": output_files}
       
       with open(args.profile, 'w') as fp:
         json.dump(profile, fp, sort_keys=True, indent=2)
@@ -316,8 +477,10 @@ def main():
   else:
     # make sure to run the anatomy data
     # TODO: restructure to avoid all the repeat calls and profiles saves
-    table_2_atlas(lookup_file, profile, output_files, rerun = args.rerun  )
-    profile["Connectome_maker"] = { "Output_files": output_files}
+#    print("pre-table_2_atlas: ", time.time() - start)
+    table_2_atlas(lookup_file, profile, output_files, rerun = args.rerun, mapping = args.mapping  )
+#    print("post-table_2_atlas: ", time.time() - start)
+    profile["Connectome_maker"] = { "version": current_ver,  "Output_files": output_files}
     
     with open(args.profile, 'w') as fp:
       json.dump(profile, fp, sort_keys=True, indent=2)
@@ -326,6 +489,7 @@ def main():
   
   if args.stim:
     print("running stimulation data")
+#    print(time.time() - start)
     if "stim_table" in profile.keys():
       if not os.path.exists(profile["stim_table"]):
         raise ValueError("cannot find stimulation table: "+profile["stim_table"])
@@ -340,7 +504,7 @@ def main():
     
 #    print(stim_out_check)
 #    print(np.all(stim_out_check))
-    
+#    print("stim output check point time: ", time.time() - start)
     if np.all(stim_out_check):
       print("stim files all exist")
       print(args.rerun)
@@ -350,42 +514,45 @@ def main():
         print("stim output files exist.  Use '-f' to force overwrite")
         return
     
+#    print("starting loop through stim files: ", time.time() - start)
     for idx in range(len(stim_output_files["lookup_tables"])):
       
       st_lookup_file = stim_output_files["lookup_tables"][idx]
 #      st_lookup = pd.read_csv(stim_output_files["lookup_tables"][idx], index_col=False)
-      st_output_fs = {"nifti_outputfile": stim_output_files["nifti_outputfiles"][idx],
+      st_output_fs = {
+          "nifti_outputfile": stim_output_files["nifti_outputfiles"][idx],
           "nifti_lookup_outputfile" : stim_output_files["nifti_lookup_outputfiles"][idx],
           "matkey_outputname" : stim_output_files["matkey_outputnames"][idx]
       }
       
 #      print("should make these files :")
 #      print(st_output_fs)
-      
-      table_2_atlas_stim(st_lookup_file, profile, st_output_fs, rerun = args.rerun )
+#      print("pre-table_2_atlas_stim: ", time.time() - start)
+      table_2_atlas_stim(st_lookup_file, profile, st_output_fs, rerun = args.rerun, mapping = args.mapping )
+#      print("post-table_2_atlas_stim: ", time.time() - start)
+#      print("end loop ", idx, " : ", time.time() - start)
     
     ROIs = stim_output_files["ROIs"]
     stim_tags = stim_output_files["stim_tags"]
     stim_output_files.pop("ROIs")
     stim_output_files.pop("stim_tags")
     
-    if "stim" in profile.keys():
-      profile["stim"]["Connectome_maker"] = {
-                             "Output_files" : stim_output_files,
-                             "ROIs" : ROIs,
-                             "stim_tags" : stim_tags
-      }
-    else:
-      profile["stim"] = { "Connectome_maker" :
-                            { "Output_files" : stim_output_files,
-                              "ROIs" : ROIs,
-                              "stim_tags" : stim_tags
-                            }
-                        }
+    if not "stim" in profile.keys():
+      profile["stim"] = {}
+      
+    profile["stim"]["Connectome_maker"] = {
+                           "version" : current_ver,
+                           "Output_files" : stim_output_files,
+                           "ROIs" : ROIs,
+                           "stim_tags" : stim_tags
+                           }
+    
                       
         
     with open(args.profile, 'w') as fp:
       json.dump(profile, fp, sort_keys=True, indent=2)
+    
+#  print("end main() : ", time.time() - start)
     
 
 if __name__ == "__main__":
