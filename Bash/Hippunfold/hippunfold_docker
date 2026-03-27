@@ -1,0 +1,35 @@
+#!/bin/bash
+
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=32gb
+#SBATCH --time=05:00:00
+#SBATCH --job-name=Hippunfold
+#SBATCH --partition=hpg-turin
+#SBATCH --gpus=1
+#SBATCH --mail-type=ALL
+#SBATCH --output=hipp_run_%j.out
+
+set -e
+if [[ -z "$SYSNAME" ]]; then
+echo environment not set.  run makeSysConfig.sh
+exit
+fi
+
+if [ $SYSNAME == "hipergator" ]
+then
+module load apptainer
+module load cuda
+# apptainer cache clean
+# module load ants
+# module load fsl
+fi
+
+file=$1
+mkdir -p sub-001
+mkdir -p sub-001/anat
+cp $file sub-001/anat/sub-001_T1w.nii.gz
+# TODO: figure out where the sif file should live
+apptainer run -B ${PWD}:${PWD} -W ${PWD} -u --cleanenv /home/mphook/blue_butsonc/Docker/Hippunfold/Hippunfold.sif sub-001 hipp participant --modality T1w --cores all --use-gpu
+
