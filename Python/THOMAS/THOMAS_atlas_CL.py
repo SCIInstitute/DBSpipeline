@@ -45,8 +45,10 @@ for hemi in ['left', 'right']:
             nuc_num = int(nuc.split('-')[0])
         except:
             continue #skip non-numbered files
-        if nuc_num > 20:
+        if nuc_num > 40:
             continue #skip VL conglomeration
+        if nuc_num == 33:
+            continue #skip full Pallidum conglomeration
         if nuc_num == 1:
             continue #skip Thalamus bounds
         if nuc_num == 11:
