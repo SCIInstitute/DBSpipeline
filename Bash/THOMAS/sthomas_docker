@@ -95,6 +95,6 @@ then
 module load python
 fi
 
-python ./THOMAS_atlas_CL.py
+python $CODEDIR/Python/THOMAS/THOMAS_atlas_CL.py
 
 echo "Done!"
