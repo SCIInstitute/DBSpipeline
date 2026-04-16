@@ -244,12 +244,9 @@ def makeProfile(subject, args, **kwargs):
         profile[key] = paths_table[key](profile,args)
   
   print(profile)
-  
-  
-  
-  
-  
-
+  with open(profile_file, 'w') as fp:
+    json.dump(profile, fp, sort_keys=True, indent=2)
+  return profile_file
 
 
 def main():
