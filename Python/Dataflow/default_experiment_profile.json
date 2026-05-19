@@ -6,6 +6,10 @@
   "right_ROI" : [1016]
 }
 
+# expose more settings and parameters of the script if possible
+# left and right roi may not be as helpful for future experiments
+
+
 
   
 

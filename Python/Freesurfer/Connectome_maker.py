@@ -286,6 +286,7 @@ def add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, *
   
     img_data = img_resamp.get_fdata()
     
+    
     lut = np.zeros(max(local_index)+1)
     #    print(local_index)
     #    print(main_index)
@@ -305,9 +306,12 @@ def add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, *
 
 #  print("saved nifti file:", time.time() - start)
   
-  #Create Key for MRtrix image
-  mrtrix_key = {  'Lookup Index' : np.unique(All_data)[1:].tolist(),
-                  'MRtrix Index' : list(range(1,len(np.unique(All_data)[1:].tolist())+1))
+  # Create Key for MRtrix image
+  ## TODO: blank seg regions (not on purpose) ruins this
+#  lu_index = np.unique(All_data)[1:].tolist()
+  lu_index = np.unique(lookup['Index'][lookup['Index']>0]).tolist()
+  mrtrix_key = {  'Lookup Index' : lu_index,
+                  'MRtrix Index' : list(range(1,len(lu_index)+1))
   }
   
   lookup_table = np.zeros(max(mrtrix_key['Lookup Index'])+1)
