@@ -26,12 +26,25 @@ import subprocess
 import time
 import copy
 from packaging.version import parse as parse_version
+import importlib.util
+
 
 #print(os.path.join(os.path.dirname(__file__), "..", "MRtrix" ))
 #sys.path.append(os.path.join(os.path.dirname(__file__), "..", "MRtrix" ))
 print(os.path.join(os.environ["CODEDIR"], "Python/MRtrix" ))
 sys.path.append(os.path.join(os.environ["CODEDIR"], "Python/MRtrix" ))
 sys.path.append(os.path.join(os.environ["CODEDIR"], "Python/utils" ))
+
+# some workarounds because we don't have proper packaging yet
+spec_nc = importlib.util.spec_from_file_location("NRRDConverter", os.path.join(os.environ["CODEDIR"], "Python/MRtrix", "NRRDConverter.py" ))
+NRRDConverter = importlib.util.module_from_spec(spec_nc)
+sys.modules["NRRDConverter"] = NRRDConverter # Optional: add to sys.modules
+spec_nc.loader.exec_module(NRRDConverter)
+
+spec_ac = importlib.util.spec_from_file_location("AxisChecker", os.path.join(os.environ["CODEDIR"], "Python/utils", "AxisChecker.py" ))
+AxisChecker = importlib.util.module_from_spec(spec_ac)
+sys.modules["AxisChecker"] = AxisChecker # Optional: add to sys.modules
+spec_ac.loader.exec_module(AxisChecker)
  
 from NRRDConverter import readNRRD
 from AxisChecker import getAxes, compareAxes, getNiftiObjAxes
@@ -57,7 +70,7 @@ def build_parser():
                       help="force a rewrite of files",
                       action = "store_true", dest="rerun")
   parser.add_argument("-m", "--mapping", required=False,
-                      help="force a rewrite of files",
+                      help="mapping tool option",
                       default = "ANTs",  dest="mapping",
                       choices=["ANTs", "nibabel"])
   parser.add_argument("-u", "--upgrade", required=False,
