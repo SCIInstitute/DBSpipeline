@@ -35,16 +35,7 @@ print(os.path.join(os.environ["CODEDIR"], "Python/MRtrix" ))
 sys.path.append(os.path.join(os.environ["CODEDIR"], "Python/MRtrix" ))
 sys.path.append(os.path.join(os.environ["CODEDIR"], "Python/utils" ))
 
-# some workarounds because we don't have proper packaging yet
-spec_nc = importlib.util.spec_from_file_location("NRRDConverter", os.path.join(os.environ["CODEDIR"], "Python/MRtrix", "NRRDConverter.py" ))
-NRRDConverter = importlib.util.module_from_spec(spec_nc)
-sys.modules["NRRDConverter"] = NRRDConverter # Optional: add to sys.modules
-spec_nc.loader.exec_module(NRRDConverter)
 
-spec_ac = importlib.util.spec_from_file_location("AxisChecker", os.path.join(os.environ["CODEDIR"], "Python/utils", "AxisChecker.py" ))
-AxisChecker = importlib.util.module_from_spec(spec_ac)
-sys.modules["AxisChecker"] = AxisChecker # Optional: add to sys.modules
-spec_ac.loader.exec_module(AxisChecker)
  
 from NRRDConverter import readNRRD
 from AxisChecker import getAxes, compareAxes, getNiftiObjAxes
