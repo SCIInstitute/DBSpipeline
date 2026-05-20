@@ -311,8 +311,8 @@ def add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, *
 #  print("saved nifti file:", time.time() - start)
   
   # Create Key for MRtrix image
-  ## TODO: blank seg regions (not on purpose) ruins this
-#  lu_index = np.unique(All_data)[1:].tolist()
+  
+  # this will check the lookup table file for the indices that should exist, making sure that empty seg regions are still accounted for and to prevent index shifting
   lu_index = np.unique(lookup['Index'][lookup['Index']>0]).tolist()
   mrtrix_key = {  'Lookup Index' : lu_index,
                   'MRtrix Index' : list(range(1,len(lu_index)+1))
