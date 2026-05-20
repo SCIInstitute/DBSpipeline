@@ -55,6 +55,7 @@ Help()
    echo "-e  experiment tag to run"
    echo "-a  assignment method [\"assignment_radial_search 3\"].  options from MRtrix: https://mrtrix.readthedocs.io/en/dev/reference/commands/tck2connectome.html#options"
    echo "-s run stimulated regions.  requires extra files"
+   echo "-i begining index to use for stimulation regions in Connectome_maker.py"
    echo
 }
 
@@ -80,9 +81,11 @@ run_loop() {
   local testrun=$4
   local radius=$5
   local mdist=$6
-  local experiment=$7
+  local experiment="$7"
   local stim=$8
-  local upgrade=$9
+  local stim_index="$9"
+  local upgrade=${10}
+  local atlas_mapping="${11}"
   
 #  files=($(ls -1 "${DATADIR}/${subject}/${rel_path1}/Stim/HCP_parc_all_"*".nii.gz"))
   
@@ -92,6 +95,8 @@ run_loop() {
 #  file_pattern="HCP_parc_all_*.nii.gz"
   file_pattern=$experiment"*profile.json"
 
+  echo $file_pattern
+  echo "$subject_path"
   
 #  echo ${#files[@]}
   
@@ -122,6 +127,15 @@ run_loop() {
     if [ "$stim" = true ] ; then
       python_call=$python_call" -s"
     fi
+    
+    if [ -n "$stim_index" ] ; then
+      python_call="$python_call -i ${stim_index}"
+    fi
+    
+    if [ -n "$atlas_mapping" ] ; then
+      python_call="$python_call -m ${atlas_mapping}"
+    fi
+    
     
     if [ "$testrun" = true ]; then
       echo "this is the call that would run: "
@@ -184,7 +198,7 @@ rerun=false
 upgrade=false
 stim=false
 
-while getopts "hd:l:a:r:tfum:e:s" option; do
+while getopts "hd:l:a:r:tfum:e:si:p:" option; do
    case $option in
       d) d_dir=$OPTARG;;
       l) subjects=$OPTARG;;
@@ -196,6 +210,8 @@ while getopts "hd:l:a:r:tfum:e:s" option; do
       m) mdist=$OPTARG;;
       e) experiment=$OPTARG;;
       s) stim=true;;
+      i) stim_index=$OPTARG;;
+      p) atlas_mapping=$OPTARG;;
       h | * | :) Help && exit;;
    esac
 done
@@ -254,7 +270,7 @@ then
     then
       subject=$(basename "$sf")
       echo "valid subject: $subject"
-      run_loop "$subject" "$assignment" $rerun $testrun $radius $mdist $experiment $stim
+      run_loop "$subject" "$assignment" "$rerun" "$testrun" "$radius" "$mdist" "$experiment" "$stim" "$stim_index" "$upgrade" "$atlas_mapping"
 #    else
 #      echo "skipping $sf"
     fi
@@ -275,7 +291,7 @@ else
     do
       echo "$subject"
       
-      run_loop "$subject" "$assignment" "$rerun" "$testrun" "$radius" "$mdist" "$experiment" "$stim" "$upgrade"
+      run_loop "$subject" "$assignment" "$rerun" "$testrun" "$radius" "$mdist" "$experiment" "$stim" "$stim_index" "$upgrade" "$atlas_mapping"
 
     done < "$subjects"
   fi
