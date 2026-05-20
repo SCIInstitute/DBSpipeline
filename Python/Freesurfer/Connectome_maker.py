@@ -57,6 +57,9 @@ def build_parser():
   parser.add_argument("-s", "--stim", required=False,
                       help="include stimulations",
                       action = "store_true", dest="stim")
+  parser.add_argument("-i", "--index", required=False,
+                      help="begining index for stimulations [3000]",
+                      default = 3000 , type=int, dest="stim_index")
   parser.add_argument("-f", "--force", required=False,
                       help="force a rewrite of files",
                       action = "store_true", dest="rerun")
@@ -504,7 +507,7 @@ def main():
     else:
       raise ValueError("Cannot run --stim (-s) option without stimulation table filepath (profile['stim_table'])")
 
-    stim_output_files = append_lookup_file(profile)
+    stim_output_files = append_lookup_file(profile, begin_idx=args.stim_index)
 #    print("--- checking files ---")
 #    print(stim_output_files)
     
