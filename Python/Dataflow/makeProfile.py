@@ -7,7 +7,7 @@ import copy
 
 import os
 
-from defaultProfile import experiment_required_fields, files_ignore, def_print_contents, base_profile_keys, profile_keys, def_baseProfile, def_implantation
+from defaultProfile import experiment_required_fields, files_ignore, def_print_contents, def_Makeprofile,  base_profile_keys, profile_keys, def_baseProfile, def_implantation
 
 
 
@@ -316,7 +316,7 @@ def copyFromProfile(subject, profilepath):
   
 
 def makeProfile(subject,  **kwargs):
-  kwargs = {**def_baseProfile, **kwargs}
+  kwargs = {**def_Makeprofile, **def_baseProfile, **kwargs}
   
   
   kwargs["datapath"] = check_datapath(kwargs["datapath"])

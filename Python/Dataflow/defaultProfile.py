@@ -79,31 +79,31 @@ profile_keys["base"] = {
               "default" : [ 1016 ]
               },
   "rootPath" :  {
-              "help" : "subject data directory",
+              "help" : "subject data directory. (default: <datapath>/subject)",
               "type" : pathlib.Path
               },
   "segPath" :  {
-              "help" : "subject segmentation directory",
+              "help" : "subject segmentation directory. (default: <rootPath>/Segmentations)",
               "type" : pathlib.Path
               },
   "SRFilesPath" :  {
-              "help" : "subject directory for SCIRun files",
+              "help" : "subject directory for SCIRun files. (default: <rootPath>/SCIRun_files)",
               "type" : pathlib.Path
               },
   "connectomePath" :  {
-              "help" : "subject directory for connectome data",
+              "help" : "subject directory for connectome data. (default: <rootPath>/Connectome)",
               "type" : pathlib.Path
               },
   "tractographyPath" :  {
-              "help" : "subject directory for tractography data",
+              "help" : "subject directory for tractography data. (default: <rootPath>/Tractography)",
               "type" : pathlib.Path
               },
   "cleantractPath" :  {
-              "help" : "subject directory for cleanded tractography data",
+              "help" : "subject directory for cleanded tractography data. (default: <tractographyPath>/Cleaned)",
               "type" : pathlib.Path
               },
   "fibertractPath" :  {
-              "help" : "subject directory for fiber tractography data",
+              "help" : "subject directory for fiber tractography data. (default: <cleantractPath>/Fibers)",
               "type" : pathlib.Path
               }
 }
