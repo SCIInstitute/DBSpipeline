@@ -61,12 +61,7 @@ def build_parser():
   parser.add_argument("-f", "--force", required=False,
                       help="Force overwrite profile files",
                       action = "store_true", dest="rewrite")
-#  parser.add_argument("-e", "--experiment", required=False,
-#                      help="Name for the experiment.  this string will be used in several filenames, and should not include spaces.  Unicode characters and many symboles may also cause problems. (default: %(default)s)",
-#                      dest="experiment_name", default = "default")
-#  parser.add_argument("--lookup_table", required=False,
-#                      help="path to lookuptable to use for atlas generation. (default: %(default)s)",
-#                      dest="lookup_table", type=pathlib.Path, default = pathlib.Path("connectome_lookup.csv") )
+  # pull inputs from the dictionary in defaultProfile.py to help make sure the defaults are the same with the CLI and the Python call directly
   for key, value in profile_keys["base"].items():
     p_args = [ "--"+key ]
     if "short_flag" in profile_keys["base"][key].keys():
@@ -325,7 +320,8 @@ def makeProfile(subject,  **kwargs):
   # there may be an edge case where a user may want to set the datapath from this input, but I'm not going to deal with that until someone asks for it.
   profilepath = check_profilepath(kwargs["profilepath"])
   
-  profile_filename = subject+"_"+kwargs["experiment"]+"_profile.json"
+#  profile_filename = subject+"_"+kwargs["experiment"]+"_profile.json"
+  profile_filename = kwargs["experiment"]+"_profile.json"
   profile_file = os.path.join(kwargs["datapath"], subject, profile_filename)
   
   print(kwargs["datapath"])
