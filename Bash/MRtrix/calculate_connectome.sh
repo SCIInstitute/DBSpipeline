@@ -93,14 +93,16 @@ run_loop() {
 #  subject_path="${DATADIR}/${subject}/${rel_path1}/"
   subject_path="${DATADIR}/${subject}/"
 #  file_pattern="HCP_parc_all_*.nii.gz"
-  file_pattern=$experiment"*profile.json"
 
-  echo $file_pattern
+#  echo $file_pattern
   echo "$subject_path"
   
-#  echo ${#files[@]}
+# pfiles=($(ls -1 ${subject_path}/{${subject}{\-,\.,_,},}${experiment}{,_,-,.}profile.json 2>/dev/null || true ))
+#  echo ${#pfiles[@]}
+#  for file in ${pfiles[@]}
+
   
-  find "$subject_path" -type f -name "$file_pattern" -print0 | while IFS= read -r -d '' file;
+  find "$subject_path" -type f \( -name "${experiment}[\-,\.,_]profile.json" -o -name "${experiment}profile.json" \) -print0 | while IFS= read -r -d '' file;
   do
     echo "file = $file"
     
