@@ -8,6 +8,9 @@
 
 # expose more settings and parameters of the script if possible
 # left and right roi may not be as helpful for future experiments
+# what other fields/parameters would be helpful to expose at this level
+#   eg stimulation parameters
+#       stim lookup, implantation profile,
 
 
 

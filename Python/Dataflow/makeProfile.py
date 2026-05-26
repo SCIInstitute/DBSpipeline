@@ -2,10 +2,12 @@
 import json
 import numpy as np
 import argparse
+import pathlib
+import copy
 
 import os
 
-from defaultProfile import experiment_required_fields, def_Makeprofile, files_ignore, def_print_contents, base_profile_keys, def_baseProfile, def_implantation
+from defaultProfile import experiment_required_fields, files_ignore, def_print_contents, base_profile_keys, profile_keys, def_baseProfile, def_implantation
 
 
 
@@ -35,62 +37,137 @@ https://github.com/dask/dask
 
 Current design is based on an "experiment" with a set of parameters and subjects that would be relatively consistent. This could still be a useful concept yet I think I would like to rethink the interface a little bit. 
 
+
+Notes from Matt (2026/04/14):
+patient name redundancy - make sure that it doesn't have to be read/written twice
+two patient IDs - freesurfer and connectomics 
+
 """
 
 def build_parser():
   parser = argparse.ArgumentParser(
                 prog = "makeProfile",
                 description = "makes a profile file for a set of experimental parameters",
-                epilog="saves a profile to the provide profile path")
-
-  # This will be implemented as rollout broadens
+                epilog="saves a profile subject path inferred from the DATADIR environment variable or as supplied to %(prog)s")
+  parser.add_argument("-s", "--subjects", required=True,
+                      help="Lists of subjects to make a profile. Subjects should have their own folder in DATADIR",
+                      dest="subjects", nargs="*")
   parser.add_argument("-d", "--datapath", required=False,
                       help="path to were the data are located. If not provided, the script will try to use the enviroment variable DATADIR",
-                      dest="datapath")
-  parser.add_argument("-p", "--profilepath", required=False,
-                      help="path to profile directory. default location is <datapath>/profiles",
-                      dest="profilepath")
-  parser.add_argument("-e", "--experiment", required=False,
-                      help="path (relative to profilepath or absolute) to experiment profile file. default file found default_experiment_profile.json.",
-                      dest="experimentfile", default = os.path.join(scriptpath, "default_experiment_profile.json" ))
+                      dest="datapath", type=pathlib.Path)
+  parser.add_argument("-p", "--profile", required=False,
+                      help="path to profile file to use as a template.  Only provided values will be used.", nargs="*", default = [""],
+                      dest="profilepath", type=pathlib.Path)
+  parser.add_argument("-f", "--force", required=False,
+                      help="Force overwrite profile files",
+                      action = "store_true", dest="rewrite")
+#  parser.add_argument("-e", "--experiment", required=False,
+#                      help="Name for the experiment.  this string will be used in several filenames, and should not include spaces.  Unicode characters and many symboles may also cause problems. (default: %(default)s)",
+#                      dest="experiment_name", default = "default")
+#  parser.add_argument("--lookup_table", required=False,
+#                      help="path to lookuptable to use for atlas generation. (default: %(default)s)",
+#                      dest="lookup_table", type=pathlib.Path, default = pathlib.Path("connectome_lookup.csv") )
+  for key, value in profile_keys["base"].items():
+    p_args = [ "--"+key ]
+    if "short_flag" in profile_keys["base"][key].keys():
+      p_args.insert(0, "-"+profile_keys["base"][key]["short_flag"])
+      del profile_keys["base"][key]["short_flag"]
+    p_kwargs = { **{"required" : False }, **profile_keys["base"][key] }
+    parser.add_argument(*p_args, **p_kwargs)
+#    print(p_args)
   return parser
+
+def check_datapath(datapath):
+    
+  use_environ = True
+  if datapath:
+    if not isinstance(datapath, pathlib.Path):
+      datapath = pathlib.Path(datapath)
+    if datapath.is_dir():
+      use_environ = False
+      datapath = os.fspath(datapath)
+    else:
+      print("the provided path, "+os.fspath(datapath)+" does not exist.  Trying environment variable")
+  
+  if use_environ:
+    if os.environ["DATADIR"]:
+      datapath = os.environ["DATADIR"]
+    else:
+      raise ValueError("environment variable DATADIR not set.  use -d flag to provide path or set DATADIR")
+      
+  return datapath
+  
+  
+def check_profilepath(profilepath):
+
+  if profilepath:
+    if not isinstance(profilepath, pathlib.Path):
+      profilepath = pathlib.Path(profilepath)
+    if profilepath.exists():
+      profilepath = os.fspath(profilepath)
+    else:
+      print("the supplied profile, "+os.fspath(profilepath)+", does not exist. Ignoring")
+      profilepath=""
+
+  
+  return profilepath
+  
+def check_lookup_table(lookup_table):
+#  print(os.fspath(args.lookup_table))
+  
+  if lookup_table:
+    if not isinstance(lookup_table, pathlib.Path):
+      lookup_table = pathlib.Path(lookup_table)
+    if lookup_table.exists():
+      os.fspath(lookup_table)
+    else:
+#      def_lookup = os.path.join(args.datapath, def_baseProfile["lookup_table"] )
+      print("the supplied lookup table, "+os.fspath(lookup_table)+", does not exist. Using default value: "+ os.fspath(def_baseProfile["lookup_table"]) )
+      lookup_table = os.fspath(def_baseProfile["lookup_table"])
+  else:
+    lookup_table = os.fspath(def_baseProfile["lookup_table"])
+  
+  return lookup_table
+  
+def check_subject(datapath, subject):
+  sub_dir = os.path.join(datapath, subject)
+  sub_check = False
+  if os.path.isdir(sub_dir):
+    sub_check = True
+  else:
+    print(sub_dir+" not found ")
+  return sub_check
+  
+  
+  
   
 def check_parser(args):
 
-  use_environ = True
-  if args.datapath:
-    if os.path.exists(args.datapath):
-      use_environ = False
-    else:
-      print("the provided path, "+args.datapath+"does not exist.  Trying environment variable")
+  args.datapath = check_datapath(args.datapath)
+  
+  args.lookup_table = check_lookup_table(args.lookup_table)
+  
+  print(args.profilepath)
+  profilepaths = []
+  for profpath in args.profilepath:
+    profilepaths.append(check_profilepath(profpath))
+  
+  
+  
+  missing_subs=[]
+  for subject in args.subjects:
     
-      
-  if use_environ:
-    if os.environ["DATADIR"]:
-      args.datapath = os.environ["DATADIR"]
-    else:
-      raise ValueError("environment variable DATADIR not set.  use -d flag to provide path or set DATADIR")
+    if not check_subject(args.datapath, subject):
+      missing_subs.append(subject)
+    
+  if len(missing_subs)>0:
+    raise ValueError("Subjects:"+" ".join(missing_subs)+", are missing folders in "+args.datapath)
   
-  use_defaultpath = True
-  profilepath = ""
-  if args.profilepath:
-    if os.path.exists(args.profilepath):
-      use_defaultpath = False
-    else:
-      print("the provided path, "+args.profilepath+"does not exist.  Using default path")
-  
-  if use_defaultpath:
-    args.profilepath = os.path.join(args.datapath, "profiles")
-    if not os.path.exists(args.profilepath):
-      os.makedirs(args.profilepath)
-  
-  experimentfile = args.experimentfile
-  if not os.path.exists(args.experimentfile):
-    args.experimentfile = os.path.abspath(args.experimentfile)
-    if not os.path.exists(args.experimentfile):
-      args.experimentfile = os.path.join(args.profilepath, args.experimentfile)
-    else:
-      raise ValueError("cannot find experiment file "+experimentfile+" or "+ args.experimentfile)
+  if len(profilepaths)==1 or len(profilepaths)==len(args.subjects):
+    args.profilepath = profilepaths
+  else:
+    print(profilepaths)
+    raise ValueError("profilepath inputs (-p, --profile) needs to be a single file, or the lenght as the subjects list (-s, --subjects)")
       
   return args
   
@@ -184,25 +261,25 @@ def print_contents(contents, **kwargs):
 
 
 
-def getRootPath(profile, args):
-  return os.path.join(args.datapath, profile["subject"] )
+def getRootPath(profile, **kwargs):
+  return os.path.join(kwargs["datapath"], profile["subject"] )
 
-def getSegPath(profile, args):
+def getSegPath(profile, **kwargs):
   return os.path.join(profile["rootPath"], "Segmentations")
   
-def getSRFilesPath(profile, args):
+def getSRFilesPath(profile, **kwargs):
   return os.path.join(profile["rootPath"], "SCIRun_files")
   
-def getConnectomePath(profile, args):
+def getConnectomePath(profile, **kwargs):
   return os.path.join(profile["rootPath"], "Connectome")
   
-def getTractographyPath(profile, args):
+def getTractographyPath(profile, **kwargs):
   return os.path.join(profile["rootPath"], "Tractography")
 
-def getCleanTractPath(profile, args):
+def getCleanTractPath(profile, **kwargs):
   return os.path.join(profile["tractographyPath"], "Cleaned")
   
-def getFiberTractPath(profile, args):
+def getFiberTractPath(profile, **kwargs):
   return os.path.join(profile["cleantractPath"], "Fibers")
   
 paths_table = {
@@ -215,37 +292,99 @@ paths_table = {
   "fibertractPath" : getFiberTractPath,
 }
 
+def copyFromProfile(subject, profilepath):
+  # copy what makes sense from another profile
+  with open(profilepath, 'r') as json_file:
+    profile_old = json.load(json_file)
+  
+  subject_old = profile_old["subject"]
+  
+  profile = copy.deepcopy(profile_old)
+  
+  if not subject == subject_old:
+  
+    with open(profilepath, 'r+') as st_file:
+      content_old = st_file.read()
+      
+    content = content_old.replace(subject_old, subject)
+    profile = json.loads(content)
+    
+    # TODO: it would probably be good to have a check to see if the files exist, especially when changing the subject name
+    # TODO: another thing to do could be to make an option to have a list of profiles for the list of subjects?
+    
+  return profile
+  
 
-def makeProfile(subject, args, **kwargs):
-  kwargs = {**def_Makeprofile, **kwargs}
+def makeProfile(subject,  **kwargs):
+  kwargs = {**def_baseProfile, **kwargs}
+  
+  
+  kwargs["datapath"] = check_datapath(kwargs["datapath"])
+  if not check_subject(kwargs["datapath"], subject):
+    raise ValueError(subject+" not found in "+kwargs["datapath"])
+  # there may be an edge case where a user may want to set the datapath from this input, but I'm not going to deal with that until someone asks for it.
+  profilepath = check_profilepath(kwargs["profilepath"])
   
   profile_filename = subject+"_"+kwargs["experiment"]+"_profile.json"
-  profile_file = os.path.join(args.profilepath, profile_filename)
+  profile_file = os.path.join(kwargs["datapath"], subject, profile_filename)
   
+  print(kwargs["datapath"])
+  print(profile_file)
+  
+  if kwargs["profilepath"]:
+    print(" copying from "+kwargs["profilepath"])
+    profile_cp = copyFromProfile(subject, profilepath)
+  
+  write_q = True
   if os.path.exists(profile_file):
+    print("previous version of this profile file exists (" + profile_file + ").  Pulling existing fields from existing file, and Kwarg input fields will override previous values.  Note the profile file will not be overwritten without the appropriate flag ('-f' or '--force')")
+    write_q = False
     with open(profile_file, 'r') as json_file:
       profile = json.load(json_file)
   else:
     profile = {}
+  
+  if kwargs["profilepath"]:
+    profile_cp = copyFromProfile(subject, profilepath)
+    profile = { **profile, **profile_cp}
     
+    
+  
   profile["subject"]=subject
   profile["profile_file"] = profile_file
   
+  
   for key, value in kwargs.items():
-    if key in base_profile_keys and value:
+    if key == "subject":
+      print("subject added as arg and kwarg.  kwarg value will be ignored")
+      continue
+    elif key == "profile_file":
+      print("'profile_file' kwarg will be ignored")
+      continue
+    elif key in profile_keys["base"].keys() and value:
       profile[key] = value #do I need to deep copy?
   
-  for key in base_profile_keys:
+  for key in profile_keys["base"].keys():
     if not key in profile.keys():
       if key in def_baseProfile.keys():
         profile[key] = def_baseProfile[key] #do I need to deep copy?
       else:
         # very order dependent right now
-        profile[key] = paths_table[key](profile,args)
+        profile[key] = paths_table[key](profile,**kwargs)
   
   print(profile)
-  with open(profile_file, 'w') as fp:
-    json.dump(profile, fp, sort_keys=True, indent=2)
+  if not write_q:
+    if kwargs["rewrite"]:
+      write_q = True
+      print(" overwriting previous profile file "+ profile_file)
+    else:
+      print("profile already exists :" + profile_file + ". To overwrite, use '-f' or '--force'.")
+      profile_file = ""
+      
+      
+  if write_q:
+    with open(profile_file, 'w') as fp:
+      json.dump(profile, fp, sort_keys=True, indent=2)
   return profile_file
 
 
@@ -255,15 +394,24 @@ def main():
   args = parser.parse_args()
   args = check_parser(args)
   
-  experiment = readExperimentFile(args)
-  
-  for sub in experiment["subjects"]:
-    makeProfile(sub, args,
-          experiment = experiment["experiment_name"],
-          lookup_table = experiment["lookup_table"],
-          left_ROI = experiment["left_ROI"],
-          right_ROI = experiment["right_ROI"]
-          )
+#  experiment = readExperimentFile(args)
+  subjects=args.subjects
+  profilepaths = args.profilepath
+  args_dict = vars(args)
+  del args_dict["subjects"]
+#  print(pathlib.Path)
+  for key, val in args_dict.items():
+#    print(key, type(val), isinstance(val, pathlib.Path) )
+    if isinstance(val, pathlib.Path):
+      args_dict[key] = os.fspath(val)
+
+#  print(args_dict)
+  for k, sub in enumerate(subjects):
+    if len(profilepaths)==1:
+      args_dict["profilepath"] = profilepaths[0]
+    else:
+      args_dict["profilepath"] = profilepaths[k]
+    makeProfile(sub, **args_dict)
   
     
 if __name__ == "__main__":
