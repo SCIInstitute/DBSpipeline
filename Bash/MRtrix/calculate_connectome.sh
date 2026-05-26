@@ -102,7 +102,13 @@ run_loop() {
 #  for file in ${pfiles[@]}
 
   
-  find "$subject_path" -type f \( -name "${experiment}[\-,\.,_]profile.json" -o -name "${experiment}profile.json" \) -print0 | while IFS= read -r -d '' file;
+# evaluates experiment tag only.  Subject name in the filename will break.
+# <experiment>[,.,-,_]profile.json
+#  find "$subject_path" -type f \( -name "${experiment}[\-,\.,_]profile.json" -o -name "${experiment}profile.json" \) -print0 | while IFS= read -r -d '' file;
+# a few specific cases spelled out for subject in the file name: <subject>[,.,-,_]<experiment>[,.,-,_]profile.json.  Also previous version without subject name
+# find "$subject_path" -type f \( -name "${experiment}[\-,\.,_]profile.json" -o -name "${experiment}profile.json" -o -name "${subject}[\-,\.,_]${experiment}[\-,\.,_]profile.json" -o -name "${subject}[\-,\.,_]${experiment}profile.json"  -o -name "${subject}${experiment}[\-,\.,_]profile.json" -o -name "${subject}${experiment}profile.json" \) -print0 | while IFS= read -r -d '' file;
+# Simplest handling of subject name in the filename with a full wildcard. Subject name not needed though. 
+  find "$subject_path" -type f \( -name "${experiment}[\-,\.,_]profile.json" -o -name "${experiment}profile.json" -o -name "${subject}*${experiment}[\-,\.,_]profile.json" -o -name "${subject}*${experiment}profile.json"  \) -print0 | while IFS= read -r -d '' file;
   do
     echo "file = $file"
     
