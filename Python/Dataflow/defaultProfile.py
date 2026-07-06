@@ -34,7 +34,7 @@ base_profile_keys = [
   "lookup_table",
   "left_ROI",
   "right_ROI",
-  "rootPath",
+  "rootpath",
   "segPath",
   "SRFilesPath",
   "connectomePath",
@@ -78,7 +78,7 @@ profile_keys["base"] = {
               "type" : int,
               "default" : [ 1016 ]
               },
-  "rootPath" :  {
+  "rootpath" :  {
               "help" : "subject data directory. (default: <datapath>/subject)",
               "type" : pathlib.Path
               },
