@@ -114,7 +114,7 @@ def check_lookup_table(lookup_table):
     if not isinstance(lookup_table, pathlib.Path):
       lookup_table = pathlib.Path(lookup_table)
     if lookup_table.exists():
-      os.fspath(lookup_table)
+      lookup_table = os.fspath(lookup_table)
     else:
 #      def_lookup = os.path.join(args.datapath, def_baseProfile["lookup_table"] )
       print("the supplied lookup table, "+os.fspath(lookup_table)+", does not exist. Using default value: "+ os.fspath(def_baseProfile["lookup_table"]) )
@@ -133,7 +133,18 @@ def check_subject(datapath, subject):
     print(sub_dir+" not found ")
   return sub_check
   
+def check_stim_table(stim_table):
+
+  if stim_table:
+    if not isinstance(stim_table, pathlib.Path):
+      stim_table = pathlib.Path(stim_table)
+    if stim_table.exists():
+      stim_table = os.fspath(stim_table)
+    else:
+#      def_lookup = os.path.join(args.datapath, def_baseProfile["lookup_table"] )
+      print("the supplied stim table, "+os.fspath(stim_table)+", does not exist." )
   
+  return stim_table
   
   
 def check_parser(args):
@@ -141,6 +152,8 @@ def check_parser(args):
   args.datapath = check_datapath(args.datapath)
   
   args.lookup_table = check_lookup_table(args.lookup_table)
+  
+  args.stim_table = check_stim_table(args.stim_table)
   
   print(args.profilepath)
   profilepaths = []
@@ -277,6 +290,18 @@ def getCleanTractPath(profile, **kwargs):
 def getFiberTractPath(profile, **kwargs):
   return os.path.join(profile["cleantractPath"], "Fibers")
   
+def getStimParamPath(profile, **kwargs):
+  return os.path.join(profile["SRFilesPath"], "stim_params")
+  
+def getStimOutputPath(profile, **kwargs):
+  return os.path.join(profile["SRFilesPath"], "Stim")
+  
+def getStimSegPath(profile, **kwargs):
+  return os.path.join(profile["segPath"], "Stim")
+
+def getStimTable(profile, **kwargs):
+  return os.path.join(profile["stim_param_dir"], profile["experiment"]+".csv")
+  
 paths_table = {
   "rootPath" : getRootPath,
   "segPath" : getSegPath,
@@ -285,6 +310,10 @@ paths_table = {
   "tractographyPath" : getTractographyPath,
   "cleantractPath" : getCleanTractPath,
   "fibertractPath" : getFiberTractPath,
+  "stim_param_dir" : getStimParamPath,
+  "stimoutpath" : getStimOutputPath,
+  "stimsegpath" : getStimSegPath,
+  "stim_table" : getStimTable
 }
 
 def copyFromProfile(subject, profilepath):
@@ -308,6 +337,27 @@ def copyFromProfile(subject, profilepath):
     # TODO: another thing to do could be to make an option to have a list of profiles for the list of subjects?
     
   return profile
+  
+def checkStimTable(profile, **kwargs):
+
+  if "stim_table" in profile.keys():
+    stim_table = profile["stim_table"]
+  else:
+    return ""
+    
+  if stim_table:
+    if not isinstance(stim_table, pathlib.Path):
+      stim_table = pathlib.Path(stim_table)
+    if stim_table.exists():
+      stim_table = os.fspath(stim_table.resolve())
+    elif (profile["stim_param_dir"] / stim_table).exists():
+      stim_table = os.fspath((profile["stim_param_dir"] / stim_table).resolve())
+    else:
+#      def_lookup = os.path.join(args.datapath, def_baseProfile["lookup_table"] )
+      print("the supplied stim table, "+os.fspath(stim_table)+", does not exist." )
+      stim_table = os.fspath(stim_table)
+  
+  return stim_table
   
 
 def makeProfile(subject,  **kwargs):
@@ -367,6 +417,8 @@ def makeProfile(subject,  **kwargs):
       else:
         # very order dependent right now
         profile[key] = paths_table[key](profile,**kwargs)
+        
+  profile["stim_table"]=checkStimTable(profile, **kwargs)
   
   print(profile)
   if not write_q:

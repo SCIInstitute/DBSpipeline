@@ -105,6 +105,22 @@ profile_keys["base"] = {
   "fibertractPath" :  {
               "help" : "subject directory for fiber tractography data. (default: <cleantractPath>/Fibers)",
               "type" : pathlib.Path
+              },
+  "stim_param_dir" : {
+              "help" : "Path to the directory with clinical stimulation parameters to use in SCIRun simulations. (default: <SRFilesPath>/stim_params)",
+              "type" : pathlib.Path
+              },
+  "stim_table" : {
+              "help" : "Path to the lookuptable for stimulated regions.  Path can be absolute or relative to <stim_param_dir>. (default : <stim_param_dir>/<experiment>.csv)",
+              "type" : pathlib.Path
+              },
+  "stimoutpath" : {
+              "help" : "Path to directory for Connectome data using stimulation regions. (default: <connectomePath>/Stim)",
+              "type" : pathlib.Path
+              },
+  "stimsegpath" : {
+              "help" : "Path to the directory containing the segmented stimulation regions. An output of the SCIRun simulation pipelines. (default: <segPath>/Stim)",
+              "type" : pathlib.Path
               }
 }
 
@@ -113,24 +129,9 @@ profile_keys["optional"] = {
   "implantation" : {
               "help" : "implantantion profile for the patient",
               "default" : def_implantation
-              },
-  "stim_param_dir" : {
-              "help" : "Path to the directory with clinical stimulation parameters to use in SCIRun simulations",
-              "type" : pathlib.Path
-              },
-  "stim_table" : {
-              "help" : "Path to the lookuptable for stimulated regions",
-              "type" : pathlib.Path
-              },
-  "stimoutpath" : {
-              "help" : "Path to directory for Connectome data using stimulation regions",
-              "type" : pathlib.Path
-              },
-  "stimsegpath" : {
-              "help" : "Path to the directory containing the segmented stimulation regions. An output of the SCIRun simulation pipelines.",
-              "type" : pathlib.Path
               }
 }
+
 
 def_baseProfile = {}
 for key, v_dict in profile_keys["base"].items():
