@@ -273,16 +273,16 @@ def getRootPath(profile, **kwargs):
   return os.path.join(kwargs["datapath"], profile["subject"] )
 
 def getSegPath(profile, **kwargs):
-  return os.path.join(profile["rootPath"], "Segmentations")
+  return os.path.join(profile["rootpath"], "Segmentations")
   
 def getSRFilesPath(profile, **kwargs):
-  return os.path.join(profile["rootPath"], "SCIRun_files")
+  return os.path.join(profile["rootpath"], "SCIRun_files")
   
 def getConnectomePath(profile, **kwargs):
-  return os.path.join(profile["rootPath"], "Connectome")
+  return os.path.join(profile["rootpath"], "Connectome")
   
 def getTractographyPath(profile, **kwargs):
-  return os.path.join(profile["rootPath"], "Tractography")
+  return os.path.join(profile["rootpath"], "Tractography")
 
 def getCleanTractPath(profile, **kwargs):
   return os.path.join(profile["tractographyPath"], "Cleaned")
@@ -303,7 +303,7 @@ def getStimTable(profile, **kwargs):
   return os.path.join(profile["stim_param_dir"], profile["experiment"]+".csv")
   
 paths_table = {
-  "rootPath" : getRootPath,
+  "rootpath" : getRootPath,
   "segPath" : getSegPath,
   "SRFilesPath" : getSRFilesPath,
   "connectomePath" : getConnectomePath,
