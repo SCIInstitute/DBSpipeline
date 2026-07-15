@@ -294,7 +294,7 @@ def getStimParamPath(profile, **kwargs):
   return os.path.join(profile["SRFilesPath"], "stim_params")
   
 def getStimOutputPath(profile, **kwargs):
-  return os.path.join(profile["SRFilesPath"], "Stim")
+  return os.path.join(profile["rootpath"], "Connectome", "Stim")
   
 def getStimSegPath(profile, **kwargs):
   return os.path.join(profile["segPath"], "Stim")

@@ -56,6 +56,8 @@ Help()
    echo "-a  assignment method [\"assignment_radial_search 3\"].  options from MRtrix: https://mrtrix.readthedocs.io/en/dev/reference/commands/tck2connectome.html#options"
    echo "-s run stimulated regions.  requires extra files"
    echo "-i begining index to use for stimulation regions in Connectome_maker.py"
+   echo "-v scale connectome by inverse node volume (optional)"
+   echo "-g scale connectome by inverse fiber length (optional)"
    echo
 }
 
@@ -86,6 +88,8 @@ run_loop() {
   local stim_index="$9"
   local upgrade=${10}
   local atlas_mapping="${11}"
+  local invnodevol="${12}"
+  local invlength="${13}"
   
 #  files=($(ls -1 "${DATADIR}/${subject}/${rel_path1}/Stim/HCP_parc_all_"*".nii.gz"))
   
@@ -118,6 +122,8 @@ run_loop() {
 #    fi
 
     echo "rerun: $rerun testrun: $testrun radius: $radius mdist: $mdist stim: $stim upgrade: $upgrade"
+    echo "Scale by inv node vol: $invnodevol"
+    echo "Scale by inv length: $invlength"
     
     if [ "$SYSNAME" == "hipergator" ]
     then
@@ -157,6 +163,12 @@ run_loop() {
     # heres where to add connectome maker
     python_call="python ${CODEDIR}/Python/MRtrix/makeConnectomeMatrix.py -p ${file} -a ${assignment} -r ${radius} -d ${mdist}"
     # upgrade not implemented in these other scripts
+    if [ "$invnodevol" = true ] ; then
+      python_call=$python_call" -v"
+    fi
+    if [ "$invlength" = true ] ; then
+      python_call=$python_call" -g"
+    fi
     if [ "$rerun" = true ] ; then
       python_call=$python_call" -f"
     fi
@@ -205,8 +217,9 @@ testrun=false
 rerun=false
 upgrade=false
 stim=false
-
-while getopts "hd:l:a:r:tfum:e:si:p:" option; do
+invnodevol=false
+invlength=false
+while getopts "hd:l:a:r:tfum:e:si:vgp:" option; do
    case $option in
       d) d_dir=$OPTARG;;
       l) subjects=$OPTARG;;
@@ -219,6 +232,8 @@ while getopts "hd:l:a:r:tfum:e:si:p:" option; do
       e) experiment=$OPTARG;;
       s) stim=true;;
       i) stim_index=$OPTARG;;
+      v) invnodevol=true;;
+      g) invlength=true;;
       p) atlas_mapping=$OPTARG;;
       h | * | :) Help && exit;;
    esac
@@ -278,7 +293,7 @@ then
     then
       subject=$(basename "$sf")
       echo "valid subject: $subject"
-      run_loop "$subject" "$assignment" "$rerun" "$testrun" "$radius" "$mdist" "$experiment" "$stim" "$stim_index" "$upgrade" "$atlas_mapping"
+      run_loop "$subject" "$assignment" "$rerun" "$testrun" "$radius" "$mdist" "$experiment" "$stim" "$stim_index" "$upgrade" "$atlas_mapping" "$invnodevol" "$invlength"
 #    else
 #      echo "skipping $sf"
     fi
@@ -299,7 +314,7 @@ else
     do
       echo "$subject"
       
-      run_loop "$subject" "$assignment" "$rerun" "$testrun" "$radius" "$mdist" "$experiment" "$stim" "$stim_index" "$upgrade" "$atlas_mapping"
+      run_loop "$subject" "$assignment" "$rerun" "$testrun" "$radius" "$mdist" "$experiment" "$stim" "$stim_index" "$upgrade" "$atlas_mapping" "$invnodevol" "$invlength"
 
     done < "$subjects"
   fi
