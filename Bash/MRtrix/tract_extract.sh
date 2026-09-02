@@ -120,7 +120,19 @@ do
     fi
     side_big=${side^^}
     side_marker=${side_big:0:1}
-    lookup_name=$(jq -r -c .lookup_table ${sub_dir}/${profile}profile.json)
+    # lookup_name=$(jq -r -c .lookup_table ${sub_dir}/${profile}profile.json)
+
+    if [[ -f "${sub_dir}/${profile}profile.json" ]]; then
+    json_file="${sub_dir}/${profile}profile.json"
+    elif [[ -f "${sub_dir}/${profile}_profile.json" ]]; then
+        json_file="${sub_dir}/${profile}_profile.json"
+    else
+        echo "No profile JSON found for ${profile}" >&2
+        exit 1
+    fi
+
+    lookup_name=$(jq -r -c '.lookup_table' "$json_file")
+
     if [ -z $targ ]
     then
       echo -e "\n No target given, using the profile default\n"

@@ -152,7 +152,7 @@ def main():
       stim_experiment = experiment+"_"+stim_tags[idx]
       stim_conn_mat=os.path.join(profile["stimoutpath"], "connectome_matrix_" + stim_experiment + ".csv")
       
-      run_connectome_matrix(stim_conn_mat, stim_inputs[idx], stim_lookup_tables[idx],  stim_experiment, profile, args.assignment, args.radius, args.distance)
+      run_connectome_matrix(stim_conn_mat, stim_inputs[idx], stim_lookup_tables[idx],  stim_experiment, profile, args.assignment, args.radius, args.distance, args.invnodevol, args.invlength)
       
       stim_connectome_matrices.append(stim_conn_mat)
       
