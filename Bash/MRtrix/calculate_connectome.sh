@@ -55,6 +55,9 @@ Help()
    echo "-e  experiment tag to run"
    echo "-a  assignment method [\"assignment_radial_search 3\"].  options from MRtrix: https://mrtrix.readthedocs.io/en/dev/reference/commands/tck2connectome.html#options"
    echo "-s run stimulated regions.  requires extra files"
+   echo "-i begining index to use for stimulation regions in Connectome_maker.py"
+   echo "-v scale connectome by inverse node volume (optional)"
+   echo "-g scale connectome by inverse fiber length (optional)"
    echo
 }
 
@@ -80,9 +83,13 @@ run_loop() {
   local testrun=$4
   local radius=$5
   local mdist=$6
-  local experiment=$7
+  local experiment="$7"
   local stim=$8
-  local upgrade=$9
+  local stim_index="$9"
+  local upgrade=${10}
+  local atlas_mapping="${11}"
+  local invnodevol="${12}"
+  local invlength="${13}"
   
 #  files=($(ls -1 "${DATADIR}/${subject}/${rel_path1}/Stim/HCP_parc_all_"*".nii.gz"))
   
@@ -90,12 +97,22 @@ run_loop() {
 #  subject_path="${DATADIR}/${subject}/${rel_path1}/"
   subject_path="${DATADIR}/${subject}/"
 #  file_pattern="HCP_parc_all_*.nii.gz"
-  file_pattern=$experiment"*profile.json"
+
+#  echo $file_pattern
+  echo "$subject_path"
+  
+# pfiles=($(ls -1 ${subject_path}/{${subject}{\-,\.,_,},}${experiment}{,_,-,.}profile.json 2>/dev/null || true ))
+#  echo ${#pfiles[@]}
+#  for file in ${pfiles[@]}
 
   
-#  echo ${#files[@]}
-  
-  find "$subject_path" -type f -name "$file_pattern" -print0 | while IFS= read -r -d '' file;
+# evaluates experiment tag only.  Subject name in the filename will break.
+# <experiment>[,.,-,_]profile.json
+#  find "$subject_path" -type f \( -name "${experiment}[\-,\.,_]profile.json" -o -name "${experiment}profile.json" \) -print0 | while IFS= read -r -d '' file;
+# a few specific cases spelled out for subject in the file name: <subject>[,.,-,_]<experiment>[,.,-,_]profile.json.  Also previous version without subject name
+# find "$subject_path" -type f \( -name "${experiment}[\-,\.,_]profile.json" -o -name "${experiment}profile.json" -o -name "${subject}[\-,\.,_]${experiment}[\-,\.,_]profile.json" -o -name "${subject}[\-,\.,_]${experiment}profile.json"  -o -name "${subject}${experiment}[\-,\.,_]profile.json" -o -name "${subject}${experiment}profile.json" \) -print0 | while IFS= read -r -d '' file;
+# Simplest handling of subject name in the filename with a full wildcard. Subject name not needed though. 
+  find "$subject_path" -type f \( -name "${experiment}[\-,\.,_]profile.json" -o -name "${experiment}profile.json" -o -name "${subject}*${experiment}[\-,\.,_]profile.json" -o -name "${subject}*${experiment}profile.json"  \) -print0 | while IFS= read -r -d '' file;
   do
     echo "file = $file"
     
@@ -105,6 +122,8 @@ run_loop() {
 #    fi
 
     echo "rerun: $rerun testrun: $testrun radius: $radius mdist: $mdist stim: $stim upgrade: $upgrade"
+    echo "Scale by inv node vol: $invnodevol"
+    echo "Scale by inv length: $invlength"
     
     if [ "$SYSNAME" == "hipergator" ]
     then
@@ -123,6 +142,15 @@ run_loop() {
       python_call=$python_call" -s"
     fi
     
+    if [ -n "$stim_index" ] ; then
+      python_call="$python_call -i ${stim_index}"
+    fi
+    
+    if [ -n "$atlas_mapping" ] ; then
+      python_call="$python_call -m ${atlas_mapping}"
+    fi
+    
+    
     if [ "$testrun" = true ]; then
       echo "this is the call that would run: "
       echo $python_call
@@ -135,6 +163,12 @@ run_loop() {
     # heres where to add connectome maker
     python_call="python ${CODEDIR}/Python/MRtrix/makeConnectomeMatrix.py -p ${file} -a ${assignment} -r ${radius} -d ${mdist}"
     # upgrade not implemented in these other scripts
+    if [ "$invnodevol" = true ] ; then
+      python_call=$python_call" -v"
+    fi
+    if [ "$invlength" = true ] ; then
+      python_call=$python_call" -g"
+    fi
     if [ "$rerun" = true ] ; then
       python_call=$python_call" -f"
     fi
@@ -183,8 +217,9 @@ testrun=false
 rerun=false
 upgrade=false
 stim=false
-
-while getopts "hd:l:a:r:tfum:e:s" option; do
+invnodevol=false
+invlength=false
+while getopts "hd:l:a:r:tfum:e:si:vgp:" option; do
    case $option in
       d) d_dir=$OPTARG;;
       l) subjects=$OPTARG;;
@@ -196,6 +231,10 @@ while getopts "hd:l:a:r:tfum:e:s" option; do
       m) mdist=$OPTARG;;
       e) experiment=$OPTARG;;
       s) stim=true;;
+      i) stim_index=$OPTARG;;
+      v) invnodevol=true;;
+      g) invlength=true;;
+      p) atlas_mapping=$OPTARG;;
       h | * | :) Help && exit;;
    esac
 done
@@ -207,7 +246,6 @@ then
 fi
 
 echo "$assignment"
-
 
 if [ -z "$experiment" ]
 then
@@ -255,7 +293,7 @@ then
     then
       subject=$(basename "$sf")
       echo "valid subject: $subject"
-      run_loop "$subject" "$assignment" $rerun $testrun $radius $mdist $experiment $stim
+      run_loop "$subject" "$assignment" "$rerun" "$testrun" "$radius" "$mdist" "$experiment" "$stim" "$stim_index" "$upgrade" "$atlas_mapping" "$invnodevol" "$invlength"
 #    else
 #      echo "skipping $sf"
     fi
@@ -276,7 +314,7 @@ else
     do
       echo "$subject"
       
-      run_loop "$subject" "$assignment" "$rerun" "$testrun" "$radius" "$mdist" "$experiment" "$stim" "$upgrade"
+      run_loop "$subject" "$assignment" "$rerun" "$testrun" "$radius" "$mdist" "$experiment" "$stim" "$stim_index" "$upgrade" "$atlas_mapping" "$invnodevol" "$invlength"
 
     done < "$subjects"
   fi

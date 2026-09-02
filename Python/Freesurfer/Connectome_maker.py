@@ -26,12 +26,16 @@ import subprocess
 import time
 import copy
 from packaging.version import parse as parse_version
+import importlib.util
+
 
 #print(os.path.join(os.path.dirname(__file__), "..", "MRtrix" ))
 #sys.path.append(os.path.join(os.path.dirname(__file__), "..", "MRtrix" ))
 print(os.path.join(os.environ["CODEDIR"], "Python/MRtrix" ))
 sys.path.append(os.path.join(os.environ["CODEDIR"], "Python/MRtrix" ))
 sys.path.append(os.path.join(os.environ["CODEDIR"], "Python/utils" ))
+
+
  
 from NRRDConverter import readNRRD
 from AxisChecker import getAxes, compareAxes, getNiftiObjAxes
@@ -53,11 +57,14 @@ def build_parser():
   parser.add_argument("-s", "--stim", required=False,
                       help="include stimulations",
                       action = "store_true", dest="stim")
+  parser.add_argument("-i", "--index", required=False,
+                      help="begining index for stimulations [3000]",
+                      default = 3000 , type=int, dest="stim_index")
   parser.add_argument("-f", "--force", required=False,
                       help="force a rewrite of files",
                       action = "store_true", dest="rerun")
   parser.add_argument("-m", "--mapping", required=False,
-                      help="force a rewrite of files",
+                      help="mapping tool option",
                       default = "ANTs",  dest="mapping",
                       choices=["ANTs", "nibabel"])
   parser.add_argument("-u", "--upgrade", required=False,
@@ -286,6 +293,7 @@ def add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, *
   
     img_data = img_resamp.get_fdata()
     
+    
     lut = np.zeros(max(local_index)+1)
     #    print(local_index)
     #    print(main_index)
@@ -305,9 +313,12 @@ def add_files_2_atlas(All_data, HCP, lookup, seg_files, profile, output_files, *
 
 #  print("saved nifti file:", time.time() - start)
   
-  #Create Key for MRtrix image
-  mrtrix_key = {  'Lookup Index' : np.unique(All_data)[1:].tolist(),
-                  'MRtrix Index' : list(range(1,len(np.unique(All_data)[1:].tolist())+1))
+  # Create Key for MRtrix image
+  
+  # this will check the lookup table file for the indices that should exist, making sure that empty seg regions are still accounted for and to prevent index shifting
+  lu_index = np.unique(lookup['Index'][lookup['Index']>0]).tolist()
+  mrtrix_key = {  'Lookup Index' : lu_index,
+                  'MRtrix Index' : list(range(1,len(lu_index)+1))
   }
   
   lookup_table = np.zeros(max(mrtrix_key['Lookup Index'])+1)
@@ -496,7 +507,7 @@ def main():
     else:
       raise ValueError("Cannot run --stim (-s) option without stimulation table filepath (profile['stim_table'])")
 
-    stim_output_files = append_lookup_file(profile)
+    stim_output_files = append_lookup_file(profile, begin_idx=args.stim_index)
 #    print("--- checking files ---")
 #    print(stim_output_files)
     

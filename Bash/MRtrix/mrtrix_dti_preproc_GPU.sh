@@ -6,8 +6,8 @@
 #SBATCH --mem=32gb
 #SBATCH --time=10:00:00
 #SBATCH --job-name=Preproc
-#SBATCH --partition=gpu
-#SBATCH --gpus=geforce:1
+#SBATCH --partition=hpg-turin
+#SBATCH --gpus=1
 #SBATCH --mail-type=ALL
 #SBATCH --output=Preproc_%j.out
 
@@ -132,7 +132,7 @@ then
 	module load ants
 	module load fsl
 	module load mrtrix
-	module load freesurfer/7.2.0
+	module load freesurfer/7.4.1
 	module load cuda/12.4.1
 fi
 
@@ -282,7 +282,7 @@ then
     	mrthreshold brain_FS.mif -abs 0 -comparison gt brainmask_FS.mif -force
     	maskfilter brainmask_FS.mif dilate brainmask_dilate.mif -npass 10 -force
     	maskfilter brainmask_dilate.mif erode brainmask_dilate_erode.mif -npass 10 -force
-    	mrgrid brainmask_dilate_erode.mif regrid -template dwi_tensor_prep.mif brainmask_regrid.mif -force
+    	mrgrid brainmask_dilate_erode.mif regrid -template dwi_cleaned_resamp.mif brainmask_regrid.mif -force
     	dwi2tensor dwi_cleaned_resamp.mif -mask brainmask_regrid.mif dti.mif -force
     	mrconvert brainmask_regrid.mif brain_mask.nii.gz -force
 	fi

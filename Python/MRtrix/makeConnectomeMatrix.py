@@ -46,6 +46,14 @@ def build_parser():
   parser.add_argument("-d", "--distance", required=False,
                       help="Assignment max distance for MRtrix.  works only with assignment_reverse_search and assignment_forward_search",
                       dest="distance", default=default_distance, type=int)
+  
+  parser.add_argument("-v", "--scale_invnodevol", required=False,
+                      help="Scale connectivity by inverse node volume.  Defined as Connectivity/(#voxels in Node1 + #voxels in Node2)",
+                      action = "store_true", dest="invnodevol")
+  
+  parser.add_argument("-g", "--scale_invlength", required=False,
+                      help="Scale connectivity by inverse length of fibers.  Meant to correct for bias towards longer fibers",
+                      action = "store_true", dest="invlength")
                       
   parser.add_argument("-s", "--stim", required=False,
                       help="include stimulations",
@@ -55,7 +63,7 @@ def build_parser():
                       action = "store_true", dest="rerun")
   return parser
 
-def run_connectome_matrix(connectome_matrix, input_file, lookup_table,  experiment, profile, assignment, radius, distance):
+def run_connectome_matrix(connectome_matrix, input_file, lookup_table,  experiment, profile, assignment, radius, distance, invnodevol, invlength):
 
   rerun = True
   
@@ -90,9 +98,12 @@ def run_connectome_matrix(connectome_matrix, input_file, lookup_table,  experime
     cl_call2.append(str(radius))
   elif assignment == "assignment_forward_search" or assignment == "assignment_reverse_search":
     cl_call2.append(str(distance))
-    
-      #-scale_invlength \
-      #-scale_invnodevol
+
+  if invnodevol:
+    cl_call2.append("-scale_invnodevol")
+  if invlength:
+    cl_call2.append("-scale_invlength")
+
   print(" ".join(cl_call2))
   subprocess.run(cl_call2)
   
@@ -119,7 +130,7 @@ def main():
     filename = hcp_pattern+experiment+".nii.gz"
     filepath = os.path.join(connectomePath,filename)
   
-  run_connectome_matrix(connectome_matrix, filepath, lookup_table,  experiment, profile, args.assignment, args.radius, args.distance)
+  run_connectome_matrix(connectome_matrix, filepath, lookup_table,  experiment, profile, args.assignment, args.radius, args.distance, args.invnodevol, args.invlength)
   
   #setup output files for saving
   profile["makeConnectomeMatrix"] = { "Output_files":
@@ -141,7 +152,7 @@ def main():
       stim_experiment = experiment+"_"+stim_tags[idx]
       stim_conn_mat=os.path.join(profile["stimoutpath"], "connectome_matrix_" + stim_experiment + ".csv")
       
-      run_connectome_matrix(stim_conn_mat, stim_inputs[idx], stim_lookup_tables[idx],  stim_experiment, profile, args.assignment, args.radius, args.distance)
+      run_connectome_matrix(stim_conn_mat, stim_inputs[idx], stim_lookup_tables[idx],  stim_experiment, profile, args.assignment, args.radius, args.distance, args.invnodevol, args.invlength)
       
       stim_connectome_matrices.append(stim_conn_mat)
       

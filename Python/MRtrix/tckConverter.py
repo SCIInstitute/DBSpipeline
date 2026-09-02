@@ -21,9 +21,9 @@ def convertPtsEdges(filename, tract_datafile=None):
 
     if tract_datafile:
         try:
-            original_data = np.loadtxt(tract_datafile, delimiter=",")
+            original_data = np.atleast_1d(np.loadtxt(tract_datafile, delimiter=","))
         except:
-            original_data = [i for i in np.loadtxt(tract_datafile, delimiter=" ", dtype=str) if not i == ""]
+            original_data = np.atleast_1d([i for i in np.loadtxt(tract_datafile, delimiter=" ", dtype=str) if not i == ""])
 
         tract_data = np.zeros((extractedTckFile.streamlines.total_nb_rows))
         counter = 0
